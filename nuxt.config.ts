@@ -24,6 +24,14 @@ export default defineNuxtConfig({
     key: process.env.SUPABASE_ANON_KEY,
     redirect: false,
     },
+    image: {
+      provider: process.env.NODE_ENV === 'development' ? 'ipx' : 'netlify',
+      dir: 'public',
+      // Global options
+      quality: 80,
+      format: ['webp', 'avif', 'jpg'],
+      domains: ['https://minjvvxdfdwmbrtphzpr.supabase.co']
+    },
 
 
   vite: {
