@@ -113,9 +113,4 @@ const countries = [
 ];
 </script>
 
-<!-- Optional: Preload key images early for better LCP -->
-<head>
-  <link rel="preload" href="/img/uk.png" as="image" />
-  <link rel="preload" href="/img/usa.jpg" as="image" />
-  <link rel="preload" href="/img/australia.jpg" as="image" />
-</head>
+
