@@ -991,9 +991,6 @@ const handleRegistration = async () => {
       {
         event_id: eventId,
         form_data: formData,
-        admission_fee: event.value.admission_fee,
-        is_paid: event.value.is_free, // Default to true if event is free
-        currency: event.value.currency
       },
     ]);
 
