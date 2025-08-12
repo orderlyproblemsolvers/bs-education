@@ -204,10 +204,10 @@
                         <li>Transfer <span class="font-bold">{{ event.currency }}{{ event.admission_fee }}</span> to:</li>
                         <li class="ml-5">
                           <span class="font-semibold">Bank Name:</span> Zenith Bank<br>
-                          <span class="font-semibold">Account Name:</span> Tech Events Ltd<br>
-                          <span class="font-semibold">Account Number:</span> 1234567890
+                          <span class="font-semibold">Account Name:</span> B&S Educational Services<br>
+                          <span class="font-semibold">Account Number:</span> 1011289196
                         </li>
-                        <li>Send proof of payment via WhatsApp to <span class="font-bold">+234 812 345 6789</span></li>
+                        <li>Send proof of payment via WhatsApp to <span class="font-bold">+234 806 5442 707</span></li>
                         <li>You'll receive a confirmation within 24 hours</li>
                       </ol>
                       <div class="mt-3">
