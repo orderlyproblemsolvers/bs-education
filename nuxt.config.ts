@@ -29,8 +29,8 @@ export default defineNuxtConfig({
       dir: 'public',
       // Global options
       quality: 80,
-      format: ['webp', 'avif', 'jpg'],
-      domains: ['https://minjvvxdfdwmbrtphzpr.supabase.co']
+      format: ['webp', 'avif', 'jpg', 'png'],
+      domains: ['https://minjvvxdfdwmbrtphzpr.supabase.co', 'http://localhost:3000']
     },
 
 

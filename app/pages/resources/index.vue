@@ -119,7 +119,7 @@
           </div>
           
           <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <NuxtLink to="/resources/student-guide" class="flex items-start gap-3 p-4 rounded-lg hover:bg-[#f4f5f3] transition-colors">
+            <NuxtLink to="/resources/templates" class="flex items-start gap-3 p-4 rounded-lg hover:bg-[#f4f5f3] transition-colors">
               <div class="w-10 h-10 bg-[#5d6b56] rounded-lg flex items-center justify-center flex-shrink-0">
                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C20.168 18.477 18.582 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
@@ -127,19 +127,19 @@
               </div>
               <div>
                 <h4 class="font-semibold text-[#333333] mb-1">2025 Student Guide</h4>
-                <p class="text-sm text-[#666666]">Complete application handbook for international education</p>
+                <p class="text-sm text-[#666666]">Complete application templates for international education</p>
               </div>
             </NuxtLink>
             
-            <NuxtLink to="/scholarships" class="flex items-start gap-3 p-4 rounded-lg hover:bg-[#f4f5f3] transition-colors">
+            <NuxtLink to="/events" class="flex items-start gap-3 p-4 rounded-lg hover:bg-[#f4f5f3] transition-colors">
               <div class="w-10 h-10 bg-[#EB6534] rounded-lg flex items-center justify-center flex-shrink-0">
                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"></path>
                 </svg>
               </div>
               <div>
-                <h4 class="font-semibold text-[#333333] mb-1">Scholarship Database</h4>
-                <p class="text-sm text-[#666666]">Find funding opportunities for your education</p>
+                <h4 class="font-semibold text-[#333333] mb-1">Exciting Events </h4>
+                <p class="text-sm text-[#666666]">Participate in our upcoming events and seminars</p>
               </div>
             </NuxtLink>
             

@@ -6,6 +6,7 @@
     <ApplicationForm />
     <Blog />
     <Testimonials />
+    <Featured/>
     <Partners />
     <Faq />
     <Chat />

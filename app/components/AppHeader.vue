@@ -96,76 +96,15 @@
           </div>
 
           <!-- Test Prep Dropdown -->
-          <div
-            class="relative"
-            @mouseenter="showCoachingDropdown = true"
-            @mouseleave="showCoachingDropdown = false"
+          <NuxtLink
+            to="/test-prep"
+            class="px-4 py-2 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] font-medium rounded-lg transition-all duration-200"
+            :class="{
+              'bg-[#859484]/15 text-[#859484]': $route.path === '/about',
+            }"
           >
-            <button
-              class="px-4 py-2 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] font-medium rounded-lg transition-all duration-200 flex items-center space-x-1"
-              :class="{
-                'bg-[#859484]/15 text-[#859484]':
-                  $route.path.startsWith('/coaching'),
-              }"
-            >
-              <span>Test Prep</span>
-              <Icon
-                name="heroicons:chevron-down"
-                class="w-4 h-4 transition-transform duration-200"
-                :class="{ 'rotate-180': showCoachingDropdown }"
-              />
-            </button>
-            <div
-              v-if="showCoachingDropdown"
-              class="absolute top-full left-0 mt-1 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2 z-50"
-            >
-              <NuxtLink
-                to="/coaching"
-                class="block px-4 py-3 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] transition-colors duration-200"
-              >
-                <div class="font-medium">All Test Prep</div>
-                <div class="text-sm text-gray-500">
-                  Complete test preparation
-                </div>
-              </NuxtLink>
-              <NuxtLink
-                to="/coaching/ielts"
-                class="block px-4 py-3 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] transition-colors duration-200"
-              >
-                <div class="font-medium">IELTS Preparation</div>
-                <div class="text-sm text-gray-500">
-                  International English testing
-                </div>
-              </NuxtLink>
-              <NuxtLink
-                to="/coaching/toefl"
-                class="block px-4 py-3 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] transition-colors duration-200"
-              >
-                <div class="font-medium">TOEFL Preparation</div>
-                <div class="text-sm text-gray-500">
-                  Test of English proficiency
-                </div>
-              </NuxtLink>
-              <NuxtLink
-                to="/coaching/gre"
-                class="block px-4 py-3 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] transition-colors duration-200"
-              >
-                <div class="font-medium">GRE Preparation</div>
-                <div class="text-sm text-gray-500">
-                  Graduate Record Examination
-                </div>
-              </NuxtLink>
-              <NuxtLink
-                to="/coaching/gmat"
-                class="block px-4 py-3 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] transition-colors duration-200"
-              >
-                <div class="font-medium">GMAT Preparation</div>
-                <div class="text-sm text-gray-500">
-                  Business school admission
-                </div>
-              </NuxtLink>
-            </div>
-          </div>
+            Test Prep
+          </NuxtLink>
 
           <!-- Resources Dropdown -->
           <div
@@ -195,24 +134,17 @@
                 to="/resources"
                 class="block px-4 py-3 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] transition-colors duration-200"
               >
-                <div class="font-medium">All Resources</div>
+                <div class="font-medium">Blog</div>
                 <div class="text-sm text-gray-500">
-                  Complete resource library
+                  News, tips, and updates
                 </div>
               </NuxtLink>
               <NuxtLink
-                to="/resources/brochures"
+                to="/resources/templates"
                 class="block px-4 py-3 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] transition-colors duration-200"
               >
-                <div class="font-medium">Brochures</div>
+                <div class="font-medium">Templates & Guides</div>
                 <div class="text-sm text-gray-500">Download our guides</div>
-              </NuxtLink>
-              <NuxtLink
-                to="/resources/study-guides"
-                class="block px-4 py-3 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] transition-colors duration-200"
-              >
-                <div class="font-medium">Study Guides</div>
-                <div class="text-sm text-gray-500">Educational materials</div>
               </NuxtLink>
               <NuxtLink
                 to="/resources/country-guides"
@@ -261,13 +193,6 @@
               >
                 <div class="font-medium">Visit Our Office</div>
                 <div class="text-sm text-gray-500">Jahi, Abuja location</div>
-              </NuxtLink>
-              <NuxtLink
-                to="/contact/online-consultation"
-                class="block px-4 py-3 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] transition-colors duration-200"
-              >
-                <div class="font-medium">Online Consultation</div>
-                <div class="text-sm text-gray-500">Virtual meetings</div>
               </NuxtLink>
             </div>
           </div>

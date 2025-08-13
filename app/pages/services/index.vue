@@ -45,7 +45,7 @@
             <div class="text-sm text-gray-600">Years of Excellence</div>
           </div>
           <div class="space-y-2">
-            <div class="text-3xl font-bold text-[#5d6b56]">5000+</div>
+            <div class="text-3xl font-bold text-[#5d6b56]">500+</div>
             <div class="text-sm text-gray-600">Dreams Realized</div>
           </div>
           <div class="space-y-2">
@@ -121,7 +121,7 @@
         
         <div class="flex flex-col sm:flex-row gap-4 justify-center mb-8">
           <button class="px-8 py-3 bg-[#EB6534] text-white font-medium rounded-lg shadow-sm hover:bg-[#d55529] transition-all duration-200">
-            Get Free Consultation 📞
+            Get Free Consultation <UIcon name="i-lucide-phone" class="inline-block ml-2" />
           </button>
           <button class="px-8 py-3 border-2 border-white text-white font-medium rounded-lg hover:bg-white hover:text-[#5d6b56] transition-all duration-200">
             Download Guide ↓
@@ -131,15 +131,15 @@
         <!-- Contact Info -->
         <div class="grid md:grid-cols-3 gap-6 pt-8 border-t border-white/20">
           <div class="flex items-center justify-center space-x-3">
-            <div class="w-5 h-5 bg-white/20 rounded"></div>
+            <UIcon name="i-lucide-phone" class="inline-block"/>
             <span class="text-white/90">+234 806 544 2707</span>
           </div>
           <div class="flex items-center justify-center space-x-3">
-            <div class="w-5 h-5 bg-white/20 rounded"></div>
+            <UIcon name="i-lucide-mail" class="inline-block"/>
             <span class="text-white/90">info@bs-education.com</span>
           </div>
           <div class="flex items-center justify-center space-x-3">
-            <div class="w-5 h-5 bg-white/20 rounded"></div>
+            <UIcon name="i-lucide-map" class="inline-block"/>
             <span class="text-white/90">Abuja, Nigeria</span>
           </div>
         </div>
