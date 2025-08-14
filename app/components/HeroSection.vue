@@ -1,6 +1,6 @@
 <template>
   <section
-    class="relative w-full bg-gray-50 overflow-hidden px-4 sm:px-6 md:px-12 lg:px-24"
+    class="relative w-full bg-gray-50 overflow-hidden px-4 sm:px-6 md:px-12 lg:px-24 sm:pt-4"
     style="height: 90dvh"
   >
     <!-- Decorative Pattern Top Left -->

@@ -75,7 +75,7 @@
                 Can't find what you're looking for? Our counsellors are here to help with personalized guidance.
               </p>
               <div class="help-actions">
-                <NuxtLink to="/book-counselling" class="help-button primary">
+                <NuxtLink to="/contact" class="help-button primary">
                   Book Free Consultation
                 </NuxtLink>
                 <a href="tel:+2348065442707" class="help-button secondary">
@@ -92,7 +92,7 @@
               <h4 class="resources-title">Popular Resources</h4>
               <ul class="resources-list">
                 <li>
-                  <NuxtLink to="/resources" class="resource-link">
+                  <NuxtLink to="/resources/templates" class="resource-link">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                       <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
@@ -101,11 +101,11 @@
                   </NuxtLink>
                 </li>
                 <li>
-                  <NuxtLink to="/scholarships" class="resource-link">
+                  <NuxtLink to="/events" class="resource-link">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                       <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                     </svg>
-                    Scholarship Database
+                    Exciting Events
                   </NuxtLink>
                 </li>
                 <li>

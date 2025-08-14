@@ -1,36 +1,56 @@
 <template>
   <section class="bg-white py-16 px-4 sm:px-6 lg:px-24">
-    <h2 class="text-3xl sm:text-4xl font-bold text-black mb-10 text-center">
+    <h2 class="text-3xl sm:text-4xl font-bold text-black mb-12 text-center">
       Where Can You Study?
     </h2>
 
-    <div
-      class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-6 auto-rows-[200px] sm:auto-rows-[250px] gap-4"
-    >
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-2xl md:max-w-4xl mx-auto w-[90%] sm:w-[80%] lg:w-[70%]">
+      <!-- UK - Large featured card -->
+      <div class="col-span-2 row-span-2 group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300">
+        <NuxtImg
+          :src="countries[0].src"
+          :alt="countries[0].alt"
+          :width="800"
+          :height="800"
+          format="webp"
+          placeholder="blur"
+          preload
+          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent">
+          <div class="absolute bottom-0 left-0 right-0 p-6 sm:p-8">
+            <h3 class="text-white font-bold text-2xl sm:text-3xl lg:text-4xl text-center drop-shadow-lg">
+              {{ countries[0].name }}
+            </h3>
+          </div>
+        </div>
+        <div class="absolute inset-0 bg-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+      </div>
+
+      <!-- Other countries -->
       <div
-        v-for="(country, index) in countries"
+        v-for="(country, index) in countries.slice(1, 9)"
         :key="country.name"
-        :class="country.layout"
-        class="group relative overflow-hidden rounded-xl"
+        class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 aspect-square"
       >
         <NuxtImg
           :src="country.src"
           :alt="country.alt"
-          :width="country.width"
-          :height="country.height"
+          :width="400"
+          :height="400"
           format="webp"
           placeholder="blur"
           :preload="index < 3"
-          class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
-        <div class="absolute inset-0 bg-black/40 flex items-center justify-center">
-          <h3
-            class="text-white font-semibold"
-            :class="country.textSize"
-          >
-            {{ country.name }}
-          </h3>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent">
+          <div class="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
+            <h3 class="text-white font-bold text-lg sm:text-xl lg:text-2xl text-center drop-shadow-lg">
+              {{ country.name }}
+            </h3>
+          </div>
         </div>
+        <div class="absolute inset-0 bg-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </div>
     </div>
   </section>
@@ -42,75 +62,46 @@ const countries = [
     name: "UK",
     src: "/img/uk.png",
     alt: "Study in the UK",
-    width: 600,
-    height: 600,
-    textSize: "text-lg sm:text-2xl",
-    layout: "col-span-2 row-span-2",
   },
   {
     name: "USA",
     src: "/img/usa.jpg",
-    alt: "Study in the USA",
-    width: 600,
-    height: 600,
-    textSize: "text-lg sm:text-2xl",
-    layout: "col-span-2",
+    alt: "Study in the USA", 
   },
   {
     name: "Australia",
     src: "/img/australia.jpg",
     alt: "Study in Australia",
-    width: 600,
-    height: 600,
-    textSize: "text-lg sm:text-2xl",
-    layout: "col-span-2",
   },
   {
     name: "France",
     src: "/img/france.jpg",
     alt: "Study in France",
-    width: 600,
-    height: 600,
-    textSize: "text-lg sm:text-2xl",
-    layout: "col-span-2 row-span-2",
+  },
+  {
+    name: "Ireland",
+    src: "/img/ireland.jpg",
+    alt: "Study in Ireland",
+  },
+  {
+    name: "Canada",
+    src: "/img/canada.jpg",
+    alt: "Study in Canada",
   },
   {
     name: "Malta",
     src: "/img/malta.jpg",
     alt: "Study in Malta",
-    width: 500,
-    height: 500,
-    textSize: "text-lg sm:text-xl",
-    layout: "",
   },
   {
     name: "Hungary",
     src: "/img/hungary.png",
     alt: "Study in Hungary",
-    width: 500,
-    height: 500,
-    textSize: "text-lg sm:text-xl",
-    layout: "",
   },
   {
     name: "Cyprus",
     src: "/img/cyprus.png",
     alt: "Study in Cyprus",
-    width: 600,
-    height: 600,
-    textSize: "text-lg sm:text-2xl",
-    layout: "col-span-2",
-  },
-  {
-    name: "Nigeria",
-    src: "/img/nigeria.jpg",
-    alt: "Study in Nigeria",
-    width: 600,
-    height: 600,
-    textSize: "text-lg sm:text-2xl",
-    layout: "col-span-2",
   },
 ];
 </script>
-
-

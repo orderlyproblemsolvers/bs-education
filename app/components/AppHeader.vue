@@ -201,7 +201,7 @@
         <!-- CTA Buttons (Desktop) -->
         <div class="hidden lg:flex items-center space-x-4">
           <NuxtLink
-            to="/book-counselling"
+            to="/contact"
             class="px-2 py-2 border-2 border-[#859484] text-[#859484] hover:bg-[#859484] hover:text-white font-medium rounded-lg transition-all duration-200"
           >
             Free Counselling
@@ -246,8 +246,8 @@
                   src="/img/main-logo.png"
                   alt="B&S Educational Services logo"
                   class="w-full h-full object-contain"
-                  width="32"
-                  height="32"
+                  width="48"
+                  height="48"
                 />
               </div>
               <span class="font-semibold text-gray-900 text-sm"
@@ -313,35 +313,14 @@
               <h3
                 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3"
               >
-                Test Preparation
+                Test Prep
               </h3>
               <NuxtLink
-                to="/coaching/ielts"
+                to="/test-prep"
                 class="flex items-center px-3 py-2 text-sm text-gray-600 hover:text-[#859484] hover:bg-[#859484]/5 rounded-lg transition-all duration-200"
                 @click="isMobileMenuOpen = false"
               >
-                IELTS Preparation
-              </NuxtLink>
-              <NuxtLink
-                to="/coaching/toefl"
-                class="flex items-center px-3 py-2 text-sm text-gray-600 hover:text-[#859484] hover:bg-[#859484]/5 rounded-lg transition-all duration-200"
-                @click="isMobileMenuOpen = false"
-              >
-                TOEFL Preparation
-              </NuxtLink>
-              <NuxtLink
-                to="/coaching/gre"
-                class="flex items-center px-3 py-2 text-sm text-gray-600 hover:text-[#859484] hover:bg-[#859484]/5 rounded-lg transition-all duration-200"
-                @click="isMobileMenuOpen = false"
-              >
-                GRE Preparation
-              </NuxtLink>
-              <NuxtLink
-                to="/coaching/gmat"
-                class="flex items-center px-3 py-2 text-sm text-gray-600 hover:text-[#859484] hover:bg-[#859484]/5 rounded-lg transition-all duration-200"
-                @click="isMobileMenuOpen = false"
-              >
-                GMAT Preparation
+                Test Preparation
               </NuxtLink>
             </div>
 
@@ -414,15 +393,13 @@ const showContactDropdown = ref(false);
 const mainRoutes = [
   { path: "/", name: "Home" },
   { path: "/events", name: "Events" },
-  { path: "/services", name: "Services" },
-  { path: "/coaching", name: "Test Prep" },
   { path: "/resources", name: "Resources" },
   { path: "/contact", name: "Contact" },
 ];
 
 const allRoutes = [
   ...mainRoutes,
-  { path: "/book-counselling", name: "Book Free Counselling" },
+  { path: "/contact", name: "Book Free Counselling" },
 ];
 
 // Close mobile menu when route changes
