@@ -1,12 +1,12 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-slate-50 to-gray-100">
+  <div class="min-h-screen bg-gradient-to-br from-[#f4f5f3] to-gray-100">
     <!-- Toast Notification -->
     <Transition name="toast">
       <div
         v-if="showToast"
         class="fixed top-4 right-4 z-50 max-w-md w-full bg-white rounded-lg shadow-lg border-l-4 p-4"
         :class="
-          toastType === 'success' ? 'border-emerald-500' : 'border-red-500'
+          toastType === 'success' ? 'border-[#5d6b56]' : 'border-red-500'
         "
       >
         <div class="flex items-center">
@@ -19,7 +19,7 @@
               "
               class="w-5 h-5"
               :class="
-                toastType === 'success' ? 'text-emerald-500' : 'text-red-500'
+                toastType === 'success' ? 'text-[#5d6b56]' : 'text-red-500'
               "
             />
           </div>
@@ -42,13 +42,13 @@
     <section class="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <!-- Background decoration -->
       <div
-        class="absolute inset-0 bg-gradient-to-r from-emerald-50/50 to-orange-50/50"
+        class="absolute inset-0 bg-gradient-to-r from-[#f4f5f3]/50 to-orange-50/50"
       ></div>
       <div
-        class="absolute top-10 right-10 w-72 h-72 bg-gradient-to-br from-emerald-200/20 to-orange-200/20 rounded-full blur-3xl"
+        class="absolute top-10 right-10 w-72 h-72 bg-gradient-to-br from-[#5d6b56]/20 to-[#eb6534]/20 rounded-full blur-3xl"
       ></div>
       <div
-        class="absolute bottom-10 left-10 w-96 h-96 bg-gradient-to-tr from-orange-200/20 to-emerald-200/20 rounded-full blur-3xl"
+        class="absolute bottom-10 left-10 w-96 h-96 bg-gradient-to-tr from-[#eb6534]/20 to-[#5d6b56]/20 rounded-full blur-3xl"
       ></div>
 
       <div class="max-w-7xl mx-auto relative">
@@ -57,17 +57,17 @@
           <div class="space-y-8">
             <div class="space-y-6">
               <h1
-                class="text-4xl md:text-6xl font-bold text-gray-900 leading-tight"
+                class="text-4xl md:text-6xl font-bold text-[#333333] leading-tight font-inter"
               >
                 Let's Start Your
                 <span
-                  class="bg-gradient-to-r from-orange-500 to-orange-600 bg-clip-text text-transparent"
+                  class="bg-gradient-to-r from-[#eb6534] to-[#eb6534] bg-clip-text text-transparent"
                 >
                   Study Abroad
                 </span>
                 Journey
               </h1>
-              <p class="text-xl text-gray-600 leading-relaxed max-w-lg">
+              <p class="text-xl text-[#666666] leading-relaxed max-w-lg font-inter">
                 Get personalized guidance from our education experts. We're here
                 to help you find the perfect university and course that matches
                 your dreams and goals.
@@ -77,26 +77,26 @@
             <!-- Quick Stats -->
             <div class="grid grid-cols-2 gap-6">
               <div
-                class="group text-center p-6 rounded-2xl bg-white/70 backdrop-blur-sm border border-gray-200/50 hover:shadow-lg transition-all duration-300"
+                class="group text-center p-6 rounded-xl bg-white/70 backdrop-blur-sm border border-[#DDDDDD] hover:shadow-lg transition-all duration-300"
               >
                 <div
-                  class="text-3xl font-bold text-orange-500 group-hover:scale-110 transition-transform duration-300"
+                  class="text-3xl font-bold text-[#eb6534] group-hover:scale-110 transition-transform duration-300 font-inter"
                 >
                   500+
                 </div>
-                <div class="text-sm font-medium text-gray-600 mt-1">
+                <div class="text-sm font-medium text-[#666666] mt-1 font-inter">
                   Success Stories
                 </div>
               </div>
               <div
-                class="group text-center p-6 rounded-2xl bg-white/70 backdrop-blur-sm border border-gray-200/50 hover:shadow-lg transition-all duration-300"
+                class="group text-center p-6 rounded-xl bg-white/70 backdrop-blur-sm border border-[#DDDDDD] hover:shadow-lg transition-all duration-300"
               >
                 <div
-                  class="text-3xl font-bold text-emerald-600 group-hover:scale-110 transition-transform duration-300"
+                  class="text-3xl font-bold text-[#5d6b56] group-hover:scale-110 transition-transform duration-300 font-inter"
                 >
-                  15+
+                  7+
                 </div>
-                <div class="text-sm font-medium text-gray-600 mt-1">
+                <div class="text-sm font-medium text-[#666666] mt-1 font-inter">
                   Countries
                 </div>
               </div>
@@ -106,21 +106,27 @@
           <!-- Right Image Placeholder -->
           <div class="relative">
             <div
-              class="aspect-[4/3] rounded-3xl overflow-hidden bg-gradient-to-br from-emerald-400 to-emerald-600 shadow-2xl"
+              class="aspect-[4/3] rounded-tl-[80px] rounded-br-[80px] overflow-hidden bg-gradient-to-br from-[#5d6b56] to-[#6b7a6a] shadow-xl"
             >
               <div
-                class="w-full h-full flex items-center justify-center text-white text-lg font-medium backdrop-blur-sm bg-black/10"
+                class="w-full h-full flex items-center justify-center text-white text-lg font-medium backdrop-blur-sm bg-black/10 font-inter"
               >
-                [Hero Image Placeholder]
+              <NuxtImg
+                    src="/img/customerservice.png"
+                    alt="Study abroad destinations"
+                    class="absolute inset-0 w-full h-full object-cover"
+                    loading="eager"
+                    preload
+                  />
               </div>
             </div>
             <!-- Floating Card -->
             <div
-              class="absolute -bottom-8 -left-8 bg-white p-6 rounded-2xl shadow-2xl border border-gray-100"
+              class="absolute -bottom-8 -left-8 bg-white p-6 rounded-xl shadow-xl border border-[#DDDDDD]"
             >
               <div class="flex items-center space-x-4">
                 <div
-                  class="w-12 h-12 rounded-full bg-gradient-to-r from-orange-500 to-orange-600 flex items-center justify-center"
+                  class="w-12 h-12 rounded-full bg-gradient-to-r from-[#eb6534] to-[#eb6534] flex items-center justify-center"
                 >
                   <Icon
                     name="i-heroicons-chat-bubble-left-ellipsis"
@@ -128,8 +134,8 @@
                   />
                 </div>
                 <div>
-                  <div class="font-semibold text-gray-900">24/7 Support</div>
-                  <div class="text-sm text-gray-500">Always here to help</div>
+                  <div class="font-semibold text-[#333333] font-inter">Chat with us</div>
+                  <div class="text-sm text-[#666666] font-inter">Always here to help</div>
                 </div>
               </div>
             </div>
@@ -145,13 +151,13 @@
           <!-- Contact Form -->
           <div class="lg:col-span-2">
             <div
-              class="bg-white rounded-3xl shadow-xl border border-gray-100 p-8 md:p-10"
+              class="bg-white rounded-xl shadow-xl border border-[#DDDDDD] p-8 md:p-10"
             >
               <div class="mb-10">
-                <h2 class="text-3xl font-bold text-gray-900 mb-3">
+                <h2 class="text-3xl font-bold text-[#333333] mb-3 font-inter">
                   Start Your Journey
                 </h2>
-                <p class="text-gray-600 text-lg">
+                <p class="text-[#666666] text-lg font-inter">
                   Fill out the form below and we'll reach out to you within 24
                   hours.
                 </p>
@@ -161,7 +167,7 @@
                 <!-- Personal Information -->
                 <div class="form-section">
                   <h3
-                    class="text-xl font-semibold text-gray-900 mb-6 pb-2 border-b border-gray-200"
+                    class="text-xl font-semibold text-[#333333] mb-6 pb-2 border-b border-[#DDDDDD] font-inter"
                   >
                     Personal Information
                   </h3>
@@ -169,14 +175,14 @@
                   <div class="grid md:grid-cols-2 gap-6">
                     <div class="form-group">
                       <label
-                        class="block text-sm font-medium text-gray-700 mb-2"
+                        class="block text-sm font-medium text-[#333333] mb-2 font-inter"
                       >
                         First Name <span class="text-red-500">*</span>
                       </label>
                       <input
                         v-model="form.firstName"
                         type="text"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-500"
+                        class="w-full px-4 py-3 border border-[#DDDDDD] rounded-lg focus:ring-2 focus:ring-[#5d6b56] focus:border-[#5d6b56] transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-500 font-inter"
                         placeholder="Enter your first name"
                         required
                         :disabled="isSubmitting"
@@ -185,14 +191,14 @@
 
                     <div class="form-group">
                       <label
-                        class="block text-sm font-medium text-gray-700 mb-2"
+                        class="block text-sm font-medium text-[#333333] mb-2 font-inter"
                       >
                         Last Name <span class="text-red-500">*</span>
                       </label>
                       <input
                         v-model="form.lastName"
                         type="text"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-500"
+                        class="w-full px-4 py-3 border border-[#DDDDDD] rounded-lg focus:ring-2 focus:ring-[#5d6b56] focus:border-[#5d6b56] transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-500 font-inter"
                         placeholder="Enter your last name"
                         required
                         :disabled="isSubmitting"
@@ -203,14 +209,14 @@
                   <div class="grid md:grid-cols-2 gap-6 mt-6">
                     <div class="form-group">
                       <label
-                        class="block text-sm font-medium text-gray-700 mb-2"
+                        class="block text-sm font-medium text-[#333333] mb-2 font-inter"
                       >
                         Email Address <span class="text-red-500">*</span>
                       </label>
                       <input
                         v-model="form.email"
                         type="email"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-500"
+                        class="w-full px-4 py-3 border border-[#DDDDDD] rounded-lg focus:ring-2 focus:ring-[#5d6b56] focus:border-[#5d6b56] transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-500 font-inter"
                         placeholder="your.email@example.com"
                         required
                         :disabled="isSubmitting"
@@ -219,14 +225,14 @@
 
                     <div class="form-group">
                       <label
-                        class="block text-sm font-medium text-gray-700 mb-2"
+                        class="block text-sm font-medium text-[#333333] mb-2 font-inter"
                       >
                         Phone Number <span class="text-red-500">*</span>
                       </label>
                       <input
                         v-model="form.phone"
                         type="tel"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-500"
+                        class="w-full px-4 py-3 border border-[#DDDDDD] rounded-lg focus:ring-2 focus:ring-[#5d6b56] focus:border-[#5d6b56] transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-500 font-inter"
                         placeholder="+234 123 456 7890"
                         required
                         :disabled="isSubmitting"
@@ -238,7 +244,7 @@
                 <!-- Study Preferences -->
                 <div class="form-section">
                   <h3
-                    class="text-xl font-semibold text-gray-900 mb-6 pb-2 border-b border-gray-200"
+                    class="text-xl font-semibold text-[#333333] mb-6 pb-2 border-b border-[#DDDDDD] font-inter"
                   >
                     Study Preferences
                   </h3>
@@ -246,14 +252,14 @@
                   <div class="grid md:grid-cols-2 gap-6">
                     <div class="form-group">
                       <label
-                        class="block text-sm font-medium text-gray-700 mb-2"
+                        class="block text-sm font-medium text-[#333333] mb-2 font-inter"
                       >
                         Preferred Study Destination
                         <span class="text-red-500">*</span>
                       </label>
                       <select
                         v-model="form.destination"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-500"
+                        class="w-full px-4 py-3 border border-[#DDDDDD] rounded-lg focus:ring-2 focus:ring-[#5d6b56] focus:border-[#5d6b56] transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-500 font-inter"
                         required
                         :disabled="isSubmitting"
                       >
@@ -270,13 +276,13 @@
 
                     <div class="form-group">
                       <label
-                        class="block text-sm font-medium text-gray-700 mb-2"
+                        class="block text-sm font-medium text-[#333333] mb-2 font-inter"
                       >
                         Study Level <span class="text-red-500">*</span>
                       </label>
                       <select
                         v-model="form.level"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-500"
+                        class="w-full px-4 py-3 border border-[#DDDDDD] rounded-lg focus:ring-2 focus:ring-[#5d6b56] focus:border-[#5d6b56] transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-500 font-inter"
                         required
                         :disabled="isSubmitting"
                       >
@@ -292,13 +298,13 @@
                   <div class="grid md:grid-cols-2 gap-6 mt-6">
                     <div class="form-group">
                       <label
-                        class="block text-sm font-medium text-gray-700 mb-2"
+                        class="block text-sm font-medium text-[#333333] mb-2 font-inter"
                       >
                         When Would You Like to Start?
                       </label>
                       <select
                         v-model="form.studyTime"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-500"
+                        class="w-full px-4 py-3 border border-[#DDDDDD] rounded-lg focus:ring-2 focus:ring-[#5d6b56] focus:border-[#5d6b56] transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-500 font-inter"
                         :disabled="isSubmitting"
                       >
                         <option value="">Select a year</option>
@@ -310,13 +316,13 @@
 
                     <div class="form-group">
                       <label
-                        class="block text-sm font-medium text-gray-700 mb-2"
+                        class="block text-sm font-medium text-[#333333] mb-2 font-inter"
                       >
                         Counselling Mode
                       </label>
                       <select
                         v-model="form.mode"
-                        class="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-500"
+                        class="w-full px-4 py-3 border border-[#DDDDDD] rounded-lg focus:ring-2 focus:ring-[#5d6b56] focus:border-[#5d6b56] transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-500 font-inter"
                         :disabled="isSubmitting"
                       >
                         <option value="">Choose a mode</option>
@@ -330,7 +336,7 @@
                 <!-- Consent -->
                 <div class="form-section">
                   <h3
-                    class="text-xl font-semibold text-gray-900 mb-6 pb-2 border-b border-gray-200"
+                    class="text-xl font-semibold text-[#333333] mb-6 pb-2 border-b border-[#DDDDDD] font-inter"
                   >
                     Consent & Preferences
                   </h3>
@@ -342,12 +348,12 @@
                       <input
                         v-model="form.agreeTerms"
                         type="checkbox"
-                        class="mt-1 w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500 transition-colors duration-200"
+                        class="mt-1 w-4 h-4 text-[#5d6b56] border-[#DDDDDD] rounded focus:ring-[#5d6b56] transition-colors duration-200"
                         required
                         :disabled="isSubmitting"
                       />
                       <span
-                        class="text-sm text-gray-700 group-hover:text-gray-900 transition-colors duration-200"
+                        class="text-sm text-[#666666] group-hover:text-[#333333] transition-colors duration-200 font-inter"
                       >
                         I agree to B&S terms and privacy policy
                         <span class="text-red-500">*</span>
@@ -360,11 +366,11 @@
                       <input
                         v-model="form.contactPref"
                         type="checkbox"
-                        class="mt-1 w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500 transition-colors duration-200"
+                        class="mt-1 w-4 h-4 text-[#5d6b56] border-[#DDDDDD] rounded focus:ring-[#5d6b56] transition-colors duration-200"
                         :disabled="isSubmitting"
                       />
                       <span
-                        class="text-sm text-gray-700 group-hover:text-gray-900 transition-colors duration-200"
+                        class="text-sm text-[#666666] group-hover:text-[#333333] transition-colors duration-200 font-inter"
                       >
                         Please contact me by phone or email
                       </span>
@@ -376,11 +382,11 @@
                       <input
                         v-model="form.receiveUpdates"
                         type="checkbox"
-                        class="mt-1 w-4 h-4 text-emerald-600 border-gray-300 rounded focus:ring-emerald-500 transition-colors duration-200"
+                        class="mt-1 w-4 h-4 text-[#5d6b56] border-[#DDDDDD] rounded focus:ring-[#5d6b56] transition-colors duration-200"
                         :disabled="isSubmitting"
                       />
                       <span
-                        class="text-sm text-gray-700 group-hover:text-gray-900 transition-colors duration-200"
+                        class="text-sm text-[#666666] group-hover:text-[#333333] transition-colors duration-200 font-inter"
                       >
                         I would like to receive updates via email
                       </span>
@@ -392,7 +398,7 @@
                 <div class="pt-6 text-center">
                   <button
                     type="submit"
-                    class="w-full md:w-auto px-10 py-4 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-semibold rounded-xl transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed transform hover:scale-105 disabled:hover:scale-100"
+                    class="w-full md:w-auto px-10 py-4 bg-[#5d6b56] hover:bg-[#6b7a6a] text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed transform hover:scale-105 disabled:hover:scale-100 font-inter"
                     :disabled="isSubmitting"
                   >
                     <span
@@ -413,7 +419,7 @@
                       />
                     </span>
                   </button>
-                  <p class="text-sm text-gray-500 mt-4">
+                  <p class="text-sm text-[#666666] mt-4 font-inter">
                     We'll review your application and get back to you within 24
                     hours.
                   </p>
@@ -426,69 +432,69 @@
           <div class="space-y-8">
             <!-- Contact Cards -->
             <div
-              class="bg-white rounded-3xl shadow-xl border border-gray-100 p-8"
+              class="bg-white rounded-xl shadow-xl border border-[#DDDDDD] p-8"
             >
-              <h3 class="text-xl font-semibold text-gray-900 mb-8">
+              <h3 class="text-xl font-semibold text-[#333333] mb-8 font-inter">
                 Get in Touch
               </h3>
               <div class="space-y-8">
                 <div
-                  class="group flex items-start space-x-4 p-4 rounded-2xl hover:bg-gray-50 transition-colors duration-200"
+                  class="group flex items-start space-x-4 p-4 rounded-lg hover:bg-[#f8f9f8] transition-colors duration-200"
                 >
                   <div
-                    class="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center group-hover:scale-110 transition-transform duration-200"
+                    class="w-12 h-12 rounded-lg bg-gradient-to-br from-[#eb6534]/10 to-[#eb6534]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-200"
                   >
                     <Icon
                       name="i-heroicons-phone"
-                      class="w-6 h-6 text-orange-600"
+                      class="w-6 h-6 text-[#eb6534]"
                     />
                   </div>
                   <div>
-                    <h4 class="font-semibold text-gray-900 mb-1">Phone</h4>
-                    <p class="text-gray-700 font-medium">+234 806 544 2707</p>
-                    <p class="text-sm text-gray-500 mt-1">
+                    <h4 class="font-semibold text-[#333333] mb-1 font-inter">Phone</h4>
+                    <p class="text-[#666666] font-medium font-inter">+234 806 544 2707</p>
+                    <p class="text-sm text-[#666666] mt-1 font-inter">
                       Mon-Fri 9AM-6PM WAT
                     </p>
                   </div>
                 </div>
 
                 <div
-                  class="group flex items-start space-x-4 p-4 rounded-2xl hover:bg-gray-50 transition-colors duration-200"
+                  class="group flex items-start space-x-4 p-4 rounded-lg hover:bg-[#f8f9f8] transition-colors duration-200"
                 >
                   <div
-                    class="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center group-hover:scale-110 transition-transform duration-200"
+                    class="w-12 h-12 rounded-lg bg-gradient-to-br from-[#eb6534]/10 to-[#eb6534]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-200"
                   >
                     <Icon
                       name="i-heroicons-envelope"
-                      class="w-6 h-6 text-orange-600"
+                      class="w-6 h-6 text-[#eb6534]"
                     />
                   </div>
                   <div>
-                    <h4 class="font-semibold text-gray-900 mb-1">Email</h4>
-                    <p class="text-gray-700 font-medium">
+                    <h4 class="font-semibold text-[#333333] mb-1 font-inter">Email</h4>
+                    <p class="text-[#666666] font-medium font-inter">
                       info@bs-education.com
                     </p>
-                    <p class="text-sm text-gray-500 mt-1">
+                    <p class="text-sm text-[#666666] mt-1 font-inter">
                       We'll respond within 24hrs
                     </p>
                   </div>
                 </div>
 
                 <div
-                  class="group flex items-start space-x-4 p-4 rounded-2xl hover:bg-gray-50 transition-colors duration-200"
+                  class="group flex items-start space-x-4 p-4 rounded-lg hover:bg-[#f8f9f8] transition-colors duration-200"
                 >
                   <div
-                    class="w-12 h-12 rounded-2xl bg-gradient-to-br from-orange-100 to-orange-200 flex items-center justify-center group-hover:scale-110 transition-transform duration-200"
+                    class="w-12 h-12 rounded-lg bg-gradient-to-br from-[#eb6534]/10 to-[#eb6534]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-200"
                   >
                     <Icon
                       name="i-heroicons-map-pin"
-                      class="w-6 h-6 text-orange-600"
+                      class="w-6 h-6 text-[#eb6534]"
                     />
                   </div>
                   <div>
-                    <h4 class="font-semibold text-gray-900 mb-1">Office</h4>
-                    <p class="text-gray-700 font-medium">Lagos, Nigeria</p>
-                    <p class="text-sm text-gray-500 mt-1">
+                    <h4 class="font-semibold text-[#333333] mb-1 font-inter">Office</h4>
+                    <p class="text-[#666666] font-medium font-inter">Lagos, Nigeria</p>
+                    <p class="text-sm text-[#666666] mt-1 font-inter">
                       Visit by appointment only
                     </p>
                   </div>
@@ -498,25 +504,25 @@
 
             <!-- WhatsApp CTA -->
             <div
-              class="rounded-3xl p-8 text-white bg-gradient-to-br from-emerald-500 via-emerald-600 to-emerald-700 shadow-xl"
+              class="rounded-xl p-8 text-white bg-gradient-to-br from-[#5d6b56] via-[#5d6b56] to-[#6b7a6a] shadow-xl"
             >
               <div class="text-center space-y-6">
                 <div
-                  class="w-16 h-16 bg-white/20 rounded-2xl flex items-center justify-center mx-auto backdrop-blur-sm"
+                  class="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center mx-auto backdrop-blur-sm"
                 >
                   <Icon name="i-simple-icons-whatsapp" class="w-8 h-8" />
                 </div>
                 <div>
-                  <h3 class="text-xl font-semibold mb-3">
+                  <h3 class="text-xl font-semibold mb-3 font-inter">
                     Quick WhatsApp Chat
                   </h3>
-                  <p class="text-emerald-100 mb-6">
+                  <p class="text-white/80 mb-6 font-inter">
                     Get instant answers to your questions via WhatsApp
                   </p>
                   <a
                     href="https://wa.me/+2348065442707"
                     target="_blank"
-                    class="inline-flex items-center px-6 py-3 bg-white text-emerald-600 font-semibold rounded-xl hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+                    class="inline-flex items-center px-6 py-3 bg-white text-[#5d6b56] font-semibold rounded-lg hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 font-inter"
                   >
                     Chat Now
                     <Icon
@@ -529,15 +535,15 @@
             </div>
 
             <!-- Success Stories Image -->
-            <div class="rounded-3xl overflow-hidden shadow-xl">
+            <div class="rounded-xl overflow-hidden shadow-xl">
               <div
-                class="aspect-[4/3] bg-gradient-to-br from-emerald-400 to-emerald-600"
+                class="aspect-[4/3] bg-gradient-to-br from-[#5d6b56] to-[#6b7a6a]"
               >
                 <div
-                  class="w-full h-full flex items-center justify-center text-white text-lg font-medium backdrop-blur-sm bg-black/10"
+                  class="w-full h-full flex items-center justify-center text-white text-lg font-medium backdrop-blur-sm bg-black/10 font-inter"
                 >
                   <NuxtImg
-                    src="/img/success.jpg"
+                    src="/img/celebration.png"
                     alt="Study abroad destinations"
                     class="absolute inset-0 w-full h-full object-cover"
                     loading="eager"
@@ -553,32 +559,58 @@
 
     <!-- FAQ Section -->
     <section
-      class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-gray-50 to-emerald-50/30"
+      class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-[#f4f5f3] to-[#f4f5f3]/70"
     >
       <div class="max-w-4xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+          <h2 class="text-3xl md:text-4xl font-bold text-[#333333] mb-4 font-inter">
             Frequently Asked Questions
           </h2>
-          <p class="text-xl text-gray-600">
+          <p class="text-xl text-[#666666] font-inter">
             Quick answers to common questions about studying abroad
           </p>
         </div>
 
-        <UAccordion
-          :items="faqItems"
-          :ui="{
-            wrapper: 'space-y-4',
-            item: {
-              base: 'bg-white rounded-2xl shadow-lg border border-gray-100',
-              padding: 'p-6',
-              color: 'text-gray-900',
-            },
-            trigger: {
-              base: 'flex items-center justify-between w-full text-left font-semibold hover:text-orange-600 transition-colors duration-200',
-            },
-          }"
-        />
+        <div class="faq-main">
+            <div class="faq-list">
+              <div
+                v-for="(faq, index) in faqItems"
+                :key="index"
+                class="faq-item"
+                :class="{ 'active': activeIndex === index }"
+              >
+                <button
+                  class="faq-question"
+                  @click="toggleFaq(index)"
+                  :aria-expanded="activeIndex === index"
+                >
+                  <span class="question-text">{{ faq.label }}</span>
+                  <div class="toggle-icon">
+                    <svg 
+                      width="20" 
+                      height="20" 
+                      viewBox="0 0 24 24" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      stroke-width="2"
+                      :class="{ 'rotated': activeIndex === index }"
+                    >
+                      <path d="M6 9l6 6 6-6"/>
+                    </svg>
+                  </div>
+                </button>
+                
+                <div 
+                  class="faq-answer"
+                  :ref="el => answerRefs[index] = el"
+                >
+                  <div class="answer-content">
+                    <p v-html="faq.content"></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
       </div>
     </section>
   </div>
@@ -728,6 +760,27 @@ const faqItems = [
     defaultOpen: false,
   },
 ];
+const activeIndex = ref(null)
+  const answerRefs = ref([])
+
+const toggleFaq = (index) => {
+    if (activeIndex.value === index) {
+      activeIndex.value = null
+    } else {
+      activeIndex.value = index
+    }
+  }
+  
+  watch(activeIndex, () => {
+    if (activeIndex.value !== null) {
+      nextTick(() => {
+        const activeElement = document.querySelector('.faq-item.active')
+        if (activeElement) {
+          activeElement.scrollIntoView({ block: 'nearest' })
+        }
+      })
+    }
+  })
 
 // SEO Meta
 useSeoMeta({
@@ -791,4 +844,89 @@ useSeoMeta({
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 200ms;
 }
+
+.faq-main {
+    background: white;
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+  }
+  
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .faq-item {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #DDDDDD;
+  }
+  
+  .faq-item.active {
+    border-color: #5d6b56;
+    box-shadow: 0 4px 12px rgba(133, 148, 132, 0.15);
+  }
+  
+  .faq-question {
+    width: 100%;
+    padding: 20px 24px;
+    background: white;
+    border: none;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333333;
+  }
+  
+  .faq-item.active .faq-question {
+    background: #f8f9f8;
+    color: #5d6b56;
+  }
+  
+  .faq-question:hover {
+    background: #f8f9f8;
+    color: #5d6b56;
+  }
+  
+  .question-text {
+    flex: 1;
+    padding-right: 16px;
+  }
+  
+  .toggle-icon {
+    color: #5d6b56;
+  }
+  
+  .toggle-icon svg.rotated {
+    transform: rotate(180deg);
+  }
+  
+  .faq-answer {
+    overflow: hidden;
+    background: white;
+  }
+  
+  .faq-item.active .faq-answer {
+    display: block;
+  }
+  
+  .faq-item:not(.active) .faq-answer {
+    display: none;
+  }
+  
+  .answer-content {
+    padding: 24px;
+    color: #666666;
+    line-height: 1.6;
+  }
+  
+  .answer-content p {
+    margin-bottom: 16px;
+  }
 </style>
