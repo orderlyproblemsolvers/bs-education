@@ -5,54 +5,46 @@
       <div class="section-header">
         <h2 class="section-title">Success Stories</h2>
         <p class="section-subtitle">
-          Hear from our students who are now studying abroad and achieving their dreams
+          Hear from our students who are now studying abroad and achieving their
+          dreams
         </p>
       </div>
 
       <!-- Testimonials Grid -->
       <div class="testimonials-grid">
         <!-- First Image Card -->
-        <div
-          class="testimonial-card image-card"
-          @mousemove="(event) => handleMouseMove(event, 'img1')"
-          @mouseleave="(event) => handleMouseLeave(event, 'img1')"
-          :ref="el => setCardRef(el, 'img1')"
-        >
-          <div 
-            class="gloss-overlay" 
-            :ref="el => setGlossRef(el, 'img1')"
-          ></div>
-          <NuxtImg
-            src="/img/Grad1.jpg"
-            alt="Graduation success story"
-            class="card-image"
-            loading="lazy"
-            preload
-          />
-        </div>
 
         <!-- Testimonial Cards -->
         <div
           v-for="(testimonial, index) in testimonials"
           :key="testimonial.id"
           class="testimonial-card"
-          :class="{ 'featured': testimonial.featured }"
+          :class="{ featured: testimonial.featured }"
           @mousemove="(event) => handleMouseMove(event, index)"
           @mouseleave="(event) => handleMouseLeave(event, index)"
-          :ref="el => setCardRef(el, index)"
+          :ref="(el) => setCardRef(el, index)"
         >
           <!-- Gloss overlay -->
-          <div 
-            class="gloss-overlay" 
-            :ref="el => setGlossRef(el, index)"
+          <div
+            class="gloss-overlay"
+            :ref="(el) => setGlossRef(el, index)"
           ></div>
-          
+
           <!-- Card content -->
           <div class="card-content">
             <!-- Quote icon -->
             <div class="quote-icon">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" fill="currentColor"/>
+              <svg
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z"
+                  fill="currentColor"
+                />
               </svg>
             </div>
 
@@ -99,16 +91,35 @@
           </div>
         </div>
 
+        <div
+          class="testimonial-card image-card"
+          @mousemove="(event) => handleMouseMove(event, 'img1')"
+          @mouseleave="(event) => handleMouseLeave(event, 'img1')"
+          :ref="(el) => setCardRef(el, 'img1')"
+        >
+          <div
+            class="gloss-overlay"
+            :ref="(el) => setGlossRef(el, 'img1')"
+          ></div>
+          <NuxtImg
+            src="/img/Grad1.jpg"
+            alt="Graduation success story"
+            class="card-image"
+            loading="lazy"
+            preload
+          />
+        </div>
+
         <!-- Second Image Card -->
         <div
           class="testimonial-card image-card"
           @mousemove="(event) => handleMouseMove(event, 'img2')"
           @mouseleave="(event) => handleMouseLeave(event, 'img2')"
-          :ref="el => setCardRef(el, 'img2')"
+          :ref="(el) => setCardRef(el, 'img2')"
         >
-          <div 
-            class="gloss-overlay" 
-            :ref="el => setGlossRef(el, 'img2')"
+          <div
+            class="gloss-overlay"
+            :ref="(el) => setGlossRef(el, 'img2')"
           ></div>
           <NuxtImg
             src="/img/Grad2.jpg"
@@ -122,11 +133,11 @@
           class="testimonial-card image-card"
           @mousemove="(event) => handleMouseMove(event, 'img3')"
           @mouseleave="(event) => handleMouseLeave(event, 'img3')"
-          :ref="el => setCardRef(el, 'img3')"
+          :ref="(el) => setCardRef(el, 'img3')"
         >
-          <div 
-            class="gloss-overlay" 
-            :ref="el => setGlossRef(el, 'img3')"
+          <div
+            class="gloss-overlay"
+            :ref="(el) => setGlossRef(el, 'img3')"
           ></div>
           <NuxtImg
             src="/img/Grad5.jpg"
@@ -142,18 +153,19 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
+import { ref, computed, onMounted, onUnmounted, nextTick } from "vue";
 
 // Optimized refs
-const cardRefs = ref(new Map())
-const glossRefs = ref(new Map())
-const observer = ref(null)
+const cardRefs = ref(new Map());
+const glossRefs = ref(new Map());
+const observer = ref(null);
 
 // Pre-computed stars HTML to avoid v-for overhead
 const starsHtml = computed(() => {
-  const starSvg = '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>'
-  return Array(5).fill(starSvg).join('')
-})
+  const starSvg =
+    '<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>';
+  return Array(5).fill(starSvg).join("");
+});
 
 // Optimized testimonial data with unique IDs for better v-for performance
 const testimonials = ref([
@@ -165,7 +177,7 @@ const testimonials = ref([
     country: "United Kingdom",
     countryFlag: "/flags/uk.svg",
     avatar: "/img/default.png",
-    featured: true
+    featured: true,
   },
   {
     id: 2,
@@ -175,7 +187,7 @@ const testimonials = ref([
     country: "Canada",
     countryFlag: "/flags/canada.svg",
     avatar: "/img/default.png",
-    featured: false
+    featured: false,
   },
   {
     id: 3,
@@ -185,145 +197,146 @@ const testimonials = ref([
     country: "Australia",
     countryFlag: "/flags/australia.svg",
     avatar: "/img/default.png",
-    featured: false
-  }
-])
+    featured: false,
+  },
+]);
 
 // Optimized ref setters
 const setCardRef = (el, index) => {
   if (el) {
-    cardRefs.value.set(index, el)
+    cardRefs.value.set(index, el);
   } else {
-    cardRefs.value.delete(index)
+    cardRefs.value.delete(index);
   }
-}
+};
 
 const setGlossRef = (el, index) => {
   if (el) {
-    glossRefs.value.set(index, el)
+    glossRefs.value.set(index, el);
   } else {
-    glossRefs.value.delete(index)
+    glossRefs.value.delete(index);
   }
-}
+};
 
 // Throttled mouse move handler for better performance
-let rafId = null
+let rafId = null;
 const handleMouseMove = (event, index) => {
-  if (rafId) return
-  
+  if (rafId) return;
+
   rafId = requestAnimationFrame(() => {
-    const card = cardRefs.value.get(index)
-    const gloss = glossRefs.value.get(index)
-    
+    const card = cardRefs.value.get(index);
+    const gloss = glossRefs.value.get(index);
+
     if (!card || !gloss) {
-      rafId = null
-      return
+      rafId = null;
+      return;
     }
-    
-    const rect = card.getBoundingClientRect()
-    const x = event.clientX - rect.left
-    const y = event.clientY - rect.top
-    
-    const centerX = rect.width / 2
-    const centerY = rect.height / 2
-    
-    const rotateX = (y - centerY) / 10
-    const rotateY = (centerX - x) / 10
-    
+
+    const rect = card.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+
+    const rotateX = (y - centerY) / 10;
+    const rotateY = (centerX - x) / 10;
+
     // Apply 3D transform to card with GPU acceleration
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translate3d(0, 0, 10px)`
-    
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translate3d(0, 0, 10px)`;
+
     // Move gloss overlay
-    const glossX = (x / rect.width) * 100
-    const glossY = (y / rect.height) * 100
-    
-    gloss.style.background = `radial-gradient(circle at ${glossX}% ${glossY}%, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 50%, transparent 70%)`
-    gloss.style.opacity = '1'
-    
-    rafId = null
-  })
-}
+    const glossX = (x / rect.width) * 100;
+    const glossY = (y / rect.height) * 100;
+
+    gloss.style.background = `radial-gradient(circle at ${glossX}% ${glossY}%, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 50%, transparent 70%)`;
+    gloss.style.opacity = "1";
+
+    rafId = null;
+  });
+};
 
 const handleMouseLeave = (event, index) => {
   if (rafId) {
-    cancelAnimationFrame(rafId)
-    rafId = null
+    cancelAnimationFrame(rafId);
+    rafId = null;
   }
-  
-  const card = cardRefs.value.get(index)
-  const gloss = glossRefs.value.get(index)
-  
-  if (!card || !gloss) return
-  
+
+  const card = cardRefs.value.get(index);
+  const gloss = glossRefs.value.get(index);
+
+  if (!card || !gloss) return;
+
   // Reset transform with GPU acceleration
-  card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translate3d(0, 0, 0)'
-  
+  card.style.transform =
+    "perspective(1000px) rotateX(0deg) rotateY(0deg) translate3d(0, 0, 0)";
+
   // Hide gloss
-  gloss.style.opacity = '0'
-}
+  gloss.style.opacity = "0";
+};
 
 // Preload success stories page on hover
 const preloadSuccessStories = () => {
   if (process.client) {
     // Nuxt 3 preloading
-    navigateTo('/success-stories', { preload: true })
+    navigateTo("/success-stories", { preload: true });
   }
-}
+};
 
 // Optimized intersection observer
 const setupIntersectionObserver = () => {
-  if (!process.client) return
-  
+  if (!process.client) return;
+
   observer.value = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('animate-in')
+          entry.target.classList.add("animate-in");
           // Unobserve after animation to save resources
-          observer.value?.unobserve(entry.target)
+          observer.value?.unobserve(entry.target);
         }
-      })
+      });
     },
-    { 
+    {
       threshold: 0.1,
-      rootMargin: '50px' // Start animation slightly before element enters viewport
+      rootMargin: "50px", // Start animation slightly before element enters viewport
     }
-  )
-  
+  );
+
   // Observe all cards
   cardRefs.value.forEach((card) => {
-    if (card) observer.value?.observe(card)
-  })
-}
+    if (card) observer.value?.observe(card);
+  });
+};
 
 onMounted(async () => {
-  await nextTick()
-  setupIntersectionObserver()
-})
+  await nextTick();
+  setupIntersectionObserver();
+});
 
 onUnmounted(() => {
   // Cleanup
   if (observer.value) {
-    observer.value.disconnect()
-    observer.value = null
+    observer.value.disconnect();
+    observer.value = null;
   }
-  
+
   if (rafId) {
-    cancelAnimationFrame(rafId)
-    rafId = null
+    cancelAnimationFrame(rafId);
+    rafId = null;
   }
-  
+
   // Clear refs
-  cardRefs.value.clear()
-  glossRefs.value.clear()
-})
+  cardRefs.value.clear();
+  glossRefs.value.clear();
+});
 </script>
 
 <style scoped>
 .testimonials-section {
   padding: 64px 0;
   background: linear-gradient(135deg, #f4f5f3 0%, #e8ebe7 100%);
-  font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .container {
@@ -374,7 +387,7 @@ onUnmounted(() => {
   background: rgba(255, 255, 255, 0.9);
   border-radius: 10px;
   padding: 16px;
-  border: 1px solid #DDDDDD;
+  border: 1px solid #dddddd;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   backdrop-filter: blur(10px);
@@ -410,7 +423,11 @@ onUnmounted(() => {
 }
 
 .testimonial-card.featured {
-  background: linear-gradient(135deg, rgba(132, 148, 132, 0.1) 0%, rgba(255, 255, 255, 0.95) 100%);
+  background: linear-gradient(
+    135deg,
+    rgba(132, 148, 132, 0.1) 0%,
+    rgba(255, 255, 255, 0.95) 100%
+  );
   border: 2px solid #5d6b56;
 }
 
@@ -437,7 +454,7 @@ onUnmounted(() => {
 }
 
 .quote-icon {
-  color: #EB6534;
+  color: #eb6534;
   margin-bottom: 12px;
 }
 
@@ -516,7 +533,7 @@ onUnmounted(() => {
 .stars {
   display: flex;
   gap: 1px;
-  color: #EB6534;
+  color: #eb6534;
 }
 
 .section-footer {
@@ -546,12 +563,12 @@ onUnmounted(() => {
   .container {
     padding: 0 40px;
   }
-  
+
   .section-title {
     font-size: 30px;
     line-height: 40px;
   }
-  
+
   .testimonial-card {
     min-width: 260px;
     width: 260px;
@@ -562,31 +579,31 @@ onUnmounted(() => {
   .testimonials-section {
     padding: 32px 0;
   }
-  
+
   .container {
     padding: 0 20px;
   }
-  
+
   .section-title {
     font-size: 26px;
     line-height: 36px;
   }
-  
+
   .section-subtitle {
     font-size: 16px;
     line-height: 24px;
   }
-  
+
   .testimonial-card {
     padding: 14px;
     min-width: 240px;
     width: 240px;
   }
-  
+
   .testimonials-grid {
     gap: 16px;
   }
-  
+
   .view-more-btn {
     padding: 12px 20px;
   }
@@ -618,7 +635,7 @@ onUnmounted(() => {
   .testimonial-card {
     transition: opacity 0.3s ease;
   }
-  
+
   .view-more-btn:hover {
     transform: none;
   }
