@@ -11,6 +11,27 @@
 
       <!-- Testimonials Grid -->
       <div class="testimonials-grid">
+        <!-- First Image Card -->
+        <div
+          class="testimonial-card image-card"
+          @mousemove="(event) => handleMouseMove(event, 'img1')"
+          @mouseleave="(event) => handleMouseLeave(event, 'img1')"
+          :ref="el => setCardRef(el, 'img1')"
+        >
+          <div 
+            class="gloss-overlay" 
+            :ref="el => setGlossRef(el, 'img1')"
+          ></div>
+          <NuxtImg
+            src="/img/Grad1.jpg"
+            alt="Graduation success story"
+            class="card-image"
+            loading="lazy"
+            preload
+          />
+        </div>
+
+        <!-- Testimonial Cards -->
         <div
           v-for="(testimonial, index) in testimonials"
           :key="testimonial.id"
@@ -77,15 +98,43 @@
             </div>
           </div>
         </div>
-        <div class="testimonial-card">
+
+        <!-- Second Image Card -->
+        <div
+          class="testimonial-card image-card"
+          @mousemove="(event) => handleMouseMove(event, 'img2')"
+          @mouseleave="(event) => handleMouseLeave(event, 'img2')"
+          :ref="el => setCardRef(el, 'img2')"
+        >
+          <div 
+            class="gloss-overlay" 
+            :ref="el => setGlossRef(el, 'img2')"
+          ></div>
           <NuxtImg
-                    src="/img/customerservice.png"
-                    alt="Study abroad destinations"
-                    class="absolute inset-0 w-full h-full object-cover"
-                    loading="eager"
-                    preload
-                  />
-          
+            src="/img/Grad2.jpg"
+            alt="Graduation success story"
+            class="card-image"
+            loading="lazy"
+            preload
+          />
+        </div>
+        <div
+          class="testimonial-card image-card"
+          @mousemove="(event) => handleMouseMove(event, 'img3')"
+          @mouseleave="(event) => handleMouseLeave(event, 'img3')"
+          :ref="el => setCardRef(el, 'img3')"
+        >
+          <div 
+            class="gloss-overlay" 
+            :ref="el => setGlossRef(el, 'img3')"
+          ></div>
+          <NuxtImg
+            src="/img/Grad5.jpg"
+            alt="Graduation success story"
+            class="card-image"
+            loading="lazy"
+            preload
+          />
         </div>
       </div>
     </div>
@@ -341,6 +390,20 @@ onUnmounted(() => {
   flex-shrink: 0;
 }
 
+.testimonial-card.image-card {
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
 .testimonial-card.animate-in {
   opacity: 1;
   transform: translate3d(0, 0, 0);
@@ -540,6 +603,14 @@ onUnmounted(() => {
 
 .testimonial-card:nth-child(3) {
   transition-delay: 200ms;
+}
+
+.testimonial-card:nth-child(4) {
+  transition-delay: 300ms;
+}
+
+.testimonial-card:nth-child(5) {
+  transition-delay: 400ms;
 }
 
 /* Reduced motion support */

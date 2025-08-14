@@ -36,8 +36,8 @@
                   </NuxtLink>
                 </li>
                 <li>
-                  <NuxtLink to="/about" class="text-gray-300 hover:text-[#ACBEA3] text-sm transition-colors">
-                    About Us
+                  <NuxtLink to="/events" class="text-gray-300 hover:text-[#ACBEA3] text-sm transition-colors">
+                    Events
                   </NuxtLink>
                 </li>
                 <li>
@@ -46,8 +46,8 @@
                   </NuxtLink>
                 </li>
                 <li>
-                  <NuxtLink to="/apply" class="text-gray-300 hover:text-[#ACBEA3] text-sm transition-colors">
-                    Apply Now
+                  <NuxtLink to="/test-prep" class="text-gray-300 hover:text-[#ACBEA3] text-sm transition-colors">
+                    Test Prep
                   </NuxtLink>
                 </li>
                 <li>
@@ -66,8 +66,8 @@
               <div class="text-sm">
                 <p class="text-gray-300 mb-1">Address</p>
                 <p class="text-gray-400 text-xs">
-                  12 Ogundana Street, Allen Avenue<br />
-                  Ikeja, Lagos, Nigeria
+                  No 308, Kings Plaza<br />
+                  Jahi, Abuja, Nigeria
                 </p>
               </div>
 

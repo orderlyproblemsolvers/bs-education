@@ -440,7 +440,7 @@ const countries = [
     images: [
       '/img/australia.jpg',
       '/img/australia2.webp',
-      '/img/australia.jpg',
+      '/img/australia3.jpg',
       '/img/australia4.webp'
     ],
   },
@@ -480,7 +480,7 @@ const countries = [
     ],
     images: [
       '/img/cyprus.png',
-      '/img/cyprus2.jpg',
+      '/img/cyprus2.jpeg',
       '/img/cyprus3.png',
       '/img/cyprus4.jpg'
     ],
