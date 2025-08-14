@@ -30,7 +30,7 @@ export default defineNuxtConfig({
       // Global options
       quality: 80,
       format: ['webp', 'avif', 'jpg', 'png'],
-      domains: ['https://minjvvxdfdwmbrtphzpr.supabase.co', 'http://localhost:3000']
+      domains: ['https://minjvvxdfdwmbrtphzpr.supabase.co', 'localhost:3000']
     },
 
 

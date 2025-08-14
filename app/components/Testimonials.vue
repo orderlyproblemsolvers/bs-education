@@ -77,6 +77,16 @@
             </div>
           </div>
         </div>
+        <div class="testimonial-card">
+          <NuxtImg
+                    src="/img/customerservice.png"
+                    alt="Study abroad destinations"
+                    class="absolute inset-0 w-full h-full object-cover"
+                    loading="eager"
+                    preload
+                  />
+          
+        </div>
       </div>
     </div>
   </section>
