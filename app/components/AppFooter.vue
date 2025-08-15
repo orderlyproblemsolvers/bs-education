@@ -55,6 +55,11 @@
                     Contact
                   </NuxtLink>
                 </li>
+                <li>
+                  <NuxtLink to="/contact/visit" class="text-gray-300 hover:text-[#ACBEA3] text-sm transition-colors">
+                    Get Directions
+                  </NuxtLink>
+                </li>
               </ul>
             </nav>
           </div>

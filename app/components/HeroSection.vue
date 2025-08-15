@@ -59,7 +59,7 @@
             color="white"
             variant="ghost"
             size="lg"
-            to="https://wa.me/2348065442707?text={{ message }}"
+            @click="openWhatsApp"
             class="px-6 py-3 bg-[#eb6534] hover:bg-[#b66654] text-white font-semibold rounded-lg shadow-lg"
           >
             Chat on WhatsApp
@@ -84,7 +84,12 @@
 <script setup>
 import { NuxtLink } from '#components';
 
-const message = encodeURIComponent('Hello! I\'m interested in B&S Educational Services. Can you help me with study abroad opportunities?')
+function openWhatsApp() {
+    const phoneNumber = '2348065442707'
+    const message = encodeURIComponent('Hello! I\'m interested in B&S Educational Services. Can you help me with study abroad opportunities?')
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`
+    window.open(whatsappUrl, '_blank')
+  }
 </script>
 
 <style scoped>
