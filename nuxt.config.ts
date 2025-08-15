@@ -9,8 +9,8 @@ export default defineNuxtConfig({
   nitro: {
     preset: 'netlify' // ensures Nuxt builds for Netlify
   },
-  modules: ['@nuxt/image', '@nuxt/ui', '@nuxtjs/supabase', '@vueuse/nuxt'],
-  css: ['~/assets/css/main.css', 'quill/dist/quill.snow.css'],
+    modules: ['@nuxt/image', '@nuxt/ui', '@nuxtjs/supabase', '@vueuse/nuxt', '@nuxtjs/leaflet'],
+  css: ['~/assets/css/main.css', 'quill/dist/quill.snow.css', 'leaflet/dist/leaflet.css'],
   runtimeConfig: {
     supabaseServiceKey: process.env.SUPABASE_SERVICE_ROLE_KEY,
     adminSecret: process.env.ADMIN_SECRET_KEY,
@@ -23,6 +23,9 @@ export default defineNuxtConfig({
     url: process.env.SUPABASE_URL,
     key: process.env.SUPABASE_ANON_KEY,
     redirect: false,
+    },
+    leaflet: {
+      markerCluster: true
     },
     image: {
       provider: process.env.NODE_ENV === 'development' ? 'ipx' : 'netlify',

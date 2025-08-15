@@ -188,7 +188,7 @@
                 <div class="text-sm text-gray-500">Get in touch</div>
               </NuxtLink>
               <NuxtLink
-                to="/contact/office-visit"
+                to="/contact/visit"
                 class="block px-4 py-3 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] transition-colors duration-200"
               >
                 <div class="font-medium">Visit Our Office</div>
@@ -285,6 +285,35 @@
               </NuxtLink>
             </div>
 
+            <!-- Resource Links -->
+            <div class="space-y-1">
+              <h3
+                class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3"
+              >
+                Resources
+              </h3>
+              <NuxtLink
+                to="/resources"
+                class="flex items-center px-3 py-2 text-sm text-gray-600 hover:text-[#859484] hover:bg-[#859484]/5 rounded-lg transition-all duration-200"
+                @click="isMobileMenuOpen = false"
+              >
+                Blog Posts
+              </NuxtLink>
+              <NuxtLink
+                to="/resources/templates"
+                class="flex items-center px-3 py-2 text-sm text-gray-600 hover:text-[#859484] hover:bg-[#859484]/5 rounded-lg transition-all duration-200"
+                @click="isMobileMenuOpen = false"
+              >
+                Templates & Guides
+              </NuxtLink>
+              <NuxtLink
+                to="/resources/country-guides"
+                class="flex items-center px-3 py-2 text-sm text-gray-600 hover:text-[#859484] hover:bg-[#859484]/5 rounded-lg transition-all duration-200"
+                @click="isMobileMenuOpen = false"
+              >
+                Country Guides
+              </NuxtLink>
+            </div>
             <!-- Service Links -->
             <div class="space-y-1">
               <h3
@@ -393,7 +422,6 @@ const showContactDropdown = ref(false);
 const mainRoutes = [
   { path: "/", name: "Home" },
   { path: "/events", name: "Events" },
-  { path: "/resources", name: "Resources" },
   { path: "/contact", name: "Contact" },
 ];
 

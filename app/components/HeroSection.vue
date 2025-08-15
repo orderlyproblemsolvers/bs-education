@@ -53,13 +53,13 @@
             size="lg"
             class="bg-[#5d6b56] text-white font-bold px-6 py-3 hover:bg-gray-100 rounded-lg shadow-lg"
           >
-            Book Free Consultation
+          <NuxtLink to="/contact" class="text-white">Book Free Consultation</NuxtLink>
           </UButton>
           <UButton
             color="white"
             variant="ghost"
             size="lg"
-            to="https://wa.me/234XXXXXXXXXX"
+            to="https://wa.me/2348065442707?text={{ message }}"
             class="px-6 py-3 bg-[#eb6534] hover:bg-[#b66654] text-white font-semibold rounded-lg shadow-lg"
           >
             Chat on WhatsApp
@@ -82,7 +82,9 @@
 </template>
 
 <script setup>
-// No script logic for now
+import { NuxtLink } from '#components';
+
+const message = encodeURIComponent('Hello! I\'m interested in B&S Educational Services. Can you help me with study abroad opportunities?')
 </script>
 
 <style scoped>

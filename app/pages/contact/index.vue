@@ -493,7 +493,7 @@
                   </div>
                   <div>
                     <h4 class="font-semibold text-[#333333] mb-1 font-inter">Office</h4>
-                    <p class="text-[#666666] font-medium font-inter">Lagos, Nigeria</p>
+                    <p class="text-[#666666] font-medium font-inter">Abuja, Nigeria</p>
                     <p class="text-sm text-[#666666] mt-1 font-inter">
                       Visit by appointment only
                     </p>
