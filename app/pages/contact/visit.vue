@@ -128,11 +128,11 @@
   const props = defineProps({
     latitude: {
       type: Number,
-      default: 9.0500598
+      default: 9.089076906985705
     },
     longitude: {
       type: Number,
-      default: 7.4647884
+      default: 7.424841271555334
     },
     zoom: {
       type: Number,
