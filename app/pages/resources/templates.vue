@@ -3,7 +3,7 @@
       <div class="max-w-4xl mx-auto">
         <!-- Section Header -->
         <h1 class="text-3xl sm:text-4xl font-bold text-[#859484] mb-8 text-center">
-          Download Our Brochures
+          Download OurTemplates
         </h1>
   
         <!-- Loading State -->
@@ -29,9 +29,6 @@
                 <h2 class="text-lg font-semibold text-[#859484] mb-1">
                   {{ b.title }}
                 </h2>
-                <p class="text-sm text-gray-500">
-                  {{ formatDate(b.created_at) }}
-                </p>
               </div>
   
               <!-- Download Button -->
