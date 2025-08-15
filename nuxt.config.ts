@@ -5,6 +5,18 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
+  app: {
+    head: {
+      link: [
+        {
+          rel: 'stylesheet',
+          href: 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.css',
+          integrity: 'sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=',
+          crossorigin: ''
+        }
+      ]
+    }
+  },
   ssr: true,
   nitro: {
     preset: 'netlify' // ensures Nuxt builds for Netlify
@@ -23,9 +35,6 @@ export default defineNuxtConfig({
     url: process.env.SUPABASE_URL,
     key: process.env.SUPABASE_ANON_KEY,
     redirect: false,
-    },
-    leaflet: {
-      markerCluster: true
     },
     image: {
       provider: process.env.NODE_ENV === 'development' ? 'ipx' : 'netlify',
