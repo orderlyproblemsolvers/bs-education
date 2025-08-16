@@ -13,7 +13,7 @@
               class="w-full h-full object-contain"
               loading="eager"
               width="52"
-              height="48"
+              height="52"
             />
           </div>
           <div class="hidden sm:block">
@@ -400,6 +400,17 @@
 </template>
 
 <script setup>
+useSeoMeta({
+  title: "B&S Educational Services - Your Path to Studying Abroad",
+  description:
+    "B&S Educational Services offers free expert counselling, admission processing, visa support, and test prep for students looking to study in the UK, USA, Hungary, Australia, and more.",
+  ogTitle: "B&S Educational Services - Your Path to Studying Abroad",
+  ogDescription:
+    "B&S Educational Services provides comprehensive support for students aspiring to study abroad. From free consultations to visa assistance, we are here to help you succeed.",
+  ogImage: "/img/main-logo.jpg",
+  twitterCard: "summary_large_image",
+  robots: "index, follow",
+});
 // Brand colors from the design system
 const brandColors = {
   baseColor: "#f4f5f3",

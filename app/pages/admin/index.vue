@@ -47,7 +47,9 @@
 </template>
 
 <script setup>
+
 definePageMeta({
+  title: 'Admin Dashboard - B&S Educational Services',
   middleware: (to) => {
     const user = useSupabaseUser()
     const { isAdmin } = useAuth()
@@ -57,6 +59,16 @@ definePageMeta({
     }
   },
   layout: 'admin'
+
+
+})
+
+useSeoMeta({
+  title: 'Admin Dashboard - B&S Educational Services',
+  description: 'Manage blog posts, events, inquiries, and brochures in the admin panel.',
+  ogTitle: 'Admin Dashboard - B&S Educational Services',
+  ogDescription: 'Access the admin dashboard to manage all aspects of B&S Educational Services.',
+  robots: 'noindex, nofollow',
 })
 
 const cards = [

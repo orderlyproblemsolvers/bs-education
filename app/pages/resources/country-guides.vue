@@ -197,6 +197,14 @@
 </template>
 
 <script setup>
+useSeoMeta({
+  title: 'Study Abroad Country Guides',
+  description: 'Explore comprehensive guides for studying abroad in the UK, France, Canada, Malta, Hungary, Australia, Cyprus and more.',
+  ogTitle: 'Study Abroad Country Guides',
+  ogDescription: 'Discover essential information, top universities, and practical tips for international students looking to study abroad.',
+  ogImage: '/img/france.jpg',
+  twitterCard: 'summary_large_image'
+});
 const countries = [
   {
     name: 'United Kingdom',

@@ -50,6 +50,14 @@
   </template>
   
   <script setup>
+  useSeoMeta({
+    title: 'Download Our Templates',
+    description: 'Access our latest brochures and templates to help you with your study abroad journey.',
+    ogTitle: 'Download Our Templates',
+    ogDescription: 'Explore and download our templates for detailed information on studying abroad with B&S Educational Services.',
+    ogImage: '/img/main-logo.png',
+    twitterCard: 'summary_large_image'
+  })
   import { ref, onMounted } from 'vue'
   import { useSupabaseClient } from '#imports'
   

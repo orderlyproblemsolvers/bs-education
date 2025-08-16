@@ -134,26 +134,20 @@
     {
       question: "Do I need IELTS or TOEFL to study abroad?",
       answer: "Not always! While most universities require English proficiency tests, some accept alternatives like Duolingo, PTE, or even waive the requirement if you studied in English. We help identify universities that match your language qualifications and can guide you through test preparation if needed.",
-      cta: {
-        text: "Check Your Eligibility",
-        link: "/apply"
-      }
+      cta: null
     },
     {
       question: "What's the easiest country to get a visa for?",
       answer: "Countries like <strong>Canada, Ireland, and Australia</strong> generally have more straightforward visa processes for Nigerian students. However, the 'easiest' depends on your profile, course choice, and financial situation. Our counsellors assess your background to recommend the best options with highest success rates.",
       cta: {
         text: "Get Country Recommendations",
-        link: "/book-counselling"
+        cta: null
       }
     },
     {
       question: "How much do your services cost?",
-      answer: "Our <strong>initial consultation is completely FREE</strong>. Service fees vary based on the package you choose - from basic admission support to comprehensive visa and travel assistance. We offer flexible payment plans and our fees are transparent with no hidden charges.",
-      cta: {
-        text: "View Service Packages",
-        link: "/services"
-      }
+      answer: "<strong>Service Fee is basd on the country</strong>. UK N250K, Nothern Cyprus and Egypt N350K, other countries $500 - $1000 dollars. Some require an application fee.",
+      cta: null
     },
     {
       question: "Can I work while studying abroad?",
@@ -163,18 +157,12 @@
     {
       question: "What if I don't have enough money for tuition?",
       answer: "Don't let finances stop your dreams! We help identify <strong>scholarships, grants, and affordable universities</strong>. Many students combine partial scholarships with education loans or family support. We also recommend countries with lower tuition fees and living costs that fit your budget.",
-      cta: {
-        text: "Explore Scholarships",
-        link: "/scholarships"
-      }
+      cta: null
     },
     {
       question: "How long does the entire process take?",
       answer: "Typically <strong>6-12 months</strong> from application to travel, depending on the intake and country. We recommend starting at least 8-10 months before your intended study date. Our structured timeline ensures you meet all deadlines without rushing through important steps.",
-      cta: {
-        text: "Download Timeline Guide",
-        link: "/resources"
-      }
+      cta: null
     },
     {
       question: "What happens if my visa gets rejected?",

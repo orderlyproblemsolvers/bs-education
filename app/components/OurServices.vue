@@ -51,6 +51,7 @@
 
         <template #footer>
           <UButton
+          v-if="service.cta && service.link"
             color="primary"
             trailing-icon="i-lucide-arrow-right"
             variant="soft"
@@ -74,42 +75,42 @@ const services = [
     description:
       'We guide you with personalized, no-cost consultations to help you choose the best study destination.',
     cta: 'Book a Session',
-    link: '/contact#counselling',
+    link: '/#application',
   },
   {
     title: 'University & Program Selection',
     description:
       'We help you select programs that match your goals, budget, and academic profile.',
-    cta: 'Find a Program',
-    link: '/services/program-selection',
+    cta: 'Country guides',
+    link: '/resources/country-guides',
   },
   {
     title: 'Application Support',
     description:
       'From start to submission, we support your university and scholarship applications.',
     cta: 'Start Application',
-    link: '/contact#application',
+    link: '/#application',
   },
   {
     title: 'Visa Assistance',
     description:
       'We guide you through visa forms, documents, and interview prep for a smoother approval.',
     cta: 'Get Visa Help',
-    link: '/services/visa-support',
+    link: '/services/visa-assistance',
   },
   {
     title: 'Test Prep & Coaching',
     description:
       'We offer classes for IELTS, TOEFL, and more to help you meet admission requirements.',
     cta: 'Join a Class',
-    link: '/services/test-prep',
+    link: '/test-prep',
   },
   {
     title: 'Travel & Accommodation',
     description:
       'We assist with travel plans and finding housing that fits your needs abroad.',
     cta: 'Plan Travel',
-    link: '/services/travel',
+    link: '/resources/country-guides',
   },
 ]
 

@@ -123,9 +123,9 @@
           <button class="px-8 py-3 bg-[#EB6534] text-white font-medium rounded-lg shadow-sm hover:bg-[#d55529] transition-all duration-200">
             Get Free Consultation <UIcon name="i-lucide-phone" class="inline-block ml-2" />
           </button>
-          <button class="px-8 py-3 border-2 border-white text-white font-medium rounded-lg hover:bg-white hover:text-[#5d6b56] transition-all duration-200">
-            Download Guide ↓
-          </button>
+          <NuxtLink to="/resources/templates" class="px-8 py-3 border-2 border-white text-white font-medium rounded-lg hover:bg-white hover:text-[#5d6b56] transition-all duration-200">
+            Download Templates <UIcon name="i-lucide-download" class="inline-block ml-2" />
+          </NuxtLink>
         </div>
 
         <!-- Contact Info -->

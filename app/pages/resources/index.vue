@@ -175,6 +175,14 @@ useHead({
   ]
 })
 
+useSeoMeta({
+  title: 'Study Abroad Resources | B&S Educational Services',
+  description: 'Access comprehensive study abroad resources, guides, and expert insights from B&S Educational Services. Everything you need for your international education journey.',
+  ogTitle: 'Study Abroad Resources | B&S Educational Services',
+  ogDescription: 'Expert study abroad resources and guides for Nigerian students',
+  keywords: 'study abroad resources, international education guides, student resources, Nigeria, university guides, scholarship information'
+})
+
 const posts = ref([])
 const loading = ref(true)
 const error = ref(null)

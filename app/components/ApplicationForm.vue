@@ -3,7 +3,7 @@
     <div class="container">
       <div class="form-grid">
         <!-- Left: Form -->
-        <div class="form-container">
+        <div id="application" class="form-container">
           <div class="form-card">
             <div class="form-header">
               <h2 class="form-title">Start Your Journey</h2>

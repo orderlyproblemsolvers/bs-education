@@ -617,6 +617,14 @@
 </template>
 
 <script setup>
+useSeoMeta({
+  title: "Contact Us - B&S Educational Services",
+  description:
+    "Get in touch with B&S Educational Services for personalized study abroad guidance. Free counselling, admission support, and visa assistance.",
+  ogTitle: "Contact B&S Educational Services - Study Abroad Experts",
+  ogDescription:
+    "Start your study abroad journey today. Contact our education experts for free counselling and personalized guidance.",
+});
 // Form Data
 const destinations = [
   "UK",

@@ -578,6 +578,13 @@
 </template>
 
 <script setup>
+useSeoMeta({
+  title: computed(() => event?.value?.title || 'Event Details'),
+  description: computed(() => event?.value?.description || 'Details about the event'),
+  ogTitle: computed(() => event?.value?.title || 'Event Details'),
+  ogDescription: computed(() => event?.value?.description || 'Details about the event'),
+  ogImage: computed(() => event?.value?.image || '/img/main-logo.png')
+});
 const supabase = useSupabaseClient();
 const route = useRoute();
 const toast = useToast();

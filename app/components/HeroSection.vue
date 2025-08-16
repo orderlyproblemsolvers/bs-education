@@ -82,6 +82,15 @@
 </template>
 
 <script setup>
+useSeoMeta({
+  title: 'B&S Educational Services - Your Path to Studying Abroad',
+  description: 'B&S Educational Services offers free expert counselling, admission processing, visa support, and test prep for students looking to study in the UK, USA, Hungary, Australia, and more.',
+  ogTitle: 'B&S Educational Services - Your Path to Studying Abroad',
+  ogDescription: 'B&S Educational Services provides comprehensive support for students aspiring to study abroad. From free consultations to visa assistance, we are here to help you succeed.',
+  ogImage: '/img/main-logo.jpg',
+  twitterCard: 'summary_large_image',
+  robots: 'index, follow',
+})
 import { NuxtLink } from '#components';
 
 function openWhatsApp() {

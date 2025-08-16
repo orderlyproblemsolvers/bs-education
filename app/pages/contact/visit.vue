@@ -123,6 +123,15 @@
   
   <script setup>
   import { ref, onMounted, onUnmounted } from 'vue'
+
+  useSeoMeta({
+    title: 'Visit Our Office - B&S Educational Services',
+    description: 'Find our office location in Abuja, Nigeria. Visit us for free consultations on study abroad opportunities.',
+    ogTitle: 'Visit Our Office - B&S Educational Services',
+    ogDescription: 'Find our office location in Abuja, Nigeria. Visit us for free consultations on study abroad opportunities.',
+    ogImage: '/img/contact.png',
+    twitterCard: 'summary_large_image'
+  })
   
   // Component props with default values for B&S Educational Services
   const props = defineProps({

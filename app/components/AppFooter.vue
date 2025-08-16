@@ -96,17 +96,11 @@
           <div>
             <h4 class="text-white font-medium mb-4">Follow Us</h4>
             <div class="flex gap-3">
-              <a href="#" class="w-8 h-8 bg-[#2d332a] hover:bg-[#ACBEA3] rounded-lg flex items-center justify-center transition-colors group">
+              <a href="https://www.instagram.com/bs_education" class="w-8 h-8 bg-[#2d332a] hover:bg-[#ACBEA3] rounded-lg flex items-center justify-center transition-colors group">
                 <UIcon name="i-simple-icons-instagram" class="w-4 h-4 text-gray-300 group-hover:text-gray-900" />
               </a>
-              <a href="#" class="w-8 h-8 bg-[#2d332a] hover:bg-[#ACBEA3] rounded-lg flex items-center justify-center transition-colors group">
+              <a href="https://www.facebook.com/bseducationabuja" class="w-8 h-8 bg-[#2d332a] hover:bg-[#ACBEA3] rounded-lg flex items-center justify-center transition-colors group">
                 <UIcon name="i-simple-icons-facebook" class="w-4 h-4 text-gray-300 group-hover:text-gray-900" />
-              </a>
-              <a href="#" class="w-8 h-8 bg-[#2d332a] hover:bg-[#ACBEA3] rounded-lg flex items-center justify-center transition-colors group">
-                <UIcon name="i-simple-icons-linkedin" class="w-4 h-4 text-gray-300 group-hover:text-gray-900" />
-              </a>
-              <a href="#" class="w-8 h-8 bg-[#2d332a] hover:bg-[#ACBEA3] rounded-lg flex items-center justify-center transition-colors group">
-                <UIcon name="i-simple-icons-twitter" class="w-4 h-4 text-gray-300 group-hover:text-gray-900" />
               </a>
             </div>
           </div>
@@ -141,4 +135,14 @@
 import { computed } from "vue";
 
 const currentYear = computed(() => new Date().getFullYear());
+
+useSeoMeta({
+  title: 'B&S Educational Services - Your Path to Studying Abroad',
+  description: 'B&S Educational Services offers free expert counselling, admission processing, visa support, and test prep for students looking to study in the UK, USA, Hungary, Australia, and more.',
+  ogTitle: 'B&S Educational Services - Your Path to Studying Abroad',
+  ogDescription: 'B&S Educational Services provides comprehensive support for students aspiring to study abroad. From free consultations to visa assistance, we are here to help you succeed.',
+  ogImage: '/img/main-logo.jpg',
+  twitterCard: 'summary_large_image',
+  robots: 'index, follow',
+});
 </script>

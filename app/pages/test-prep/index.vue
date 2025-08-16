@@ -206,6 +206,14 @@
   </template>
   
   <script setup>
+  useSeoMeta({
+    title: 'Test Preparation - B&S Educational Services',
+    description: 'Comprehensive test preparation for IELTS, SAT, GRE, JAMB, and more. Achieve your target scores with expert guidance and personalized study plans.',
+    ogTitle: 'Test Preparation - B&S Educational Services',
+    ogDescription: 'Join thousands of successful students with our proven test preparation programs. Book your free assessment today!',
+    ogImage: '/img/main-logo.png',
+    twitterCard: 'summary_large_image'
+  })
   const activeTest = ref('ielts')
   
   const testTypes = [

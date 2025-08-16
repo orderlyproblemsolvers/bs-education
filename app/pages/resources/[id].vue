@@ -186,9 +186,18 @@
           { property: 'article:published_time', content: newPost.created_at }
         ]
       })
+      useSeoMeta({
+        title: `${newPost.title} - The Covenant Academy`,
+        description: newPost.content.replace(/<[^>]*>/g, '').substring(0, 160),
+        ogTitle: newPost.title,
+        ogDescription: newPost.content.replace(/<[^>]*>/g, '').substring(0, 160),
+        ogImage: newPost.image_url || '',
+        twitterCard: 'summary_large_image'
+      })
     }
   })
   
+
   onMounted(() => {
     fetchPost()
   })
