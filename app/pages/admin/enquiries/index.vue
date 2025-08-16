@@ -60,6 +60,18 @@
 </template>
 
 <script setup>
+definePageMeta({
+  title: "Study Applications - Admin Dashboard",
+  layout: "admin",
+  middleware: (to) => {
+    const user = useSupabaseUser()
+    const { isAdmin } = useAuth()
+
+    if (!user.value && !isAdmin.value) {
+      return navigateTo('/admin/login')
+    }
+  },
+});
 import { ref, computed, onMounted } from "vue";
 import { saveAs } from "file-saver";
 

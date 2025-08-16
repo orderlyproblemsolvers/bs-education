@@ -114,7 +114,15 @@
   
   <script setup>
   definePageMeta({
-    layout: 'admin'
+    layout: 'admin',
+    middleware: (to) => {
+    const user = useSupabaseUser()
+    const { isAdmin } = useAuth()
+
+    if (!user.value && !isAdmin.value) {
+      return navigateTo('/admin/login')
+    }
+  },
   });
   
   const supabase = useSupabaseClient();

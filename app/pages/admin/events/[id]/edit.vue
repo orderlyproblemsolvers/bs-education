@@ -252,6 +252,18 @@
 </template>
 
 <script setup>
+definePageMeta({
+  layout: 'admin',
+  title: 'Edit Event',
+  middleware: (to) => {
+    const user = useSupabaseUser()
+    const { isAdmin } = useAuth()
+
+    if (!user.value && !isAdmin.value) {
+      return navigateTo('/admin/login')
+    }
+  },
+});
 const supabase = useSupabaseClient();
 const router = useRouter();
 const route = useRoute();

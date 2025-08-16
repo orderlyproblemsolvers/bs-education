@@ -315,6 +315,14 @@ useHead({
 definePageMeta({
   layout: "admin",
   auth: true,
+  middleware: (to) => {
+    const user = useSupabaseUser()
+    const { isAdmin } = useAuth()
+
+    if (!user.value && !isAdmin.value) {
+      return navigateTo('/admin/login')
+    }
+  },
 });
 
 const posts = ref([]);

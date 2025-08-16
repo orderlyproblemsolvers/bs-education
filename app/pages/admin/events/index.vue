@@ -242,7 +242,15 @@
     layout: 'admin',
     title: 'Admin - Events Management',
     requiresAuth: true,
-    requiresAdmin: true
+    requiresAdmin: true,
+    middleware: (to) => {
+    const user = useSupabaseUser()
+    const { isAdmin } = useAuth()
+
+    if (!user.value && !isAdmin.value) {
+      return navigateTo('/admin/login')
+    }
+  },
   })
   
   // State for the modal

@@ -94,8 +94,8 @@ const cards = [
     color: 'bg-yellow-500'
   },
   {
-    title: 'Manage Brochures',
-    description: 'Upload and organize brochures',
+    title: 'Manage Docs',
+    description: 'Upload and organize Templates',
     to: '/admin/brochures',
     icon: '📄',
     color: 'bg-green-500'
