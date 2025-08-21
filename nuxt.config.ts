@@ -93,14 +93,7 @@ export default defineNuxtConfig({
   nitro: {
     preset: "netlify", // ensures Nuxt builds for Netlify
   },
-  modules: [
-    "@nuxt/image",
-    "@nuxt/ui",
-    "@nuxtjs/supabase",
-    "@vueuse/nuxt",
-    "@nuxtjs/leaflet",
-    "@nuxtjs/security",
-  ],
+  modules: ["@nuxt/image", "@nuxt/ui", "@nuxtjs/supabase", "@vueuse/nuxt", "@nuxtjs/leaflet", "nuxt-security"],
   css: [
     "~/assets/css/main.css",
     "quill/dist/quill.snow.css",
