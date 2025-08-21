@@ -177,7 +177,7 @@
         ]
       })
       useSeoMeta({
-        title: `${newPost.title} - The Covenant Academy`,
+        title: `${newPost.title} - B&S Educational Services`,
         description: newPost.content.replace(/<[^>]*>/g, '').substring(0, 160),
         ogTitle: newPost.title,
         ogDescription: newPost.content.replace(/<[^>]*>/g, '').substring(0, 160),

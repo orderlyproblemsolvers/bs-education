@@ -61,7 +61,7 @@ export default defineNuxtConfig({
           integrity: "sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=",
           crossorigin: "",
         },
-        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" }
+        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
       ],
     },
   },
@@ -73,9 +73,14 @@ export default defineNuxtConfig({
         "connect-src": [
           "'self'",
           "https://api.supabase.co",
-          "https://*.supabase.co"
+          "https://*.supabase.co",
         ],
-        'img-src': ["'self'", 'data:']
+        "img-src": [
+          "'self'",
+          "data:",
+          "https://api.supabase.co",
+          "https://*.supabase.co",
+        ],
       },
       xXSSProtection: "1; mode=block",
       xFrameOptions: "DENY",
@@ -93,7 +98,14 @@ export default defineNuxtConfig({
   nitro: {
     preset: "netlify", // ensures Nuxt builds for Netlify
   },
-  modules: ["@nuxt/image", "@nuxt/ui", "@nuxtjs/supabase", "@vueuse/nuxt", "@nuxtjs/leaflet", "nuxt-security"],
+  modules: [
+    "@nuxt/image",
+    "@nuxt/ui",
+    "@nuxtjs/supabase",
+    "@vueuse/nuxt",
+    "@nuxtjs/leaflet",
+    "nuxt-security",
+  ],
   css: [
     "~/assets/css/main.css",
     "quill/dist/quill.snow.css",
