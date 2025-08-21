@@ -28,7 +28,7 @@
           </div>
           <p class="text-lg text-gray-600 px-4">{{ error }}</p>
           <NuxtLink 
-            to="/blog"
+            to="/resources"
             class="inline-flex items-center px-6 py-3 text-sm font-medium text-[#ACBEA3] border border-[#ACBEA3] rounded-lg hover:bg-[#ACBEA3] hover:text-white transition-all duration-200"
           >
             Back to Blog
@@ -125,16 +125,6 @@
                   <p class="text-sm text-gray-600 truncate">Published {{ formatDate(post.created_at) }}</p>
                 </div>
               </div>
-              
-              <NuxtLink 
-                to="/blog"
-                class="inline-flex items-center justify-center px-6 py-3 text-sm font-medium text-white bg-[#EB6534] rounded-lg hover:bg-[#c16a3d] transition-colors duration-200 shadow-sm hover:shadow-md whitespace-nowrap"
-              >
-                More Articles
-                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5l7 7-7 7"></path>
-                </svg>
-              </NuxtLink>
             </div>
           </footer>
         </article>
@@ -176,7 +166,7 @@
   watch(post, (newPost) => {
     if (newPost) {
       useHead({
-        title: `${newPost.title} - The Covenant Academy`,
+        title: `${newPost.title} - B&S Educational Services`,
         meta: [
           { name: 'description', content: newPost.content.replace(/<[^>]*>/g, '').substring(0, 160) },
           { property: 'og:title', content: newPost.title },
