@@ -72,7 +72,7 @@
         class="w-full md:w-[45%] flex justify-center items-center px-2 sm:px-0"
       >
         <NuxtImg
-          src="/img/graduant.png"
+          src="/img/graduant.webp"
           alt="Graduated student abroad"
           class="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl h-auto object-cover rounded-tl-[80px] sm:rounded-tl-[100px] md:rounded-tl-[140px] rounded-br-[80px] sm:rounded-br-[100px] md:rounded-br-[140px] rounded-tr-none rounded-bl-none"
         />
@@ -90,6 +90,18 @@ useSeoMeta({
   ogImage: '/img/main-logo.jpg',
   twitterCard: 'summary_large_image',
   robots: 'index, follow',
+})
+useHead({
+  link: [
+    { rel: 'preload', as: 'image', href: '/img/graduant.webp' }
+  ],
+  meta: [
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' }
+  ],
+  htmlAttrs: {
+    lang: 'en'
+  },
+
 })
 import { NuxtLink } from '#components';
 

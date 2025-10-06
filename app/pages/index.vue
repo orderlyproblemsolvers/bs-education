@@ -21,4 +21,21 @@ useSeoMeta({
   twitterCard: 'summary_large_image',
   robots: 'index, follow',
 })
+
+useHead({
+
+  link: [
+    { rel: 'preload', as: 'image', href: '/img/graduant.webp' },
+  ],
+})
+
+definePageMeta({
+  meta: [
+    { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+    { charset: 'utf-8' },
+  ],
+  htmlAttrs: {
+    lang: 'en',
+  },
+})
 </script>
