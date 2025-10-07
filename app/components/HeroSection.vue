@@ -73,6 +73,8 @@
       >
         <NuxtImg
           src="/img/graduant.webp"
+          width="1200"
+          height="800"
           alt="Graduated student abroad"
           class="w-full max-w-sm sm:max-w-md md:max-w-lg lg:max-w-xl h-auto object-cover rounded-tl-[80px] sm:rounded-tl-[100px] md:rounded-tl-[140px] rounded-br-[80px] sm:rounded-br-[100px] md:rounded-br-[140px] rounded-tr-none rounded-bl-none"
         />
