@@ -97,6 +97,8 @@ export default defineNuxtConfig({
 
   nitro: {
     preset: "netlify", // ensures Nuxt builds for Netlify
+    compressPublicAssets: true,
+    minify: true
   },
   modules: [
     "@nuxt/image",
@@ -135,5 +137,15 @@ export default defineNuxtConfig({
 
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            vendor: ['vue', 'vue-router']
+          }
+        }
+      }
+    },
+    
   },
 });
