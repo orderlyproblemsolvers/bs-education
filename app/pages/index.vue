@@ -3,11 +3,11 @@
     <HeroSection />
     <OurServices />
     <Locations />
-    <ApplicationForm />
+    <LazyApplicationForm />
     <Blog />
     <Testimonials />
-    <Partners />
-    <Faq />
+    <LazyPartners />
+    <LazyFaq />
     <Chat />
   </div>
 </template>
