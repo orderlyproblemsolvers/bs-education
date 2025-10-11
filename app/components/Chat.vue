@@ -4,6 +4,8 @@
       <div class="fixed bottom-6 right-6 z-50 flex flex-col space-y-4">
         <!-- WhatsApp Button -->
         <UButton
+        aria-label="Chat on WhatsApp"
+        name="WhatsApp"
           @click="openWhatsApp"
           :ui="{
             rounded: 'rounded-full',
@@ -20,6 +22,8 @@
   
         <!-- Chat Button -->
         <UButton
+          aria-label="Open Chat"
+          name="Chat"
           @click="toggleChat"
           :ui="{
             rounded: 'rounded-full',

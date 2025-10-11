@@ -1,90 +1,126 @@
 <template>
-  <section class="form-section">
+  <section class="form-section" aria-labelledby="form-heading">
     <div class="container">
       <div class="form-grid">
         <!-- Left: Form -->
         <div id="application" class="form-container">
           <div class="form-card">
-            <div class="form-header">
-              <h2 class="form-title">Start Your Journey</h2>
+            <header class="form-header">
+              <h1 id="form-heading" class="form-title">Start Your Journey</h1>
               <p class="form-subtitle">
                 Fill out the form below and we'll reach out to you within 24
                 hours.
               </p>
-            </div>
+            </header>
 
-            <form @submit.prevent="handleSubmit" class="form">
+            <form 
+              @submit.prevent="handleSubmit" 
+              class="form"
+              novalidate
+              aria-describedby="form-description"
+            >
+              <p id="form-description" class="sr-only">
+                Complete this application form to begin your study abroad journey. All fields marked with an asterisk are required.
+              </p>
+
               <!-- Personal Information -->
-              <div class="form-section-group">
-                <h3 class="section-title">Personal Information</h3>
+              <fieldset class="form-section-group">
+                <legend class="section-title">Personal Information</legend>
 
                 <div class="field-row">
                   <div class="form-group">
-                    <label class="label">First Name *</label>
+                    <label for="firstName" class="label">
+                      First Name <span aria-label="required">*</span>
+                    </label>
                     <input
+                      id="firstName"
                       v-model="form.firstName"
                       type="text"
                       class="input"
                       placeholder="Enter your first name"
                       required
+                      aria-required="true"
                       :disabled="isSubmitting"
+                      autocomplete="given-name"
                     />
                   </div>
 
                   <div class="form-group">
-                    <label class="label">Last Name *</label>
+                    <label for="lastName" class="label">
+                      Last Name <span aria-label="required">*</span>
+                    </label>
                     <input
+                      id="lastName"
                       v-model="form.lastName"
                       type="text"
                       class="input"
                       placeholder="Enter your last name"
                       required
+                      aria-required="true"
                       :disabled="isSubmitting"
+                      autocomplete="family-name"
                     />
                   </div>
                 </div>
 
                 <div class="field-row">
                   <div class="form-group">
-                    <label class="label">Email Address *</label>
+                    <label for="email" class="label">
+                      Email Address <span aria-label="required">*</span>
+                    </label>
                     <input
+                      id="email"
                       v-model="form.email"
                       type="email"
                       class="input"
                       placeholder="your.email@example.com"
                       required
+                      aria-required="true"
                       :disabled="isSubmitting"
+                      autocomplete="email"
+                      inputmode="email"
                     />
                   </div>
 
                   <div class="form-group">
-                    <label class="label">Phone Number *</label>
+                    <label for="phone" class="label">
+                      Phone Number <span aria-label="required">*</span>
+                    </label>
                     <input
+                      id="phone"
                       v-model="form.phone"
                       type="tel"
                       class="input"
                       placeholder="+234 123 456 7890"
                       required
+                      aria-required="true"
                       :disabled="isSubmitting"
+                      autocomplete="tel"
+                      inputmode="tel"
                     />
                   </div>
                 </div>
-              </div>
+              </fieldset>
 
               <!-- Study Preferences -->
-              <div class="form-section-group">
-                <h3 class="section-title">Study Preferences</h3>
+              <fieldset class="form-section-group">
+                <legend class="section-title">Study Preferences</legend>
 
                 <div class="field-row">
                   <div class="form-group">
-                    <label class="label">Preferred Study Destination *</label>
+                    <label for="destination" class="label">
+                      Preferred Study Destination <span aria-label="required">*</span>
+                    </label>
                     <select
+                      id="destination"
                       v-model="form.destination"
                       class="select"
                       required
+                      aria-required="true"
                       :disabled="isSubmitting"
+                      autocomplete="country"
                     >
-                      <option value="">Select a country</option>
+                      <option value="" disabled>Select a country</option>
                       <option
                         v-for="destination in destinations"
                         :key="destination"
@@ -96,14 +132,18 @@
                   </div>
 
                   <div class="form-group">
-                    <label class="label">Study Level *</label>
+                    <label for="level" class="label">
+                      Study Level <span aria-label="required">*</span>
+                    </label>
                     <select
+                      id="level"
                       v-model="form.level"
                       class="select"
                       required
+                      aria-required="true"
                       :disabled="isSubmitting"
                     >
-                      <option value="">Choose study level</option>
+                      <option value="" disabled>Choose study level</option>
                       <option value="Undergraduate">Undergraduate</option>
                       <option value="Postgraduate">Postgraduate</option>
                       <option value="Diploma">Diploma</option>
@@ -114,8 +154,11 @@
 
                 <div class="field-row">
                   <div class="form-group">
-                    <label class="label">When Would You Like to Start?</label>
+                    <label for="studyTime" class="label">
+                      When Would You Like to Start?
+                    </label>
                     <select
+                      id="studyTime"
                       v-model="form.studyTime"
                       class="select"
                       :disabled="isSubmitting"
@@ -128,8 +171,9 @@
                   </div>
 
                   <div class="form-group">
-                    <label class="label">Counselling Mode</label>
+                    <label for="mode" class="label">Counselling Mode</label>
                     <select
+                      id="mode"
                       v-model="form.mode"
                       class="select"
                       :disabled="isSubmitting"
@@ -140,51 +184,55 @@
                     </select>
                   </div>
                 </div>
-              </div>
+              </fieldset>
 
               <!-- Consent -->
-              <div class="form-section-group">
-                <h3 class="section-title">Consent & Preferences</h3>
+              <fieldset class="form-section-group">
+                <legend class="section-title">Consent & Preferences</legend>
 
                 <div class="checkbox-group">
-                  <label class="checkbox-item">
+                  <div class="checkbox-item">
                     <input
+                      id="agreeTerms"
                       v-model="form.agreeTerms"
                       type="checkbox"
                       class="checkbox"
                       required
+                      aria-required="true"
                       :disabled="isSubmitting"
                     />
-                    <span class="checkbox-text">
-                      I agree to B&S terms and privacy policy *
-                    </span>
-                  </label>
+                    <label for="agreeTerms" class="checkbox-text">
+                      I agree to B&S terms and privacy policy <span aria-label="required">*</span>
+                    </label>
+                  </div>
 
-                  <label class="checkbox-item">
+                  <div class="checkbox-item">
                     <input
+                      id="contactPref"
                       v-model="form.contactPref"
                       type="checkbox"
                       class="checkbox"
                       :disabled="isSubmitting"
                     />
-                    <span class="checkbox-text"
-                      >Please contact me by phone or email</span
-                    >
-                  </label>
+                    <label for="contactPref" class="checkbox-text">
+                      Please contact me by phone or email
+                    </label>
+                  </div>
 
-                  <label class="checkbox-item">
+                  <div class="checkbox-item">
                     <input
+                      id="receiveUpdates"
                       v-model="form.receiveUpdates"
                       type="checkbox"
                       class="checkbox"
                       :disabled="isSubmitting"
                     />
-                    <span class="checkbox-text"
-                      >I would like to receive updates via email</span
-                    >
-                  </label>
+                    <label for="receiveUpdates" class="checkbox-text">
+                      I would like to receive updates via email
+                    </label>
+                  </div>
                 </div>
-              </div>
+              </fieldset>
 
               <!-- Submit -->
               <div class="form-footer">
@@ -192,6 +240,7 @@
                   type="submit"
                   class="submit-btn"
                   :disabled="isSubmitting"
+                  :aria-busy="isSubmitting"
                 >
                   <span v-if="isSubmitting">Submitting...</span>
                   <span v-else>Submit Application</span>
@@ -206,31 +255,40 @@
         </div>
 
         <!-- Right: Image -->
-        <div class="image-container">
+        <aside class="image-container" aria-label="Success statistics">
           <NuxtImg
             src="/img/caps.jpg"
-            alt="Student celebrating graduation abroad"
+            alt="Students celebrating graduation with caps thrown in the air, representing successful study abroad journey"
             class="image"
+            loading="lazy"
+            width="600"
+            height="500"
           />
-          <div class="stats">
-            <div class="stat">
-              <div class="stat-number">500+</div>
+          <div class="stats" role="list">
+            <div class="stat" role="listitem">
+              <div class="stat-number" aria-label="500 plus students placed">500+</div>
               <div class="stat-label">Students Placed</div>
             </div>
-            <div class="stat">
-              <div class="stat-number">95%</div>
+            <div class="stat" role="listitem">
+              <div class="stat-number" aria-label="95 percent visa success rate">95%</div>
               <div class="stat-label">Visa Success Rate</div>
             </div>
           </div>
-        </div>
+        </aside>
       </div>
     </div>
 
     <!-- Toast Notification -->
     <Transition name="toast">
-      <div v-if="showToast" :class="['toast', toastType]">
+      <div 
+        v-if="showToast" 
+        :class="['toast', toastType]"
+        role="alert"
+        aria-live="polite"
+        aria-atomic="true"
+      >
         <div class="toast-content">
-          <div class="toast-icon">
+          <div class="toast-icon" aria-hidden="true">
             <span v-if="toastType === 'success'">✓</span>
             <span v-else>⚠</span>
           </div>
@@ -242,6 +300,29 @@
 </template>
 
 <script setup>
+// SEO Meta tags
+useHead({
+  title: 'Study Abroad Application - Start Your Journey | B&S Education',
+  meta: [
+    { 
+      name: 'description', 
+      content: 'Apply to study abroad with B&S Education. Get expert counselling for UK, USA, Australia, France, Hungary, Malta, and Cyprus. 95% visa success rate with 500+ students placed.' 
+    },
+    { 
+      name: 'keywords', 
+      content: 'study abroad, international education, student visa, UK study, USA study, Australia study, education counselling, overseas education' 
+    },
+    { property: 'og:title', content: 'Study Abroad Application - Start Your Journey' },
+    { property: 'og:description', content: 'Apply to study abroad with expert guidance. 95% visa success rate.' },
+    { property: 'og:type', content: 'website' },
+    { name: 'twitter:card', content: 'summary_large_image' },
+    { name: 'robots', content: 'index, follow' }
+  ],
+  link: [
+    { rel: 'canonical', href: 'https://yourdomain.com/apply' }
+  ]
+});
+
 const destinations = [
   "UK",
   "USA",
@@ -353,6 +434,19 @@ const handleSubmit = async () => {
 </script>
 
 <style scoped>
+/* Screen reader only class for accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
 .form-section {
   padding: 64px 0;
   background: #f4f5f3;
@@ -400,6 +494,8 @@ const handleSubmit = async () => {
 
 .form-section-group {
   margin-bottom: 32px;
+  border: none;
+  padding: 0;
 }
 
 .section-title {
@@ -470,13 +566,14 @@ const handleSubmit = async () => {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  cursor: pointer;
 }
 
 .checkbox {
   margin-top: 2px;
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  cursor: pointer;
 }
 
 .checkbox:disabled {
@@ -484,10 +581,16 @@ const handleSubmit = async () => {
   opacity: 0.6;
 }
 
+.checkbox:focus {
+  outline: 2px solid #5d6b56;
+  outline-offset: 2px;
+}
+
 .checkbox-text {
   font-size: 14px;
   color: #333333;
   line-height: 1.4;
+  cursor: pointer;
 }
 
 /* Submit Button */
@@ -512,6 +615,11 @@ const handleSubmit = async () => {
 
 .submit-btn:hover:not(:disabled) {
   background: #6b7a6a;
+}
+
+.submit-btn:focus {
+  outline: 2px solid #5d6b56;
+  outline-offset: 2px;
 }
 
 .submit-btn:disabled {
@@ -670,6 +778,29 @@ const handleSubmit = async () => {
     right: 10px;
     left: 10px;
     max-width: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .input,
+  .select {
+    border: 2px solid currentColor;
+  }
+  
+  .submit-btn {
+    border: 2px solid currentColor;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 </style>

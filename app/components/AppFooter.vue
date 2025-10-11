@@ -96,10 +96,10 @@
           <div>
             <h4 class="text-white font-medium mb-4">Follow Us</h4>
             <div class="flex gap-3">
-              <a href="https://www.instagram.com/bs_education" class="w-8 h-8 bg-[#2d332a] hover:bg-[#ACBEA3] rounded-lg flex items-center justify-center transition-colors group">
+              <a aria-label="Instagram" href="https://www.instagram.com/bs_education" class="w-8 h-8 bg-[#2d332a] hover:bg-[#ACBEA3] rounded-lg flex items-center justify-center transition-colors group">
                 <UIcon name="i-simple-icons-instagram" class="w-4 h-4 text-gray-300 group-hover:text-gray-900" />
               </a>
-              <a href="https://www.facebook.com/bseducationabuja" class="w-8 h-8 bg-[#2d332a] hover:bg-[#ACBEA3] rounded-lg flex items-center justify-center transition-colors group">
+              <a aria-label="facebook" href="https://www.facebook.com/bseducationabuja" class="w-8 h-8 bg-[#2d332a] hover:bg-[#ACBEA3] rounded-lg flex items-center justify-center transition-colors group">
                 <UIcon name="i-simple-icons-facebook" class="w-4 h-4 text-gray-300 group-hover:text-gray-900" />
               </a>
             </div>
@@ -114,12 +114,6 @@
         <div class="flex flex-col md:flex-row justify-between items-center gap-3">
           <div class="flex flex-wrap items-center gap-4 text-xs text-gray-100">
             <p>&copy; {{ currentYear }} B&S Educational Services. All rights reserved.</p>
-            <NuxtLink to="/privacy" class="hover:text-[#ACBEA3] transition-colors">
-              Privacy Policy
-            </NuxtLink>
-            <NuxtLink to="/terms" class="hover:text-[#ACBEA3] transition-colors">
-              Terms of Service
-            </NuxtLink>
           </div>
 
           <div class="flex items-center gap-2 text-xs text-gray-200">
