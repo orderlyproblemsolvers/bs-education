@@ -1,6 +1,5 @@
 <template>
   <div class="min-h-screen bg-gradient-to-br from-[#f4f5f3] to-gray-100">
-    <!-- Toast Notification -->
     <Transition name="toast">
       <div
         v-if="showToast"
@@ -38,9 +37,7 @@
       </div>
     </Transition>
 
-    <!-- Hero Section -->
     <section class="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      <!-- Background decoration -->
       <div
         class="absolute inset-0 bg-gradient-to-r from-[#f4f5f3]/50 to-orange-50/50"
       ></div>
@@ -53,7 +50,6 @@
 
       <div class="max-w-7xl mx-auto relative">
         <div class="grid lg:grid-cols-2 gap-12 items-center">
-          <!-- Left Content -->
           <div class="space-y-8">
             <div class="space-y-6">
               <h1
@@ -74,7 +70,6 @@
               </p>
             </div>
 
-            <!-- Quick Stats -->
             <div class="grid grid-cols-2 gap-6">
               <div
                 class="group text-center p-6 rounded-xl bg-white/70 backdrop-blur-sm border border-[#DDDDDD] hover:shadow-lg transition-all duration-300"
@@ -103,7 +98,6 @@
             </div>
           </div>
 
-          <!-- Right Image Placeholder -->
           <div class="relative">
             <div
               class="aspect-[4/3] rounded-tl-[80px] rounded-br-[80px] overflow-hidden bg-gradient-to-br from-[#5d6b56] to-[#6b7a6a] shadow-xl"
@@ -120,7 +114,6 @@
                   />
               </div>
             </div>
-            <!-- Floating Card -->
             <div
               class="absolute -bottom-8 -left-8 bg-white p-6 rounded-xl shadow-xl border border-[#DDDDDD]"
             >
@@ -144,11 +137,9 @@
       </div>
     </section>
 
-    <!-- Main Content -->
     <section class="py-20 px-4 sm:px-6 lg:px-8">
       <div class="max-w-7xl mx-auto">
         <div class="grid lg:grid-cols-3 gap-12">
-          <!-- Contact Form -->
           <div class="lg:col-span-2">
             <div
               class="bg-white rounded-xl shadow-xl border border-[#DDDDDD] p-8 md:p-10"
@@ -164,7 +155,6 @@
               </div>
 
               <form @submit.prevent="handleSubmit" class="space-y-8">
-                <!-- Personal Information -->
                 <div class="form-section">
                   <h3
                     class="text-xl font-semibold text-[#333333] mb-6 pb-2 border-b border-[#DDDDDD] font-inter"
@@ -241,7 +231,6 @@
                   </div>
                 </div>
 
-                <!-- Study Preferences -->
                 <div class="form-section">
                   <h3
                     class="text-xl font-semibold text-[#333333] mb-6 pb-2 border-b border-[#DDDDDD] font-inter"
@@ -333,7 +322,6 @@
                   </div>
                 </div>
 
-                <!-- Consent -->
                 <div class="form-section">
                   <h3
                     class="text-xl font-semibold text-[#333333] mb-6 pb-2 border-b border-[#DDDDDD] font-inter"
@@ -394,7 +382,6 @@
                   </div>
                 </div>
 
-                <!-- Submit -->
                 <div class="pt-6 text-center">
                   <button
                     type="submit"
@@ -428,9 +415,7 @@
             </div>
           </div>
 
-          <!-- Contact Information -->
           <div class="space-y-8">
-            <!-- Contact Cards -->
             <div
               class="bg-white rounded-xl shadow-xl border border-[#DDDDDD] p-8"
             >
@@ -502,7 +487,6 @@
               </div>
             </div>
 
-            <!-- WhatsApp CTA -->
             <div
               class="rounded-xl p-8 text-white bg-gradient-to-br from-[#5d6b56] via-[#5d6b56] to-[#6b7a6a] shadow-xl"
             >
@@ -534,7 +518,6 @@
               </div>
             </div>
 
-            <!-- Success Stories Image -->
             <div class="rounded-xl overflow-hidden shadow-xl">
               <div
                 class="aspect-[4/3] bg-gradient-to-br from-[#5d6b56] to-[#6b7a6a]"
@@ -557,7 +540,6 @@
       </div>
     </section>
 
-    <!-- FAQ Section -->
     <section
       class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-[#f4f5f3] to-[#f4f5f3]/70"
     >
@@ -619,14 +601,6 @@
 <script setup>
 import { set } from '@vueuse/core';
 
-useSeoMeta({
-  title: "Contact Us - B&S Educational Services",
-  description:
-    "Get in touch with B&S Educational Services for personalized study abroad guidance. Free counselling, admission support, and visa assistance.",
-  ogTitle: "Contact B&S Educational Services - Study Abroad Experts",
-  ogDescription:
-    "Start your study abroad journey today. Contact our education experts for free counselling and personalized guidance.",
-});
 // Form Data
 const destinations = [
   "UK",
@@ -681,16 +655,18 @@ const resetForm = () => {
   form.receiveUpdates = false;
 };
 
-const triggerWhatsAppChat = () => {
+// Fixed function: Accepts data snapshot argument
+const triggerWhatsAppChat = (data) => {
   const phoneNumber = "+2348065442707";
   const message = encodeURIComponent(
     "Hello, my name is " +
-      form.firstName +
+      data.firstName +
       " " +
-      form.lastName +
-      ". I would like to inquire about studying abroad. My preferred destination is " + form.destination + "."
+      data.lastName +
+      ". I would like to inquire about studying abroad. My preferred destination is " + data.destination + "."
   );
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+  // Using api.whatsapp.com for better mobile deep-linking
+  const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`;
   window.open(whatsappUrl, "_blank");
 };
 
@@ -698,6 +674,9 @@ const handleSubmit = async () => {
   if (isSubmitting.value) return;
 
   isSubmitting.value = true;
+
+  // IMPORTANT: Create snapshot before sending
+  const formDataSnapshot = { ...form };
 
   try {
     const supabase = useSupabaseClient();
@@ -737,15 +716,20 @@ const handleSubmit = async () => {
         "Application submitted successfully! We'll be in touch within 24 hours.",
         "success"
       );
+      
       resetForm();
-      settimeout(()=>{
+
+      // Fixed typo: settimeout -> setTimeout
+      setTimeout(() => {
         showToastNotification(
           "Would you like to chat with us on WhatsApp for immediate assistance?",
           "success"
         );
-      }, 4000)
+      }, 4000);
+      
+      // Pass the SNAPSHOT to the delayed trigger function
       setTimeout(() => {
-        triggerWhatsAppChat();
+        triggerWhatsAppChat(formDataSnapshot);
       }, 8000);
     }
   } catch (error) {
@@ -822,7 +806,7 @@ useSeoMeta({
   ogTitle: "Contact B&S Educational Services - Study Abroad Experts",
   ogDescription:
     "Start your study abroad journey today. Contact our education experts for free counselling and personalized guidance.",
-    canonical: "https://www.bs-education.com/contact",
+  canonical: "https://www.bs-education.com/contact",
 });
 </script>
 

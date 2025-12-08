@@ -2,7 +2,6 @@
   <section class="form-section" aria-labelledby="form-heading">
     <div class="container">
       <div class="form-grid">
-        <!-- Left: Form -->
         <div id="application" class="form-container">
           <div class="form-card">
             <header class="form-header">
@@ -23,7 +22,6 @@
                 Complete this application form to begin your study abroad journey. All fields marked with an asterisk are required.
               </p>
 
-              <!-- Personal Information -->
               <fieldset class="form-section-group">
                 <legend class="section-title">Personal Information</legend>
 
@@ -102,7 +100,6 @@
                 </div>
               </fieldset>
 
-              <!-- Study Preferences -->
               <fieldset class="form-section-group">
                 <legend class="section-title">Study Preferences</legend>
 
@@ -186,7 +183,6 @@
                 </div>
               </fieldset>
 
-              <!-- Consent -->
               <fieldset class="form-section-group">
                 <legend class="section-title">Consent & Preferences</legend>
 
@@ -234,7 +230,6 @@
                 </div>
               </fieldset>
 
-              <!-- Submit -->
               <div class="form-footer">
                 <button
                   type="submit"
@@ -254,7 +249,6 @@
           </div>
         </div>
 
-        <!-- Right: Image -->
         <aside class="image-container" aria-label="Success statistics">
           <NuxtImg
             src="/img/caps.jpg"
@@ -278,7 +272,6 @@
       </div>
     </div>
 
-    <!-- Toast Notification -->
     <Transition name="toast">
       <div 
         v-if="showToast" 
@@ -376,11 +369,15 @@ const resetForm = () => {
   form.receiveUpdates = false;
 };
 
-const message = `Hello! I have just submitted my application form to B&S Educational Services. My name is ${form.firstName} ${form.lastName}, and I am interested in studying in ${form.destination}. Please get in touch with me at your earliest convenience. Thank you!`;
-
-const triggerWhatsapp = () => {
+// Fixed function: Accepts data argument and builds message dynamically
+const triggerWhatsapp = (data) => {
+  const message = `Hello! I have just submitted my application form to B&S Educational Services. My name is ${data.firstName} ${data.lastName}, and I am interested in studying in ${data.destination}. Please get in touch with me at your earliest convenience. Thank you!`;
+  
   const phoneNumber = '2348065442707';
-  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  
+  // Using api.whatsapp.com for better mobile deep-linking support
+  const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+  
   window.open(whatsappUrl, '_blank');
 };
 
@@ -388,6 +385,9 @@ const handleSubmit = async () => {
   if (isSubmitting.value) return;
 
   isSubmitting.value = true;
+
+  // IMPORTANT: Create a snapshot of the form data before sending or resetting
+  const formDataSnapshot = { ...form };
 
   try {
     const supabase = useSupabaseClient();
@@ -427,15 +427,19 @@ const handleSubmit = async () => {
         "Application submitted successfully! We'll be in touch within 24 hours.",
         "success"
       );
+      
       resetForm();
+      
       setTimeout(() => {
         showToastNotification(
           "A WhatsApp chat will open to confirm your application.",
           "success"
         );
       }, 4000);
+      
+      // Pass the SNAPSHOT to the delayed trigger function
       setTimeout(() => {
-        triggerWhatsapp();
+        triggerWhatsapp(formDataSnapshot);
       }, 6000);
     }
   } catch (error) {
