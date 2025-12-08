@@ -145,4 +145,5 @@
 
 <script setup>
 // No script logic required for static presentation
+
 </script>

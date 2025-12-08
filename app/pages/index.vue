@@ -20,6 +20,7 @@ useSeoMeta({
   ogImage: '/img/main-logo.jpg',
   twitterCard: 'summary_large_image',
   robots: 'index, follow',
+  canonical: 'https://bs-education.com/',
 })
 
 useHead({

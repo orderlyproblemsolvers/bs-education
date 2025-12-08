@@ -188,7 +188,8 @@ useSeoMeta({
   ogTitle: 'All Events - B&S Educational Services',
   ogDescription: 'Discover our upcoming and past events to enrich your educational experience.',
   ogImage: '/img/main-logo.png',
-  ogType: 'website'
+  ogType: 'website',
+  canonical: 'https://bs-education.com/events',
 });
 
 // Fetch all events from the server

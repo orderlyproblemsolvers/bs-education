@@ -617,6 +617,8 @@
 </template>
 
 <script setup>
+import { set } from '@vueuse/core';
+
 useSeoMeta({
   title: "Contact Us - B&S Educational Services",
   description:
@@ -679,6 +681,19 @@ const resetForm = () => {
   form.receiveUpdates = false;
 };
 
+const triggerWhatsAppChat = () => {
+  const phoneNumber = "+2348065442707";
+  const message = encodeURIComponent(
+    "Hello, my name is " +
+      form.firstName +
+      " " +
+      form.lastName +
+      ". I would like to inquire about studying abroad. My preferred destination is " + form.destination + "."
+  );
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+  window.open(whatsappUrl, "_blank");
+};
+
 const handleSubmit = async () => {
   if (isSubmitting.value) return;
 
@@ -723,6 +738,15 @@ const handleSubmit = async () => {
         "success"
       );
       resetForm();
+      settimeout(()=>{
+        showToastNotification(
+          "Would you like to chat with us on WhatsApp for immediate assistance?",
+          "success"
+        );
+      }, 4000)
+      setTimeout(() => {
+        triggerWhatsAppChat();
+      }, 8000);
     }
   } catch (error) {
     console.error("Submission error:", error);
@@ -798,6 +822,7 @@ useSeoMeta({
   ogTitle: "Contact B&S Educational Services - Study Abroad Experts",
   ogDescription:
     "Start your study abroad journey today. Contact our education experts for free counselling and personalized guidance.",
+    canonical: "https://www.bs-education.com/contact",
 });
 </script>
 

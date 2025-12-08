@@ -156,6 +156,7 @@ useSeoMeta({
   ogTitle: 'Study Abroad Services | B&S Educational Services',
   ogDescription: 'Transform your future with world-class education. Professional study abroad services including admissions, visa assistance, and scholarship guidance.',
   ogType: 'website',
+  canonical: 'https://bs-education.com/services',
 })
 
 // Services data with storytelling approach

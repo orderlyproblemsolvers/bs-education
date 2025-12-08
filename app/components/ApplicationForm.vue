@@ -376,6 +376,14 @@ const resetForm = () => {
   form.receiveUpdates = false;
 };
 
+const message = `Hello! I have just submitted my application form to B&S Educational Services. My name is ${form.firstName} ${form.lastName}, and I am interested in studying in ${form.destination}. Please get in touch with me at your earliest convenience. Thank you!`;
+
+const triggerWhatsapp = () => {
+  const phoneNumber = '2348065442707';
+  const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+  window.open(whatsappUrl, '_blank');
+};
+
 const handleSubmit = async () => {
   if (isSubmitting.value) return;
 
@@ -420,6 +428,15 @@ const handleSubmit = async () => {
         "success"
       );
       resetForm();
+      setTimeout(() => {
+        showToastNotification(
+          "A WhatsApp chat will open to confirm your application.",
+          "success"
+        );
+      }, 4000);
+      setTimeout(() => {
+        triggerWhatsapp();
+      }, 6000);
     }
   } catch (error) {
     console.error("Submission error:", error);
