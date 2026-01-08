@@ -5,8 +5,8 @@
       </h2>
       
       <!-- Fading edges with improved blur -->
-      <div class="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none"></div>
-      <div class="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none"></div>
+      <div class="absolute inset-y-0 left-0 w-12 md:w-32 lg:w-32 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none"></div>
+      <div class="absolute inset-y-0 right-0 w-12 md:w-32 lg:w-32 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none"></div>
       
       <div class="space-y-6">
         <!-- Top Row -->
@@ -68,7 +68,7 @@
   const logos = [
     '/img/debrecen.jpeg', '/img/coventry.png', '/img/uwe.jpeg', '/img/bangor.webp',
     '/img/hull.jpeg', '/img/sruc.png', '/img/bradford.png', '/img/uclan.webp',
-    '/img/abbey.webp', '/img/shorelight.webp', '/img/wakefield.webp', '/img/ieu.png',
+    '/img/abbey.webp', '/img/wakefield.webp', '/img/ieu.png',
     '/img/into.webp', '/img/navitas.webp', '/img/kings.jpeg', '/img/oxford.webp'
   ]
   </script>
