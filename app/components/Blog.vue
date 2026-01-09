@@ -98,7 +98,7 @@ const fetchPosts = async () => {
   }
 };
 
-onMounted(() => {
+onBeforeMount(() => {
   fetchPosts();
 });
 
