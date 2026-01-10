@@ -21,7 +21,7 @@
             </p>
             <div class="flex items-center gap-2 text-xs text-[#ACBEA3]">
               <span class="w-2 h-2 bg-[#ACBEA3] rounded-full"></span>
-              <span>Trusted by 500+ students</span>
+              <span>Trusted by 1000+ students</span>
             </div>
           </div>
 
@@ -76,17 +76,23 @@
                 </p>
               </div>
 
-              <div class="text-sm">
+              <div class="text-sm flex flex-col">
                 <p class="text-gray-300 mb-1">Phone</p>
                 <a href="tel:+2349012345678" class="text-[#ACBEA3] hover:text-white text-xs transition-colors">
                   +234 901 234 5678
                 </a>
+                <a href="tel:+2349012345678" class="text-[#ACBEA3] hover:text-white text-xs transition-colors">
+                  +234 806 544 2707
+                </a>
               </div>
 
-              <div class="text-sm">
-                <p class="text-gray-300 mb-1">Email</p>
+              <div class="text-sm flex flex-col">
+                <p class="text-gray-300 mb-1 ">Email</p>
                 <a href="mailto:info@bs-education.com" class="text-[#ACBEA3] hover:text-white text-xs transition-colors">
                   info@bs-education.com
+                </a>
+                <a href="mailto:bseducation@live.com" class="text-[#ACBEA3] hover:text-white text-xs transition-colors">
+                  bseducation@live.com
                 </a>
               </div>
             </div>

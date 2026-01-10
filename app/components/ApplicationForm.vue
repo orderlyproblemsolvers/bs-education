@@ -260,11 +260,11 @@
           />
           <div class="stats" role="list">
             <div class="stat" role="listitem">
-              <div class="stat-number" aria-label="500 plus students placed">500+</div>
+              <div class="stat-number" aria-label="500 plus students placed">1000+</div>
               <div class="stat-label">Students Placed</div>
             </div>
             <div class="stat" role="listitem">
-              <div class="stat-number" aria-label="95 percent visa success rate">95%</div>
+              <div class="stat-number" aria-label="95 percent visa success rate">99%</div>
               <div class="stat-label">Visa Success Rate</div>
             </div>
           </div>
