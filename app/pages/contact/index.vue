@@ -77,7 +77,7 @@
                 <div
                   class="text-3xl font-bold text-[#eb6534] group-hover:scale-110 transition-transform duration-300 font-inter"
                 >
-                  500+
+                  1000+
                 </div>
                 <div class="text-sm font-medium text-[#666666] mt-1 font-inter">
                   Success Stories
@@ -458,6 +458,9 @@
                     <h4 class="font-semibold text-[#333333] mb-1 font-inter">Email</h4>
                     <p class="text-[#666666] font-medium font-inter">
                       info@bs-education.com
+                    </p>
+                    <p class="text-[#666666] font-medium font-inter">
+                      bseducation@live.com
                     </p>
                     <p class="text-sm text-[#666666] mt-1 font-inter">
                       We'll respond within 24hrs

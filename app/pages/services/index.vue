@@ -45,7 +45,7 @@
             <div class="text-sm text-gray-600">Years of Excellence</div>
           </div>
           <div class="space-y-2">
-            <div class="text-3xl font-bold text-[#5d6b56]">500+</div>
+            <div class="text-3xl font-bold text-[#5d6b56]">1000+</div>
             <div class="text-sm text-gray-600">Dreams Realized</div>
           </div>
           <div class="space-y-2">
@@ -53,7 +53,7 @@
             <div class="text-sm text-gray-600">Countries</div>
           </div>
           <div class="space-y-2">
-            <div class="text-3xl font-bold text-[#5d6b56]">95%</div>
+            <div class="text-3xl font-bold text-[#5d6b56]">99%</div>
             <div class="text-sm text-gray-600">Success Rate</div>
           </div>
         </div>

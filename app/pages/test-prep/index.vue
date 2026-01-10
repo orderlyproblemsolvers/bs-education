@@ -16,11 +16,11 @@
               <!-- Stats -->
               <div class="flex flex-wrap justify-center lg:justify-start gap-8 mb-10">
                 <div class="text-center">
-                  <div class="text-2xl font-bold text-[#5d6b56]">500+</div>
+                  <div class="text-2xl font-bold text-[#5d6b56]">1000+</div>
                   <div class="text-sm text-gray-600 mt-1">Students Trained</div>
                 </div>
                 <div class="text-center">
-                  <div class="text-2xl font-bold text-[#5d6b56]">95%</div>
+                  <div class="text-2xl font-bold text-[#5d6b56]">99%</div>
                   <div class="text-sm text-gray-600 mt-1">Success Rate</div>
                 </div>
                 <div class="text-center">
