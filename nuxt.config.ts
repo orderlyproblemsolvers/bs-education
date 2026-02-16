@@ -78,6 +78,7 @@ export default defineNuxtConfig({
         "img-src": [
           "'self'",
           "data:",
+          "blob:",
           "https://api.supabase.co",
           "https://*.supabase.co",
         ],
@@ -131,8 +132,8 @@ export default defineNuxtConfig({
     dir: "public",
     // Global options
     quality: 80,
-    format: ["webp", "avif", "jpg", "png"],
-    domains: ["https://minjvvxdfdwmbrtphzpr.supabase.co", "localhost:3000"],
+    format: ["webp", "avif", "jpg", "png", "jpeg"],
+    domains: ["minjvvxdfdwmbrtphzpr.supabase.co"],
   },
 
   vite: {

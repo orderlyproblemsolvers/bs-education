@@ -71,7 +71,7 @@
       <div
         class="w-full md:w-[45%] flex justify-center items-center px-2 sm:px-0"
       >
-        <NuxtImg
+        <img
           src="/img/graduant.webp"
           width="1200"
           height="800"

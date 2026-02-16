@@ -250,11 +250,10 @@
         </div>
 
         <aside class="image-container" aria-label="Success statistics">
-          <NuxtImg
+          <img
             src="/img/caps.jpg"
             alt="Students celebrating graduation with caps thrown in the air, representing successful study abroad journey"
             class="image"
-            loading="lazy"
             width="600"
             height="500"
           />

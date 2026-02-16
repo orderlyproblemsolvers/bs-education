@@ -8,12 +8,11 @@
           <!-- Logo & About -->
           <div class="lg:col-span-1">
             <div class="mb-4">
-              <NuxtImg
+              <img
                 src="/img/bs-secondary.png"
                 alt="B&S Educational Services Logo"
                 width="140"
                 height="auto"
-                loading="lazy"
               />
             </div>
             <p class="text-gray-300 text-sm leading-relaxed mb-4">

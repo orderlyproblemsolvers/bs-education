@@ -1,36 +1,67 @@
 <template>
   <section class="bg-white py-16 px-4 sm:px-6 lg:px-24">
-    <h2 class="text-3xl sm:text-4xl font-bold text-black mb-12 text-center">
-      Where Can You Study?
-    </h2>
-
-    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 max-w-6xl mx-auto w-[90%] sm:w-[80%] lg:w-[70%]">
-      <div
-        v-for="(country, index) in countries"
-        :key="country.name"
-        class="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 aspect-square"
-        role="article"
-        :aria-label="`Study destination: ${country.name}`"
-      >
-        <NuxtImg
-          :src="country.src"
-          :alt="country.alt"
-          :width="400"
-          :height="400"
-          format="webp"
-          placeholder="blur"
-          :preload="index < 4"
-          class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-          loading="lazy"
-        />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent">
-          <div class="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
-            <h3 class="text-white font-bold text-lg sm:text-xl lg:text-2xl text-center drop-shadow-lg">
-              {{ country.name }}
-            </h3>
+    <div class="max-w-7xl mx-auto">
+      <h2 class="text-3xl sm:text-4xl font-bold text-black mb-4">
+        Where Can You Study?
+      </h2>
+      <p class="text-[#666666] text-lg mb-12 max-w-2xl">
+        From historic European campuses to cutting-edge institutions worldwide, find your perfect destination.
+      </p>
+      
+      <!-- Featured Hero Section -->
+      <div class="mb-12">
+        <div class="relative overflow-hidden rounded-2xl shadow-xl h-[400px] lg:h-[450px]">
+          <img
+            :src="featuredCountry.src"
+            :alt="featuredCountry.alt"
+            class="w-full h-full object-cover"
+          />
+          <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent">
+            <div class="absolute bottom-0 left-0 right-0 p-8 lg:p-12 lg:max-w-2xl">
+              <div class="inline-flex items-center gap-2 mb-4">
+                <span class="w-2 h-2 bg-[#5d6b56] rounded-full"></span>
+                <span class="text-white/90 text-sm font-medium uppercase tracking-wider">
+                  Featured Destination
+                </span>
+              </div>
+              <h3 class="text-white font-bold text-4xl lg:text-5xl mb-4">
+                {{ featuredCountry.name }}
+              </h3>
+              <p class="text-white/95 text-lg leading-relaxed">
+                {{ featuredCountry.description }}
+              </p>
+            </div>
           </div>
         </div>
-        <div class="absolute inset-0 bg-blue-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" aria-hidden="true"></div>
+      </div>
+
+      <!-- Compact Grid Section -->
+      <div>
+        <h4 class="text-xl font-semibold text-[#333333] mb-6 pb-3 border-b-2 border-[#5d6b56]">
+          More Destinations
+        </h4>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
+          <div
+            v-for="country in otherCountries"
+            :key="country.name"
+            class="relative overflow-hidden rounded-xl shadow-md aspect-[4/3]"
+            role="article"
+            :aria-label="`Study destination: ${country.name}`"
+          >
+            <img
+              :src="country.src"
+              :alt="country.alt"
+              class="w-full h-full object-cover"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent">
+              <div class="absolute bottom-0 left-0 right-0 p-3">
+                <h3 class="text-white font-semibold text-sm text-center">
+                  {{ country.name }}
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -39,9 +70,10 @@
 <script setup>
 const countries = [
   {
-    name: "UK",
-    src: "/img/uk.png",
+    name: "United Kingdom",
+    src: "/img/london.webp",
     alt: "United Kingdom flag with iconic landmarks - study abroad destination",
+    description: "Study at prestigious universities with centuries of academic excellence. Access exceptional research facilities and vibrant multicultural student communities."
   },
   {
     name: "USA",
@@ -93,10 +125,18 @@ const countries = [
     src: "/img/egypt.jpeg",
     alt: "Egyptian flag with pyramids and ancient monuments - study abroad destination",
   },
-  {
-    name: "Switzerland",
-    src: "/img/swiss.jpeg",
-    alt: "Swiss flag with Alpine mountains and lakes - study abroad destination",
-  },
 ];
+
+const featuredCountry = countries[0];
+const otherCountries = countries.slice(1);
 </script>
+
+<style scoped>
+/* Prefers reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+</style>

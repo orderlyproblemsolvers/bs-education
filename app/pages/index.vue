@@ -3,10 +3,10 @@
     <HeroSection />
     <OurServices />
     <Locations />
+    <LazyPartners />
     <LazyApplicationForm />
     <Blog />
     <Testimonials />
-    <LazyPartners />
     <LazyFaq />
     <Chat />
   </div>

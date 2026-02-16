@@ -20,7 +20,7 @@
               :key="`partner-1-${index}`"
               :src="partner.logo"
               :alt="`${partner.name} Logo`"
-              class="w-36 h-20 object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-300 flex-shrink-0"
+              class="w-36 h-20 object-contain  flex-shrink-0"
             />
           </div>
           <!-- Duplicate set for seamless loop -->
@@ -30,7 +30,7 @@
               :key="`partner-1-dup-${index}`"
               :src="partner.logo"
               :alt="`${partner.name} Logo`"
-              class="w-36 h-20 object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-300 flex-shrink-0"
+              class="w-36 h-20 object-contain  flex-shrink-0"
             />
           </div>
         </div>
@@ -46,7 +46,7 @@
               :key="`partner-2-${index}`"
               :src="partner.logo"
               :alt="`${partner.name} Logo`"
-              class="w-36 h-20 object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-300 flex-shrink-0"
+              class="w-36 h-20 object-contain  transition-all duration-300 flex-shrink-0"
             />
           </div>
           <!-- Duplicate set for seamless loop -->
@@ -56,7 +56,7 @@
               :key="`partner-2-dup-${index}`"
               :src="partner.logo"
               :alt="`${partner.name} Logo`"
-              class="w-36 h-20 object-contain grayscale opacity-80 hover:grayscale-0 hover:opacity-100 transition-all duration-300 flex-shrink-0"
+              class="w-36 h-20 object-contain  flex-shrink-0"
             />
           </div>
         </div>
@@ -206,11 +206,11 @@ const secondRow = partners.slice(midpoint)
 }
 
 .animate-scroll-right {
-  animation: scrollRight 40s linear infinite;
+  animation: scrollRight 20s linear infinite;
 }
 
 .animate-scroll-left {
-  animation: scrollLeft 40s linear infinite;
+  animation: scrollLeft 20s linear infinite;
 }
 
 /* Pause animation on hover */

@@ -7,11 +7,10 @@
         <!-- Logo/Brand -->
         <NuxtLink to="/" class="flex items-center space-x-3 flex-shrink-0">
           <div class="w-10 h-10 lg:w-14 lg:h-12">
-            <NuxtImg
+            <img
               src="/img/bs-primary.png"
               alt="B&S Educational Services logo"
               class="w-full h-full object-contain"
-              loading="eager"
               width="52"
               height="52"
             />
