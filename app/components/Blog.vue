@@ -7,7 +7,6 @@
         News, Updates & Featured Scholarships
       </h2>
 
-      <!-- Loading State -->
       <div v-if="loading" class="grid gap-10 lg:grid-cols-3 md:grid-cols-2">
         <div
           v-for="n in 3"
@@ -24,18 +23,16 @@
         </div>
       </div>
 
-      <!-- Error State -->
       <div v-else-if="error" class="text-center py-12">
-        <p class="text-red-600 mb-4">{{ error }}</p>
+        <p class="text-red-600 mb-4">Failed to load blog posts. Please try again.</p>
         <button
-          @click="fetchPosts"
+          @click="refreshPosts"
           class="bg-[#EB6534] text-white px-6 py-2 rounded-lg hover:bg-[#d55529] transition-colors"
         >
           Try Again
         </button>
       </div>
 
-      <!-- Posts Grid -->
       <div
         v-else-if="postsWithExcerpts.length > 0"
         class="grid gap-10 lg:grid-cols-3 md:grid-cols-2"
@@ -70,7 +67,6 @@
         </div>
       </div>
 
-      <!-- No Posts State -->
       <div v-else class="text-center py-12">
         <p class="text-gray-600">No blog posts available at the moment.</p>
       </div>
@@ -81,28 +77,24 @@
 <script setup>
 const { getRecentBlogPosts } = useBlog();
 
-const posts = ref([]);
-const loading = ref(true);
-const error = ref(null);
-
-const fetchPosts = async () => {
-  try {
-    loading.value = true;
-    error.value = null;
-    posts.value = await getRecentBlogPosts(3);
-  } catch (err) {
-    console.error("Error fetching recent posts:", err);
-    error.value = "Failed to load blog posts. Please try again.";
-  } finally {
-    loading.value = false;
+// useAsyncData handles the SSR fetching, hydration, and provides state automatically
+const {
+  data: posts,
+  pending: loading,
+  error,
+  refresh: refreshPosts
+} = await useAsyncData(
+  'recent-blog-posts', // A unique key to ensure proper hydration
+  () => getRecentBlogPosts(3),
+  {
+    default: () => [] // Ensures `posts.value` is an array even if the fetch fails
   }
-};
+);
 
-onBeforeMount(() => {
-  fetchPosts();
-});
-
+// We can still use computed properties on the reactive data returned by useAsyncData
 const postsWithExcerpts = computed(() => {
+  if (!posts.value) return [];
+  
   return posts.value.map((post) => ({
     ...post,
     excerpt: post.content

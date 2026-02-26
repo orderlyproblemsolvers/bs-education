@@ -125,79 +125,108 @@
     </section>
   </template>
   
-  <script setup>
-  const activeIndex = ref(null)
-  const answerRefs = ref([])
-  
-  // FAQ data focusing on common student worries
-  const mainFaqs = ref([
-    {
-      question: "Do I need IELTS or TOEFL to study abroad?",
-      answer: "Not always! While most universities require English proficiency tests, some accept alternatives like Duolingo, PTE, or even waive the requirement if you studied in English. We help identify universities that match your language qualifications and can guide you through test preparation if needed.",
+<script setup>
+import { ref, watch, nextTick, computed } from 'vue'
+
+const activeIndex = ref(null)
+const answerRefs = ref([])
+
+// FAQ data focusing on common student worries
+const mainFaqs = ref([
+  {
+    question: "Do I need IELTS or TOEFL to study abroad?",
+    answer: "Not always! While most universities require English proficiency tests, some accept alternatives like Duolingo, PTE, or even waive the requirement if you studied in English. We help identify universities that match your language qualifications and can guide you through test preparation if needed.",
+    cta: null
+  },
+  {
+    question: "What's the easiest country to get a visa for?",
+    answer: "Countries like <strong>Canada, Ireland, and Australia</strong> generally have more straightforward visa processes for Nigerian students. However, the 'easiest' depends on your profile, course choice, and financial situation. Our counsellors assess your background to recommend the best options with highest success rates.",
+    cta: {
+      text: "Get Country Recommendations",
       cta: null
-    },
-    {
-      question: "What's the easiest country to get a visa for?",
-      answer: "Countries like <strong>Canada, Ireland, and Australia</strong> generally have more straightforward visa processes for Nigerian students. However, the 'easiest' depends on your profile, course choice, and financial situation. Our counsellors assess your background to recommend the best options with highest success rates.",
-      cta: {
-        text: "Get Country Recommendations",
-        cta: null
-      }
-    },
-    {
-      question: "How much do your services cost?",
-      answer: "<strong>Service Fee is basd on the country</strong>. UK N250K, Nothern Cyprus and Egypt N350K, other countries $500 - $1000 dollars. Some require an application fee.",
-      cta: null
-    },
-    {
-      question: "Can I work while studying abroad?",
-      answer: "Yes! Most study destinations allow part-time work during studies. <strong>Canada and Australia</strong> offer 20 hours/week during studies and unlimited hours during breaks. The <strong>UK</strong> allows 20 hours/week, while the <strong>US</strong> has on-campus work opportunities. We provide guidance on work regulations for each country.",
-      cta: null
-    },
-    {
-      question: "What if I don't have enough money for tuition?",
-      answer: "Don't let finances stop your dreams! We help identify <strong>scholarships, grants, and affordable universities</strong>. Many students combine partial scholarships with education loans or family support. We also recommend countries with lower tuition fees and living costs that fit your budget.",
-      cta: null
-    },
-    {
-      question: "How long does the entire process take?",
-      answer: "Typically <strong>6-12 months</strong> from application to travel, depending on the intake and country. We recommend starting at least 8-10 months before your intended study date. Our structured timeline ensures you meet all deadlines without rushing through important steps.",
-      cta: null
-    },
-    {
-      question: "What happens if my visa gets rejected?",
-      answer: "While rare with our guidance (we have a 95%+ success rate), we provide <strong>full support for reapplication or alternative options</strong>. This includes reviewing rejection reasons, strengthening your profile, or exploring other suitable countries. Your success is our commitment.",
-      cta: null
-    },
-    {
-      question: "Do you help with accommodation and travel arrangements?",
-      answer: "Absolutely! Our support extends beyond admissions. We assist with <strong>accommodation booking, airport pickup, SIM cards, bank account opening</strong>, and settling-in support. Many of our students arrive to a home away from home, not a foreign country.",
-      cta: {
-        text: "See Full Support Services",
-        link: "/services"
-      }
     }
-  ])
-  
-  const toggleFaq = (index) => {
-    if (activeIndex.value === index) {
-      activeIndex.value = null
-    } else {
-      activeIndex.value = index
+  },
+  {
+    question: "How much do your services cost?",
+    answer: "<strong>Service Fee is basd on the country</strong>. UK N250K, Nothern Cyprus and Egypt N350K, other countries $500 - $1000 dollars. Some require an application fee.",
+    cta: null
+  },
+  {
+    question: "Can I work while studying abroad?",
+    answer: "Yes! Most study destinations allow part-time work during studies. <strong>Canada and Australia</strong> offer 20 hours/week during studies and unlimited hours during breaks. The <strong>UK</strong> allows 20 hours/week, while the <strong>US</strong> has on-campus work opportunities. We provide guidance on work regulations for each country.",
+    cta: null
+  },
+  {
+    question: "What if I don't have enough money for tuition?",
+    answer: "Don't let finances stop your dreams! We help identify <strong>scholarships, grants, and affordable universities</strong>. Many students combine partial scholarships with education loans or family support. We also recommend countries with lower tuition fees and living costs that fit your budget.",
+    cta: null
+  },
+  {
+    question: "How long does the entire process take?",
+    answer: "Typically <strong>6-12 months</strong> from application to travel, depending on the intake and country. We recommend starting at least 8-10 months before your intended study date. Our structured timeline ensures you meet all deadlines without rushing through important steps.",
+    cta: null
+  },
+  {
+    question: "What happens if my visa gets rejected?",
+    answer: "While rare with our guidance (we have a 95%+ success rate), we provide <strong>full support for reapplication or alternative options</strong>. This includes reviewing rejection reasons, strengthening your profile, or exploring other suitable countries. Your success is our commitment.",
+    cta: null
+  },
+  {
+    question: "Do you help with accommodation and travel arrangements?",
+    answer: "Absolutely! Our support extends beyond admissions. We assist with <strong>accommodation booking, airport pickup, SIM cards, bank account opening</strong>, and settling-in support. Many of our students arrive to a home away from home, not a foreign country.",
+    cta: {
+      text: "See Full Support Services",
+      link: "/services"
     }
   }
-  
-  watch(activeIndex, () => {
-    if (activeIndex.value !== null) {
-      nextTick(() => {
-        const activeElement = document.querySelector('.faq-item.active')
-        if (activeElement) {
-          activeElement.scrollIntoView({ block: 'nearest' })
-        }
-      })
+])
+
+const toggleFaq = (index) => {
+  if (activeIndex.value === index) {
+    activeIndex.value = null
+  } else {
+    activeIndex.value = index
+  }
+}
+
+watch(activeIndex, () => {
+  if (activeIndex.value !== null) {
+    nextTick(() => {
+      const activeElement = document.querySelector('.faq-item.active')
+      if (activeElement) {
+        activeElement.scrollIntoView({ block: 'nearest' })
+      }
+    })
+  }
+})
+
+// Generate FAQ Schema.org JSON-LD
+const faqSchema = computed(() => {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: mainFaqs.value.map((faq) => ({
+      '@type': 'Question',
+      name: faq.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        // Strip HTML tags for the schema text to keep it clean for search engines
+        text: faq.answer.replace(/<[^>]*>?/gm, '') 
+      }
+    }))
+  }
+})
+
+// Inject the schema into the document head
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify(faqSchema.value)
     }
-  })
-  </script>
+  ]
+})
+</script>
   
   <style scoped>
   .faq-section {

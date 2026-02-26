@@ -1,363 +1,246 @@
 <template>
-    <div class="relative w-full min-h-screen bg-white overflow-hidden font-inter">
-      <!-- Subtle Background Pattern -->
-      <div class="absolute inset-0 opacity-5">
-        <svg width="60" height="60" viewBox="0 0 60 60" class="absolute top-0 left-0 w-full h-full">
-          <defs>
-            <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
-              <circle cx="30" cy="30" r="1" fill="#ACBEA3"/>
-            </pattern>
-          </defs>
-          <rect width="100%" fill="url(#grid)"/>
+  <main class="min-h-screen bg-[#f8faf8] font-inter pb-20">
+    <div v-if="loading" class="flex flex-col items-center justify-center min-h-[60vh] space-y-4">
+      <div class="inline-block animate-spin rounded-full h-10 w-10 border-4 border-gray-200 border-t-[#ACBEA3]"></div>
+      <p class="text-gray-500 font-medium tracking-wide">Preparing article...</p>
+    </div>
+
+    <div v-else-if="error" class="max-w-2xl mx-auto mt-20 px-6 text-center">
+      <div class="w-20 h-20 mx-auto bg-red-50 rounded-full flex items-center justify-center mb-6 shadow-sm">
+        <svg class="w-10 h-10 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
         </svg>
       </div>
-  
-      <div class="relative z-10 w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-        <!-- Loading State -->
-        <div v-if="loading" class="text-center py-12 space-y-6">
-          <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#ACBEA3]"></div>
-          <p class="text-gray-600">Loading blog post...</p>
-        </div>
-  
-        <!-- Error State -->
-        <div v-else-if="error" class="text-center py-12 space-y-6">
-          <div class="w-12 h-12 mx-auto bg-[#ACBEA3]/10 rounded-lg flex items-center justify-center">
-            <svg class="w-6 h-6 text-[#ACBEA3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-          </div>
-          <p class="text-lg text-gray-600 px-4">{{ error }}</p>
-          <NuxtLink 
-            to="/resources"
-            class="inline-flex items-center px-6 py-3 text-sm font-medium text-[#ACBEA3] border border-[#ACBEA3] rounded-lg hover:bg-[#ACBEA3] hover:text-white transition-all duration-200"
+      <h2 class="text-2xl font-bold text-gray-800 mb-4">Article Not Found</h2>
+      <p class="text-gray-600 mb-8">{{ error.message || 'The blog post you are looking for is unavailable.' }}</p>
+      <NuxtLink 
+        to="/resources"
+        class="inline-flex items-center px-6 py-3 font-medium text-white bg-[#ACBEA3] rounded-lg hover:bg-[#97aa8e] transition-colors duration-200 shadow-md hover:shadow-lg"
+      >
+        Return to Resources
+      </NuxtLink>
+    </div>
+
+    <article v-else-if="post" class="w-full relative">
+      <div class="relative w-full h-[45vh] min-h-[400px] bg-[#2c332b]">
+        <img 
+          v-if="post.image_url"
+          :src="post.image_url" 
+          :alt="post.title"
+          class="absolute inset-0 w-full h-full object-cover opacity-50"
+        />
+        <div class="absolute inset-0 bg-gradient-to-t from-[#1a1f19] via-transparent to-transparent opacity-80"></div>
+        
+        <div class="absolute top-0 left-0 w-full p-6 sm:p-8 z-10 max-w-5xl mx-auto left-0 right-0">
+          <button 
+            @click.prevent="router.back()"
+            class="inline-flex items-center text-white/80 hover:text-white transition-colors duration-200 bg-black/20 backdrop-blur-sm px-4 py-2 rounded-full text-sm font-medium"
           >
-            Back to Blog
-          </NuxtLink>
+            <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            </svg>
+            Back to Articles
+          </button>
         </div>
-  
-        <!-- Content -->
-        <article v-else class="relative w-full">
-          <!-- Navigation -->
-          <div class="mb-6 sm:mb-8">
-            <NuxtLink 
-              to="#"
-              @click.prevent="router.back()"
-              class="inline-flex items-center text-[#ACBEA3] hover:text-[#6b7a6a] transition-colors duration-200"
-            >
-              <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 19l-7-7 7-7"></path>
-              </svg>
-              Back
-            </NuxtLink>
-          </div>
-  
-          <!-- Featured Image -->
-          <div v-if="post.image_url" class="relative mb-6 sm:mb-8 h-48 sm:h-56 md:h-64 w-full overflow-hidden rounded-xl shadow border border-gray-200">
-            <img 
-              :src="post.image_url" 
-              :alt="post.title"
-              class="w-full h-full object-cover"
-            />
-          </div>
-  
-          <!-- Article Header -->
-          <header class="mb-8 sm:mb-12">
-            <!-- Category Badge -->
-            <div class="inline-flex items-center space-x-3 mb-4 sm:mb-6">
-              <div class="w-2 h-2 bg-[#EB6534] rounded-full flex-shrink-0"></div>
-              <span class="text-xs font-semibold text-gray-500 tracking-wide uppercase">
-                Blog Post
+      </div>
+
+      <div class="relative z-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 -mt-40 sm:-mt-48">
+        <div class="bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+          
+          <header class="px-6 sm:px-10 pt-10 pb-8 border-b border-gray-100">
+            <div class="flex items-center space-x-3 mb-6">
+              <span class="px-3 py-1 bg-[#EB6534]/10 text-[#EB6534] text-xs font-bold uppercase tracking-wider rounded-full">
+                Featured
               </span>
+              <span class="text-sm text-gray-400">&bull;</span>
+              <span class="text-sm font-medium text-gray-500">{{ formatDate(post.created_at) }}</span>
             </div>
-  
-            <h1 class="text-2xl sm:text-3xl md:text-4xl font-bold text-[#333333] tracking-tight mb-4 sm:mb-6 leading-tight break-words">
+
+            <h1 class="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#333333] tracking-tight leading-[1.15] mb-8">
               {{ post.title }}
             </h1>
-  
-            <!-- Meta Information -->
-            <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-center gap-3 sm:gap-x-6 sm:gap-y-3 text-sm text-gray-600 pb-6">
+
+            <div class="flex flex-wrap items-center gap-6 text-sm">
               <div class="flex items-center">
-                <div class="w-8 h-8 bg-[#ACBEA3]/10 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
-                  <svg class="w-4 h-4 text-[#ACBEA3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                  </svg>
+                <div class="w-10 h-10 bg-gradient-to-br from-[#ACBEA3] to-[#8a9b81] rounded-full flex items-center justify-center mr-3 text-white font-bold shadow-inner">
+                  {{ post.author.charAt(0).toUpperCase() }}
                 </div>
-                <span class="font-medium truncate">{{ post.author }}</span>
-              </div>
-              <div class="flex items-center">
-                <div class="w-8 h-8 bg-[#ACBEA3]/10 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
-                  <svg class="w-4 h-4 text-[#ACBEA3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
-                  </svg>
+                <div>
+                  <p class="font-semibold text-gray-800">{{ post.author }}</p>
+                  <p class="text-gray-500 text-xs">Author</p>
                 </div>
-                <span class="whitespace-nowrap">{{ formatDate(post.created_at) }}</span>
-              </div>
-              <div v-if="post.updated_at !== post.created_at" class="flex items-center text-xs text-gray-500">
-                <span class="whitespace-nowrap">
-                  Updated {{ formatDate(post.updated_at) }}
-                </span>
               </div>
             </div>
-  
-            <!-- Accent Line -->
-            <div class="w-16 sm:w-24 h-1 bg-gradient-to-r from-[#ACBEA3] to-[#EB6534] rounded-full"></div>
           </header>
-  
-          <!-- Article Content -->
-          <div class="w-full bg-white rounded-xl p-4 sm:p-6 md:p-8 shadow border border-gray-200 overflow-hidden">
+
+          <div class="px-6 sm:px-10 py-10 sm:py-12">
             <div 
-              class="prose prose-sm sm:prose-base lg:prose-lg max-w-none w-full"
+              class="prose prose-sm sm:prose-base lg:prose-lg max-w-none"
               v-html="post.content"
             ></div>
           </div>
 
-          <!-- Article Footer -->
-          <footer class="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-200">
-            <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-              <div class="flex items-center space-x-4">
-                <div class="w-12 h-12 bg-[#ACBEA3]/10 rounded-full flex items-center justify-center flex-shrink-0">
-                  <svg class="w-6 h-6 text-[#ACBEA3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
-                  </svg>
-                </div>
-                <div class="min-w-0 flex-1">
-                  <p class="font-semibold text-[#333333] truncate">{{ post.author }}</p>
-                  <p class="text-sm text-gray-600 truncate">Published {{ formatDate(post.created_at) }}</p>
-                </div>
-              </div>
+          <footer class="bg-gray-50 px-6 sm:px-10 py-8 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p class="text-sm text-gray-500 font-medium">
+              Enjoyed this read? Share it with others.
+            </p>
+            <div class="flex gap-3">
+              <button class="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:text-[#ACBEA3] hover:border-[#ACBEA3] transition-colors shadow-sm">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/></svg>
+              </button>
+              <button class="w-10 h-10 rounded-full bg-white border border-gray-200 flex items-center justify-center text-gray-500 hover:text-[#EB6534] hover:border-[#EB6534] transition-colors shadow-sm">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              </button>
             </div>
           </footer>
-        </article>
+        </div>
       </div>
-    </div>
-  </template>
-  
-  <script setup>
-  const route = useRoute()
-  const router = useRouter()
-  const { getBlogPost } = useBlog()
-  
-  const post = ref(null)
-  const loading = ref(true)
-  const error = ref(null)
-  
-  const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
-    })
-  }
-  
-  const fetchPost = async () => {
-    try {
-      loading.value = true
-      error.value = null
-      post.value = await getBlogPost(route.params.id)
-    } catch (err) {
-      console.error('Error fetching post:', err)
-      error.value = 'Blog post not found or failed to load.'
-    } finally {
-      loading.value = false
-    }
-  }
-  
-  // SEO
-  watch(post, (newPost) => {
-    if (newPost) {
-      useHead({
-        title: `${newPost.title} - B&S Educational Services`,
-        meta: [
-          { name: 'description', content: newPost.content.replace(/<[^>]*>/g, '').substring(0, 160) },
-          { property: 'og:title', content: newPost.title },
-          { property: 'og:description', content: newPost.content.replace(/<[^>]*>/g, '').substring(0, 160) },
-          { property: 'og:image', content: newPost.image_url || '' },
-          { property: 'article:author', content: newPost.author },
-          { property: 'article:published_time', content: newPost.created_at }
-        ]
-      })
-      useSeoMeta({
-        title: `${newPost.title} - B&S Educational Services`,
-        description: newPost.content.replace(/<[^>]*>/g, '').substring(0, 160),
-        ogTitle: newPost.title,
-        ogDescription: newPost.content.replace(/<[^>]*>/g, '').substring(0, 160),
-        ogImage: newPost.image_url || '',
-        twitterCard: 'summary_large_image'
-      })
-    }
+    </article>
+  </main>
+</template>
+
+<script setup>
+const route = useRoute()
+const router = useRouter()
+const { getBlogPost } = useBlog()
+
+// Formatter function
+const formatDate = (dateString) => {
+  return new Date(dateString).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric'
   })
-  
+}
 
-  onMounted(() => {
-    fetchPost()
+// SSR Data Fetching
+const { data: post, pending: loading, error } = await useAsyncData(
+  `blog-post-${route.params.id}`,
+  () => getBlogPost(route.params.id)
+)
+
+// Dynamic SSR SEO Meta Tags
+if (post.value) {
+  const plainTextExcerpt = post.value.content
+    .replace(/<[^>]*>/g, '')
+    .substring(0, 160)
+    .trim() + '...';
+
+  useSeoMeta({
+    title: `${post.value.title} | B&S Educational Services`,
+    description: plainTextExcerpt,
+    ogTitle: post.value.title,
+    ogDescription: plainTextExcerpt,
+    ogImage: post.value.image_url || '',
+    ogType: 'article',
+    author: post.value.author,
+    twitterCard: 'summary_large_image',
   })
-  </script>
-  
-  <style scoped>
-  .font-inter {
-    font-family: 'Inter', sans-serif;
-  }
+}
+</script>
 
-  .prose {
-    color: #666666;
-    line-height: 1.6;
-    font-size: 16px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    hyphens: auto;
-  }
-  
-  .prose h1, .prose h2, .prose h3, .prose h4, .prose h5, .prose h6 {
-    color: #333333;
-    font-weight: 600;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    line-height: 1.5;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-  }
-  
-  .prose h1 { 
-    font-size: clamp(24px, 4vw, 30px);
-    font-weight: 700;
-    margin-bottom: 1.5rem;
-  }
-  .prose h2 { 
-    font-size: clamp(22px, 3.5vw, 26px);
-    font-weight: 600;
-    margin-bottom: 1.25rem;
-  }
-  .prose h3 { 
-    font-size: clamp(16px, 2.5vw, 18px);
-    font-weight: 600;
-    margin-bottom: 1rem;
-  }
-  
-  .prose p {
-    margin-bottom: 1.25rem;
-    font-weight: 500;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-  }
-  
-  .prose img {
-    border-radius: 12px;
-    margin: 2rem 0;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-    max-width: 100%;
-    height: auto;
-  }
-  
-  .prose blockquote {
-    font-style: italic;
-    border-left: 4px solid #ACBEA3;
-    padding-left: 1rem;
-    margin: 2rem 0;
-    color: #859484;
-    font-weight: 500;
-    background: rgba(133, 148, 132, 0.1);
-    padding: 1rem;
-    border-radius: 8px;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-  }
-  
-  @media (min-width: 640px) {
-    .prose blockquote {
-      padding-left: 1.5rem;
-      padding: 1.5rem;
-    }
-  }
-  
-  .prose ul, .prose ol {
-    margin: 1.25rem 0;
-    padding-left: 1.5rem;
-  }
-  
-  .prose li {
-    margin: 0.5rem 0;
-    font-weight: 500;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-  }
-  
-  .prose a {
-    color: #EB6534;
-    text-decoration: underline;
-    text-decoration-thickness: 1px;
-    text-underline-offset: 2px;
-    font-weight: 500;
-    transition: color 0.2s ease;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-  }
+<style scoped>
+.font-inter {
+  font-family: 'Inter', sans-serif;
+}
 
-  .prose a:hover {
-    color: #c16a3d;
-  }
+/* Refined Prose Styles for modern editorial look */
+.prose {
+  color: #4b5563; /* gray-600 */
+  line-height: 1.8;
+  font-size: 1.125rem;
+}
 
-  .prose code {
-    background: #f4f5f3;
-    color: #333333;
-    padding: 0.25rem 0.5rem;
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: 500;
-    word-break: break-all;
-  }
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  color: #1f2937; /* gray-800 */
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 1.25rem;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+}
 
-  .prose pre {
-    background: #f4f5f3;
-    border: 1px solid #DDDDDD;
-    border-radius: 8px;
-    padding: 1rem;
-    margin: 1.5rem 0;
-    overflow-x: auto;
-    max-width: 100%;
-  }
+.prose h2 { font-size: 1.875rem; }
+.prose h3 { font-size: 1.5rem; }
 
-  @media (min-width: 640px) {
-    .prose pre {
-      padding: 1.5rem;
-    }
-  }
+.prose p {
+  margin-bottom: 1.5rem;
+}
 
-  .prose pre code {
-    background: transparent;
-    padding: 0;
-    word-break: normal;
-  }
+.prose img {
+  border-radius: 0.75rem;
+  margin: 3rem 0;
+  width: 100%;
+  height: auto;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+}
 
-  .prose strong {
-    color: #333333;
-    font-weight: 600;
-  }
+.prose blockquote {
+  font-style: italic;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  border-left: 4px solid #ACBEA3;
+  padding: 1.5rem 2rem;
+  margin: 3rem 0;
+  color: #374151;
+  background: linear-gradient(to right, rgba(172, 190, 163, 0.15), transparent);
+  border-radius: 0 1rem 1rem 0;
+}
 
-  .prose em {
-    color: #859484;
-    font-style: italic;
-  }
+.prose ul, .prose ol {
+  margin: 1.5rem 0;
+  padding-left: 1.5rem;
+}
 
-  .prose table {
-    width: 100%;
-    max-width: 100%;
-    overflow-x: auto;
-    display: block;
-    white-space: nowrap;
-  }
+.prose li {
+  margin: 0.75rem 0;
+  position: relative;
+}
 
-  @media (min-width: 768px) {
-    .prose table {
-      display: table;
-      white-space: normal;
-    }
-  }
+.prose ul li::marker {
+  color: #EB6534;
+}
 
-  .prose video,
-  .prose iframe,
-  .prose embed,
-  .prose object {
-    max-width: 100%;
-    height: auto;
-  }
+.prose a {
+  color: #EB6534;
+  text-decoration: none;
+  border-bottom: 2px solid rgba(235, 101, 52, 0.2);
+  transition: all 0.2s ease;
+  font-weight: 600;
+}
+
+.prose a:hover {
+  border-bottom-color: #EB6534;
+  color: #c55328;
+}
+
+.prose pre {
+  background: #1f2937;
+  color: #f3f4f6;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  margin: 2rem 0;
+  overflow-x: auto;
+  box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+}
+
+.prose code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.875em;
+}
+
+.prose pre code {
+  color: inherit;
+  background: transparent;
+  padding: 0;
+}
+
+/* Inline code style */
+.prose :not(pre) > code {
+  background: #f3f4f6;
+  color: #EB6534;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+}
 </style>
