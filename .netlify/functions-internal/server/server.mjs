@@ -1,7 +1,7 @@
 export { default } from "./main.mjs";
 export const config = {
   name: "server handler",
-  generator: "nuxt@4.0.2",
+  generator: "nuxt@4.3.1",
   path: "/*",
   nodeBundler: "none",
   includedFiles: ["**"],

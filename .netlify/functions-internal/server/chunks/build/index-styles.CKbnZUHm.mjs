@@ -1,0 +1,2 @@
+const a=["@keyframes marquee-8cae8029{0%{transform:translate(0)}to{transform:translate(-50%)}}.animate-marquee[data-v-8cae8029]{animation:marquee-8cae8029 80s linear infinite}.animate-marquee[data-v-8cae8029]:hover{animation-play-state:paused}@media(prefers-reduced-motion:reduce){.animate-marquee[data-v-8cae8029]{animation-duration:80s!important}}"];export{a as default};
+//# sourceMappingURL=index-styles.CKbnZUHm.mjs.map

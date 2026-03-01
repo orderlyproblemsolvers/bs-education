@@ -1,0 +1,2 @@
+const a=["@keyframes scrollRight-b215d088{0%{transform:translate(0)}to{transform:translate(-50%)}}@keyframes scrollLeft-b215d088{0%{transform:translate(-50%)}to{transform:translate(0)}}.animate-scroll-right[data-v-b215d088]{animation:scrollRight-b215d088 20s linear infinite}.animate-scroll-left[data-v-b215d088]{animation:scrollLeft-b215d088 20s linear infinite}.animate-scroll-left[data-v-b215d088]:hover,.animate-scroll-right[data-v-b215d088]:hover{animation-play-state:paused}"];export{a as default};
+//# sourceMappingURL=Partners-styles.Dak9WCl3.mjs.map

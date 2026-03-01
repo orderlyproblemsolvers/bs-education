@@ -1,13 +1,21 @@
 {
-  "date": "2025-08-12T19:57:34.846Z",
+  "date": "2026-03-01T23:12:24.052Z",
   "preset": "netlify",
   "framework": {
     "name": "nuxt",
-    "version": "4.0.2"
+    "version": "4.3.1"
   },
   "versions": {
-    "nitro": "2.12.4"
+    "nitro": "2.13.1"
   },
   "commands": {},
-  "config": {}
+  "config": {
+    "netlify": {
+      "images": {
+        "remote_images": [
+          "https?:\\/\\/minjvvxdfdwmbrtphzpr\\.supabase\\.co\\/.*"
+        ]
+      }
+    }
+  }
 }

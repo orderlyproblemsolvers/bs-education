@@ -1,0 +1,2 @@
+const a=[".animate-in[data-v-883a1fb7]{animation:slideInUp-883a1fb7 .6s cubic-bezier(.16,1,.3,1) forwards}@keyframes slideInUp-883a1fb7{0%{opacity:0;transform:translateY(32px)}to{opacity:1;transform:translateY(0)}}@media(prefers-reduced-motion:reduce){.animate-in[data-v-883a1fb7]{animation:fadeIn-883a1fb7 .3s ease forwards}@keyframes fadeIn-883a1fb7{0%{opacity:0}to{opacity:1}}}"];export{a as default};
+//# sourceMappingURL=OurServices-styles.CQjGHFJp.mjs.map
