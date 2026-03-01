@@ -84,7 +84,7 @@
           class="group inline-flex items-center gap-4 bg-white px-5 py-3 md:px-6 md:py-4 rounded-full shadow-md border border-gray-100 hover:shadow-xl hover:border-primary/30 hover:-translate-y-1 transition-all duration-300"
         >
           <div class="flex -space-x-3">
-            <img src="/img/grad5.jpg" alt="Student" class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white object-cover shadow-sm group-hover:border-gray-50 transition-colors" loading="lazy" />
+            <img src="/girl.jpg" alt="Student" class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white object-cover shadow-sm group-hover:border-gray-50 transition-colors" loading="lazy" />
             <img src="/img/grad4.jpg" alt="Student" class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white object-cover shadow-sm group-hover:border-gray-50 transition-colors" loading="lazy" />
             <img src="/img/grad3.jpg" alt="Student" class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white object-cover shadow-sm group-hover:border-gray-50 transition-colors" loading="lazy" />
             <div class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white bg-secondary text-white flex items-center justify-center text-xs md:text-sm font-bold shadow-sm z-10 group-hover:bg-secondary/90 transition-colors">
@@ -137,7 +137,7 @@ const testimonials = ref([
     text: "I highly recommend their services! They helped me find the perfect university match and made the entire application and transition completely stress-free.",
     course: "Masters Degree",
     country: "Canada",
-    avatar: "/img/grad5.jpg",
+    avatar: "/img/girl.jpg",
     featured: false,
   },
   {
