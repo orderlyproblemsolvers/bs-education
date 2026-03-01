@@ -137,7 +137,7 @@ const testimonials = ref([
     text: "I highly recommend their services! They helped me find the perfect university match and made the entire application and transition completely stress-free.",
     course: "Masters Degree",
     country: "Canada",
-    avatar: "/img/grad2.jpg",
+    avatar: "/img/grad5.jpg",
     featured: false,
   },
   {
