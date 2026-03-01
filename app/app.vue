@@ -6,3 +6,9 @@ import { NuxtLoadingIndicator } from '#components';
     <NuxtPage />
   </NuxtLayout>
 </template>
+
+<style>
+  body{
+    background: rgb(255, 252, 252);
+  }
+</style>

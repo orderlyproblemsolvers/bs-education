@@ -1,130 +1,144 @@
 <template>
-    <section class="faq-section">
-      <div class="container">
-        <!-- Section Header -->
-        <div class="section-header">
-          <h2 class="section-title">Frequently Asked Questions</h2>
-          <p class="section-subtitle">
-            Get answers to common questions about studying abroad and our services
-          </p>
-        </div>
-  
-        <!-- FAQ Grid -->
-        <div class="faq-grid">
-          <!-- Left Column - Main FAQs -->
-          <div class="faq-main">
-            <div class="faq-list">
-              <div
-                v-for="(faq, index) in mainFaqs"
-                :key="index"
-                class="faq-item"
-                :class="{ 'active': activeIndex === index }"
+  <section class="py-8 md:py-16 bg-[#f4f5f3] font-sans">
+    <div class="max-w-7xl mx-auto px-5 md:px-10 lg:px-20">
+      <div class="text-center mb-12">
+        <h2 class="text-[26px] md:text-4xl font-bold leading-tight text-gray-800 mb-4">
+          Frequently Asked Questions
+        </h2>
+        <p class="text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+          Get answers to common questions about studying abroad and our services
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-start">
+        <div class="lg:col-span-2 bg-white rounded-xl p-5 md:p-8 shadow-sm">
+          <div class="flex flex-col gap-2">
+            <div
+              v-for="(faq, index) in mainFaqs"
+              :key="index"
+              :class="[
+                'faq-item rounded-lg overflow-hidden border transition-all duration-200',
+                activeIndex === index 
+                  ? 'active border-primary shadow-[0_4px_12px_rgba(133,148,132,0.15)]' 
+                  : 'border-gray-200'
+              ]"
+            >
+              <button
+                :class="[
+                  'w-full px-5 py-4 md:px-6 md:py-5 text-left cursor-pointer flex justify-between items-center text-[15px] md:text-base font-semibold transition-colors duration-200',
+                  activeIndex === index ? 'bg-[#f8f9f8] text-primary' : 'bg-white text-gray-800 hover:bg-[#f8f9f8] hover:text-primary'
+                ]"
+                @click="toggleFaq(index)"
+                :aria-expanded="activeIndex === index"
               >
-                <button
-                  class="faq-question"
-                  @click="toggleFaq(index)"
-                  :aria-expanded="activeIndex === index"
-                >
-                  <span class="question-text">{{ faq.question }}</span>
-                  <div class="toggle-icon">
-                    <svg 
-                      width="20" 
-                      height="20" 
-                      viewBox="0 0 24 24" 
-                      fill="none" 
-                      stroke="currentColor" 
-                      stroke-width="2"
-                      :class="{ 'rotated': activeIndex === index }"
+                <span class="flex-1 pr-4">{{ faq.question }}</span>
+                <div class="text-primary flex-shrink-0">
+                  <svg 
+                    width="20" 
+                    height="20" 
+                    viewBox="0 0 24 24" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    stroke-width="2"
+                    :class="['transition-transform duration-300', { 'rotate-180': activeIndex === index }]"
+                  >
+                    <path d="M6 9l6 6 6-6"/>
+                  </svg>
+                </div>
+              </button>
+              
+              <div 
+                v-show="activeIndex === index"
+                class="bg-white overflow-hidden"
+                :ref="el => answerRefs[index] = el"
+              >
+                <div class="px-5 pb-5 md:px-6 md:pb-6 text-gray-600 leading-relaxed text-sm md:text-base">
+                  <p v-html="faq.answer" class="mb-4 last:mb-0"></p>
+                  <div v-if="faq.cta" class="mt-4">
+                    <NuxtLink 
+                      :to="faq.cta.link" 
+                      class="inline-flex items-center gap-2 px-4 py-2.5 bg-primary text-white hover:bg-primary/90 rounded-lg text-sm font-medium transition-colors"
                     >
-                      <path d="M6 9l6 6 6-6"/>
-                    </svg>
-                  </div>
-                </button>
-                
-                <div 
-                  class="faq-answer"
-                  :ref="el => answerRefs[index] = el"
-                >
-                  <div class="answer-content">
-                    <p v-html="faq.answer"></p>
-                    <div v-if="faq.cta" class="answer-cta">
-                      <NuxtLink :to="faq.cta.link" class="cta-button">
-                        {{ faq.cta.text }}
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                          <path d="M5 12h14M12 5l7 7-7 7"/>
-                        </svg>
-                      </NuxtLink>
-                    </div>
+                      {{ faq.cta.text }}
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </NuxtLink>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-  
-          <!-- Right Column - Quick Help -->
-          <div class="faq-sidebar">
-            <div class="help-card">
-              <div class="help-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
-                  <path d="M12 17h.01"/>
+        </div>
+
+        <div class="flex flex-col gap-6">
+          <div class="bg-white rounded-xl p-5 md:p-6 shadow-sm border border-gray-200">
+            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                <path d="M12 17h.01"/>
+              </svg>
+            </div>
+            <h3 class="text-lg font-semibold text-gray-800 mb-2">Still Have Questions?</h3>
+            <p class="text-gray-600 text-sm leading-relaxed mb-5">
+              Can't find what you're looking for? Our counsellors are here to help with personalized guidance.
+            </p>
+            <div class="flex flex-col gap-3">
+              <NuxtLink 
+                to="/contact" 
+                class="inline-flex items-center justify-center gap-2 px-4 py-3 bg-primary text-white hover:bg-primary/90 rounded-lg text-sm font-medium transition-colors w-full"
+              >
+                Book Free Consultation
+              </NuxtLink>
+              <a 
+                href="tel:+2348065442707" 
+                class="inline-flex items-center justify-center gap-2 px-4 py-3 bg-transparent text-secondary border border-secondary hover:bg-secondary hover:text-white rounded-lg text-sm font-medium transition-colors w-full"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                 </svg>
-              </div>
-              <h3 class="help-title">Still Have Questions?</h3>
-              <p class="help-text">
-                Can't find what you're looking for? Our counsellors are here to help with personalized guidance.
-              </p>
-              <div class="help-actions">
-                <NuxtLink to="/contact" class="help-button primary">
-                  Book Free Consultation
-                </NuxtLink>
-                <a href="tel:+2348065442707" class="help-button secondary">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                Call Now
+              </a>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-xl p-5 md:p-6 shadow-sm border border-gray-200">
+            <h4 class="text-base font-semibold text-gray-800 mb-4">Popular Resources</h4>
+            <ul class="flex flex-col m-0 p-0 list-none">
+              <li>
+                <NuxtLink to="/resources/templates" class="flex items-center gap-2 text-gray-600 text-sm py-2.5 border-b border-gray-100 hover:text-primary transition-colors">
+                  <svg class="flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                    <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
                   </svg>
-                  Call Now
-                </a>
-              </div>
-            </div>
-  
-            <!-- Popular Resources -->
-            <div class="resources-card">
-              <h4 class="resources-title">Popular Resources</h4>
-              <ul class="resources-list">
-                <li>
-                  <NuxtLink to="/resources/templates" class="resource-link">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                      <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
-                    </svg>
-                    2025 Student Guide
-                  </NuxtLink>
-                </li>
-                <li>
-                  <NuxtLink to="/events" class="resource-link">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
-                    </svg>
-                    Exciting Events
-                  </NuxtLink>
-                </li>
-                <li>
-                  <NuxtLink to="/resources/country-guides" class="resource-link">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <circle cx="12" cy="12" r="10"/>
-                      <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                    </svg>
-                    Country Guides
-                  </NuxtLink>
-                </li>
-              </ul>
-            </div>
+                  2025 Student Guide
+                </NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/events" class="flex items-center gap-2 text-gray-600 text-sm py-2.5 border-b border-gray-100 hover:text-primary transition-colors">
+                  <svg class="flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                  </svg>
+                  Exciting Events
+                </NuxtLink>
+              </li>
+              <li>
+                <NuxtLink to="/resources/country-guides" class="flex items-center gap-2 text-gray-600 text-sm py-2.5 hover:text-primary transition-colors">
+                  <svg class="flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                  </svg>
+                  Country Guides
+                </NuxtLink>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
-    </section>
-  </template>
-  
+    </div>
+  </section>
+</template>
+
 <script setup>
 import { ref, watch, nextTick, computed } from 'vue'
 
@@ -143,12 +157,12 @@ const mainFaqs = ref([
     answer: "Countries like <strong>Canada, Ireland, and Australia</strong> generally have more straightforward visa processes for Nigerian students. However, the 'easiest' depends on your profile, course choice, and financial situation. Our counsellors assess your background to recommend the best options with highest success rates.",
     cta: {
       text: "Get Country Recommendations",
-      cta: null
+      link: "/contact"
     }
   },
   {
     question: "How much do your services cost?",
-    answer: "<strong>Service Fee is basd on the country</strong>. UK N250K, Nothern Cyprus and Egypt N350K, other countries $500 - $1000 dollars. Some require an application fee.",
+    answer: "<strong>Service Fee is based on the country</strong>. UK N500K, Northern Cyprus and Egypt N350K, other countries $500 - $1000 dollars. Some require an application fee.",
     cta: null
   },
   {
@@ -227,320 +241,3 @@ useHead({
   ]
 })
 </script>
-  
-  <style scoped>
-  .faq-section {
-    padding: 64px 0;
-    background: #f4f5f3;
-    font-family: 'Inter', sans-serif;
-  }
-  
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 80px;
-  }
-  
-  .section-header {
-    text-align: center;
-    margin-bottom: 48px;
-  }
-  
-  .section-title {
-    font-size: 36px;
-    font-weight: 700;
-    line-height: 44px;
-    color: #333333;
-    margin-bottom: 16px;
-  }
-  
-  .section-subtitle {
-    font-size: 18px;
-    line-height: 28px;
-    color: #666666;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  
-  .faq-grid {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 48px;
-    align-items: start;
-  }
-  
-  .faq-main {
-    background: white;
-    border-radius: 12px;
-    padding: 32px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  }
-  
-  .faq-list {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-  
-  .faq-item {
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid #DDDDDD;
-  }
-  
-  .faq-item.active {
-    border-color: #5d6b56;
-    box-shadow: 0 4px 12px rgba(133, 148, 132, 0.15);
-  }
-  
-  .faq-question {
-    width: 100%;
-    padding: 20px 24px;
-    background: white;
-    border: none;
-    text-align: left;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 16px;
-    font-weight: 600;
-    color: #333333;
-  }
-  
-  .faq-item.active .faq-question {
-    background: #f8f9f8;
-    color: #5d6b56;
-  }
-  
-  .faq-question:hover {
-    background: #f8f9f8;
-    color: #5d6b56;
-  }
-  
-  .question-text {
-    flex: 1;
-    padding-right: 16px;
-  }
-  
-  .toggle-icon {
-    color: #5d6b56;
-  }
-  
-  .toggle-icon svg.rotated {
-    transform: rotate(180deg);
-  }
-  
-  .faq-answer {
-    overflow: hidden;
-    background: white;
-  }
-  
-  .faq-item.active .faq-answer {
-    display: block;
-  }
-  
-  .faq-item:not(.active) .faq-answer {
-    display: none;
-  }
-  
-  .answer-content {
-    padding: 24px;
-    color: #666666;
-    line-height: 1.6;
-  }
-  
-  .answer-content p {
-    margin-bottom: 16px;
-  }
-  
-  .answer-cta {
-    margin-top: 16px;
-  }
-  
-  .cta-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 10px 16px;
-    background: #5d6b56;
-    color: white;
-    text-decoration: none;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 500;
-  }
-  
-  .cta-button:hover {
-    background: #6b7a6a;
-  }
-  
-  .faq-sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-  }
-  
-  .help-card, .resources-card {
-    background: white;
-    border-radius: 12px;
-    padding: 24px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-    border: 1px solid #DDDDDD;
-  }
-  
-  .help-icon {
-    width: 48px;
-    height: 48px;
-    background: rgba(133, 148, 132, 0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #5d6b56;
-    margin-bottom: 16px;
-  }
-  
-  .help-title {
-    font-size: 18px;
-    font-weight: 600;
-    color: #333333;
-    margin-bottom: 8px;
-  }
-  
-  .help-text {
-    color: #666666;
-    line-height: 1.5;
-    margin-bottom: 20px;
-    font-size: 14px;
-  }
-  
-  .help-actions {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .help-button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 12px 16px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 14px;
-  }
-  
-  .help-button.primary {
-    background: #5d6b56;
-    color: white;
-  }
-  
-  .help-button.secondary {
-    background: transparent;
-    color: #EB6534 ;
-    border: 1px solid #EB6534 ;
-  }
-  
-  .help-button.primary:hover {
-    background: #6b7a6a;
-  }
-  
-  .help-button.secondary:hover {
-    background: #EB6534 ;
-    color: white;
-  }
-  
-  .resources-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: #333333;
-    margin-bottom: 16px;
-  }
-  
-  .resources-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  
-  .resource-link {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    color: #666666;
-    text-decoration: none;
-    font-size: 14px;
-    padding: 8px 0;
-    border-bottom: 1px solid #f0f0f0;
-  }
-  
-  .resource-link:hover {
-    color: #5d6b56;
-  }
-  
-  .resource-link svg {
-    flex-shrink: 0;
-    width: 16px;
-    height: 16px;
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 1023px) {
-    .container {
-      padding: 0 40px;
-    }
-    
-    .faq-grid {
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-    
-    .section-title {
-      font-size: 30px;
-      line-height: 40px;
-    }
-  }
-  
-  @media (max-width: 767px) {
-    .faq-section {
-      padding: 32px 0;
-    }
-    
-    .container {
-      padding: 0 20px;
-    }
-    
-    .section-title {
-      font-size: 26px;
-      line-height: 36px;
-    }
-    
-    .section-subtitle {
-      font-size: 16px;
-      line-height: 24px;
-    }
-    
-    .faq-main {
-      padding: 20px;
-    }
-    
-    .faq-question {
-      padding: 16px 20px;
-      font-size: 15px;
-    }
-    
-    .answer-content {
-      padding: 0 20px 20px;
-    }
-    
-    .help-card, .resources-card {
-      padding: 20px;
-    }
-  }
-  </style>

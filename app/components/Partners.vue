@@ -1,69 +1,61 @@
 <template>
   <section class="relative bg-white py-16 px-4 sm:px-8 lg:px-24 overflow-hidden">
-    <h2 class="text-2xl sm:text-3xl font-bold text-center text-[#859484] mb-12">
+    <h2 class="text-2xl sm:text-3xl font-bold text-center text-black mb-12">
       Our Trusted Partners
     </h2>
     
-    <!-- Fading edges -->
     <div class="absolute inset-y-0 left-0 w-12 md:w-32 lg:w-32 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none"></div>
     <div class="absolute inset-y-0 right-0 w-12 md:w-32 lg:w-32 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none"></div>
     
-    <!-- Infinite scroll container -->
     <div class="space-y-6 mb-8">
-      <!-- First row - scrolling right -->
+      
       <div class="overflow-hidden">
-        <div class="flex gap-8 animate-scroll-right will-change-transform">
-          <!-- First set of logos -->
-          <div class="flex gap-8 flex-shrink-0">
+        <div class="flex w-max animate-scroll-right will-change-transform">
+          <div class="flex gap-8 pr-8 flex-shrink-0">
             <img
               v-for="(partner, index) in firstRow"
               :key="`partner-1-${index}`"
               :src="partner.logo"
               :alt="`${partner.name} Logo`"
-              class="w-36 h-20 object-contain  flex-shrink-0"
+              class="w-36 h-20 object-contain flex-shrink-0"
             />
           </div>
-          <!-- Duplicate set for seamless loop -->
-          <div class="flex gap-8 flex-shrink-0">
+          <div class="flex gap-8 pr-8 flex-shrink-0">
             <img
               v-for="(partner, index) in firstRow"
               :key="`partner-1-dup-${index}`"
               :src="partner.logo"
               :alt="`${partner.name} Logo`"
-              class="w-36 h-20 object-contain  flex-shrink-0"
+              class="w-36 h-20 object-contain flex-shrink-0"
             />
           </div>
         </div>
       </div>
 
-      <!-- Second row - scrolling left (hidden on desktop) -->
       <div class="overflow-hidden md:hidden">
-        <div class="flex gap-8 animate-scroll-left will-change-transform">
-          <!-- First set of logos -->
-          <div class="flex gap-8 flex-shrink-0">
+        <div class="flex w-max animate-scroll-left will-change-transform">
+          <div class="flex gap-8 pr-8 flex-shrink-0">
             <img
               v-for="(partner, index) in secondRow"
               :key="`partner-2-${index}`"
               :src="partner.logo"
               :alt="`${partner.name} Logo`"
-              class="w-36 h-20 object-contain  transition-all duration-300 flex-shrink-0"
+              class="w-36 h-20 object-contain transition-all duration-300 flex-shrink-0"
             />
           </div>
-          <!-- Duplicate set for seamless loop -->
-          <div class="flex gap-8 flex-shrink-0">
+          <div class="flex gap-8 pr-8 flex-shrink-0">
             <img
               v-for="(partner, index) in secondRow"
               :key="`partner-2-dup-${index}`"
               :src="partner.logo"
               :alt="`${partner.name} Logo`"
-              class="w-36 h-20 object-contain  flex-shrink-0"
+              class="w-36 h-20 object-contain flex-shrink-0"
             />
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Styled details section -->
     <div class="max-w-4xl mx-auto mt-12">
       <details class="bg-gray-50 rounded-lg border border-gray-200 overflow-hidden">
         <summary class="cursor-pointer px-6 py-4 font-semibold text-[#859484] hover:bg-gray-100 transition-colors duration-200 select-none">

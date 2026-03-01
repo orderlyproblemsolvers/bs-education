@@ -4,9 +4,8 @@
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 lg:h-20">
-        <!-- Logo/Brand -->
         <NuxtLink to="/" class="flex items-center space-x-3 flex-shrink-0">
-          <div class="w-10 h-10 lg:w-14 lg:h-12">
+          <div class="w-24 h-24 lg:w-24 lg:h-24">
             <img
               src="/img/bs-primary.png"
               alt="B&S Educational Services logo"
@@ -22,40 +21,31 @@
           </div>
         </NuxtLink>
 
-        <!-- Desktop Navigation -->
         <nav class="hidden lg:flex items-center space-x-2 text-sm">
-          <!-- Home Link -->
           <NuxtLink
             to="/"
-            class="px-4 py-2 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] font-medium rounded-lg transition-all duration-200"
-            :class="{ 'bg-[#859484]/15 text-[#859484]': $route.path === '/' }"
+            class="px-4 py-2 font-medium rounded-lg transition-all duration-200"
+            :class="$route.path === '/' ? 'bg-primary text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-primary'"
           >
             Home
           </NuxtLink>
 
-          <!-- About Link -->
           <NuxtLink
             to="/events"
-            class="px-4 py-2 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] font-medium rounded-lg transition-all duration-200"
-            :class="{
-              'bg-[#859484]/15 text-[#859484]': $route.path === '/about',
-            }"
+            class="px-4 py-2 font-medium rounded-lg transition-all duration-200"
+            :class="$route.path === '/events' ? 'bg-primary text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-primary'"
           >
             Events
           </NuxtLink>
 
-          <!-- Services Dropdown -->
           <div
             class="relative"
             @mouseenter="showServicesDropdown = true"
             @mouseleave="showServicesDropdown = false"
           >
             <button
-              class="px-4 py-2 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] font-medium rounded-lg transition-all duration-200 flex items-center space-x-1"
-              :class="{
-                'bg-[#859484]/15 text-[#859484]':
-                  $route.path.startsWith('/services'),
-              }"
+              class="px-4 py-2 font-medium rounded-lg transition-all duration-200 flex items-center space-x-1"
+              :class="$route.path.startsWith('/services') ? 'bg-primary text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-primary'"
             >
               <span>Services</span>
               <Icon
@@ -70,53 +60,47 @@
             >
               <NuxtLink
                 to="/services"
-                class="block px-4 py-3 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] transition-colors duration-200"
+                class="block px-4 py-3 transition-colors duration-200"
+                :class="$route.path === '/services' ? 'bg-primary/10 text-primary' : 'text-gray-700 hover:bg-gray-50 hover:text-primary'"
               >
                 <div class="font-medium">All Services</div>
-                <div class="text-sm text-gray-500">Complete overview</div>
+                <div class="text-sm opacity-70">Complete overview</div>
               </NuxtLink>
               <NuxtLink
                 to="/services/counselling"
-                class="block px-4 py-3 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] transition-colors duration-200"
+                class="block px-4 py-3 transition-colors duration-200"
+                :class="$route.path === '/services/counselling' ? 'bg-primary/10 text-primary' : 'text-gray-700 hover:bg-gray-50 hover:text-primary'"
               >
                 <div class="font-medium">Admission Counselling</div>
-                <div class="text-sm text-gray-500">
-                  University placement guidance
-                </div>
+                <div class="text-sm opacity-70">University placement guidance</div>
               </NuxtLink>
               <NuxtLink
                 to="/services/visa-assistance"
-                class="block px-4 py-3 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] transition-colors duration-200"
+                class="block px-4 py-3 transition-colors duration-200"
+                :class="$route.path === '/services/visa-assistance' ? 'bg-primary/10 text-primary' : 'text-gray-700 hover:bg-gray-50 hover:text-primary'"
               >
                 <div class="font-medium">Visa Assistance</div>
-                <div class="text-sm text-gray-500">Student visa support</div>
+                <div class="text-sm opacity-70">Student visa support</div>
+              </NuxtLink>
+              <NuxtLink
+                to="/test-prep"
+                class="block px-4 py-3 transition-colors duration-200"
+                :class="$route.path === '/test-prep' ? 'bg-primary/10 text-primary' : 'text-gray-700 hover:bg-gray-50 hover:text-primary'"
+              >
+                <div class="font-medium">Test Preparation</div>
+                <div class="text-sm opacity-70">IELTS, SAT, GLE and more</div>
               </NuxtLink>
             </div>
           </div>
 
-          <!-- Test Prep Dropdown -->
-          <NuxtLink
-            to="/test-prep"
-            class="px-4 py-2 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] font-medium rounded-lg transition-all duration-200"
-            :class="{
-              'bg-[#859484]/15 text-[#859484]': $route.path === '/about',
-            }"
-          >
-            Test Prep
-          </NuxtLink>
-
-          <!-- Resources Dropdown -->
           <div
             class="relative"
             @mouseenter="showResourcesDropdown = true"
             @mouseleave="showResourcesDropdown = false"
           >
             <button
-              class="px-4 py-2 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] font-medium rounded-lg transition-all duration-200 flex items-center space-x-1"
-              :class="{
-                'bg-[#859484]/15 text-[#859484]':
-                  $route.path.startsWith('/resources'),
-              }"
+              class="px-4 py-2 font-medium rounded-lg transition-all duration-200 flex items-center space-x-1"
+              :class="$route.path.startsWith('/resources') ? 'bg-primary text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-primary'"
             >
               <span>Resources</span>
               <Icon
@@ -131,42 +115,39 @@
             >
               <NuxtLink
                 to="/resources"
-                class="block px-4 py-3 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] transition-colors duration-200"
+                class="block px-4 py-3 transition-colors duration-200"
+                :class="$route.path === '/resources' ? 'bg-primary/10 text-primary' : 'text-gray-700 hover:bg-gray-50 hover:text-primary'"
               >
                 <div class="font-medium">Blog</div>
-                <div class="text-sm text-gray-500">
-                  News, tips, and updates
-                </div>
+                <div class="text-sm opacity-70">News, tips, and updates</div>
               </NuxtLink>
               <NuxtLink
                 to="/resources/templates"
-                class="block px-4 py-3 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] transition-colors duration-200"
+                class="block px-4 py-3 transition-colors duration-200"
+                :class="$route.path === '/resources/templates' ? 'bg-primary/10 text-primary' : 'text-gray-700 hover:bg-gray-50 hover:text-primary'"
               >
                 <div class="font-medium">Templates & Guides</div>
-                <div class="text-sm text-gray-500">Download our guides</div>
+                <div class="text-sm opacity-70">Download our guides</div>
               </NuxtLink>
               <NuxtLink
                 to="/resources/country-guides"
-                class="block px-4 py-3 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] transition-colors duration-200"
+                class="block px-4 py-3 transition-colors duration-200"
+                :class="$route.path === '/resources/country-guides' ? 'bg-primary/10 text-primary' : 'text-gray-700 hover:bg-gray-50 hover:text-primary'"
               >
                 <div class="font-medium">Country Guides</div>
-                <div class="text-sm text-gray-500">Study destination info</div>
+                <div class="text-sm opacity-70">Study destination info</div>
               </NuxtLink>
             </div>
           </div>
 
-          <!-- Contact Dropdown -->
           <div
             class="relative"
             @mouseenter="showContactDropdown = true"
             @mouseleave="showContactDropdown = false"
           >
             <button
-              class="px-4 py-2 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] font-medium rounded-lg transition-all duration-200 flex items-center space-x-1"
-              :class="{
-                'bg-[#859484]/15 text-[#859484]':
-                  $route.path.startsWith('/contact'),
-              }"
+              class="px-4 py-2 font-medium rounded-lg transition-all duration-200 flex items-center space-x-1"
+              :class="$route.path.startsWith('/contact') ? 'bg-primary text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-primary'"
             >
               <span>Contact</span>
               <Icon
@@ -181,37 +162,37 @@
             >
               <NuxtLink
                 to="/contact"
-                class="block px-4 py-3 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] transition-colors duration-200"
+                class="block px-4 py-3 transition-colors duration-200"
+                :class="$route.path === '/contact' ? 'bg-primary/10 text-primary' : 'text-gray-700 hover:bg-gray-50 hover:text-primary'"
               >
                 <div class="font-medium">Contact Us</div>
-                <div class="text-sm text-gray-500">Get in touch</div>
+                <div class="text-sm opacity-70">Get in touch</div>
               </NuxtLink>
               <NuxtLink
                 to="/contact/visit"
-                class="block px-4 py-3 text-gray-700 hover:bg-[#859484]/10 hover:text-[#859484] transition-colors duration-200"
+                class="block px-4 py-3 transition-colors duration-200"
+                :class="$route.path === '/contact/visit' ? 'bg-primary/10 text-primary' : 'text-gray-700 hover:bg-gray-50 hover:text-primary'"
               >
                 <div class="font-medium">Visit Our Office</div>
-                <div class="text-sm text-gray-500">Jahi, Abuja location</div>
+                <div class="text-sm opacity-70">Jahi, Abuja location</div>
               </NuxtLink>
             </div>
           </div>
         </nav>
 
-        <!-- CTA Buttons (Desktop) -->
         <div class="hidden lg:flex items-center space-x-4">
           <NuxtLink
             to="/contact"
-            class="px-2 py-2 border-2 border-[#859484] text-[#859484] hover:bg-[#859484] hover:text-white font-medium rounded-lg transition-all duration-200"
+            class="px-4 py-2 border-2 bg-secondary text-white font-medium rounded-lg transition-all duration-200 hover:bg-secondary/90"
           >
             Free Counselling
           </NuxtLink>
         </div>
 
-        <!-- Mobile Menu Button -->
         <div class="lg:hidden">
           <button
             @click="isMobileMenuOpen = !isMobileMenuOpen"
-            class="p-2 text-gray-700 hover:text-[#859484] hover:bg-gray-100 rounded-lg transition-all duration-200"
+            class="p-2 text-gray-700 hover:text-primary hover:bg-gray-100 rounded-lg transition-all duration-200"
           >
             <Icon
               :name="isMobileMenuOpen ? 'heroicons:x-mark' : 'heroicons:bars-3'"
@@ -222,22 +203,18 @@
       </div>
     </div>
 
-    <!-- Mobile Menu Slide-in Drawer -->
     <Teleport to="body">
       <div v-if="isMobileMenuOpen" class="fixed inset-0 z-50 lg:hidden">
-        <!-- Backdrop with blur instead of dark overlay -->
         <div
-          class="fixed inset-0 bg-white/20 backdrop-blur-sm transition-all duration-500 ease-out"
+          class="fixed inset-0 bg-black/20 backdrop-blur-sm transition-all duration-500 ease-out"
           @click="isMobileMenuOpen = false"
         ></div>
 
-        <!-- Slide-in Drawer from Right -->
         <div
-          class="mobile-drawer fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white/95 backdrop-blur-md shadow-2xl transform translate-x-full transition-all duration-500 ease-out overflow-y-auto border-l border-gray-200/50"
+          class="mobile-drawer fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl transform translate-x-full transition-all duration-500 ease-out overflow-y-auto border-l border-gray-200"
         >
-          <!-- Drawer Header -->
           <div
-            class="flex items-center justify-between p-4 border-b border-gray-200"
+            class="flex items-center justify-between p-4 border-b border-gray-200 sticky top-0 bg-white z-10"
           >
             <div class="flex items-center space-x-3">
               <div class="w-8 h-8">
@@ -249,9 +226,7 @@
                   height="48"
                 />
               </div>
-              <span class="font-semibold text-gray-900 text-sm"
-                >B&S Educational</span
-              >
+              <span class="font-semibold text-gray-900 text-sm">B&S Educational</span>
             </div>
             <button
               @click="isMobileMenuOpen = false"
@@ -261,132 +236,107 @@
             </button>
           </div>
 
-          <!-- Drawer Content -->
           <div class="p-4 space-y-6">
-            <!-- Navigation Links -->
             <div class="space-y-1">
-              <h3
-                class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3"
-              >
+              <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
                 Navigation
               </h3>
               <NuxtLink
                 v-for="route in mainRoutes"
                 :key="route.path"
                 :to="route.path"
-                class="flex items-center px-3 py-3 text-gray-700 hover:text-[#859484] hover:bg-[#859484]/5 font-medium rounded-lg transition-all duration-200"
-                :class="{
-                  'text-[#859484] bg-[#859484]/10': $route.path === route.path,
-                }"
+                class="flex items-center px-3 py-3 font-medium rounded-lg transition-all duration-200"
+                :class="$route.path === route.path ? 'bg-primary text-white' : 'text-gray-700 hover:bg-gray-50 hover:text-primary'"
                 @click="isMobileMenuOpen = false"
               >
                 {{ route.name }}
               </NuxtLink>
             </div>
 
-            <!-- Resource Links -->
             <div class="space-y-1">
-              <h3
-                class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3"
-              >
+              <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
                 Resources
               </h3>
               <NuxtLink
                 to="/resources"
-                class="flex items-center px-3 py-2 text-sm text-gray-600 hover:text-[#859484] hover:bg-[#859484]/5 rounded-lg transition-all duration-200"
+                class="flex items-center px-3 py-2 text-sm rounded-lg transition-all duration-200"
+                :class="$route.path === '/resources' ? 'bg-primary text-white' : 'text-gray-600 hover:bg-gray-50 hover:text-primary'"
                 @click="isMobileMenuOpen = false"
               >
                 Blog Posts
               </NuxtLink>
               <NuxtLink
                 to="/resources/templates"
-                class="flex items-center px-3 py-2 text-sm text-gray-600 hover:text-[#859484] hover:bg-[#859484]/5 rounded-lg transition-all duration-200"
+                class="flex items-center px-3 py-2 text-sm rounded-lg transition-all duration-200"
+                :class="$route.path === '/resources/templates' ? 'bg-primary text-white' : 'text-gray-600 hover:bg-gray-50 hover:text-primary'"
                 @click="isMobileMenuOpen = false"
               >
                 Templates & Guides
               </NuxtLink>
               <NuxtLink
                 to="/resources/country-guides"
-                class="flex items-center px-3 py-2 text-sm text-gray-600 hover:text-[#859484] hover:bg-[#859484]/5 rounded-lg transition-all duration-200"
+                class="flex items-center px-3 py-2 text-sm rounded-lg transition-all duration-200"
+                :class="$route.path === '/resources/country-guides' ? 'bg-primary text-white' : 'text-gray-600 hover:bg-gray-50 hover:text-primary'"
                 @click="isMobileMenuOpen = false"
               >
                 Country Guides
               </NuxtLink>
             </div>
-            <!-- Service Links -->
+
             <div class="space-y-1">
-              <h3
-                class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3"
-              >
+              <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
                 Services
               </h3>
               <NuxtLink
                 to="/services/counselling"
-                class="flex items-center px-3 py-2 text-sm text-gray-600 hover:text-[#859484] hover:bg-[#859484]/5 rounded-lg transition-all duration-200"
+                class="flex items-center px-3 py-2 text-sm rounded-lg transition-all duration-200"
+                :class="$route.path === '/services/counselling' ? 'bg-primary text-white' : 'text-gray-600 hover:bg-gray-50 hover:text-primary'"
                 @click="isMobileMenuOpen = false"
               >
                 Admission Counselling
               </NuxtLink>
               <NuxtLink
                 to="/services/visa-assistance"
-                class="flex items-center px-3 py-2 text-sm text-gray-600 hover:text-[#859484] hover:bg-[#859484]/5 rounded-lg transition-all duration-200"
+                class="flex items-center px-3 py-2 text-sm rounded-lg transition-all duration-200"
+                :class="$route.path === '/services/visa-assistance' ? 'bg-primary text-white' : 'text-gray-600 hover:bg-gray-50 hover:text-primary'"
                 @click="isMobileMenuOpen = false"
               >
                 Visa Assistance
               </NuxtLink>
-            </div>
-
-            <!-- Test Prep Links -->
-            <div class="space-y-1">
-              <h3
-                class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3"
-              >
-                Test Prep
-              </h3>
               <NuxtLink
                 to="/test-prep"
-                class="flex items-center px-3 py-2 text-sm text-gray-600 hover:text-[#859484] hover:bg-[#859484]/5 rounded-lg transition-all duration-200"
+                class="flex items-center px-3 py-2 text-sm rounded-lg transition-all duration-200"
+                :class="$route.path === '/test-prep' ? 'bg-primary text-white' : 'text-gray-600 hover:bg-gray-50 hover:text-primary'"
                 @click="isMobileMenuOpen = false"
-              >
-                Test Preparation
+              >Test Preparation
               </NuxtLink>
             </div>
 
-            <!-- CTA Buttons -->
             <div class="pt-4 space-y-3 border-t border-gray-200">
               <NuxtLink
-                to="/book-counselling"
-                class="block w-full px-6 py-3 border-2 border-[#859484] text-[#859484] hover:bg-[#859484] hover:text-white font-medium rounded-lg transition-all duration-200 text-center"
+                to="/contact"
+                class="block w-full px-6 py-3 border-2 bg-secondary text-white font-medium rounded-lg transition-all duration-200 text-center"
                 @click="isMobileMenuOpen = false"
               >
                 Book Free Counselling
               </NuxtLink>
             </div>
 
-            <!-- Contact Info -->
-            <div class="pt-4 border-t border-gray-200">
-              <h3
-                class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3"
-              >
+            <div class="pt-4 border-t border-gray-200 pb-8">
+              <h3 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-3">
                 Get in Touch
               </h3>
               <div class="space-y-2 text-sm text-gray-600">
                 <p class="flex items-center space-x-2">
-                  <Icon
-                    name="heroicons:map-pin"
-                    class="w-4 h-4 text-[#859484]"
-                  />
+                  <Icon name="heroicons:map-pin" class="w-4 h-4 text-primary" />
                   <span>Jahi, Abuja</span>
                 </p>
                 <NuxtLink
                   to="/contact"
-                  class="flex items-center space-x-2 hover:text-[#859484] transition-colors duration-200"
+                  class="flex items-center space-x-2 hover:text-primary transition-colors duration-200"
                   @click="isMobileMenuOpen = false"
                 >
-                  <Icon
-                    name="heroicons:envelope"
-                    class="w-4 h-4 text-[#859484]"
-                  />
+                  <Icon name="heroicons:envelope" class="w-4 h-4 text-primary" />
                   <span>Contact Us</span>
                 </NuxtLink>
               </div>
@@ -410,6 +360,7 @@ useSeoMeta({
   twitterCard: "summary_large_image",
   robots: "index, follow",
 });
+
 // Brand colors from the design system
 const brandColors = {
   baseColor: "#f4f5f3",
@@ -517,14 +468,5 @@ h1 {
 a,
 button {
   transition: all 0.2s ease-in-out;
-}
-
-/* Active link styling */
-.router-link-active {
-  color: #859484 !important;
-}
-
-.router-link-active span {
-  width: 100% !important;
 }
 </style>

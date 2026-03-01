@@ -1,8 +1,13 @@
 <template>
   <section class="bg-gray-50 py-20 px-4 sm:px-8 lg:px-24">
-    <h2 class="text-3xl sm:text-4xl font-bold text-center text-black mb-12">
-      What We Offer
-    </h2>
+    <div class="mb-12 text-left max-w-3xl">
+      <h2 class="text-3xl sm:text-4xl font-bold text-black mb-4">
+        With You at Every <span class="text-secondary">Step</span> of the Journey
+      </h2>
+      <p class="text-gray-600 text-lg sm:text-xl">
+        Discover how our end-to-end support turns your dream of studying internationally into reality.
+      </p>
+    </div>
 
     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       <UCard
@@ -10,57 +15,40 @@
         v-for="(service, index) in services"
         :key="index"
         :ref="el => cardRefs[index] = el"
-        class="bg-[#ACBEA3]/10 hover:shadow-lg transition-all duration-300 border border-[#f5f4f4] relative overflow-hidden opacity-0 translate-y-8"
-        :class="{ 'animate-in': visibleCards.has(index) }"
+        class="hover:shadow-lg transition-all duration-300 relative overflow-hidden opacity-0 translate-y-8 border-transparent"
+        :class="[
+          { 'animate-in': visibleCards.has(index) },
+          isHighlightCard(index) ? 'bg-secondary text-white' : 'bg-alt text-black'
+        ]"
         :ui="{
           base: ' rounded-xl h-full flex flex-col justify-between',
-          body: { base: 'p-6' },
+          body: { base: 'p-6 h-full flex flex-col' },
           footer: { base: 'px-6 pb-6 pt-2' }
         }"
       >
-        <!-- Circular Background Pattern -->
-        <div class="absolute bottom-0 right-0 pointer-events-none opacity-20">
-          <svg width="80" height="80" viewBox="0 0 80 80" class="hidden sm:block">
-            <circle cx="60" cy="60" r="6" :fill="index % 2 === 0 ? '#6B7280' : '#EA580C'" />
-            <circle cx="45" cy="65" r="4" :fill="index % 2 === 0 ? '#EA580C' : '#6B7280'" />
-            <circle cx="70" cy="45" r="4" :fill="index % 2 === 0 ? '#EA580C' : '#6B7280'" />
-            <circle cx="55" cy="50" r="3" :fill="index % 2 === 0 ? '#6B7280' : '#EA580C'" />
-            <circle cx="65" cy="70" r="3" :fill="index % 2 === 0 ? '#6B7280' : '#EA580C'" />
-            <circle cx="75" cy="55" r="2" :fill="index % 2 === 0 ? '#EA580C' : '#6B7280'" />
-            <circle cx="50" cy="75" r="2" :fill="index % 2 === 0 ? '#EA580C' : '#6B7280'" />
-          </svg>
-          <!-- Mobile version with smaller pattern -->
-          <svg width="60" height="60" viewBox="0 0 60 60" class="block sm:hidden">
-            <circle cx="45" cy="45" r="4" :fill="index % 2 === 0 ? '#6B7280' : '#EA580C'" />
-            <circle cx="35" cy="50" r="3" :fill="index % 2 === 0 ? '#EA580C' : '#6B7280'" />
-            <circle cx="50" cy="35" r="3" :fill="index % 2 === 0 ? '#EA580C' : '#6B7280'" />
-            <circle cx="40" cy="40" r="2" :fill="index % 2 === 0 ? '#6B7280' : '#EA580C'" />
-            <circle cx="55" cy="50" r="2" :fill="index % 2 === 0 ? '#6B7280' : '#EA580C'" />
+        <div class="absolute bottom-0 right-0 pointer-events-none transform translate-x-8 translate-y-8">
+          <svg viewBox="0 0 100 100" class="w-32 h-32 sm:w-40 sm:h-40" :opacity="isHighlightCard(index) ? '0.1' : '0.05'">
+            <circle cx="100" cy="100" r="80" :fill="isHighlightCard(index) ? 'white' : 'black'" />
+            <circle cx="100" cy="100" r="60" :fill="isHighlightCard(index) ? 'white' : 'black'" opacity="0.5" />
+            <circle cx="100" cy="100" r="40" :fill="isHighlightCard(index) ? 'white' : 'black'" opacity="0.8" />
           </svg>
         </div>
 
         <template #header>
-          <h3 class="text-xl font-semibold text-[#505050] relative z-10">
+          <h3 
+            class="text-xl font-semibold relative z-10"
+            :class="isHighlightCard(index) ? 'text-white' : 'text-gray-900'"
+          >
             {{ service.title }}
           </h3>
         </template>
 
-        <p class="text-gray-600 relative z-10">
+        <p 
+          class="relative z-10 mt-auto"
+          :class="isHighlightCard(index) ? 'text-white/90' : 'text-gray-700'"
+        >
           {{ service.description }}
         </p>
-
-        <template #footer>
-          <UButton
-          v-if="service.cta && service.link"
-            color="primary"
-            trailing-icon="i-lucide-arrow-right"
-            variant="soft"
-            class="mt-4 w-full relative z-10"
-            :to="service.link"
-          >
-            {{ service.cta }}
-          </UButton>
-        </template>
       </UCard>
     </div>
   </section>
@@ -72,47 +60,34 @@ import { ref, onMounted, onUnmounted } from 'vue'
 const services = [
   {
     title: 'Free Counselling',
-    description:
-      'We guide you with personalized, no-cost consultations to help you choose the best study destination.',
-    cta: 'Book a Session',
-    link: '/#application',
+    description: 'We guide you with personalized, no-cost consultations to help you choose the best study destination.',
   },
   {
     title: 'University & Program Selection',
-    description:
-      'We help you select programs that match your goals, budget, and academic profile.',
-    cta: 'Country guides',
-    link: '/resources/country-guides',
+    description: 'We help you select programs that match your goals, budget, and academic profile.',
   },
   {
     title: 'Application Support',
-    description:
-      'From start to submission, we support your university and scholarship applications.',
-    cta: 'Start Application',
-    link: '/#application',
+    description: 'From start to submission, we support your university and scholarship applications.',
   },
   {
     title: 'Visa Assistance',
-    description:
-      'We guide you through visa forms, documents, and interview prep for a smoother approval.',
-    cta: 'Get Visa Help',
-    link: '/services/visa-assistance',
+    description: 'We guide you through visa forms, documents, and interview prep for a smoother approval.',
   },
   {
     title: 'Test Prep & Coaching',
-    description:
-      'We offer classes for IELTS, TOEFL, and more to help you meet admission requirements.',
-    cta: 'Join a Class',
-    link: '/test-prep',
+    description: 'We offer classes for IELTS, TOEFL, and more to help you meet admission requirements.',
   },
   {
     title: 'Travel & Accommodation',
-    description:
-      'We assist with travel plans and finding housing that fits your needs abroad.',
-    cta: 'Plan Travel',
-    link: '/resources/country-guides',
+    description: 'We assist with travel plans and finding housing that fits your needs abroad.',
   },
 ]
+
+// Helper function to check if the card is the first or last one
+const isHighlightCard = (index) => {
+  return index === 0 || index === services.length - 1
+}
 
 // Intersection Observer setup
 const cardRefs = ref([])
@@ -121,8 +96,8 @@ let observer = null
 
 const observerOptions = {
   root: null,
-  rootMargin: '-10% 0px -10% 0px', // Trigger when 10% of element is visible
-  threshold: 0.1 // Start animation when 10% of card is visible
+  rootMargin: '-10% 0px -10% 0px', 
+  threshold: 0.1 
 }
 
 const handleIntersection = (entries) => {
@@ -130,20 +105,17 @@ const handleIntersection = (entries) => {
     const cardIndex = cardRefs.value.findIndex(ref => ref?.$el === entry.target)
     
     if (entry.isIntersecting && cardIndex !== -1) {
-      // Add staggered delay based on card index
       setTimeout(() => {
         visibleCards.value.add(cardIndex)
-      }, cardIndex * 100) // 100ms delay between each card
+      }, cardIndex * 100) 
     }
   })
 }
 
 onMounted(() => {
-  // Use requestIdleCallback for better performance if available
   const initObserver = () => {
     observer = new IntersectionObserver(handleIntersection, observerOptions)
     
-    // Observe all card elements
     cardRefs.value.forEach((cardRef) => {
       if (cardRef?.$el) {
         observer.observe(cardRef.$el)

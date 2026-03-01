@@ -3,7 +3,6 @@
     <HeroSection />
     <OurServices />
     <Locations />
-    <Partners />
     <ApplicationForm />
     <Blog />
     <Testimonials />

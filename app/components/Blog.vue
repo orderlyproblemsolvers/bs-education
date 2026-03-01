@@ -1,24 +1,26 @@
 <template>
   <section class="bg-white py-20 px-6 md:px-12 lg:px-24">
-    <div class="max-w-7xl mx-auto">
+    <div class="max-w-5xl mx-auto">
       <h2
-        class="text-3xl sm:text-4xl font-bold text-[#859484] mb-12 text-center"
+        class="text-3xl sm:text-4xl font-bold text-black mb-12 text-center"
       >
         News, Updates & Featured Scholarships
       </h2>
 
-      <div v-if="loading" class="grid gap-10 lg:grid-cols-3 md:grid-cols-2">
+      <div v-if="loading" class="flex flex-col gap-8">
         <div
           v-for="n in 3"
           :key="n"
-          class="rounded-xl overflow-hidden shadow border border-gray-100 animate-pulse"
+          class="flex flex-col md:flex-row rounded-xl overflow-hidden shadow border border-gray-100 animate-pulse bg-white"
         >
-          <div class="w-full h-56 bg-gray-200"></div>
-          <div class="p-6 bg-white">
-            <div class="h-6 bg-gray-200 rounded mb-2"></div>
-            <div class="h-4 bg-gray-200 rounded mb-2"></div>
-            <div class="h-4 bg-gray-200 rounded w-3/4 mb-4"></div>
-            <div class="h-4 bg-gray-200 rounded w-1/3"></div>
+          <div class="w-full md:w-2/5 lg:w-1/3 h-56 md:h-auto min-h-[220px] bg-gray-200 shrink-0"></div>
+          
+          <div class="p-6 md:p-8 flex flex-col justify-center w-full">
+            <div class="h-7 bg-gray-200 rounded w-3/4 mb-4"></div>
+            <div class="h-4 bg-gray-200 rounded w-full mb-2"></div>
+            <div class="h-4 bg-gray-200 rounded w-full mb-2"></div>
+            <div class="h-4 bg-gray-200 rounded w-5/6 mb-6"></div>
+            <div class="h-4 bg-gray-200 rounded w-24"></div>
           </div>
         </div>
       </div>
@@ -27,7 +29,7 @@
         <p class="text-red-600 mb-4">Failed to load blog posts. Please try again.</p>
         <button
           @click="refreshPosts"
-          class="bg-[#EB6534] text-white px-6 py-2 rounded-lg hover:bg-[#d55529] transition-colors"
+          class="bg-[#EB6534] text-white px-6 py-2 rounded-lg hover:bg-[#d55529] transition-colors font-medium"
         >
           Try Again
         </button>
@@ -35,40 +37,55 @@
 
       <div
         v-else-if="postsWithExcerpts.length > 0"
-        class="grid gap-10 lg:grid-cols-3 md:grid-cols-2"
+        class="flex flex-col gap-8"
       >
         <div
           v-for="post in postsWithExcerpts"
           :key="post.id"
-          class="rounded-xl overflow-hidden shadow hover:shadow-lg transition-all duration-300 border border-gray-100"
+          class="flex flex-col md:flex-row rounded-xl overflow-hidden shadow  transition-all duration-300 border border-gray-100 group bg-white"
         >
-          <NuxtImg
-            v-if="post.image_url"
-            :src="post.image_url || '/images/placeholder-blog.jpg'"
-            :alt="post.title"
-            class="w-full h-56 object-cover"
-            format="webp"
-            loading="lazy"
-          />
-          <div class="p-6 bg-white">
-            <h3 class="text-xl font-semibold text-[#859484] mb-2">
-              {{ post.title }}
-            </h3>
-            <p class="text-sm text-gray-600 mb-4 line-clamp-3">
+          <div class="w-full md:w-2/5 lg:w-1/3 h-64 md:h-auto shrink-0 relative overflow-hidden">
+            <NuxtImg
+              v-if="post.image_url"
+              :src="post.image_url || '/images/placeholder-blog.jpg'"
+              :alt="post.title"
+              class="absolute inset-0 w-full h-full object-cover transition-transform duration-500"
+              format="webp"
+              loading="lazy"
+            />
+            <div v-else class="absolute inset-0 w-full h-full bg-gray-100 flex items-center justify-center">
+              <span class="text-gray-400">No image</span>
+            </div>
+          </div>
+
+          <div class="p-6 md:p-8 flex flex-col justify-center w-full">
+            <NuxtLink :to="`/resources/${post.id}`" class="group-hover:text-[#EB6534] transition-colors">
+              <h3 class="text-2xl font-semibold text-black mb-3 leading-snug">
+                {{ post.title }}
+              </h3>
+            </NuxtLink>
+            
+            <p class="text-base text-gray-600 mb-6 line-clamp-3 leading-relaxed">
               {{ post.excerpt }}
             </p>
-            <NuxtLink
-              :to="`/resources/${post.id}`"
-              class="text-[#EB6534] font-medium text-sm hover:underline transition-colors"
-            >
-              Read more →
-            </NuxtLink>
+            
+            <div class="mt-auto">
+              <NuxtLink
+                :to="`/resources/${post.id}`"
+                class="inline-flex items-center text-[#EB6534] font-semibold text-sm hover:underline transition-all"
+              >
+                Read more
+                <svg class="w-4 h-4 ml-1 transform transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </NuxtLink>
+            </div>
           </div>
         </div>
       </div>
 
-      <div v-else class="text-center py-12">
-        <p class="text-gray-600">No blog posts available at the moment.</p>
+      <div v-else class="text-center py-12 bg-gray-50 rounded-xl border border-gray-100">
+        <p class="text-gray-500 text-lg">No updates available at the moment. Check back soon!</p>
       </div>
     </div>
   </section>
@@ -77,21 +94,19 @@
 <script setup>
 const { getRecentBlogPosts } = useBlog();
 
-// useAsyncData handles the SSR fetching, hydration, and provides state automatically
 const {
   data: posts,
   pending: loading,
   error,
   refresh: refreshPosts
 } = await useAsyncData(
-  'recent-blog-posts', // A unique key to ensure proper hydration
+  'recent-blog-posts', 
   () => getRecentBlogPosts(3),
   {
-    default: () => [] // Ensures `posts.value` is an array even if the fetch fails
+    default: () => [] 
   }
 );
 
-// We can still use computed properties on the reactive data returned by useAsyncData
 const postsWithExcerpts = computed(() => {
   if (!posts.value) return [];
   
@@ -100,11 +115,11 @@ const postsWithExcerpts = computed(() => {
     excerpt: post.content
       ? (() => {
           const textContent = post.content
-            .replace(/<[^>]*>/g, "") // Remove HTML tags
-            .replace(/\s+/g, " ") // Replace multiple spaces with single space
-            .trim(); // Remove leading/trailing whitespace
-          return textContent.length > 100
-            ? textContent.substring(0, 100) + "..."
+            .replace(/<[^>]*>/g, "") 
+            .replace(/\s+/g, " ") 
+            .trim(); 
+          return textContent.length > 150
+            ? textContent.substring(0, 150) + "..."
             : textContent;
         })()
       : "No content available.",
