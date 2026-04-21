@@ -105,7 +105,7 @@ export default defineNuxtConfig({
     compressPublicAssets: true,
     minify: true
   },
-  modules: ["@nuxt/image", "@nuxt/ui", "@nuxtjs/supabase", "@vueuse/nuxt", "@nuxtjs/leaflet", "nuxt-security", "seo"],
+  modules: ["@nuxt/image", "@nuxt/ui", "@nuxtjs/supabase", "@vueuse/nuxt", "@nuxtjs/leaflet", "nuxt-security"],
   css: [
     "~/assets/css/main.css",
     "quill/dist/quill.snow.css",
