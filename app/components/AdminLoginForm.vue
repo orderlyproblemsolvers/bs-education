@@ -1,21 +1,21 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-[var(--color-bg)] px-[var(--space-lg)]">
-    <div class="w-full max-w-md bg-white rounded-[var(--radius-lg)] shadow-lg p-[var(--space-xl)]">
+  <div class="min-h-screen flex items-center justify-center bg-(--color-bg) px-(--space-lg)">
+    <div class="w-full max-w-md bg-white rounded-lg shadow-lg p-(--space-xl)">
       <!-- Header -->
-      <div class="text-center mb-[var(--space-lg)]">
-        <h1 class="text-[var(--font-xl)] font-bold text-[var(--color-text-primary)]">
+      <div class="text-center mb-(--space-lg)">
+        <h1 class="font-bold text-base">
           Admin Login
         </h1>
-        <p class="text-[var(--font-sm)] text-[var(--color-text-secondary)] mt-1">
+        <p class="text-(--color-text-secondary) mt-1">
           Sign in to manage your platform
         </p>
       </div>
 
       <!-- Form -->
-      <form class="space-y-[var(--space-md)]" @submit.prevent="handleSubmit">
+      <form class="space-y-(--space-md)" @submit.prevent="handleSubmit">
         <!-- Email -->
         <div>
-          <label for="email" class="block text-[var(--font-sm)] font-medium text-[var(--color-text-secondary)] mb-[var(--space-xs)]">
+          <label for="email" class="block text-(--font-sm) font-medium mb-(--space-xs)">
             Email Address
           </label>
           <input
@@ -24,13 +24,13 @@
             type="email"
             placeholder="you@example.com"
             required
-            class="w-full border border-[var(--color-border)] rounded-[var(--radius-md)] px-[var(--space-sm)] py-[var(--space-sm)] text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
+            class="w-full border border-(--color-border) rounded-md px-(--space-sm) py-(--space-sm) text-base focus:outline-none focus:ring-2 focus:ring-base"
           />
         </div>
 
         <!-- Password -->
         <div>
-          <label for="password" class="block text-[var(--font-sm)] font-medium text-[var(--color-text-secondary)] mb-[var(--space-xs)]">
+          <label for="password" class="block text-(--font-sm) font-medium mb-(--space-xs)">
             Password
           </label>
           <input
@@ -39,12 +39,12 @@
             type="password"
             placeholder="••••••••"
             required
-            class="w-full border border-[var(--color-border)] rounded-[var(--radius-md)] px-[var(--space-sm)] py-[var(--space-sm)] text-[var(--color-text-primary)] focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)]"
+            class="w-full border border-(--color-border) rounded-md px-(--space-sm) py-(--space-sm) text-base focus:outline-none focus:ring-2 focus:ring-base"
           />
         </div>
 
         <!-- Error Message -->
-        <div v-if="error" class="text-[var(--font-sm)] text-red-600 text-center">
+        <div v-if="error" class="text-red-600 text-center">
           {{ error }}
         </div>
 
@@ -52,7 +52,7 @@
         <button
           type="submit"
           :disabled="loading"
-          class="w-full bg-[var(--color-primary)] text-white font-medium py-[var(--space-sm)] rounded-[var(--radius-md)] hover:bg-[var(--color-primary-dark)] transition-colors duration-200 disabled:opacity-50"
+          class="w-full bg-base text-white font-medium py-(--space-sm) rounded-md hover:bg-(--color-primary-dark) transition-colors duration-200 disabled:opacity-50"
         >
           {{ loading ? 'Signing in...' : 'Sign in' }}
         </button>

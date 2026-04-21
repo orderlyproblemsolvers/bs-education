@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-br from-[#f4f5f3] to-gray-100">
+  <div class="min-h-screen bg-linear-to-br from-[#f4f5f3] to-gray-100">
     <Transition name="toast">
       <div
         v-if="showToast"
@@ -9,7 +9,7 @@
         "
       >
         <div class="flex items-center">
-          <div class="flex-shrink-0">
+          <div class="shrink-0">
             <Icon
               :name="
                 toastType === 'success'
@@ -39,13 +39,13 @@
 
     <section class="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
       <div
-        class="absolute inset-0 bg-gradient-to-r from-[#f4f5f3]/50 to-orange-50/50"
+        class="absolute inset-0 bg-linear-to-r from-[#f4f5f3]/50 to-orange-50/50"
       ></div>
       <div
-        class="absolute top-10 right-10 w-72 h-72 bg-gradient-to-br from-[#5d6b56]/20 to-[#eb6534]/20 rounded-full blur-3xl"
+        class="absolute top-10 right-10 w-72 h-72 bg-linear-to-br from-[#5d6b56]/20 to-[#eb6534]/20 rounded-full blur-3xl"
       ></div>
       <div
-        class="absolute bottom-10 left-10 w-96 h-96 bg-gradient-to-tr from-[#eb6534]/20 to-[#5d6b56]/20 rounded-full blur-3xl"
+        class="absolute bottom-10 left-10 w-96 h-96 bg-linear-to-tr from-[#eb6534]/20 to-[#5d6b56]/20 rounded-full blur-3xl"
       ></div>
 
       <div class="max-w-7xl mx-auto relative">
@@ -57,7 +57,7 @@
               >
                 Let's Start Your
                 <span
-                  class="bg-gradient-to-r from-[#eb6534] to-[#eb6534] bg-clip-text text-transparent"
+                  class="bg-linear-to-r from-[#eb6534] to-[#eb6534] bg-clip-text text-transparent"
                 >
                   Study Abroad
                 </span>
@@ -100,7 +100,7 @@
 
           <div class="relative">
             <div
-              class="aspect-[4/3] rounded-tl-[80px] rounded-br-[80px] overflow-hidden bg-gradient-to-br from-[#5d6b56] to-[#6b7a6a] shadow-xl"
+              class="aspect-4/3 rounded-tl-[80px] rounded-br-[80px] overflow-hidden bg-linear-to-br from-[#5d6b56] to-[#6b7a6a] shadow-xl"
             >
               <div
                 class="w-full h-full flex items-center justify-center text-white text-lg font-medium backdrop-blur-sm bg-black/10 font-inter"
@@ -119,7 +119,7 @@
             >
               <div class="flex items-center space-x-4">
                 <div
-                  class="w-12 h-12 rounded-full bg-gradient-to-r from-[#eb6534] to-[#eb6534] flex items-center justify-center"
+                  class="w-12 h-12 rounded-full bg-linear-to-r from-[#eb6534] to-[#eb6534] flex items-center justify-center"
                 >
                   <Icon
                     name="i-heroicons-chat-bubble-left-ellipsis"
@@ -427,7 +427,7 @@
                   class="group flex items-start space-x-4 p-4 rounded-lg hover:bg-[#f8f9f8] transition-colors duration-200"
                 >
                   <div
-                    class="w-12 h-12 rounded-lg bg-gradient-to-br from-[#eb6534]/10 to-[#eb6534]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-200"
+                    class="w-12 h-12 rounded-lg bg-linear-to-br from-[#eb6534]/10 to-[#eb6534]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-200"
                   >
                     <Icon
                       name="i-heroicons-phone"
@@ -447,7 +447,7 @@
                   class="group flex items-start space-x-4 p-4 rounded-lg hover:bg-[#f8f9f8] transition-colors duration-200"
                 >
                   <div
-                    class="w-12 h-12 rounded-lg bg-gradient-to-br from-[#eb6534]/10 to-[#eb6534]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-200"
+                    class="w-12 h-12 rounded-lg bg-linear-to-br from-[#eb6534]/10 to-[#eb6534]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-200"
                   >
                     <Icon
                       name="i-heroicons-envelope"
@@ -472,7 +472,7 @@
                   class="group flex items-start space-x-4 p-4 rounded-lg hover:bg-[#f8f9f8] transition-colors duration-200"
                 >
                   <div
-                    class="w-12 h-12 rounded-lg bg-gradient-to-br from-[#eb6534]/10 to-[#eb6534]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-200"
+                    class="w-12 h-12 rounded-lg bg-linear-to-br from-[#eb6534]/10 to-[#eb6534]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-200"
                   >
                     <Icon
                       name="i-heroicons-map-pin"
@@ -491,7 +491,7 @@
             </div>
 
             <div
-              class="rounded-xl p-8 text-white bg-gradient-to-br from-[#5d6b56] via-[#5d6b56] to-[#6b7a6a] shadow-xl"
+              class="rounded-xl p-8 text-white bg-linear-to-br from-[#5d6b56] via-[#5d6b56] to-[#6b7a6a] shadow-xl"
             >
               <div class="text-center space-y-6">
                 <div
@@ -523,7 +523,7 @@
 
             <div class="rounded-xl overflow-hidden shadow-xl">
               <div
-                class="aspect-[4/3] bg-gradient-to-br from-[#5d6b56] to-[#6b7a6a]"
+                class="aspect-4/3 bg-linear-to-br from-[#5d6b56] to-[#6b7a6a]"
               >
                 <div
                   class="w-full h-full flex items-center justify-center text-white text-lg font-medium backdrop-blur-sm bg-black/10 font-inter"
@@ -544,7 +544,7 @@
     </section>
 
     <section
-      class="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-[#f4f5f3] to-[#f4f5f3]/70"
+      class="py-20 px-4 sm:px-6 lg:px-8 bg-linear-to-r from-[#f4f5f3] to-[#f4f5f3]/70"
     >
       <div class="max-w-4xl mx-auto">
         <div class="text-center mb-16">

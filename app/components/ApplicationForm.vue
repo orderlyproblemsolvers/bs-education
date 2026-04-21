@@ -5,8 +5,8 @@
         <div id="application" class="bg-white rounded-xl p-6 md:p-8 shadow-lg border border-gray-200">
           <div>
             <header class="mb-8">
-              <h1 id="form-heading" class="text-2xl md:text-3xl font-bold text-primary mb-2">Start Your Journey</h1>
-              <p class="text-base text-gray-600 leading-relaxed">
+              <h1 id="form-heading" class="text-2xl md:text-3xl font-bold text-base mb-2">Start Your Journey</h1>
+              <p class="text-gray-600 leading-relaxed">
                 Fill out the form below and we'll reach out to you within 24
                 hours.
               </p>
@@ -23,18 +23,18 @@
               </p>
 
               <fieldset class="mb-8 border-none p-0">
-                <legend class="text-lg font-semibold text-primary mb-5 pb-2 border-b-2 border-primary w-full">Personal Information</legend>
+                <legend class="text-lg font-semibold text-base mb-5 pb-2 border-b-2 border-base w-full">Personal Information</legend>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                   <div class="flex flex-col">
-                    <label for="firstName" class="text-sm font-medium text-primary mb-1.5">
+                    <label for="firstName" class="text-sm font-medium text-base mb-1.5">
                       First Name <span aria-label="required" class="text-secondary">*</span>
                     </label>
                     <input
                       id="firstName"
                       v-model="form.firstName"
                       type="text"
-                      class="w-full px-4 py-3 border border-gray-300 rounded-lg text-base bg-white text-primary transition-all duration-200 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg text-base bg-white transition-all duration-200 focus:outline-none focus:border-base focus:ring-2 focus:ring-base/20 disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
                       placeholder="Enter your first name"
                       required
                       aria-required="true"
@@ -44,14 +44,14 @@
                   </div>
 
                   <div class="flex flex-col">
-                    <label for="lastName" class="text-sm font-medium text-primary mb-1.5">
+                    <label for="lastName" class="text-sm font-medium text-base mb-1.5">
                       Last Name <span aria-label="required" class="text-secondary">*</span>
                     </label>
                     <input
                       id="lastName"
                       v-model="form.lastName"
                       type="text"
-                      class="w-full px-4 py-3 border border-gray-300 rounded-lg text-base bg-white text-primary transition-all duration-200 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg text-base bg-white transition-all duration-200 focus:outline-none focus:border-base focus:ring-2 focus:ring-base/20 disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
                       placeholder="Enter your last name"
                       required
                       aria-required="true"
@@ -63,14 +63,14 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                   <div class="flex flex-col">
-                    <label for="email" class="text-sm font-medium text-primary mb-1.5">
+                    <label for="email" class="text-sm font-medium text-base mb-1.5">
                       Email Address <span aria-label="required" class="text-secondary">*</span>
                     </label>
                     <input
                       id="email"
                       v-model="form.email"
                       type="email"
-                      class="w-full px-4 py-3 border border-gray-300 rounded-lg text-base bg-white text-primary transition-all duration-200 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg  bg-white text-base transition-all duration-200 focus:outline-none focus:border-base focus:ring-2 focus:ring-base/20 disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
                       placeholder="your.email@example.com"
                       required
                       aria-required="true"
@@ -81,14 +81,14 @@
                   </div>
 
                   <div class="flex flex-col">
-                    <label for="phone" class="text-sm font-medium text-primary mb-1.5">
+                    <label for="phone" class="text-sm font-medium text-base mb-1.5">
                       Phone Number <span aria-label="required" class="text-secondary">*</span>
                     </label>
                     <input
                       id="phone"
                       v-model="form.phone"
                       type="tel"
-                      class="w-full px-4 py-3 border border-gray-300 rounded-lg text-base bg-white text-primary transition-all duration-200 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg  bg-white text-base transition-all duration-200 focus:outline-none focus:border-base focus:ring-2 focus:ring-base/20 disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
                       placeholder="+234 123 456 7890"
                       required
                       aria-required="true"
@@ -101,17 +101,17 @@
               </fieldset>
 
               <fieldset class="mb-8 border-none p-0">
-                <legend class="text-lg font-semibold text-primary mb-5 pb-2 border-b-2 border-primary w-full">Study Preferences</legend>
+                <legend class="text-lg font-semibold text-base mb-5 pb-2 border-b-2 border-base w-full">Study Preferences</legend>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                   <div class="flex flex-col">
-                    <label for="destination" class="text-sm font-medium text-primary mb-1.5">
+                    <label for="destination" class="text-sm font-medium text-base mb-1.5">
                       Preferred Study Destination <span aria-label="required" class="text-secondary">*</span>
                     </label>
                     <select
                       id="destination"
                       v-model="form.destination"
-                      class="w-full px-4 py-3 border border-gray-300 rounded-lg text-base bg-white text-primary transition-all duration-200 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 cursor-pointer disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-base transition-all duration-200 focus:outline-none focus:border-base focus:ring-2 focus:ring-base/20 cursor-pointer disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
                       required
                       aria-required="true"
                       :disabled="isSubmitting"
@@ -129,13 +129,13 @@
                   </div>
 
                   <div class="flex flex-col">
-                    <label for="level" class="text-sm font-medium text-primary mb-1.5">
+                    <label for="level" class="text-sm font-medium text-base mb-1.5">
                       Study Level <span aria-label="required" class="text-secondary">*</span>
                     </label>
                     <select
                       id="level"
                       v-model="form.level"
-                      class="w-full px-4 py-3 border border-gray-300 rounded-lg text-base bg-white text-primary transition-all duration-200 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 cursor-pointer disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-base transition-all duration-200 focus:outline-none focus:border-base focus:ring-2 focus:ring-base/20 cursor-pointer disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
                       required
                       aria-required="true"
                       :disabled="isSubmitting"
@@ -151,13 +151,13 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-5 mb-5">
                   <div class="flex flex-col">
-                    <label for="studyTime" class="text-sm font-medium text-primary mb-1.5">
+                    <label for="studyTime" class="text-sm font-medium text-base mb-1.5">
                       When Would You Like to Start?
                     </label>
                     <select
                       id="studyTime"
                       v-model="form.studyTime"
-                      class="w-full px-4 py-3 border border-gray-300 rounded-lg text-base bg-white text-primary transition-all duration-200 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 cursor-pointer disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-base transition-all duration-200 focus:outline-none focus:border-base focus:ring-2 focus:ring-base/20 cursor-pointer disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
                       :disabled="isSubmitting"
                     >
                       <option value="">Select a year</option>
@@ -168,11 +168,11 @@
                   </div>
 
                   <div class="flex flex-col">
-                    <label for="mode" class="text-sm font-medium text-primary mb-1.5">Counselling Mode</label>
+                    <label for="mode" class="text-sm font-medium text-base mb-1.5">Counselling Mode</label>
                     <select
                       id="mode"
                       v-model="form.mode"
-                      class="w-full px-4 py-3 border border-gray-300 rounded-lg text-base bg-white text-primary transition-all duration-200 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 cursor-pointer disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg bg-white text-base transition-all duration-200 focus:outline-none focus:border-base focus:ring-2 focus:ring-base/20 cursor-pointer disabled:bg-gray-100 disabled:cursor-not-allowed disabled:opacity-60"
                       :disabled="isSubmitting"
                     >
                       <option value="">Choose a mode</option>
@@ -184,7 +184,7 @@
               </fieldset>
 
               <fieldset class="mb-8 border-none p-0">
-                <legend class="text-lg font-semibold text-primary mb-5 pb-2 border-b-2 border-primary w-full">Consent & Preferences</legend>
+                <legend class="text-lg font-semibold text-base mb-5 pb-2 border-b-2 border-base w-full">Consent & Preferences</legend>
 
                 <div class="flex flex-col gap-4">
                   <div class="flex items-start gap-2.5">
@@ -192,12 +192,12 @@
                       id="agreeTerms"
                       v-model="form.agreeTerms"
                       type="checkbox"
-                      class="mt-0.5 w-4 h-4 shrink-0 cursor-pointer accent-primary disabled:cursor-not-allowed disabled:opacity-60 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                      class="mt-0.5 w-4 h-4 shrink-0 cursor-pointer accent-base disabled:cursor-not-allowed disabled:opacity-60 focus:ring-2 focus:ring-base focus:ring-offset-2"
                       required
                       aria-required="true"
                       :disabled="isSubmitting"
                     />
-                    <label for="agreeTerms" class="text-sm text-primary leading-tight cursor-pointer">
+                    <label for="agreeTerms" class="text-sm text-base leading-tight cursor-pointer">
                       I agree to B&S terms and privacy policy <span aria-label="required" class="text-secondary">*</span>
                     </label>
                   </div>
@@ -207,10 +207,10 @@
                       id="contactPref"
                       v-model="form.contactPref"
                       type="checkbox"
-                      class="mt-0.5 w-4 h-4 shrink-0 cursor-pointer accent-primary disabled:cursor-not-allowed disabled:opacity-60 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                      class="mt-0.5 w-4 h-4 shrink-0 cursor-pointer accent-base disabled:cursor-not-allowed disabled:opacity-60 focus:ring-2 focus:ring-base focus:ring-offset-2"
                       :disabled="isSubmitting"
                     />
-                    <label for="contactPref" class="text-sm text-primary leading-tight cursor-pointer">
+                    <label for="contactPref" class="text-sm text-base leading-tight cursor-pointer">
                       Please contact me by phone or email
                     </label>
                   </div>
@@ -220,10 +220,10 @@
                       id="receiveUpdates"
                       v-model="form.receiveUpdates"
                       type="checkbox"
-                      class="mt-0.5 w-4 h-4 shrink-0 cursor-pointer accent-primary disabled:cursor-not-allowed disabled:opacity-60 focus:ring-2 focus:ring-primary focus:ring-offset-2"
+                      class="mt-0.5 w-4 h-4 shrink-0 cursor-pointer accent-base disabled:cursor-not-allowed disabled:opacity-60 focus:ring-2 focus:ring-base focus:ring-offset-2"
                       :disabled="isSubmitting"
                     />
-                    <label for="receiveUpdates" class="text-sm text-primary leading-tight cursor-pointer">
+                    <label for="receiveUpdates" class="text-sm text-base leading-tight cursor-pointer">
                       I would like to receive updates via email
                     </label>
                   </div>
@@ -233,7 +233,7 @@
               <div class="mt-8 text-center">
                 <button
                   type="submit"
-                  class="w-full px-6 py-4 bg-secondary hover:bg-secondary/90 text-white border-none rounded-lg text-base font-semibold cursor-pointer mb-3 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-60"
+                  class="w-full px-6 py-4 bg-secondary hover:bg-secondary/90 text-white border-none rounded-lg  font-semibold cursor-pointer mb-3 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 disabled:bg-gray-400 disabled:cursor-not-allowed disabled:opacity-60"
                   :disabled="isSubmitting"
                   :aria-busy="isSubmitting"
                 >
@@ -253,17 +253,17 @@
           <img
             src="/img/caps.jpg"
             alt="Students celebrating graduation with caps thrown in the air, representing successful study abroad journey"
-            class="w-full h-[300px] md:h-[500px] object-cover rounded-xl shadow-lg"
+            class="w-full h-75 md:h-125 object-cover rounded-xl shadow-lg"
             width="600"
             height="500"
           />
           <div class="flex justify-center gap-5 md:gap-10 mt-6 p-4 md:p-5 bg-white rounded-xl shadow-lg" role="list">
             <div class="text-center" role="listitem">
-              <div class="text-2xl md:text-3xl font-bold text-primary mb-1" aria-label="500 plus students placed">1000+</div>
+              <div class="text-2xl md:text-3xl font-bold text-base mb-1" aria-label="500 plus students placed">1000+</div>
               <div class="text-xs text-gray-600 uppercase tracking-wide">Students Placed</div>
             </div>
             <div class="text-center" role="listitem">
-              <div class="text-2xl md:text-3xl font-bold text-primary mb-1" aria-label="95 percent visa success rate">99%</div>
+              <div class="text-2xl md:text-3xl font-bold text-base mb-1" aria-label="95 percent visa success rate">99%</div>
               <div class="text-xs text-gray-600 uppercase tracking-wide">Visa Success Rate</div>
             </div>
           </div>

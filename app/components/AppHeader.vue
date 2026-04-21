@@ -25,7 +25,7 @@
           <NuxtLink
             to="/"
             class="px-4 py-2 font-medium rounded-lg transition-all duration-200"
-            :class="$route.path === '/' ? 'bg-primary text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-primary'"
+            :class="$route.path === '/' ? 'bg-base text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-base'"
           >
             Home
           </NuxtLink>
@@ -33,7 +33,7 @@
           <NuxtLink
             to="/events"
             class="px-4 py-2 font-medium rounded-lg transition-all duration-200"
-            :class="$route.path === '/events' ? 'bg-primary text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-primary'"
+            :class="$route.path === '/events' ? 'bg-base text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-base'"
           >
             Events
           </NuxtLink>
@@ -45,7 +45,7 @@
           >
             <button
               class="px-4 py-2 font-medium rounded-lg transition-all duration-200 flex items-center space-x-1"
-              :class="$route.path.startsWith('/services') ? 'bg-primary text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-primary'"
+              :class="$route.path.startsWith('/services') ? 'bg-base text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-base'"
             >
               <span>Services</span>
               <Icon
@@ -61,7 +61,7 @@
               <NuxtLink
                 to="/services"
                 class="block px-4 py-3 transition-colors duration-200"
-                :class="$route.path === '/services' ? 'bg-primary/10 text-primary' : 'text-gray-700 hover:bg-gray-50 hover:text-primary'"
+                :class="$route.path === '/services' ? 'bg-base/10 text-base' : 'text-gray-700 hover:bg-gray-50 hover:text-base'"
               >
                 <div class="font-medium">All Services</div>
                 <div class="text-sm opacity-70">Complete overview</div>
@@ -69,7 +69,7 @@
               <NuxtLink
                 to="/services/counselling"
                 class="block px-4 py-3 transition-colors duration-200"
-                :class="$route.path === '/services/counselling' ? 'bg-primary/10 text-primary' : 'text-gray-700 hover:bg-gray-50 hover:text-primary'"
+                :class="$route.path === '/services/counselling' ? 'bg-base/10 text-base' : 'text-gray-700 hover:bg-gray-50 hover:text-base'"
               >
                 <div class="font-medium">Admission Counselling</div>
                 <div class="text-sm opacity-70">University placement guidance</div>
@@ -77,7 +77,7 @@
               <NuxtLink
                 to="/services/visa-assistance"
                 class="block px-4 py-3 transition-colors duration-200"
-                :class="$route.path === '/services/visa-assistance' ? 'bg-primary/10 text-primary' : 'text-gray-700 hover:bg-gray-50 hover:text-primary'"
+                :class="$route.path === '/services/visa-assistance' ? 'bg-base/10 text-base' : 'text-gray-700 hover:bg-gray-50 hover:text-base'"
               >
                 <div class="font-medium">Visa Assistance</div>
                 <div class="text-sm opacity-70">Student visa support</div>
@@ -85,7 +85,7 @@
               <NuxtLink
                 to="/test-prep"
                 class="block px-4 py-3 transition-colors duration-200"
-                :class="$route.path === '/test-prep' ? 'bg-primary/10 text-primary' : 'text-gray-700 hover:bg-gray-50 hover:text-primary'"
+                :class="$route.path === '/test-prep' ? 'bg-base/10 text-base' : 'text-gray-700 hover:bg-gray-50 hover:text-base'"
               >
                 <div class="font-medium">Test Preparation</div>
                 <div class="text-sm opacity-70">IELTS, SAT, GLE and more</div>
@@ -100,7 +100,7 @@
           >
             <button
               class="px-4 py-2 font-medium rounded-lg transition-all duration-200 flex items-center space-x-1"
-              :class="$route.path.startsWith('/resources') ? 'bg-primary text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-primary'"
+              :class="$route.path.startsWith('/resources') ? 'bg-base text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-base'"
             >
               <span>Resources</span>
               <Icon
@@ -116,7 +116,7 @@
               <NuxtLink
                 to="/resources"
                 class="block px-4 py-3 transition-colors duration-200"
-                :class="$route.path === '/resources' ? 'bg-primary/10 text-primary' : 'text-gray-700 hover:bg-gray-50 hover:text-primary'"
+                :class="$route.path === '/resources' ? 'bg-base/10 text-base' : 'text-gray-700 hover:bg-gray-50 hover:text-base'"
               >
                 <div class="font-medium">Blog</div>
                 <div class="text-sm opacity-70">News, tips, and updates</div>
@@ -124,7 +124,7 @@
               <NuxtLink
                 to="/resources/templates"
                 class="block px-4 py-3 transition-colors duration-200"
-                :class="$route.path === '/resources/templates' ? 'bg-primary/10 text-primary' : 'text-gray-700 hover:bg-gray-50 hover:text-primary'"
+                :class="$route.path === '/resources/templates' ? 'bg-base/10 text-base' : 'text-gray-700 hover:bg-gray-50 hover:text-base'"
               >
                 <div class="font-medium">Templates & Guides</div>
                 <div class="text-sm opacity-70">Download our guides</div>
@@ -132,7 +132,7 @@
               <NuxtLink
                 to="/resources/country-guides"
                 class="block px-4 py-3 transition-colors duration-200"
-                :class="$route.path === '/resources/country-guides' ? 'bg-primary/10 text-primary' : 'text-gray-700 hover:bg-gray-50 hover:text-primary'"
+                :class="$route.path === '/resources/country-guides' ? 'bg-base/10 text-base' : 'text-gray-700 hover:bg-gray-50 hover:text-base'"
               >
                 <div class="font-medium">Country Guides</div>
                 <div class="text-sm opacity-70">Study destination info</div>
@@ -147,7 +147,7 @@
           >
             <button
               class="px-4 py-2 font-medium rounded-lg transition-all duration-200 flex items-center space-x-1"
-              :class="$route.path.startsWith('/contact') ? 'bg-primary text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-primary'"
+              :class="$route.path.startsWith('/contact') ? 'bg-base text-white' : 'text-gray-700 hover:bg-gray-100 hover:text-base'"
             >
               <span>Contact</span>
               <Icon
@@ -163,7 +163,7 @@
               <NuxtLink
                 to="/contact"
                 class="block px-4 py-3 transition-colors duration-200"
-                :class="$route.path === '/contact' ? 'bg-primary/10 text-primary' : 'text-gray-700 hover:bg-gray-50 hover:text-primary'"
+                :class="$route.path === '/contact' ? 'bg-base/10 text-base' : 'text-gray-700 hover:bg-gray-50 hover:text-base'"
               >
                 <div class="font-medium">Contact Us</div>
                 <div class="text-sm opacity-70">Get in touch</div>
@@ -171,7 +171,7 @@
               <NuxtLink
                 to="/contact/visit"
                 class="block px-4 py-3 transition-colors duration-200"
-                :class="$route.path === '/contact/visit' ? 'bg-primary/10 text-primary' : 'text-gray-700 hover:bg-gray-50 hover:text-primary'"
+                :class="$route.path === '/contact/visit' ? 'bg-base/10 text-base' : 'text-gray-700 hover:bg-gray-50 hover:text-base'"
               >
                 <div class="font-medium">Visit Our Office</div>
                 <div class="text-sm opacity-70">Jahi, Abuja location</div>
@@ -192,7 +192,7 @@
         <div class="lg:hidden">
           <button
             @click="isMobileMenuOpen = !isMobileMenuOpen"
-            class="p-2 text-gray-700 hover:text-primary hover:bg-gray-100 rounded-lg transition-all duration-200"
+            class="p-2 text-gray-700 hover:text-base hover:bg-gray-100 rounded-lg transition-all duration-200"
           >
             <Icon
               :name="isMobileMenuOpen ? 'heroicons:x-mark' : 'heroicons:bars-3'"
@@ -246,7 +246,7 @@
                 :key="route.path"
                 :to="route.path"
                 class="flex items-center px-3 py-3 font-medium rounded-lg transition-all duration-200"
-                :class="$route.path === route.path ? 'bg-primary text-white' : 'text-gray-700 hover:bg-gray-50 hover:text-primary'"
+                :class="$route.path === route.path ? 'bg-base text-white' : 'text-gray-700 hover:bg-gray-50 hover:text-base'"
                 @click="isMobileMenuOpen = false"
               >
                 {{ route.name }}
@@ -260,7 +260,7 @@
               <NuxtLink
                 to="/resources"
                 class="flex items-center px-3 py-2 text-sm rounded-lg transition-all duration-200"
-                :class="$route.path === '/resources' ? 'bg-primary text-white' : 'text-gray-600 hover:bg-gray-50 hover:text-primary'"
+                :class="$route.path === '/resources' ? 'bg-base text-white' : 'text-gray-600 hover:bg-gray-50 hover:text-base'"
                 @click="isMobileMenuOpen = false"
               >
                 Blog Posts
@@ -268,7 +268,7 @@
               <NuxtLink
                 to="/resources/templates"
                 class="flex items-center px-3 py-2 text-sm rounded-lg transition-all duration-200"
-                :class="$route.path === '/resources/templates' ? 'bg-primary text-white' : 'text-gray-600 hover:bg-gray-50 hover:text-primary'"
+                :class="$route.path === '/resources/templates' ? 'bg-base text-white' : 'text-gray-600 hover:bg-gray-50 hover:text-base'"
                 @click="isMobileMenuOpen = false"
               >
                 Templates & Guides
@@ -276,7 +276,7 @@
               <NuxtLink
                 to="/resources/country-guides"
                 class="flex items-center px-3 py-2 text-sm rounded-lg transition-all duration-200"
-                :class="$route.path === '/resources/country-guides' ? 'bg-primary text-white' : 'text-gray-600 hover:bg-gray-50 hover:text-primary'"
+                :class="$route.path === '/resources/country-guides' ? 'bg-base text-white' : 'text-gray-600 hover:bg-gray-50 hover:text-base'"
                 @click="isMobileMenuOpen = false"
               >
                 Country Guides
@@ -290,7 +290,7 @@
               <NuxtLink
                 to="/services/counselling"
                 class="flex items-center px-3 py-2 text-sm rounded-lg transition-all duration-200"
-                :class="$route.path === '/services/counselling' ? 'bg-primary text-white' : 'text-gray-600 hover:bg-gray-50 hover:text-primary'"
+                :class="$route.path === '/services/counselling' ? 'bg-base text-white' : 'text-gray-600 hover:bg-gray-50 hover:text-base'"
                 @click="isMobileMenuOpen = false"
               >
                 Admission Counselling
@@ -298,7 +298,7 @@
               <NuxtLink
                 to="/services/visa-assistance"
                 class="flex items-center px-3 py-2 text-sm rounded-lg transition-all duration-200"
-                :class="$route.path === '/services/visa-assistance' ? 'bg-primary text-white' : 'text-gray-600 hover:bg-gray-50 hover:text-primary'"
+                :class="$route.path === '/services/visa-assistance' ? 'bg-base text-white' : 'text-gray-600 hover:bg-gray-50 hover:text-base'"
                 @click="isMobileMenuOpen = false"
               >
                 Visa Assistance
@@ -306,7 +306,7 @@
               <NuxtLink
                 to="/test-prep"
                 class="flex items-center px-3 py-2 text-sm rounded-lg transition-all duration-200"
-                :class="$route.path === '/test-prep' ? 'bg-primary text-white' : 'text-gray-600 hover:bg-gray-50 hover:text-primary'"
+                :class="$route.path === '/test-prep' ? 'bg-base text-white' : 'text-gray-600 hover:bg-gray-50 hover:text-base'"
                 @click="isMobileMenuOpen = false"
               >Test Preparation
               </NuxtLink>
@@ -328,15 +328,15 @@
               </h3>
               <div class="space-y-2 text-sm text-gray-600">
                 <p class="flex items-center space-x-2">
-                  <Icon name="heroicons:map-pin" class="w-4 h-4 text-primary" />
+                  <Icon name="heroicons:map-pin" class="w-4 h-4 text-base" />
                   <span>Jahi, Abuja</span>
                 </p>
                 <NuxtLink
                   to="/contact"
-                  class="flex items-center space-x-2 hover:text-primary transition-colors duration-200"
+                  class="flex items-center space-x-2 hover:text-base transition-colors duration-200"
                   @click="isMobileMenuOpen = false"
                 >
-                  <Icon name="heroicons:envelope" class="w-4 h-4 text-primary" />
+                  <Icon name="heroicons:envelope" class="w-4 h-4 text-base" />
                   <span>Contact Us</span>
                 </NuxtLink>
               </div>
@@ -364,9 +364,9 @@ useSeoMeta({
 // Brand colors from the design system
 const brandColors = {
   baseColor: "#f4f5f3",
-  primaryColor: "#505050",
+  baseColor: "#505050",
   accentColor: "#EB6534",
-  textPrimary: "#333333",
+  textbase: "#333333",
   textSecondary: "#666666",
 };
 

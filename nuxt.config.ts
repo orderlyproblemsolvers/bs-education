@@ -101,18 +101,11 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: "netlify", // ensures Nuxt builds for Netlify
+    preset: "netlify",
     compressPublicAssets: true,
     minify: true
   },
-  modules: [
-    "@nuxt/image",
-    "@nuxt/ui",
-    "@nuxtjs/supabase",
-    "@vueuse/nuxt",
-    "@nuxtjs/leaflet",
-    "nuxt-security",
-  ],
+  modules: ["@nuxt/image", "@nuxt/ui", "@nuxtjs/supabase", "@vueuse/nuxt", "@nuxtjs/leaflet", "nuxt-security", "seo"],
   css: [
     "~/assets/css/main.css",
     "quill/dist/quill.snow.css",
@@ -141,7 +134,6 @@ export default defineNuxtConfig({
   },
 
   vite: {
-    plugins: [tailwindcss()],
     build: {
       rollupOptions: {
         output: {

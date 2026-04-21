@@ -55,7 +55,7 @@
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
               
               <!-- Event Header -->
-              <div class="bg-gradient-to-r from-[#5d6b56] to-[#9BAD94] p-8 text-white">
+              <div class="bg-linear-to-r from-[#5d6b56] to-[#9BAD94] p-8 text-white">
                 <div class="flex items-center mb-4">
                   <div class="bg-white/20 p-2 rounded-lg mr-3">
                     <UIcon name="i-heroicons-academic-cap" class="w-6 h-6" />

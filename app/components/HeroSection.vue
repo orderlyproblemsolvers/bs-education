@@ -1,6 +1,6 @@
 <template>
   <section
-    class="relative w-full bg-primary overflow-hidden px-4 sm:px-2 md:px-6 lg:px-12 pt-12 pb-8 md:pt-16 md:pb-8 rounded-b-4xl min-h-[100dvh] md:min-h-[70dvh] flex items-center"
+    class="relative w-full bg-base overflow-hidden px-4 sm:px-2 md:px-6 lg:px-12 pt-12 pb-8 md:pt-16 md:pb-8 rounded-b-4xl min-h-[100dvh] md:min-h-[70dvh] flex items-center"
   >
     <svg
       class="absolute top-0 left-0 w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 opacity-30 z-0"

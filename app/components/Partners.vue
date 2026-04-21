@@ -4,29 +4,29 @@
       Our Trusted Partners
     </h2>
     
-    <div class="absolute inset-y-0 left-0 w-12 md:w-32 lg:w-32 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none"></div>
-    <div class="absolute inset-y-0 right-0 w-12 md:w-32 lg:w-32 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute inset-y-0 left-0 w-12 md:w-32 lg:w-32 bg-linear-to-r from-white via-white/80 to-transparent z-10 pointer-events-none"></div>
+    <div class="absolute inset-y-0 right-0 w-12 md:w-32 lg:w-32 bg-linear-to-l from-white via-white/80 to-transparent z-10 pointer-events-none"></div>
     
     <div class="space-y-6 mb-8">
       
       <div class="overflow-hidden">
         <div class="flex w-max animate-scroll-right will-change-transform">
-          <div class="flex gap-8 pr-8 flex-shrink-0">
+          <div class="flex gap-8 pr-8 shrink-0">
             <img
               v-for="(partner, index) in firstRow"
               :key="`partner-1-${index}`"
               :src="partner.logo"
               :alt="`${partner.name} Logo`"
-              class="w-36 h-20 object-contain flex-shrink-0"
+              class="w-36 h-20 object-contain shrink-0"
             />
           </div>
-          <div class="flex gap-8 pr-8 flex-shrink-0">
+          <div class="flex gap-8 pr-8 shrink-0">
             <img
               v-for="(partner, index) in firstRow"
               :key="`partner-1-dup-${index}`"
               :src="partner.logo"
               :alt="`${partner.name} Logo`"
-              class="w-36 h-20 object-contain flex-shrink-0"
+              class="w-36 h-20 object-contain shrink-0"
             />
           </div>
         </div>
@@ -34,22 +34,22 @@
 
       <div class="overflow-hidden md:hidden">
         <div class="flex w-max animate-scroll-left will-change-transform">
-          <div class="flex gap-8 pr-8 flex-shrink-0">
+          <div class="flex gap-8 pr-8 shrink-0">
             <img
               v-for="(partner, index) in secondRow"
               :key="`partner-2-${index}`"
               :src="partner.logo"
               :alt="`${partner.name} Logo`"
-              class="w-36 h-20 object-contain transition-all duration-300 flex-shrink-0"
+              class="w-36 h-20 object-contain transition-all duration-300 shrink-0"
             />
           </div>
-          <div class="flex gap-8 pr-8 flex-shrink-0">
+          <div class="flex gap-8 pr-8 shrink-0">
             <img
               v-for="(partner, index) in secondRow"
               :key="`partner-2-dup-${index}`"
               :src="partner.logo"
               :alt="`${partner.name} Logo`"
-              class="w-36 h-20 object-contain flex-shrink-0"
+              class="w-36 h-20 object-contain shrink-0"
             />
           </div>
         </div>

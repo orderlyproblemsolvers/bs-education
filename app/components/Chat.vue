@@ -43,7 +43,7 @@
       </div>
   
       <!-- Chat Modal/Sidebar -->
-      <div v-if="isChatOpen" class="fixed inset-0 z-40 lg:inset-auto lg:bottom-6 lg:right-6 lg:w-96 lg:h-[500px]">
+      <div v-if="isChatOpen" class="fixed inset-0 z-40 lg:inset-auto lg:bottom-6 lg:right-6 lg:w-96 lg:h-125">
         <!-- Mobile Overlay -->
         <div class="lg:hidden fixed inset-0 bg-black bg-opacity-50" @click="toggleChat"></div>
         
@@ -77,11 +77,11 @@
           </div>
   
           <!-- Chat Messages Area -->
-          <div class="flex-1 overflow-y-auto p-6 space-y-6 bg-gradient-to-b from-gray-50 to-white">
+          <div class="flex-1 overflow-y-auto p-6 space-y-6 bg-linear-to-b from-gray-50 to-white">
             <!-- Welcome Message -->
             <div class="flex items-start space-x-4">
               <div 
-                class="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md flex-shrink-0"
+                class="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md shrink-0"
                 :style="{ backgroundColor: brandColors.primaryColor }"
               >
                 B&S
@@ -126,7 +126,7 @@
               <!-- Bot Response -->
               <div v-if="message.response" class="flex items-start space-x-4">
                 <div 
-                  class="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md flex-shrink-0"
+                  class="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md shrink-0"
                   :style="{ backgroundColor: brandColors.primaryColor }"
                 >
                   B&S
@@ -168,7 +168,7 @@
             <!-- Typing Indicator -->
             <div v-if="isTyping" class="flex items-start space-x-4">
               <div 
-                class="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md flex-shrink-0"
+                class="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold shadow-md shrink-0"
                 :style="{ backgroundColor: brandColors.primaryColor }"
               >
                 B&S
@@ -192,7 +192,7 @@
           </div>
   
           <!-- Footer -->
-          <div class="border-t border-gray-100 px-6 py-4 bg-gradient-to-r from-gray-50 to-gray-100">
+          <div class="border-t border-gray-100 px-6 py-4 bg-linear-to-r from-gray-50 to-gray-100">
             <p class="text-xs text-gray-600 text-center leading-relaxed">
               Need immediate assistance? 
               <button 

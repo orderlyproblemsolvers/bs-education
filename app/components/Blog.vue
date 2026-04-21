@@ -13,7 +13,7 @@
           :key="n"
           class="flex flex-col md:flex-row rounded-xl overflow-hidden shadow border border-gray-100 animate-pulse bg-white"
         >
-          <div class="w-full md:w-2/5 lg:w-1/3 h-56 md:h-auto min-h-[220px] bg-gray-200 shrink-0"></div>
+          <div class="w-full md:w-2/5 lg:w-1/3 h-56 md:h-auto min-h-55 bg-gray-200 shrink-0"></div>
           
           <div class="p-6 md:p-8 flex flex-col justify-center w-full">
             <div class="h-7 bg-gray-200 rounded w-3/4 mb-4"></div>
@@ -65,7 +65,7 @@
               </h3>
             </NuxtLink>
             
-            <p class="text-base text-gray-600 mb-6 line-clamp-3 leading-relaxed">
+            <p class="text-base mb-6 line-clamp-3 leading-relaxed">
               {{ post.excerpt }}
             </p>
             
@@ -131,6 +131,7 @@ const postsWithExcerpts = computed(() => {
 .line-clamp-3 {
   display: -webkit-box;
   -webkit-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }

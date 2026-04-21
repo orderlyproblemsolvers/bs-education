@@ -1,12 +1,12 @@
 <template>
-  <section class="py-16 md:py-24 bg-gradient-to-br from-[#f4f5f3] to-[#e8ebe7] font-sans overflow-hidden">
+  <section class="py-16 md:py-24 bg-linear-to-br from-[#f4f5f3] to-[#e8ebe7] font-sans overflow-hidden">
     <div class="max-w-7xl mx-auto px-5 md:px-10 lg:px-20">
       
       <div class="text-center mb-12 md:mb-16">
         <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 tracking-tight">
           Success Stories
         </h2>
-        <p class="text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+        <p class="md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
           Hear from our students who are now studying abroad and achieving their
           dreams.
         </p>
@@ -17,7 +17,7 @@
           v-for="(testimonial, index) in testimonials"
           :key="testimonial.id"
           class="relative bg-white/90 backdrop-blur-md rounded-2xl p-6 border border-gray-200 cursor-pointer flex flex-col h-full transform-gpu opacity-0 translate-y-8 transition-all duration-300 ease-out shadow-sm hover:shadow-[0_20px_40px_rgba(0,0,0,0.08)]"
-          :class="{ 'border-primary/40 bg-gradient-to-br from-primary/5 to-white/95': testimonial.featured }"
+          :class="{ 'border-base/40 bg-linear-to-br from-base/5 to-white/95': testimonial.featured }"
           :style="{ transitionDelay: `${index * 150}ms` }"
           @mousemove="(event) => handleMouseMove(event, index)"
           @mouseleave="(event) => handleMouseLeave(event, index)"
@@ -28,7 +28,7 @@
             :ref="(el) => setGlossRef(el, index)"
           ></div>
 
-          <div class="relative z-20 flex flex-col flex-grow">
+          <div class="relative z-20 flex flex-col grow">
             <div class="flex justify-between items-start mb-4">
               <div class="text-secondary">
                 <svg
@@ -49,25 +49,25 @@
               </div>
             </div>
 
-            <blockquote class="text-[15px] leading-relaxed text-gray-700 italic mb-6 flex-grow">
+            <blockquote class="text-[15px] leading-relaxed text-gray-700 italic mb-6 grow">
               "{{ testimonial.text }}"
             </blockquote>
 
             <div class="flex items-center gap-3 mt-auto pt-4 border-t border-gray-100">
-              <div class="flex-shrink-0">
+              <div class="shrink-0">
                 <img
                   :src="testimonial.avatar"
                   :alt="`${testimonial.name} avatar`"
                   width="48"
                   height="48"
-                  class="w-12 h-12 rounded-full object-cover border-2 border-primary/20 shadow-sm"
+                  class="w-12 h-12 rounded-full object-cover border-2 border-base/20 shadow-sm"
                   loading="lazy"
                 />
               </div>
               <div class="flex-1 min-w-0">
                 <h4 class="text-sm font-bold text-gray-900 truncate">{{ testimonial.name }}</h4>
                 <p class="text-[13px] text-gray-500 truncate mb-0.5">{{ testimonial.course }}</p>
-                <span class="text-[11px] font-semibold text-primary uppercase tracking-wide">{{ testimonial.country }}</span>
+                <span class="text-[11px] font-semibold text-base uppercase tracking-wide">{{ testimonial.country }}</span>
               </div>
             </div>
           </div>
@@ -81,7 +81,7 @@
       >
         <NuxtLink 
           to="/contact"
-          class="group inline-flex items-center gap-4 bg-white px-5 py-3 md:px-6 md:py-4 rounded-full shadow-md border border-gray-100 hover:shadow-xl hover:border-primary/30 hover:-translate-y-1 transition-all duration-300"
+          class="group inline-flex items-center gap-4 bg-white px-5 py-3 md:px-6 md:py-4 rounded-full shadow-md border border-gray-100 hover:shadow-xl hover:border-base/30 hover:-translate-y-1 transition-all duration-300"
         >
           <div class="flex -space-x-3">
             <img src="/img/grad5.jpg" alt="Student" class="w-8 h-8 md:w-10 md:h-10 rounded-full border-2 border-white object-cover shadow-sm group-hover:border-gray-50 transition-colors" loading="lazy" />
@@ -93,7 +93,7 @@
           </div>
           
           <div class="text-sm md:text-base text-gray-700 flex items-center gap-2">
-            <span>Join <span class="font-bold text-primary group-hover:text-secondary transition-colors">900+</span> successful students</span>
+            <span>Join <span class="font-bold text-base group-hover:text-secondary transition-colors">900+</span> successful students</span>
             <svg class="w-4 h-4 text-gray-400 group-hover:text-secondary group-hover:translate-x-1 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
             </svg>

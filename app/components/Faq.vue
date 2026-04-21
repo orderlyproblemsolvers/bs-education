@@ -5,7 +5,7 @@
         <h2 class="text-[26px] md:text-4xl font-bold leading-tight text-gray-800 mb-4">
           Frequently Asked Questions
         </h2>
-        <p class="text-base md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+        <p class="text-base md:text-lg  max-w-2xl mx-auto leading-relaxed">
           Get answers to common questions about studying abroad and our services
         </p>
       </div>
@@ -19,20 +19,20 @@
               :class="[
                 'faq-item rounded-lg overflow-hidden border transition-all duration-200',
                 activeIndex === index 
-                  ? 'active border-primary shadow-[0_4px_12px_rgba(133,148,132,0.15)]' 
+                  ? 'active border-base shadow-[0_4px_12px_rgba(133,148,132,0.15)]' 
                   : 'border-gray-200'
               ]"
             >
               <button
                 :class="[
                   'w-full px-5 py-4 md:px-6 md:py-5 text-left cursor-pointer flex justify-between items-center text-[15px] md:text-base font-semibold transition-colors duration-200',
-                  activeIndex === index ? 'bg-[#f8f9f8] text-primary' : 'bg-white text-gray-800 hover:bg-[#f8f9f8] hover:text-primary'
+                  activeIndex === index ? 'bg-[#f8f9f8] text-base' : 'bg-white text-gray-800 hover:bg-[#f8f9f8] hover:text-base'
                 ]"
                 @click="toggleFaq(index)"
                 :aria-expanded="activeIndex === index"
               >
                 <span class="flex-1 pr-4">{{ faq.question }}</span>
-                <div class="text-primary flex-shrink-0">
+                <div class="text-base shrink-0">
                   <svg 
                     width="20" 
                     height="20" 
@@ -57,7 +57,7 @@
                   <div v-if="faq.cta" class="mt-4">
                     <NuxtLink 
                       :to="faq.cta.link" 
-                      class="inline-flex items-center gap-2 px-4 py-2.5 bg-primary text-white hover:bg-primary/90 rounded-lg text-sm font-medium transition-colors"
+                      class="inline-flex items-center gap-2 px-4 py-2.5 bg-base text-white hover:bg-base/90 rounded-lg text-sm font-medium transition-colors"
                     >
                       {{ faq.cta.text }}
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -73,7 +73,7 @@
 
         <div class="flex flex-col gap-6">
           <div class="bg-white rounded-xl p-5 md:p-6 shadow-sm border border-gray-200">
-            <div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center text-primary mb-4">
+            <div class="w-12 h-12 bg-base/10 rounded-full flex items-center justify-center text-base mb-4">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
                 <path d="M12 17h.01"/>
@@ -86,7 +86,7 @@
             <div class="flex flex-col gap-3">
               <NuxtLink 
                 to="/contact" 
-                class="inline-flex items-center justify-center gap-2 px-4 py-3 bg-primary text-white hover:bg-primary/90 rounded-lg text-sm font-medium transition-colors w-full"
+                class="inline-flex items-center justify-center gap-2 px-4 py-3 bg-base text-white hover:bg-base/90 rounded-lg text-sm font-medium transition-colors w-full"
               >
                 Book Free Consultation
               </NuxtLink>
@@ -103,11 +103,11 @@
           </div>
 
           <div class="bg-white rounded-xl p-5 md:p-6 shadow-sm border border-gray-200">
-            <h4 class="text-base font-semibold text-gray-800 mb-4">Popular Resources</h4>
+            <h4 class="font-semibold text-gray-800 mb-4">Popular Resources</h4>
             <ul class="flex flex-col m-0 p-0 list-none">
               <li>
-                <NuxtLink to="/resources/templates" class="flex items-center gap-2 text-gray-600 text-sm py-2.5 border-b border-gray-100 hover:text-primary transition-colors">
-                  <svg class="flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <NuxtLink to="/resources/templates" class="flex items-center gap-2 text-gray-600 text-sm py-2.5 border-b border-gray-100 hover:text-base transition-colors">
+                  <svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
                     <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
                   </svg>
@@ -115,16 +115,16 @@
                 </NuxtLink>
               </li>
               <li>
-                <NuxtLink to="/events" class="flex items-center gap-2 text-gray-600 text-sm py-2.5 border-b border-gray-100 hover:text-primary transition-colors">
-                  <svg class="flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <NuxtLink to="/events" class="flex items-center gap-2 text-gray-600 text-sm py-2.5 border-b border-gray-100 hover:text-base transition-colors">
+                  <svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                   </svg>
                   Exciting Events
                 </NuxtLink>
               </li>
               <li>
-                <NuxtLink to="/resources/country-guides" class="flex items-center gap-2 text-gray-600 text-sm py-2.5 hover:text-primary transition-colors">
-                  <svg class="flex-shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <NuxtLink to="/resources/country-guides" class="flex items-center gap-2 text-gray-600 text-sm py-2.5 hover:text-base transition-colors">
+                  <svg class="shrink-0" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="12" cy="12" r="10"/>
                     <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
                   </svg>
