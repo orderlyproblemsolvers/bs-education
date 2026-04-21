@@ -1,0 +1,5 @@
+[[redirects]]
+  from   = "https://bs-education.com/*"
+  to     = "https://studylifeabroad.com/:splat"
+  status = 301
+  force  = true
