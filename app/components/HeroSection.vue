@@ -1,6 +1,6 @@
 <template>
   <section
-    class="relative w-full bg-base overflow-hidden px-4 sm:px-2 md:px-6 lg:px-12 pt-12 pb-8 md:pt-16 md:pb-8 rounded-b-4xl min-h-[100dvh] md:min-h-[70dvh] flex items-center"
+    class="relative w-full overflow-hidden px-4 sm:px-2 md:px-6 lg:px-12 pt-12 pb-8 md:pt-16 md:pb-8  min-h-dvh md:min-h-[70dvh] flex items-center"
   >
     <svg
       class="absolute top-0 left-0 w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 opacity-30 z-0"
@@ -28,19 +28,17 @@
       class="relative z-10 w-full max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-10 md:gap-12"
     >
       <div
-        class="text-white w-full md:w-[55%] flex flex-col items-center md:items-start space-y-6 text-center md:text-left mt-8 md:mt-0"
+        class="text-black w-full md:w-[55%] flex flex-col items-center md:items-start space-y-6 text-center md:text-left mt-8 md:mt-0"
       >
         <h1
-          class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-tight"
+          class="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold leading-tight"
         >
-          Turn Your Study Abroad Dream Into Reality
+          Study Abroad Is Closer Than You Think — Get Free Expert Guidance Today
         </h1>
         <p
-          class="text-base sm:text-lg text-gray-100 max-w-lg"
+          class=" sm:text-lg text-gray-800 max-w-lg"
         >
-          Get <strong>free expert counselling</strong>, admission
-          processing, visa support, and test prep for students looking to
-          study in the UK, USA, Hungary, Australia, and more.
+          We handle your admission, visa, and travel support from start to finish. Over 1,000 students placed. 99% visa success rate. Free consultation.
         </p>
         <div
           class="flex flex-col sm:flex-row w-full sm:w-auto items-stretch sm:items-center gap-4"
@@ -55,7 +53,7 @@
             icon="i-lucide-send"
             size="lg"
             @click="openWhatsApp"
-            class="px-6 py-3 bg-alt justify-center cursor-pointer hover:bg-alt/80 text-black font-semibold rounded-lg shadow-lg"
+            class="px-6 py-3 bg-base justify-center cursor-pointer hover:bg-base/80 text-alt font-semibold rounded-lg shadow-lg"
           >
             Chat on WhatsApp
           </UButton>
@@ -66,7 +64,7 @@
         class="w-full md:w-[45%] flex justify-center items-center"
       >
         <img
-          src="/img/graduant.webp"
+          src="/img/heroimage.png"
           width="1200"
           height="800"
           alt="Graduated student abroad"
@@ -75,6 +73,7 @@
       </div>
     </div>
   </section>
+  <HomeStats/>
   <Partners/>
 </template>
 

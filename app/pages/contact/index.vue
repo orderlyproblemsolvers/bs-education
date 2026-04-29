@@ -1,25 +1,17 @@
 <template>
-  <div class="min-h-screen bg-linear-to-br from-[#f4f5f3] to-gray-100">
+  <div class="min-h-screen bg-white">
     <Transition name="toast">
       <div
         v-if="showToast"
         class="fixed top-4 right-4 z-50 max-w-md w-full bg-white rounded-lg shadow-lg border-l-4 p-4"
-        :class="
-          toastType === 'success' ? 'border-[#5d6b56]' : 'border-red-500'
-        "
+        :class="toastType === 'success' ? 'border-base' : 'border-red-500'"
       >
         <div class="flex items-center">
           <div class="shrink-0">
             <Icon
-              :name="
-                toastType === 'success'
-                  ? 'i-heroicons-check-circle'
-                  : 'i-heroicons-x-circle'
-              "
+              :name="toastType === 'success' ? 'i-heroicons-check-circle' : 'i-heroicons-x-circle'"
               class="w-5 h-5"
-              :class="
-                toastType === 'success' ? 'text-[#5d6b56]' : 'text-red-500'
-              "
+              :class="toastType === 'success' ? 'text-base' : 'text-red-500'"
             />
           </div>
           <div class="ml-3">
@@ -28,7 +20,7 @@
           <div class="ml-auto pl-3">
             <button
               @click="showToast = false"
-              class="text-gray-400 hover:text-gray-600"
+              class="text-gray-400 hover:text-gray-600 transition-colors"
             >
               <Icon name="i-heroicons-x-mark" class="w-4 h-4" />
             </button>
@@ -38,32 +30,20 @@
     </Transition>
 
     <section class="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      <div
-        class="absolute inset-0 bg-linear-to-r from-[#f4f5f3]/50 to-orange-50/50"
-      ></div>
-      <div
-        class="absolute top-10 right-10 w-72 h-72 bg-linear-to-br from-[#5d6b56]/20 to-[#eb6534]/20 rounded-full blur-3xl"
-      ></div>
-      <div
-        class="absolute bottom-10 left-10 w-96 h-96 bg-linear-to-tr from-[#eb6534]/20 to-[#5d6b56]/20 rounded-full blur-3xl"
-      ></div>
+      <div class="absolute inset-0 bg-linear-to-r from-gray-50/80 to-secondary/5"></div>
+      <div class="absolute top-10 right-10 w-72 h-72 bg-linear-to-br from-base/20 to-secondary/20 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute bottom-10 left-10 w-96 h-96 bg-linear-to-tr from-secondary/20 to-base/20 rounded-full blur-3xl pointer-events-none"></div>
 
       <div class="max-w-7xl mx-auto relative">
         <div class="grid lg:grid-cols-2 gap-12 items-center">
           <div class="space-y-8">
             <div class="space-y-6">
-              <h1
-                class="text-4xl md:text-6xl font-bold text-[#333333] leading-tight font-inter"
-              >
+              <h1 class="text-4xl md:text-6xl font-bold text-gray-900 leading-tight">
                 Let's Start Your
-                <span
-                  class="bg-linear-to-r from-[#eb6534] to-[#eb6534] bg-clip-text text-transparent"
-                >
-                  Study Abroad
-                </span>
+                <span class="text-secondary">Study Abroad</span>
                 Journey
               </h1>
-              <p class="text-xl text-[#666666] leading-relaxed max-w-lg font-inter">
+              <p class="text-xl text-gray-600 leading-relaxed max-w-lg">
                 Get personalized guidance from our education experts. We're here
                 to help you find the perfect university and course that matches
                 your dreams and goals.
@@ -71,27 +51,19 @@
             </div>
 
             <div class="grid grid-cols-2 gap-6">
-              <div
-                class="group text-center p-6 rounded-xl bg-white/70 backdrop-blur-sm border border-[#DDDDDD] hover:shadow-lg transition-all duration-300"
-              >
-                <div
-                  class="text-3xl font-bold text-[#eb6534] group-hover:scale-110 transition-transform duration-300 font-inter"
-                >
+              <div class="group text-center p-6 rounded-xl bg-white/70 backdrop-blur-sm border border-gray-200 hover:shadow-lg transition-all duration-300">
+                <div class="text-3xl font-bold text-secondary group-hover:scale-110 transition-transform duration-300">
                   1000+
                 </div>
-                <div class="text-sm font-medium text-[#666666] mt-1 font-inter">
+                <div class="text-sm font-medium text-gray-600 mt-1">
                   Success Stories
                 </div>
               </div>
-              <div
-                class="group text-center p-6 rounded-xl bg-white/70 backdrop-blur-sm border border-[#DDDDDD] hover:shadow-lg transition-all duration-300"
-              >
-                <div
-                  class="text-3xl font-bold text-[#5d6b56] group-hover:scale-110 transition-transform duration-300 font-inter"
-                >
+              <div class="group text-center p-6 rounded-xl bg-white/70 backdrop-blur-sm border border-gray-200 hover:shadow-lg transition-all duration-300">
+                <div class="text-3xl font-bold text-base group-hover:scale-110 transition-transform duration-300">
                   7+
                 </div>
-                <div class="text-sm font-medium text-[#666666] mt-1 font-inter">
+                <div class="text-sm font-medium text-gray-600 mt-1">
                   Countries
                 </div>
               </div>
@@ -99,36 +71,25 @@
           </div>
 
           <div class="relative">
-            <div
-              class="aspect-4/3 rounded-tl-[80px] rounded-br-[80px] overflow-hidden bg-linear-to-br from-[#5d6b56] to-[#6b7a6a] shadow-xl"
-            >
-              <div
-                class="w-full h-full flex items-center justify-center text-white text-lg font-medium backdrop-blur-sm bg-black/10 font-inter"
-              >
-              <NuxtImg
-                    src="/img/customerservice.png"
-                    alt="Study abroad destinations"
-                    class="absolute inset-0 w-full h-full object-cover"
-                    loading="eager"
-                    preload
-                  />
+            <div class="aspect-4/3 rounded-tl-[80px] rounded-br-[80px] overflow-hidden bg-base shadow-xl">
+              <div class="w-full h-full flex items-center justify-center text-white text-lg font-medium backdrop-blur-sm bg-black/10">
+                <NuxtImg
+                  src="/img/customerservice.png"
+                  alt="Study abroad destinations"
+                  class="absolute inset-0 w-full h-full object-cover"
+                  loading="eager"
+                  preload
+                />
               </div>
             </div>
-            <div
-              class="absolute -bottom-8 -left-8 bg-white p-6 rounded-xl shadow-xl border border-[#DDDDDD]"
-            >
+            <div class="absolute -bottom-8 -left-8 bg-white p-6 rounded-xl shadow-xl border border-gray-100">
               <div class="flex items-center space-x-4">
-                <div
-                  class="w-12 h-12 rounded-full bg-linear-to-r from-[#eb6534] to-[#eb6534] flex items-center justify-center"
-                >
-                  <Icon
-                    name="i-heroicons-chat-bubble-left-ellipsis"
-                    class="w-6 h-6 text-white"
-                  />
+                <div class="w-12 h-12 rounded-full bg-secondary flex items-center justify-center">
+                  <Icon name="i-heroicons-chat-bubble-left-ellipsis" class="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <div class="font-semibold text-[#333333] font-inter">Chat with us</div>
-                  <div class="text-sm text-[#666666] font-inter">Always here to help</div>
+                  <div class="font-semibold text-gray-900">Chat with us</div>
+                  <div class="text-sm text-gray-500">Always here to help</div>
                 </div>
               </div>
             </div>
@@ -140,55 +101,45 @@
     <section class="py-20 px-4 sm:px-6 lg:px-8">
       <div class="max-w-7xl mx-auto">
         <div class="grid lg:grid-cols-3 gap-12">
+          
           <div class="lg:col-span-2">
-            <div
-              class="bg-white rounded-xl shadow-xl border border-[#DDDDDD] p-8 md:p-10"
-            >
+            <div class="bg-white rounded-xl shadow-xl border border-gray-100 p-8 md:p-10">
               <div class="mb-10">
-                <h2 class="text-3xl font-bold text-[#333333] mb-3 font-inter">
-                  Start Your Journey
-                </h2>
-                <p class="text-[#666666] text-lg font-inter">
-                  Fill out the form below and we'll reach out to you within 24
-                  hours.
+                <h2 class="text-3xl font-bold text-gray-900 mb-3">Start Your Journey</h2>
+                <p class="text-gray-600 text-lg">
+                  Fill out the form below and we'll reach out to you within 24 hours.
                 </p>
               </div>
 
               <form @submit.prevent="handleSubmit" class="space-y-8">
-                <div class="form-section">
-                  <h3
-                    class="text-xl font-semibold text-[#333333] mb-6 pb-2 border-b border-[#DDDDDD] font-inter"
-                  >
+                <div class="space-y-6">
+                  <h3 class="text-xl font-semibold text-gray-900 pb-2 border-b border-gray-200">
                     Personal Information
                   </h3>
 
                   <div class="grid md:grid-cols-2 gap-6">
-                    <div class="form-group">
-                      <label
-                        class="block text-sm font-medium text-[#333333] mb-2 font-inter"
-                      >
+                    <div class="group">
+                      <label class="block text-sm font-medium text-gray-700 mb-2">
                         First Name <span class="text-red-500">*</span>
                       </label>
                       <input
                         v-model="form.firstName"
                         type="text"
-                        class="w-full px-4 py-3 border border-[#DDDDDD] rounded-lg focus:ring-2 focus:ring-[#5d6b56] focus:border-[#5d6b56] transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-500 font-inter"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-base focus:border-base hover:border-gray-400 transition-all duration-200 disabled:bg-gray-50 disabled:text-gray-500 hover:-translate-y-[1px]"
                         placeholder="Enter your first name"
                         required
                         :disabled="isSubmitting"
                       />
                     </div>
 
-                    <div class="form-group">
-                      <label
-                        class="block text-sm font-medium text-[#333333] mb-2 font-inter"
-                      >
+                    <div class="group">
+                      <label class="block text-sm font-medium text-gray-700 mb-2">
                         Last Name <span class="text-red-500">*</span>
                       </label>
                       <input
                         v-model="form.lastName"
                         type="text"
-                        class="w-full px-4 py-3 border border-[#DDDDDD] rounded-lg focus:ring-2 focus:ring-[#5d6b56] focus:border-[#5d6b56] transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-500 font-inter"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-base focus:border-base hover:border-gray-400 transition-all duration-200 disabled:bg-gray-50 disabled:text-gray-500 hover:-translate-y-[1px]"
                         placeholder="Enter your last name"
                         required
                         :disabled="isSubmitting"
@@ -196,33 +147,29 @@
                     </div>
                   </div>
 
-                  <div class="grid md:grid-cols-2 gap-6 mt-6">
-                    <div class="form-group">
-                      <label
-                        class="block text-sm font-medium text-[#333333] mb-2 font-inter"
-                      >
+                  <div class="grid md:grid-cols-2 gap-6">
+                    <div class="group">
+                      <label class="block text-sm font-medium text-gray-700 mb-2">
                         Email Address <span class="text-red-500">*</span>
                       </label>
                       <input
                         v-model="form.email"
                         type="email"
-                        class="w-full px-4 py-3 border border-[#DDDDDD] rounded-lg focus:ring-2 focus:ring-[#5d6b56] focus:border-[#5d6b56] transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-500 font-inter"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-base focus:border-base hover:border-gray-400 transition-all duration-200 disabled:bg-gray-50 disabled:text-gray-500 hover:-translate-y-[1px]"
                         placeholder="your.email@example.com"
                         required
                         :disabled="isSubmitting"
                       />
                     </div>
 
-                    <div class="form-group">
-                      <label
-                        class="block text-sm font-medium text-[#333333] mb-2 font-inter"
-                      >
+                    <div class="group">
+                      <label class="block text-sm font-medium text-gray-700 mb-2">
                         Phone Number <span class="text-red-500">*</span>
                       </label>
                       <input
                         v-model="form.phone"
                         type="tel"
-                        class="w-full px-4 py-3 border border-[#DDDDDD] rounded-lg focus:ring-2 focus:ring-[#5d6b56] focus:border-[#5d6b56] transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-500 font-inter"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-base focus:border-base hover:border-gray-400 transition-all duration-200 disabled:bg-gray-50 disabled:text-gray-500 hover:-translate-y-[1px]"
                         placeholder="+234 123 456 7890"
                         required
                         :disabled="isSubmitting"
@@ -231,47 +178,36 @@
                   </div>
                 </div>
 
-                <div class="form-section">
-                  <h3
-                    class="text-xl font-semibold text-[#333333] mb-6 pb-2 border-b border-[#DDDDDD] font-inter"
-                  >
+                <div class="space-y-6 pt-2">
+                  <h3 class="text-xl font-semibold text-gray-900 pb-2 border-b border-gray-200">
                     Study Preferences
                   </h3>
 
                   <div class="grid md:grid-cols-2 gap-6">
-                    <div class="form-group">
-                      <label
-                        class="block text-sm font-medium text-[#333333] mb-2 font-inter"
-                      >
-                        Preferred Study Destination
-                        <span class="text-red-500">*</span>
+                    <div class="group">
+                      <label class="block text-sm font-medium text-gray-700 mb-2">
+                        Preferred Study Destination <span class="text-red-500">*</span>
                       </label>
                       <select
                         v-model="form.destination"
-                        class="w-full px-4 py-3 border border-[#DDDDDD] rounded-lg focus:ring-2 focus:ring-[#5d6b56] focus:border-[#5d6b56] transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-500 font-inter"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-base focus:border-base hover:border-gray-400 transition-all duration-200 disabled:bg-gray-50 disabled:text-gray-500 hover:-translate-y-[1px]"
                         required
                         :disabled="isSubmitting"
                       >
                         <option value="">Select a country</option>
-                        <option
-                          v-for="destination in destinations"
-                          :key="destination"
-                          :value="destination"
-                        >
+                        <option v-for="destination in destinations" :key="destination" :value="destination">
                           {{ destination }}
                         </option>
                       </select>
                     </div>
 
-                    <div class="form-group">
-                      <label
-                        class="block text-sm font-medium text-[#333333] mb-2 font-inter"
-                      >
+                    <div class="group">
+                      <label class="block text-sm font-medium text-gray-700 mb-2">
                         Study Level <span class="text-red-500">*</span>
                       </label>
                       <select
                         v-model="form.level"
-                        class="w-full px-4 py-3 border border-[#DDDDDD] rounded-lg focus:ring-2 focus:ring-[#5d6b56] focus:border-[#5d6b56] transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-500 font-inter"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-base focus:border-base hover:border-gray-400 transition-all duration-200 disabled:bg-gray-50 disabled:text-gray-500 hover:-translate-y-[1px]"
                         required
                         :disabled="isSubmitting"
                       >
@@ -284,16 +220,14 @@
                     </div>
                   </div>
 
-                  <div class="grid md:grid-cols-2 gap-6 mt-6">
-                    <div class="form-group">
-                      <label
-                        class="block text-sm font-medium text-[#333333] mb-2 font-inter"
-                      >
+                  <div class="grid md:grid-cols-2 gap-6">
+                    <div class="group">
+                      <label class="block text-sm font-medium text-gray-700 mb-2">
                         When Would You Like to Start?
                       </label>
                       <select
                         v-model="form.studyTime"
-                        class="w-full px-4 py-3 border border-[#DDDDDD] rounded-lg focus:ring-2 focus:ring-[#5d6b56] focus:border-[#5d6b56] transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-500 font-inter"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-base focus:border-base hover:border-gray-400 transition-all duration-200 disabled:bg-gray-50 disabled:text-gray-500 hover:-translate-y-[1px]"
                         :disabled="isSubmitting"
                       >
                         <option value="">Select a year</option>
@@ -303,15 +237,13 @@
                       </select>
                     </div>
 
-                    <div class="form-group">
-                      <label
-                        class="block text-sm font-medium text-[#333333] mb-2 font-inter"
-                      >
+                    <div class="group">
+                      <label class="block text-sm font-medium text-gray-700 mb-2">
                         Counselling Mode
                       </label>
                       <select
                         v-model="form.mode"
-                        class="w-full px-4 py-3 border border-[#DDDDDD] rounded-lg focus:ring-2 focus:ring-[#5d6b56] focus:border-[#5d6b56] transition-colors duration-200 disabled:bg-gray-50 disabled:text-gray-500 font-inter"
+                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-base focus:border-base hover:border-gray-400 transition-all duration-200 disabled:bg-gray-50 disabled:text-gray-500 hover:-translate-y-[1px]"
                         :disabled="isSubmitting"
                       >
                         <option value="">Choose a mode</option>
@@ -322,60 +254,45 @@
                   </div>
                 </div>
 
-                <div class="form-section">
-                  <h3
-                    class="text-xl font-semibold text-[#333333] mb-6 pb-2 border-b border-[#DDDDDD] font-inter"
-                  >
+                <div class="space-y-6 pt-2">
+                  <h3 class="text-xl font-semibold text-gray-900 pb-2 border-b border-gray-200">
                     Consent & Preferences
                   </h3>
 
                   <div class="space-y-4">
-                    <label
-                      class="flex items-start space-x-3 cursor-pointer group"
-                    >
+                    <label class="flex items-start space-x-3 cursor-pointer group">
                       <input
                         v-model="form.agreeTerms"
                         type="checkbox"
-                        class="mt-1 w-4 h-4 text-[#5d6b56] border-[#DDDDDD] rounded focus:ring-[#5d6b56] transition-colors duration-200"
+                        class="mt-1 w-4 h-4 text-base border-gray-300 rounded focus:ring-base transition-colors duration-200"
                         required
                         :disabled="isSubmitting"
                       />
-                      <span
-                        class="text-sm text-[#666666] group-hover:text-[#333333] transition-colors duration-200 font-inter"
-                      >
-                        I agree to B&S terms and privacy policy
-                        <span class="text-red-500">*</span>
+                      <span class="text-sm text-gray-600 group-hover:text-gray-900 transition-colors duration-200">
+                        I agree to B&S terms and privacy policy <span class="text-red-500">*</span>
                       </span>
                     </label>
 
-                    <label
-                      class="flex items-start space-x-3 cursor-pointer group"
-                    >
+                    <label class="flex items-start space-x-3 cursor-pointer group">
                       <input
                         v-model="form.contactPref"
                         type="checkbox"
-                        class="mt-1 w-4 h-4 text-[#5d6b56] border-[#DDDDDD] rounded focus:ring-[#5d6b56] transition-colors duration-200"
+                        class="mt-1 w-4 h-4 text-base border-gray-300 rounded focus:ring-base transition-colors duration-200"
                         :disabled="isSubmitting"
                       />
-                      <span
-                        class="text-sm text-[#666666] group-hover:text-[#333333] transition-colors duration-200 font-inter"
-                      >
+                      <span class="text-sm text-gray-600 group-hover:text-gray-900 transition-colors duration-200">
                         Please contact me by phone or email
                       </span>
                     </label>
 
-                    <label
-                      class="flex items-start space-x-3 cursor-pointer group"
-                    >
+                    <label class="flex items-start space-x-3 cursor-pointer group">
                       <input
                         v-model="form.receiveUpdates"
                         type="checkbox"
-                        class="mt-1 w-4 h-4 text-[#5d6b56] border-[#DDDDDD] rounded focus:ring-[#5d6b56] transition-colors duration-200"
+                        class="mt-1 w-4 h-4 text-base border-gray-300 rounded focus:ring-base transition-colors duration-200"
                         :disabled="isSubmitting"
                       />
-                      <span
-                        class="text-sm text-[#666666] group-hover:text-[#333333] transition-colors duration-200 font-inter"
-                      >
+                      <span class="text-sm text-gray-600 group-hover:text-gray-900 transition-colors duration-200">
                         I would like to receive updates via email
                       </span>
                     </label>
@@ -385,30 +302,20 @@
                 <div class="pt-6 text-center">
                   <button
                     type="submit"
-                    class="w-full md:w-auto px-10 py-4 bg-[#5d6b56] hover:bg-[#6b7a6a] text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed transform hover:scale-105 disabled:hover:scale-100 font-inter"
+                    class="w-full md:w-auto px-10 py-4 bg-base hover:bg-base/90 text-white font-semibold rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl disabled:opacity-60 disabled:cursor-not-allowed transform hover:-translate-y-1 disabled:hover:translate-y-0"
                     :disabled="isSubmitting"
                   >
-                    <span
-                      v-if="isSubmitting"
-                      class="flex items-center justify-center"
-                    >
-                      <Icon
-                        name="i-heroicons-arrow-path"
-                        class="w-4 h-4 mr-2 animate-spin"
-                      />
+                    <span v-if="isSubmitting" class="flex items-center justify-center">
+                      <Icon name="i-heroicons-arrow-path" class="w-5 h-5 mr-2 animate-spin" />
                       Submitting...
                     </span>
                     <span v-else class="flex items-center justify-center">
                       Submit Application
-                      <Icon
-                        name="i-heroicons-paper-airplane"
-                        class="w-4 h-4 ml-2"
-                      />
+                      <Icon name="i-heroicons-paper-airplane" class="w-5 h-5 ml-2" />
                     </span>
                   </button>
-                  <p class="text-sm text-[#666666] mt-4 font-inter">
-                    We'll review your application and get back to you within 24
-                    hours.
+                  <p class="text-sm text-gray-500 mt-4">
+                    We'll review your application and get back to you within 24 hours.
                   </p>
                 </div>
               </form>
@@ -416,126 +323,77 @@
           </div>
 
           <div class="space-y-8">
-            <div
-              class="bg-white rounded-xl shadow-xl border border-[#DDDDDD] p-8"
-            >
-              <h3 class="text-xl font-semibold text-[#333333] mb-8 font-inter">
-                Get in Touch
-              </h3>
-              <div class="space-y-8">
-                <div
-                  class="group flex items-start space-x-4 p-4 rounded-lg hover:bg-[#f8f9f8] transition-colors duration-200"
-                >
-                  <div
-                    class="w-12 h-12 rounded-lg bg-linear-to-br from-[#eb6534]/10 to-[#eb6534]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-200"
-                  >
-                    <Icon
-                      name="i-heroicons-phone"
-                      class="w-6 h-6 text-[#eb6534]"
-                    />
+            <div class="bg-white rounded-xl shadow-xl border border-gray-100 p-8">
+              <h3 class="text-xl font-semibold text-gray-900 mb-8">Get in Touch</h3>
+              <div class="space-y-6">
+                
+                <div class="group flex items-start space-x-4 p-3 -mx-3 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                  <div class="w-12 h-12 shrink-0 rounded-lg bg-secondary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                    <Icon name="i-heroicons-phone" class="w-6 h-6 text-secondary" />
                   </div>
                   <div>
-                    <h4 class="font-semibold text-[#333333] mb-1 font-inter">Phone</h4>
-                    <p class="text-[#666666] font-medium font-inter">+234 806 544 2707</p>
-                    <p class="text-sm text-[#666666] mt-1 font-inter">
-                      Mon-Fri 9AM-6PM WAT
-                    </p>
+                    <h4 class="font-semibold text-gray-900 mb-1">Phone</h4>
+                    <p class="text-gray-600 font-medium">+234 806 544 2707</p>
+                    <p class="text-sm text-gray-500 mt-1">Mon-Fri 9AM-6PM WAT</p>
                   </div>
                 </div>
 
-                <div
-                  class="group flex items-start space-x-4 p-4 rounded-lg hover:bg-[#f8f9f8] transition-colors duration-200"
-                >
-                  <div
-                    class="w-12 h-12 rounded-lg bg-linear-to-br from-[#eb6534]/10 to-[#eb6534]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-200"
-                  >
-                    <Icon
-                      name="i-heroicons-envelope"
-                      class="w-6 h-6 text-[#eb6534]"
-                    />
+                <div class="group flex items-start space-x-4 p-3 -mx-3 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                  <div class="w-12 h-12 shrink-0 rounded-lg bg-secondary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                    <Icon name="i-heroicons-envelope" class="w-6 h-6 text-secondary" />
                   </div>
                   <div>
-                    <h4 class="font-semibold text-[#333333] mb-1 font-inter">Email</h4>
-                    <p class="text-[#666666] font-medium font-inter">
-                      info@bs-education.com
-                    </p>
-                    <p class="text-[#666666] font-medium font-inter">
-                      bseducation@live.com
-                    </p>
-                    <p class="text-sm text-[#666666] mt-1 font-inter">
-                      We'll respond within 24hrs
-                    </p>
+                    <h4 class="font-semibold text-gray-900 mb-1">Email</h4>
+                    <p class="text-gray-600 font-medium">info@bs-education.com</p>
+                    <p class="text-gray-600 font-medium">bseducation@live.com</p>
+                    <p class="text-sm text-gray-500 mt-1">We'll respond within 24hrs</p>
                   </div>
                 </div>
 
-                <div
-                  class="group flex items-start space-x-4 p-4 rounded-lg hover:bg-[#f8f9f8] transition-colors duration-200"
-                >
-                  <div
-                    class="w-12 h-12 rounded-lg bg-linear-to-br from-[#eb6534]/10 to-[#eb6534]/20 flex items-center justify-center group-hover:scale-110 transition-transform duration-200"
-                  >
-                    <Icon
-                      name="i-heroicons-map-pin"
-                      class="w-6 h-6 text-[#eb6534]"
-                    />
+                <div class="group flex items-start space-x-4 p-3 -mx-3 rounded-lg hover:bg-gray-50 transition-colors duration-200">
+                  <div class="w-12 h-12 shrink-0 rounded-lg bg-secondary/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-200">
+                    <Icon name="i-heroicons-map-pin" class="w-6 h-6 text-secondary" />
                   </div>
                   <div>
-                    <h4 class="font-semibold text-[#333333] mb-1 font-inter">Office</h4>
-                    <p class="text-[#666666] font-medium font-inter">Abuja, Nigeria</p>
-                    <p class="text-sm text-[#666666] mt-1 font-inter">
-                      Visit by appointment only
-                    </p>
+                    <h4 class="font-semibold text-gray-900 mb-1">Office</h4>
+                    <p class="text-gray-600 font-medium leading-snug">Suite 308, Kings Plaza, Ahmadu Bello Way, Jahi, Abuja, Nigeria</p>
+                    <p class="text-sm text-gray-500 mt-1">Visit by appointment only</p>
                   </div>
                 </div>
+
               </div>
             </div>
 
-            <div
-              class="rounded-xl p-8 text-white bg-linear-to-br from-[#5d6b56] via-[#5d6b56] to-[#6b7a6a] shadow-xl"
-            >
+            <div class="rounded-xl p-8 text-white bg-base shadow-xl">
               <div class="text-center space-y-6">
-                <div
-                  class="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center mx-auto backdrop-blur-sm"
-                >
+                <div class="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center mx-auto backdrop-blur-sm">
                   <Icon name="i-simple-icons-whatsapp" class="w-8 h-8" />
                 </div>
                 <div>
-                  <h3 class="text-xl font-semibold mb-3 font-inter">
-                    Quick WhatsApp Chat
-                  </h3>
-                  <p class="text-white/80 mb-6 font-inter">
+                  <h3 class="text-xl font-semibold mb-3">Quick WhatsApp Chat</h3>
+                  <p class="text-white/80 mb-6 text-sm">
                     Get instant answers to your questions via WhatsApp
                   </p>
                   <a
                     href="https://wa.me/+2348065442707"
                     target="_blank"
-                    class="inline-flex items-center px-6 py-3 bg-white text-[#5d6b56] font-semibold rounded-lg hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105 font-inter"
+                    class="inline-flex items-center px-6 py-3 bg-white text-base font-semibold rounded-lg hover:bg-gray-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
                   >
                     Chat Now
-                    <Icon
-                      name="i-heroicons-arrow-top-right-on-square"
-                      class="w-4 h-4 ml-2"
-                    />
+                    <Icon name="i-heroicons-arrow-top-right-on-square" class="w-4 h-4 ml-2" />
                   </a>
                 </div>
               </div>
             </div>
 
             <div class="rounded-xl overflow-hidden shadow-xl">
-              <div
-                class="aspect-4/3 bg-linear-to-br from-[#5d6b56] to-[#6b7a6a]"
-              >
-                <div
-                  class="w-full h-full flex items-center justify-center text-white text-lg font-medium backdrop-blur-sm bg-black/10 font-inter"
-                >
-                  <NuxtImg
-                    src="/img/celebration.png"
-                    alt="Study abroad destinations"
-                    class="absolute inset-0 w-full h-full object-cover"
-                    loading="eager"
-                    preload
-                  />
-                </div>
+              <div class="aspect-4/3 bg-base relative">
+                <NuxtImg
+                  src="/img/celebration.png"
+                  alt="Students celebrating"
+                  class="absolute inset-0 w-full h-full object-cover mix-blend-overlay opacity-80"
+                  loading="lazy"
+                />
               </div>
             </div>
           </div>
@@ -543,66 +401,60 @@
       </div>
     </section>
 
-    <section
-      class="py-20 px-4 sm:px-6 lg:px-8 bg-linear-to-r from-[#f4f5f3] to-[#f4f5f3]/70"
-    >
+    <section class="py-20 px-4 sm:px-6 lg:px-8 bg-white border-t border-gray-100">
       <div class="max-w-4xl mx-auto">
         <div class="text-center mb-16">
-          <h2 class="text-3xl md:text-4xl font-bold text-[#333333] mb-4 font-inter">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
             Frequently Asked Questions
           </h2>
-          <p class="text-xl text-[#666666] font-inter">
+          <p class="text-xl text-gray-600">
             Quick answers to common questions about studying abroad
           </p>
         </div>
 
-        <div class="faq-main">
-            <div class="faq-list">
-              <div
-                v-for="(faq, index) in faqItems"
-                :key="index"
-                class="faq-item"
-                :class="{ 'active': activeIndex === index }"
+        <div class="bg-white rounded-xl p-6 md:p-8 shadow-lg border border-gray-100">
+          <div class="flex flex-col gap-3">
+            <div
+              v-for="(faq, index) in faqItems"
+              :key="index"
+              class="rounded-lg overflow-hidden border transition-all duration-300"
+              :class="activeIndex === index ? 'border-base shadow-md' : 'border-gray-200'"
+            >
+              <button
+                class="w-full px-6 py-5 flex justify-between items-center text-left transition-colors hover:bg-gray-50 focus:outline-none"
+                :class="activeIndex === index ? 'bg-gray-50 text-base' : 'bg-white text-gray-900'"
+                @click="toggleFaq(index)"
+                :aria-expanded="activeIndex === index"
               >
-                <button
-                  class="faq-question"
-                  @click="toggleFaq(index)"
-                  :aria-expanded="activeIndex === index"
-                >
-                  <span class="question-text">{{ faq.label }}</span>
-                  <div class="toggle-icon">
-                    <svg 
-                      width="20" 
-                      height="20" 
-                      viewBox="0 0 24 24" 
-                      fill="none" 
-                      stroke="currentColor" 
-                      stroke-width="2"
-                      :class="{ 'rotated': activeIndex === index }"
-                    >
-                      <path d="M6 9l6 6 6-6"/>
-                    </svg>
-                  </div>
-                </button>
-                
-                <div 
-                  class="faq-answer"
-                  :ref="el => answerRefs[index] = el"
-                >
-                  <div class="answer-content">
+                <span class="font-semibold text-lg pr-4">{{ faq.label }}</span>
+                <Icon 
+                  name="i-heroicons-chevron-down" 
+                  class="w-5 h-5 shrink-0 transition-transform duration-300 text-base"
+                  :class="{ 'rotate-180': activeIndex === index }"
+                />
+              </button>
+              
+              <div 
+                class="grid transition-all duration-300 ease-in-out"
+                :class="activeIndex === index ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'"
+              >
+                <div class="overflow-hidden">
+                  <div class="px-6 pb-6 text-gray-600 leading-relaxed">
                     <p v-html="faq.content"></p>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+
       </div>
     </section>
   </div>
 </template>
 
 <script setup>
-import { set } from '@vueuse/core';
+import { reactive, ref, watch, nextTick } from 'vue';
 
 // Form Data
 const destinations = [
@@ -658,7 +510,6 @@ const resetForm = () => {
   form.receiveUpdates = false;
 };
 
-// Fixed function: Accepts data snapshot argument
 const triggerWhatsAppChat = (data) => {
   const phoneNumber = "+2348065442707";
   const message = encodeURIComponent(
@@ -668,7 +519,6 @@ const triggerWhatsAppChat = (data) => {
       data.lastName +
       ". I would like to inquire about studying abroad. My preferred destination is " + data.destination + "."
   );
-  // Using api.whatsapp.com for better mobile deep-linking
   const whatsappUrl = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${message}`;
   window.open(whatsappUrl, "_blank");
 };
@@ -677,14 +527,11 @@ const handleSubmit = async () => {
   if (isSubmitting.value) return;
 
   isSubmitting.value = true;
-
-  // IMPORTANT: Create snapshot before sending
   const formDataSnapshot = { ...form };
 
   try {
     const supabase = useSupabaseClient();
 
-    // Insert the form data into Supabase
     const { error } = await supabase.from("study_applications").insert({
       first_name: form.firstName,
       last_name: form.lastName,
@@ -701,8 +548,6 @@ const handleSubmit = async () => {
 
     if (error) {
       console.error("Supabase error:", error);
-
-      // Check if it's a duplicate submission error
       if (error.message.includes("already exists within the last 3 days")) {
         showToastNotification(
           "You have already submitted an application within the last 3 days. Please wait before submitting again.",
@@ -722,7 +567,6 @@ const handleSubmit = async () => {
       
       resetForm();
 
-      // Fixed typo: settimeout -> setTimeout
       setTimeout(() => {
         showToastNotification(
           "Would you like to chat with us on WhatsApp for immediate assistance?",
@@ -730,7 +574,6 @@ const handleSubmit = async () => {
         );
       }, 4000);
       
-      // Pass the SNAPSHOT to the delayed trigger function
       setTimeout(() => {
         triggerWhatsAppChat(formDataSnapshot);
       }, 8000);
@@ -752,54 +595,53 @@ const faqItems = [
     label: "How long does the application process take?",
     content:
       "The typical application process takes 2-4 weeks, depending on the country and university. We handle most of the paperwork to speed up the process.",
-    defaultOpen: false,
   },
   {
     label: "Do you help with visa applications?",
     content:
       "Yes! We provide comprehensive visa support including document preparation, application submission, and interview coaching.",
-    defaultOpen: false,
   },
   {
     label: "What are your service fees?",
     content:
       "Our counselling is completely free! We only charge a success fee after you successfully get admission and visa approval.",
-    defaultOpen: false,
   },
   {
     label: "Can you help with scholarships?",
     content:
       "Absolutely! We have access to numerous scholarship opportunities and will help identify and apply for ones that match your profile.",
-    defaultOpen: false,
   },
   {
     label: "Which countries do you specialize in?",
     content:
-      "We specialize in UK, Canada, USA, Australia, Ireland, Germany, and several other European countries. Each destination has dedicated specialists.",
-    defaultOpen: false,
+      "We specialize in UK, Canada, USA, Australia, Ireland, Cyprus, and several other European countries. Each destination has dedicated specialists.",
   },
 ];
-const activeIndex = ref(null)
-  const answerRefs = ref([])
+
+const activeIndex = ref(null);
 
 const toggleFaq = (index) => {
-    if (activeIndex.value === index) {
-      activeIndex.value = null
-    } else {
-      activeIndex.value = index
-    }
+  if (activeIndex.value === index) {
+    activeIndex.value = null;
+  } else {
+    activeIndex.value = index;
   }
+};
   
-  watch(activeIndex, () => {
-    if (activeIndex.value !== null) {
-      nextTick(() => {
-        const activeElement = document.querySelector('.faq-item.active')
-        if (activeElement) {
-          activeElement.scrollIntoView({ block: 'nearest' })
+watch(activeIndex, () => {
+  if (activeIndex.value !== null) {
+    // Only scroll if the element isn't fully visible
+    nextTick(() => {
+      const activeElement = document.querySelector('.border-base.shadow-md');
+      if (activeElement) {
+        const rect = activeElement.getBoundingClientRect();
+        if (rect.bottom > window.innerHeight || rect.top < 0) {
+          activeElement.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }
-      })
-    }
-  })
+      }
+    });
+  }
+});
 
 // SEO Meta
 useSeoMeta({
@@ -836,7 +678,7 @@ useSeoMeta({
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #f8fafc;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -847,106 +689,4 @@ useSeoMeta({
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
-
-/* Enhanced focus states */
-.form-group input:focus,
-.form-group select:focus {
-  transform: translateY(-1px);
-  box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.1),
-    0 10px 10px -5px rgba(16, 185, 129, 0.04);
-}
-
-/* Smooth transitions for all interactive elements */
-* {
-  transition-property: color, background-color, border-color,
-    text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter,
-    backdrop-filter;
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-  transition-duration: 200ms;
-}
-
-.faq-main {
-    background: white;
-    border-radius: 12px;
-    padding: 32px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-  }
-  
-  .faq-list {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-  
-  .faq-item {
-    border-radius: 8px;
-    overflow: hidden;
-    border: 1px solid #DDDDDD;
-  }
-  
-  .faq-item.active {
-    border-color: #5d6b56;
-    box-shadow: 0 4px 12px rgba(133, 148, 132, 0.15);
-  }
-  
-  .faq-question {
-    width: 100%;
-    padding: 20px 24px;
-    background: white;
-    border: none;
-    text-align: left;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 16px;
-    font-weight: 600;
-    color: #333333;
-  }
-  
-  .faq-item.active .faq-question {
-    background: #f8f9f8;
-    color: #5d6b56;
-  }
-  
-  .faq-question:hover {
-    background: #f8f9f8;
-    color: #5d6b56;
-  }
-  
-  .question-text {
-    flex: 1;
-    padding-right: 16px;
-  }
-  
-  .toggle-icon {
-    color: #5d6b56;
-  }
-  
-  .toggle-icon svg.rotated {
-    transform: rotate(180deg);
-  }
-  
-  .faq-answer {
-    overflow: hidden;
-    background: white;
-  }
-  
-  .faq-item.active .faq-answer {
-    display: block;
-  }
-  
-  .faq-item:not(.active) .faq-answer {
-    display: none;
-  }
-  
-  .answer-content {
-    padding: 24px;
-    color: #666666;
-    line-height: 1.6;
-  }
-  
-  .answer-content p {
-    margin-bottom: 16px;
-  }
 </style>

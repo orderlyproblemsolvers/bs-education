@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-[#2d332a] text-white">
+  <footer class="bg-[#040c0b] text-white">
     <!-- Main Footer Content -->
     <div class="py-12 px-6 md:px-8 lg:px-16">
       <div class="max-w-6xl mx-auto">
@@ -78,9 +78,6 @@
               <div class="text-sm flex flex-col">
                 <p class="text-gray-300 mb-1">Phone</p>
                 <a href="tel:+2349012345678" class="text-[#ACBEA3] hover:text-white text-xs transition-colors">
-                  +234 901 234 5678
-                </a>
-                <a href="tel:+2349012345678" class="text-[#ACBEA3] hover:text-white text-xs transition-colors">
                   +234 806 544 2707
                 </a>
               </div>
@@ -114,7 +111,7 @@
     </div>
 
     <!-- Bottom Bar -->
-    <div class="border-t border-white bg-[#2d332a]">
+    <div class="border-t border-white bg-[#040c0b]">
       <div class="max-w-6xl mx-auto px-6 md:px-8 lg:px-16 py-4">
         <div class="flex flex-col md:flex-row justify-between items-center gap-3">
           <div class="flex flex-wrap items-center gap-4 text-xs text-gray-100">

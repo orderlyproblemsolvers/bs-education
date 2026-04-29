@@ -1,12 +1,12 @@
 <template>
-  <section class="py-16 md:py-24 bg-linear-to-br from-[#f4f5f3] to-[#e8ebe7] font-sans overflow-hidden">
+  <section class="py-16 md:py-24 bg-base overflow-hidden">
     <div class="max-w-7xl mx-auto px-5 md:px-10 lg:px-20">
       
       <div class="text-center mb-12 md:mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4 tracking-tight">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 tracking-tight">
           Success Stories
         </h2>
-        <p class="md:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+        <p class="md:text-lg text-white max-w-2xl mx-auto leading-relaxed">
           Hear from our students who are now studying abroad and achieving their
           dreams.
         </p>
@@ -124,7 +124,7 @@ const starsHtml = computed(() => {
 const testimonials = ref([
   {
     id: 1,
-    name: "O.F",
+    name: "Olayinka",
     text: "B&S Educational Services made my dream of studying abroad a reality. Their guidance through the admission and visa process was incredibly seamless and professional.",
     course: "Postgraduate Studies",
     country: "United Kingdom",
@@ -133,16 +133,16 @@ const testimonials = ref([
   },
   {
     id: 2,
-    name: "C.U",
+    name: "Chiamaka",
     text: "I highly recommend their services! They helped me find the perfect university match and made the entire application and transition completely stress-free.",
     course: "Masters Degree",
-    country: "Canada",
+    country: "University of Bangor",
     avatar: "/img/grad5.jpg",
     featured: false,
   },
   {
     id: 3,
-    name: "Paulsen",
+    name: "Paulson",
     text: "From choosing the right university to settling into my new city, the support I received from the B&S team was exceptional every single step of the way.",
     course: "Postgraduate Studies",
     country: "Australia",
@@ -151,7 +151,7 @@ const testimonials = ref([
   },
   {
     id: 4,
-    name: "D.A",
+    name: "Dinas",
     text: "Not only did they secure my admission smoothly, but they also guided me through the dependent visa process so my family could travel and join me without any hassle.",
     course: "Masters Degree",
     country: "United Kingdom",

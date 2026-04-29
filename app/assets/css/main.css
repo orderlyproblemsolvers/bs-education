@@ -4,7 +4,11 @@
 
 @theme{
     --color-primary: #4F5B49;
-    --color-base: #4F5B49;
+    --color-base: #0F2E2A;
     --color-secondary: #EC4E20;
     --color-alt: #FFF7F8;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
 }

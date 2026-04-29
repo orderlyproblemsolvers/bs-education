@@ -1,172 +1,176 @@
 <template>
-  <section class="bg-gray-50 py-20 px-4 sm:px-8 lg:px-24">
-    <div class="mb-12 text-left max-w-3xl">
-      <h2 class="text-3xl sm:text-4xl font-bold text-black mb-4">
+  <section class="bg-surface py-20 px-4 sm:px-8 lg:px-24">
+    <!-- Section Header -->
+    <div class="mb-14 max-w-2xl">
+      <span class="inline-block py-1 px-3 rounded-full bg-base/10 text-base font-semibold text-xs uppercase tracking-widest mb-4 font-['Plus_Jakarta_Sans']">
+        Our Services
+      </span>
+      <h2 class="font-['Plus_Jakarta_Sans'] text-3xl sm:text-4xl font-bold text-base leading-tight mb-4">
         With You at Every <span class="text-secondary">Step</span> of the Journey
       </h2>
-      <p class="text-gray-600 text-lg sm:text-xl">
+      <p class="text-gray-500 text-lg leading-relaxed">
         Discover how our end-to-end support turns your dream of studying internationally into reality.
       </p>
     </div>
 
-    <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-      <UCard
-        variant="solid"
+    <!-- Cards Grid -->
+    <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div
         v-for="(service, index) in services"
         :key="index"
         :ref="el => cardRefs[index] = el"
-        class="hover:shadow-lg transition-all duration-300 relative overflow-hidden opacity-0 translate-y-8 border-transparent"
+        class="group relative rounded-xl p-7 overflow-hidden opacity-0 translate-y-8 transition-shadow duration-300"
         :class="[
           { 'animate-in': visibleCards.has(index) },
-          isHighlightCard(index) ? 'bg-secondary text-white' : 'bg-alt text-black'
+          isHighlightCard(index)
+            ? 'bg-secondary text-white shadow-lg shadow-secondary/20'
+            : 'glass-card'
         ]"
-        :ui="{
-          base: ' rounded-xl h-full flex flex-col justify-between',
-          body: { base: 'p-6 h-full flex flex-col' },
-          footer: { base: 'px-6 pb-6 pt-2' }
-        }"
       >
-        <div class="absolute bottom-0 right-0 pointer-events-none transform translate-x-8 translate-y-8">
-          <svg viewBox="0 0 100 100" class="w-32 h-32 sm:w-40 sm:h-40" :opacity="isHighlightCard(index) ? '0.1' : '0.05'">
-            <circle cx="100" cy="100" r="80" :fill="isHighlightCard(index) ? 'white' : 'black'" />
-            <circle cx="100" cy="100" r="60" :fill="isHighlightCard(index) ? 'white' : 'black'" opacity="0.5" />
-            <circle cx="100" cy="100" r="40" :fill="isHighlightCard(index) ? 'white' : 'black'" opacity="0.8" />
+        <!-- Decorative background circles -->
+        <div class="absolute bottom-0 right-0 pointer-events-none translate-x-8 translate-y-8">
+          <svg viewBox="0 0 100 100" class="w-36 h-36">
+            <circle cx="100" cy="100" r="80" :fill="isHighlightCard(index) ? 'white' : '#001915'" :opacity="isHighlightCard(index) ? '0.08' : '0.04'" />
+            <circle cx="100" cy="100" r="55" :fill="isHighlightCard(index) ? 'white' : '#001915'" :opacity="isHighlightCard(index) ? '0.06' : '0.03'" />
+            <circle cx="100" cy="100" r="30" :fill="isHighlightCard(index) ? 'white' : '#001915'" :opacity="isHighlightCard(index) ? '0.1' : '0.05'" />
           </svg>
         </div>
 
-        <template #header>
-          <h3 
-            class="text-xl font-semibold relative z-10"
-            :class="isHighlightCard(index) ? 'text-white' : 'text-gray-900'"
+        <div class="relative z-10 flex flex-col h-full">
+          <!-- Icon box -->
+          <div
+            class="w-12 h-12 rounded-lg flex items-center justify-center mb-5 shrink-0"
+            :class="isHighlightCard(index) ? 'bg-white/20' : 'bg-white border border-gray-200 shadow-sm'"
+          >
+            <component :is="service.icon" class="w-5 h-5" :class="isHighlightCard(index) ? 'text-white' : 'text-base'" />
+          </div>
+
+          <!-- Title -->
+          <h3
+            class="font-['Plus_Jakarta_Sans'] text-lg font-bold mb-3 leading-snug"
+            :class="isHighlightCard(index) ? 'text-white' : 'text-base'"
           >
             {{ service.title }}
           </h3>
-        </template>
 
-        <p 
-          class="relative z-10 mt-auto"
-          :class="isHighlightCard(index) ? 'text-white/90' : 'text-gray-700'"
-        >
-          {{ service.description }}
-        </p>
-      </UCard>
+          <!-- Description -->
+          <p
+            class="text-sm leading-relaxed mb-6 flex-grow"
+            :class="isHighlightCard(index) ? 'text-white/80' : 'text-gray-500'"
+          >
+            {{ service.description }}
+          </p>
+
+          <!-- Link -->
+          <NuxtLink
+          v-if="service.to"
+            :to="service.to"
+            class="inline-flex items-center gap-1 text-sm font-semibold font-['Plus_Jakarta_Sans'] transition-colors duration-200"
+            :class="isHighlightCard(index) ? 'text-white hover:text-white/70' : 'text-secondary hover:text-secondary/70'"
+          >
+            {{ service.cta }}
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </NuxtLink>
+        </div>
+      </div>
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, h } from 'vue'
+
+// Inline SVG icon components
+const IconForum = { render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '1.8', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, [
+  h('path', { d: 'M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z' })
+]) }
+
+const IconSchool = { render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '1.8', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, [
+  h('path', { d: 'M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5' })
+]) }
+
+const IconDoc = { render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '1.8', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, [
+  h('path', { d: 'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z' }),
+  h('polyline', { points: '14,2 14,8 20,8' }),
+  h('line', { x1: '16', y1: '13', x2: '8', y2: '13' }),
+  h('line', { x1: '16', y1: '17', x2: '8', y2: '17' }),
+  h('polyline', { points: '10,9 9,9 8,9' })
+]) }
+
+const IconGlobe = { render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '1.8', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, [
+  h('circle', { cx: '12', cy: '12', r: '10' }),
+  h('line', { x1: '2', y1: '12', x2: '22', y2: '12' }),
+  h('path', { d: 'M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z' })
+]) }
+
+const IconBook = { render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '1.8', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, [
+  h('path', { d: 'M4 19.5A2.5 2.5 0 016.5 17H20' }),
+  h('path', { d: 'M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z' })
+]) }
+
+const IconFlight = { render: () => h('svg', { xmlns: 'http://www.w3.org/2000/svg', viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': '1.8', 'stroke-linecap': 'round', 'stroke-linejoin': 'round' }, [
+  h('path', { d: 'M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z' })
+]) }
 
 const services = [
-  {
-    title: 'Free Counselling',
-    description: 'We guide you with personalized, no-cost consultations to help you choose the best study destination.',
-  },
-  {
-    title: 'University & Program Selection',
-    description: 'We help you select programs that match your goals, budget, and academic profile.',
-  },
-  {
-    title: 'Application Support',
-    description: 'From start to submission, we support your university and scholarship applications.',
-  },
-  {
-    title: 'Visa Assistance',
-    description: 'We guide you through visa forms, documents, and interview prep for a smoother approval.',
-  },
-  {
-    title: 'Test Prep & Coaching',
-    description: 'We offer classes for IELTS, TOEFL, and more to help you meet admission requirements.',
-  },
-  {
-    title: 'Travel & Accommodation',
-    description: 'We assist with travel plans and finding housing that fits your needs abroad.',
-  },
+  { title: 'Free Counselling',            description: 'Personalized, no-cost consultations to help you choose the best study destination for your goals.',  cta: 'Book a session',   icon: IconForum, to: '/contact'  },
+  { title: 'University & Program Selection', description: 'We curate programs that match your goals, budget, and academic profile across our partner institutions.',  cta: 'Explore options', icon: IconSchool  },
+  { title: 'Application Support',         description: 'Full support from start to submission — SOPs, LORs, resume building, and deadline management.', cta: 'Get started',     icon: IconDoc, to: '/contact'   },
+  { title: 'Visa Assistance',             description: 'We guide you through forms, documentation, and interview prep for a smooth visa approval.',      cta: 'Visa details',    icon: IconGlobe  },
+  { title: 'Test Prep & Coaching',        description: 'Targeted coaching for IELTS, TOEFL, GRE, GMAT, and SAT to meet your admission requirements.',   cta: 'View courses',    icon: IconBook   },
+  { title: 'Travel & Accommodation',      description: 'Flight bookings, pre-departure briefings, and safe housing near your campus — all arranged.',    cta: 'Travel support',  icon: IconFlight },
 ]
 
-// Helper function to check if the card is the first or last one
-const isHighlightCard = (index) => {
-  return index === 0 || index === services.length - 1
-}
+const isHighlightCard = (index) => index === 0 || index === services.length - 1
 
-// Intersection Observer setup
 const cardRefs = ref([])
 const visibleCards = ref(new Set())
 let observer = null
 
-const observerOptions = {
-  root: null,
-  rootMargin: '-10% 0px -10% 0px', 
-  threshold: 0.1 
-}
-
 const handleIntersection = (entries) => {
   entries.forEach((entry) => {
-    const cardIndex = cardRefs.value.findIndex(ref => ref?.$el === entry.target)
-    
-    if (entry.isIntersecting && cardIndex !== -1) {
-      setTimeout(() => {
-        visibleCards.value.add(cardIndex)
-      }, cardIndex * 100) 
+    const idx = cardRefs.value.indexOf(entry.target)
+    if (entry.isIntersecting && idx !== -1) {
+      setTimeout(() => visibleCards.value.add(idx), idx * 80)
     }
   })
 }
 
 onMounted(() => {
-  const initObserver = () => {
-    observer = new IntersectionObserver(handleIntersection, observerOptions)
-    
-    cardRefs.value.forEach((cardRef) => {
-      if (cardRef?.$el) {
-        observer.observe(cardRef.$el)
-      }
-    })
+  const init = () => {
+    observer = new IntersectionObserver(handleIntersection, { rootMargin: '-5% 0px', threshold: 0.1 })
+    cardRefs.value.forEach(el => el && observer.observe(el))
   }
-
-  if (window.requestIdleCallback) {
-    window.requestIdleCallback(initObserver)
-  } else {
-    setTimeout(initObserver, 0)
-  }
+  window.requestIdleCallback ? window.requestIdleCallback(init) : setTimeout(init, 0)
 })
 
-onUnmounted(() => {
-  if (observer) {
-    observer.disconnect()
-    observer = null
-  }
-})
+onUnmounted(() => observer?.disconnect())
 </script>
 
 <style scoped>
+.glass-card {
+  background: linear-gradient(145deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.7) 100%);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.7);
+  box-shadow: 0 8px 32px -8px rgba(0, 25, 21, 0.08);
+}
+.glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px -8px rgba(0, 25, 21, 0.12);
+  border-color: rgba(253, 101, 47, 0.25);
+}
+
 .animate-in {
-  animation: slideInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: slideInUp 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
-
 @keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translateY(32px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0);    }
 }
-
-/* Prefers reduced motion support */
 @media (prefers-reduced-motion: reduce) {
-  .animate-in {
-    animation: fadeIn 0.3s ease forwards;
-  }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-    }
-    to {
-      opacity: 1;
-    }
-  }
+  .animate-in { animation: none; opacity: 1; transform: none; }
 }
 </style>

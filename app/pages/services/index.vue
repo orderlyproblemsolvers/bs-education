@@ -1,6 +1,6 @@
 <template>
-  <div class="min-h-screen bg-white pb-20 overflow-hidden">
-    <div class="relative overflow-hidden text-white bg-primary rounded-b-[60px] md:rounded-b-[100px] pb-24">
+  <div class="min-h-screen bg-white  overflow-hidden">
+    <div class="relative overflow-hidden text-white bg-base rounded-b-[60px] md:rounded-b-[100px] pb-24">
       <NuxtImg
         src="/img/countries.jpg"
         alt="Study abroad destinations"
@@ -8,7 +8,7 @@
         loading="eager"
         preload
       />
-      <div class="absolute inset-0 bg-gradient-to-b from-primary/80 to-primary/95"></div>
+      <div class="absolute inset-0 bg-linear-to-b from-base/80 to-base/95"></div>
       
       <div class="relative max-w-7xl mx-auto px-6 md:px-12 lg:px-24 pt-32 pb-16 z-10 text-center">
         <div class="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-md border border-white/20 rounded-full text-sm font-medium text-white mb-8 shadow-xl">
@@ -21,12 +21,9 @@
           Transform your future with world-class education. We've helped thousands of students turn their study abroad dreams into reality across 7+ countries.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button class="w-full sm:w-auto px-8 py-4 bg-secondary text-white font-bold rounded-xl shadow-lg hover:bg-secondary/90 hover:-translate-y-1 transition-all duration-300">
-            Start Your Journey →
-          </button>
-          <button class="w-full sm:w-auto px-8 py-4 border-2 border-white/30 bg-white/5 backdrop-blur-sm text-white font-bold rounded-xl hover:bg-white hover:text-primary transition-all duration-300">
-            Book Free Consultation
-          </button>
+          <NuxtLink to="/contact" class="w-full sm:w-auto px-8 py-4 bg-secondary text-white font-bold rounded-xl shadow-lg hover:bg-secondary/90 hover:-translate-y-1 transition-all duration-300">
+            Book Free Consultation →
+          </NuxtLink>
         </div>
       </div>
     </div>

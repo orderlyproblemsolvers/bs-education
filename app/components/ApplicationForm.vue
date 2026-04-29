@@ -1,14 +1,13 @@
 <template>
-  <section class="py-8 md:py-16 bg-[#f4f5f3] font-sans" aria-labelledby="form-heading">
+  <section class="py-8 md:py-16 bg-white" aria-labelledby="form-heading">
     <div class="max-w-7xl mx-auto px-5 md:px-10 lg:px-20">
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
         <div id="application" class="bg-white rounded-xl p-6 md:p-8 shadow-lg border border-gray-200">
           <div>
             <header class="mb-8">
-              <h1 id="form-heading" class="text-2xl md:text-3xl font-bold text-base mb-2">Start Your Journey</h1>
+              <h1 id="form-heading" class="text-2xl md:text-3xl font-bold text-base mb-2">Book Your Free Consultation</h1>
               <p class="text-gray-600 leading-relaxed">
-                Fill out the form below and we'll reach out to you within 24
-                hours.
+                We Respond Within 24 Hours
               </p>
             </header>
 
@@ -211,7 +210,7 @@
                       :disabled="isSubmitting"
                     />
                     <label for="contactPref" class="text-sm text-base leading-tight cursor-pointer">
-                      Please contact me by phone or email
+                      Please contact me by phone or Whatsapp
                     </label>
                   </div>
 
@@ -328,6 +327,10 @@ const destinations = [
   "Hungary",
   "Malta",
   "Cyprus",
+  "Ireland",
+  "Canada",
+  "UAE",
+  "Egypt"
 ];
 
 const form = reactive({
