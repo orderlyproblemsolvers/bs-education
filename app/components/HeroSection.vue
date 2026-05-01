@@ -27,38 +27,47 @@
     <div
       class="relative z-10 w-full max-w-7xl mx-auto flex flex-col-reverse md:flex-row items-center justify-between gap-10 md:gap-12"
     >
-      <div
-        class="text-black w-full md:w-[55%] flex flex-col items-center md:items-start space-y-6 text-center md:text-left mt-8 md:mt-0"
-      >
-        <h1
-          class="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-bold leading-tight"
-        >
-          Study Abroad Is Closer Than You Think — Get Free Expert Guidance Today
-        </h1>
-        <p
-          class=" sm:text-lg text-gray-800 max-w-lg"
-        >
-          We handle your admission, visa, and travel support from start to finish. Over 1,000 students placed. 99% visa success rate. Free consultation.
-        </p>
-        <div
-          class="flex flex-col sm:flex-row w-full sm:w-auto items-stretch sm:items-center gap-4"
-        >
-          <UButton
-            size="lg"
-            class="bg-secondary text-white justify-center font-bold px-6 py-3 hover:bg-secondary/70 rounded-lg shadow-lg"
-          >
-            <NuxtLink to="/contact" class="text-white">Book Free Consultation</NuxtLink>
-          </UButton>
-          <UButton
-            icon="i-lucide-send"
-            size="lg"
-            @click="openWhatsApp"
-            class="px-6 py-3 bg-base justify-center cursor-pointer hover:bg-base/80 text-alt font-semibold rounded-lg shadow-lg"
-          >
-            Chat on WhatsApp
-          </UButton>
-        </div>
-      </div>
+ <div
+  class="text-black w-full md:w-[55%] flex flex-col items-center md:items-start space-y-5 text-center md:text-left mt-8 md:mt-0"
+>
+  <!-- Eyebrow: pulls the CTA line out of the headline -->
+  <span class="inline-flex items-center gap-2 bg-secondary/10 text-secondary text-sm font-semibold px-4 py-1.5 rounded-full">
+    <span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+    Get Free Expert Guidance Today
+  </span>
+
+  <!-- Headline is now focused on one idea -->
+  <h1 class="text-3xl sm:text-4xl md:text-[2.75rem] lg:text-5xl font-bold leading-[1.15] tracking-tight">
+    Your Dream of Studying Abroad Is
+    <span class="text-secondary"> Closer Than You Think</span>
+  </h1>
+
+  <!-- Supporting copy — short and clean -->
+<p class="text-gray-600 sm:text-lg max-w-md leading-relaxed">
+  We handle your admission, visa, and travel support from start to finish — 
+  over 1,000 students placed, 99% visa success rate, and a free consultation 
+  to get you started.
+</p>
+
+
+  <!-- CTAs unchanged -->
+  <div class="flex flex-col sm:flex-row w-full sm:w-auto items-stretch sm:items-center gap-4 pt-1">
+    <UButton
+      size="lg"
+      class="bg-secondary text-white justify-center font-bold px-6 py-3 hover:bg-secondary/70 rounded-lg shadow-lg"
+    >
+      <NuxtLink to="/contact" class="text-white">Book Free Consultation</NuxtLink>
+    </UButton>
+    <UButton
+      icon="i-lucide-send"
+      size="lg"
+      @click="openWhatsApp"
+      class="px-6 py-3 bg-base justify-center cursor-pointer hover:bg-base/80 text-alt font-semibold rounded-lg shadow-lg"
+    >
+      Chat on WhatsApp
+    </UButton>
+  </div>
+</div>
 
       <div
         class="w-full md:w-[45%] flex justify-center items-center"

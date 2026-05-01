@@ -34,14 +34,14 @@ export default defineNuxtConfig({
           name: "og:description",
           content: "B&S Educational Services - Building Foundation for Life.",
         },
-        { name: "og:image", content: "/img/main-logo.png" },
+        { name: "og:image", content: "/img/bs-primary.png" },
         { name: "og:image:type", content: "image/png" },
         { name: "og:title", content: "B&S Educational Services" },
         {
           name: "og:description",
           content: "B&S Educational Services - Building Foundation for Life.",
         },
-        { name: "og:image", content: "/img/main-logo.png" },
+        { name: "og:image", content: "/img/bs-primary.png" },
         { name: "og:url", content: "https://bs-education.com" },
         { name: "og:type", content: "website" },
         { name: "twitter:card", content: "summary_large_image" },
@@ -50,7 +50,7 @@ export default defineNuxtConfig({
           name: "twitter:description",
           content: "B&S Educational Services - Building Foundation for Life.",
         },
-        { name: "twitter:image", content: "/img/main-logo.png" },
+        { name: "twitter:image", content: "/img/bs-primary.png" },
         { name: "twitter:site", content: "@bs_education" },
         { name: "twitter:creator", content: "@bs_education" },
       ],
@@ -62,8 +62,8 @@ export default defineNuxtConfig({
           crossorigin: "",
         },
         { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-        { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32x32.png' },
-        { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/favicon-16x16.png' },
+        { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/icon-32x32.png' },
+        { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/icon-16x16.png' },
         { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
         { rel: 'manifest', href: '/site.webmanifest' }
       ]
@@ -105,7 +105,7 @@ export default defineNuxtConfig({
     compressPublicAssets: true,
     minify: true
   },
-  modules: ["@nuxt/image", "@nuxt/ui", "@nuxtjs/supabase", "@vueuse/nuxt", "@nuxtjs/leaflet", "nuxt-security", "@nuxtjs/seo", "nuxt-og-image"],
+  modules: ["@nuxt/image", "@nuxt/ui", "@nuxtjs/supabase", "@vueuse/nuxt", "@nuxtjs/leaflet", "nuxt-security", "@nuxtjs/seo", "nuxt-og-image", "nuxt-seo-utils"],
   css: [
     "~/assets/css/main.css",
     "quill/dist/quill.snow.css",
@@ -132,6 +132,9 @@ export default defineNuxtConfig({
     format: ["webp", "avif", "jpg", "png", "jpeg"],
     domains: ["minjvvxdfdwmbrtphzpr.supabase.co"],
   },
+  ogImage: {
+    enabled: true
+  },
 
   vite: {
     build: {
@@ -144,5 +147,11 @@ export default defineNuxtConfig({
       }
     },
     
+  },
+  site: {
+    url: 'https://bs-education.com',
+    name: 'B&S Educational Services',
+    description: 'Your trusted partner for studying abroad',
+    defaultLocale: 'en',
   },
 });

@@ -1,5 +1,5 @@
 <template>
-  <footer class="bg-[#040c0b] text-white">
+  <footer class="bg-[#181820] text-white">
     <!-- Main Footer Content -->
     <div class="py-12 px-6 md:px-8 lg:px-16">
       <div class="max-w-6xl mx-auto">
@@ -9,10 +9,11 @@
           <div class="lg:col-span-1">
             <div class="mb-4">
               <img
-                src="/img/bs-secondary.png"
+                src="/img/bs-primary.png"
                 alt="B&S Educational Services Logo"
                 width="140"
                 height="auto"
+                class="invert"
               />
             </div>
             <p class="text-gray-300 text-sm leading-relaxed mb-4">
@@ -70,14 +71,14 @@
               <div class="text-sm">
                 <p class="text-gray-300 mb-1">Address</p>
                 <p class="text-gray-400 text-xs">
-                  No 308, Kings Plaza<br />
+                  No 308, 3rd floor, Kings Plaza<br />
                   Jahi, Abuja, Nigeria
                 </p>
               </div>
 
               <div class="text-sm flex flex-col">
                 <p class="text-gray-300 mb-1">Phone</p>
-                <a href="tel:+2349012345678" class="text-[#ACBEA3] hover:text-white text-xs transition-colors">
+                <a href="tel:+2348065442707" class="text-[#ACBEA3] hover:text-white text-xs transition-colors">
                   +234 806 544 2707
                 </a>
               </div>
@@ -111,7 +112,7 @@
     </div>
 
     <!-- Bottom Bar -->
-    <div class="border-t border-white bg-[#040c0b]">
+    <div class="border-t border-white bg-[#181820]">
       <div class="max-w-6xl mx-auto px-6 md:px-8 lg:px-16 py-4">
         <div class="flex flex-col md:flex-row justify-between items-center gap-3">
           <div class="flex flex-wrap items-center gap-4 text-xs text-gray-100">

@@ -456,6 +456,20 @@
 <script setup>
 import { reactive, ref, watch, nextTick } from 'vue';
 
+useSeoMeta({
+  title: 'B&S Educational Services - Your Path to Studying Abroad',
+  description: 'B&S Educational Services offers free expert counselling, admission processing, visa support, and test prep for students looking to study in the UK, USA, Hungary, Australia, and more.',
+  twitterCard: 'summary_large_image',
+  robots: 'index, follow',
+  canonical: 'https://bs-education.com/contact',
+})
+
+defineOgImage('BnS', {
+  title: 'Your Dream of Studying Abroad Is Closer Than You Think',
+  description: 'Free expert guidance — admission, visa & travel support from start to finish.',
+  eyebrow: 'B&S Educational Services',
+})
+
 // Form Data
 const destinations = [
   "UK",

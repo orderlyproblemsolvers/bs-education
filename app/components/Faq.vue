@@ -182,7 +182,7 @@ const mainFaqs = ref([
   },
   {
     question: "What happens if my visa gets rejected?",
-    answer: "While rare with our guidance (we have a 95%+ success rate), we provide <strong>full support for reapplication or alternative options</strong>. This includes reviewing rejection reasons, strengthening your profile, or exploring other suitable countries. Your success is our commitment.",
+    answer: "While rare with our guidance (we have a 99%+ success rate), we provide <strong>full support for reapplication or alternative options</strong>. This includes reviewing rejection reasons, strengthening your profile, or exploring other suitable countries. Your success is our commitment.",
     cta: null
   },
   {

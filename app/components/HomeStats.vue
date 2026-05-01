@@ -29,7 +29,7 @@ import { onMounted, nextTick } from 'vue'
 
 const stats = [
   { id: 'since',    label: 'In business since',    display: '2007',   target: 2007, suffix: '',  aria: 'Since 2007',                         static: true,  color: 'var(--color-primary)' },
-  { id: 'partners', label: 'Partner universities', display: '15+',    target: 15,   suffix: '+', aria: 'Fifteen plus partner universities',   static: false, color: 'var(--color-secondary)' },
+  { id: 'partners', label: 'Partner universities', display: '17+',    target: 15,   suffix: '+', aria: 'Fifteen plus partner universities',   static: false, color: 'var(--color-secondary)' },
   { id: 'students', label: 'Students placed',      display: '1,000+', target: 1000, suffix: '+', aria: 'One thousand plus students placed',   static: false, color: 'var(--color-base)' },
   { id: 'visa',     label: 'Visa success rate',    display: '99%',    target: 99,   suffix: '%', aria: 'Ninety nine percent visa success rate', static: false, color: 'var(--color-secondary)' },
 ]
