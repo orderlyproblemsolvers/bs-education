@@ -133,7 +133,14 @@ export default defineNuxtConfig({
     domains: ["minjvvxdfdwmbrtphzpr.supabase.co"],
   },
   ogImage: {
-    enabled: true
+    enabled: true,
+    fontSubsets: [
+      // Tell Satori exactly which font weights to download
+      'Plus+Jakarta+Sans:400',
+      'Plus+Jakarta+Sans:500',
+      'Plus+Jakarta+Sans:700',
+      'Plus+Jakarta+Sans:900'
+    ]
   },
 
   vite: {

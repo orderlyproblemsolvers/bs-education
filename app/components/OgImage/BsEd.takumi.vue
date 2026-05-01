@@ -36,8 +36,8 @@ withDefaults(defineProps<{
             style="height: 56px; object-fit: contain;"
           />
           <div class="flex items-center px-5 py-2 bg-[#F8F9FA] rounded-full border border-gray-100">
-            <span class="text-[#414358 tracking-wide">
-              bseducationalservices.com
+            <span class="text-[#414358] tracking-wide">
+              bs-education.com
             </span>
           </div>
         </div>
@@ -53,12 +53,12 @@ withDefaults(defineProps<{
           </div>
 
           <!-- Headline -->
-          <h1 class="text-[56px] font-black leading-[1.1] text-[#1A1B26] m-0 tracking-tight">
+          <h1 class="text-[56px]  leading-[1.1] text-[#1A1B26] m-0 tracking-tight">
             {{ title }}
           </h1>
 
           <!-- Description -->
-          <p class="text-[26px] font-medium text-[#64657A] leading-[1.4] m-0 max-w-[95%]">
+          <p class="text-[26px]  text-[#64657A] leading-[1.4] m-0 max-w-[95%]">
             {{ description }}
           </p>
         </div>
@@ -68,7 +68,7 @@ withDefaults(defineProps<{
           
           <!-- Stat 1 -->
           <div class="flex flex-col mr-16">
-            <span class="text-[38px] font-black text-[#414358] leading-none mb-2">1,000+</span>
+            <span class="text-[38px]  text-[#414358] leading-none mb-2">1,000+</span>
             <span class=" text-[#9CA3AF] uppercase tracking-widest">Students Placed</span>
           </div>
 
@@ -77,7 +77,7 @@ withDefaults(defineProps<{
 
           <!-- Stat 2 -->
           <div class="flex flex-col mr-16">
-            <span class="text-[38px] font-black text-[#414358] leading-none mb-2">99%</span>
+            <span class="text-[38px]  text-[#414358] leading-none mb-2">99%</span>
             <span class=" text-[#9CA3AF] uppercase tracking-widest">Visa Success</span>
           </div>
 
@@ -86,7 +86,7 @@ withDefaults(defineProps<{
 
           <!-- Stat 3 -->
           <div class="flex flex-col">
-            <span class="text-[38px] font-black text-[#C5A03A] leading-none mb-2">100% Free</span>
+            <span class="text-[38px]  text-[#C5A03A] leading-none mb-2">100% Free</span>
             <span class=" text-[#9CA3AF] uppercase tracking-widest">Consultation</span>
           </div>
           
