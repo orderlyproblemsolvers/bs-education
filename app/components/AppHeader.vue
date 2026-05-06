@@ -4,7 +4,7 @@
   >
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between h-16 lg:h-20">
-        <NuxtLink to="/" class="flex items-center space-x-3 flex-shrink-0">
+        <NuxtLink to="/" class="flex items-center space-x-3 shrink-0">
           <div class="w-24 h-24 lg:w-24 lg:h-24">
             <img
               src="/img/bs-primary.png"

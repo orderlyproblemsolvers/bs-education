@@ -62,7 +62,7 @@
       icon="i-lucide-send"
       size="lg"
       @click="openWhatsApp"
-      class="px-6 py-3 bg-base justify-center cursor-pointer hover:bg-base/80 text-alt font-semibold rounded-lg shadow-lg"
+      class="px-6 py-3 border  border-green-600 justify-center cursor-pointer hover:border-green-900 text-green-600 font-semibold rounded-lg shadow-lg"
     >
       Chat on WhatsApp
     </UButton>
