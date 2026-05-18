@@ -78,6 +78,9 @@ export default defineNuxtConfig({
           "'self'",
           "https://api.supabase.co",
           "https://*.supabase.co",
+          "https://*.cloudinary.com",
+          "https://api.cloudinary.com",
+          "https://res.cloudinary.com",
         ],
         "img-src": [
           "'self'",
@@ -85,6 +88,9 @@ export default defineNuxtConfig({
           "blob:",
           "https://api.supabase.co",
           "https://*.supabase.co",
+          "https://api.cloudinary.com",
+          "https://*.cloudinary.com",
+          "https://res.cloudinary.com",
         ],
       },
       xXSSProtection: "1; mode=block",
@@ -130,7 +136,7 @@ export default defineNuxtConfig({
     // Global options
     quality: 80,
     format: ["webp", "avif", "jpg", "png", "jpeg"],
-    domains: ["minjvvxdfdwmbrtphzpr.supabase.co"],
+    domains: ["minjvvxdfdwmbrtphzpr.supabase.co", "res.cloudinary.com"],
   },
   ogImage: {
     enabled: true,

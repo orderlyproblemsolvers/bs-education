@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-[#f4f5f3]">
+  <div class="min-h-screen bg-gradient-to-b from-[#f4f5f3] to-white">
     <div class="container mx-auto px-4 py-12">
       <!-- Loading State -->
       <div v-if="pending" class="max-w-6xl mx-auto">
@@ -24,113 +24,163 @@
         <div class="bg-red-50 w-20 h-20 rounded-2xl flex items-center justify-center mx-auto mb-6">
           <UIcon name="i-heroicons-exclamation-triangle" class="w-10 h-10 text-red-500" />
         </div>
-        <h2 class="text-3xl font-bold text-gray-900 mb-4">Event Not Found</h2>
+        <h1 class="text-3xl font-bold text-gray-900 mb-4">Event Not Found</h1>
         <p class="text-gray-600 mb-8 max-w-md mx-auto">
-          This event may have been moved, cancelled, or does not exist. Please check the event list for available programmes.
+          This event may have been moved, cancelled, or does not exist.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">
           <UButton 
             to="/events" 
-            class="bg-[#5d6b56] hover:bg-[#9BAD94] text-white font-medium px-8 py-3 rounded-xl"
+            class="bg-[#5d6b56] hover:bg-[#9BAD94] text-white font-medium px-8 py-3 rounded-xl transition-all duration-300 transform hover:scale-105"
           >
             <UIcon name="i-heroicons-arrow-left" class="w-4 h-4 mr-2" />
             Back to Events
-          </UButton>
-          <UButton 
-            to="/" 
-            variant="outline"
-            class="border-[#5d6b56] text-[#5d6b56] hover:bg-[#5d6b56] hover:text-white font-medium px-8 py-3 rounded-xl"
-          >
-            Go Home
           </UButton>
         </div>
       </div>
 
       <!-- Event Details -->
-      <div v-else class="max-w-6xl mx-auto">
+      <div v-else class="max-w-7xl mx-auto">
+        <!-- Breadcrumb -->
+        <nav class="flex items-center space-x-2 text-sm text-gray-500 mb-6">
+          <UButton to="/events" variant="link" class="text-gray-500 hover:text-[#5d6b56] p-0">
+            Events
+          </UButton>
+          <UIcon name="i-heroicons-chevron-right" class="w-3 h-3" />
+          <span class="text-gray-900 font-bold text-2xl truncate">{{ event.title }}</span>
+        </nav>
+
+        <!-- Main Layout Grid -->
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
           
-          <!-- Main Content -->
-          <div class="lg:col-span-2">
+          <!-- Main Content Column -->
+          <div class="lg:col-span-2 space-y-6">
+            <!-- Event Banner & Header Combined Card -->
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
               
-              <!-- Event Header -->
-              <div class="bg-linear-to-r from-[#5d6b56] to-[#9BAD94] p-8 text-white">
-                <div class="flex items-center mb-4">
-                  <div class="bg-white/20 p-2 rounded-lg mr-3">
-                    <UIcon name="i-heroicons-academic-cap" class="w-6 h-6" />
+              <!-- Image Cap (Strictly enforcing the 1200x630 ratio) -->
+              <div v-if="event.banner_url" class="w-full aspect-1200/630 bg-gray-100">
+                <img 
+                  :src="event.banner_url" 
+                  :alt="event.title"
+                  class="w-full h-full object-contain md:object-cover"
+                />
+              </div>
+
+              <!-- Text Header -->
+              <div class="bg-gradient-to-r from-[#5d6b56] to-[#9BAD94] p-8 text-white">
+                <div class="flex items-center gap-3 mb-4 flex-wrap">
+                  <div class="bg-white/20 p-2 rounded-lg">
+                    <UIcon name="i-heroicons-academic-cap" class="w-5 h-5" />
                   </div>
-                  <span class="bg-white/20 px-3 py-1 rounded-full text-sm font-medium uppercase tracking-wide">
+                  <span class="bg-white/20 px-3 py-1 rounded-full text-sm font-medium">
                     Educational Event
                   </span>
+                  <span 
+                    class="px-3 py-1 rounded-full text-sm font-medium"
+                    :class="getStatusBadgeClass()"
+                  >
+                    {{ getEventStatus() }}
+                  </span>
                 </div>
-                <h1 class="text-4xl md:text-5xl font-bold mb-4 leading-tight">
+                
+                <h1 class="text-3xl md:text-4xl font-bold mb-4 leading-tight">
                   {{ event.title }}
                 </h1>
-                
-                <!-- Event Meta Information -->
-                <div class="flex flex-wrap gap-6 text-white/90">
+                    
+                <!-- Event Meta Grid -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-white/90">
                   <div class="flex items-center space-x-2">
-                    <div class="bg-white/20 p-1.5 rounded-lg">
+                    <div class="bg-white/20 p-2 rounded-lg">
                       <UIcon name="i-heroicons-calendar-days" class="w-4 h-4" />
                     </div>
                     <div>
-                      <div class="font-semibold">{{ formatDateShort(event.event_date) }}</div>
-                      <div class="text-sm opacity-90">{{ formatTime(event.event_date) }}</div>
+                      <div class="font-semibold text-sm">{{ formatDateShort(event.event_date) }}</div>
+                      <div class="text-xs opacity-90">{{ formatTime(event.event_date) }}</div>
                     </div>
                   </div>
                   
                   <div v-if="event.venue" class="flex items-center space-x-2">
-                    <div class="bg-white/20 p-1.5 rounded-lg">
+                    <div class="bg-white/20 p-2 rounded-lg">
                       <UIcon name="i-heroicons-map-pin" class="w-4 h-4" />
                     </div>
                     <div>
-                      <div class="font-semibold">{{ event.venue }}</div>
-                      <div class="text-sm opacity-90">Venue</div>
+                      <div class="font-semibold text-sm truncate">{{ event.venue }}</div>
+                      <div class="text-xs opacity-90">Venue</div>
                     </div>
                   </div>
 
-                  <!-- Admission Fee -->
                   <div class="flex items-center space-x-2">
-                    <div class="bg-white/20 p-1.5 rounded-lg">
+                    <div class="bg-white/20 p-2 rounded-lg">
                       <UIcon name="i-heroicons-currency-dollar" class="w-4 h-4" />
                     </div>
                     <div>
-                      <div class="font-semibold">
-                        {{ event.is_free ? 'Free' : `${event.currency}${event.admission_fee}` }}
+                      <div class="font-semibold text-sm">
+                        {{ getPriceDisplay() }}
                       </div>
-                      <div class="text-sm opacity-90">Admission</div>
+                      <div class="text-xs opacity-90">Admission</div>
                     </div>
                   </div>
 
-                  <!-- Event Status -->
                   <div class="flex items-center space-x-2">
-                    <div class="bg-white/20 p-1.5 rounded-lg">
+                    <div class="bg-white/20 p-2 rounded-lg">
                       <UIcon name="i-heroicons-clock" class="w-4 h-4" />
                     </div>
                     <div>
-                      <div class="font-semibold" :class="getStatusClass()">
-                        {{ getEventStatus() }}
-                      </div>
-                      <div class="text-sm opacity-90">Status</div>
+                      <div class="font-semibold text-sm">{{ getRemainingDays() }}</div>
+                      <div class="text-xs opacity-90">Until event</div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <!-- Event Description -->
+              <!-- Event Description & Additional Sections -->
               <div class="p-8">
                 <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center">
                   <UIcon name="i-heroicons-document-text" class="w-6 h-6 mr-3 text-[#5d6b56]" />
                   About This Event
                 </h2>
                 
-                <div v-if="event.description" class="prose prose-lg max-w-none text-gray-700 leading-relaxed">
-                  <p>{{ event.description }}</p>
-                </div>
+                <div 
+                  v-if="event.description" 
+                  class="prose prose-lg max-w-none text-gray-700 leading-relaxed"
+                  v-html="event.description"
+                ></div>
+                
                 <div v-else class="bg-gray-50 rounded-xl p-6 text-center">
                   <UIcon name="i-heroicons-information-circle" class="w-8 h-8 text-gray-400 mx-auto mb-2" />
                   <p class="text-gray-500">No additional details provided for this event.</p>
+                </div>
+
+                <!-- Pricing Tiers -->
+                <div v-if="event.pricing_tiers && event.pricing_tiers.length > 0 && !event.is_free" class="mt-8">
+                  <h2 class="text-xl font-bold text-gray-900 mb-4 flex items-center">
+                    <UIcon name="i-heroicons-ticket" class="w-5 h-5 mr-2 text-[#5d6b56]" />
+                    Ticket Tiers
+                  </h2>
+                  <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div 
+                      v-for="tier in event.pricing_tiers" 
+                      :key="tier.name"
+                      class="border border-gray-200 rounded-xl p-4 hover:shadow-md transition-all duration-300"
+                    >
+                      <div class="flex justify-between items-start mb-2">
+                        <h3 class="font-bold text-gray-900 text-base">{{ tier.name }}</h3>
+                        <span class="text-lg font-bold text-[#5d6b56]">
+                          {{ event.currency }}{{ tier.price }}
+                        </span>
+                      </div>
+                      <p v-if="tier.description" class="text-sm text-gray-600 mb-3">
+                        {{ tier.description }}
+                      </p>
+                      <ul v-if="tier.perks && tier.perks.length" class="space-y-1">
+                        <li v-for="perk in tier.perks" :key="perk" class="text-xs text-gray-500 flex items-center">
+                          <UIcon name="i-heroicons-check-circle" class="w-3 h-3 text-green-500 mr-1" />
+                          {{ perk }}
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
 
                 <!-- Event Highlights -->
@@ -151,159 +201,80 @@
                     <p class="text-sm text-gray-600">Receive a certificate of participation upon completion</p>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
+              </div> <!-- End of p-8 description section -->
+            </div> <!-- End of event banner combined card -->
+          </div> <!-- End of lg:col-span-2 main content block -->
 
-          <!-- Registration Sidebar -->
+          <!-- Registration Sidebar Column -->
           <div class="lg:col-span-1">
-            <div class="sticky top-8">
-              <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-                
-                <!-- Registration Header -->
-                <div class="bg-[#f4f5f3] p-6 border-b border-gray-100">
-                  <h3 class="text-xl font-bold text-gray-900 flex items-center">
-                    <UIcon name="i-heroicons-clipboard-document-check" class="w-6 h-6 mr-3 text-[#5d6b56]" />
-                    Event Registration
-                  </h3>
+            <div class="sticky top-8 space-y-6">
+              
+              <!-- Registration Card -->
+              <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                <div class="bg-gradient-to-r from-[#5d6b56] to-[#9BAD94] p-4">
+                  <h2 class="text-xl font-bold text-white flex items-center">
+                    <UIcon name="i-heroicons-clipboard-document-check" class="w-5 h-5 mr-2" />
+                    Register Now
+                  </h2>
                 </div>
 
                 <div class="p-6">
-                  <!-- Event Past -->
-                  <div v-if="isEventPast" class="text-center py-8">
+                  <!-- Event Past State -->
+                  <div v-if="isEventPast" class="text-center py-6">
                     <div class="bg-gray-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
                       <UIcon name="i-heroicons-clock" class="w-8 h-8 text-gray-500" />
                     </div>
-                    <h4 class="font-bold text-gray-900 mb-2">Registration Closed</h4>
-                    <p class="text-sm text-gray-600 mb-4">This event has already occurred.</p>
-                    <div class="bg-gray-50 rounded-lg p-4">
-                      <p class="text-xs text-gray-500">
-                        Event took place on {{ formatDateShort(event.event_date) }}
-                      </p>
-                    </div>
+                    <h3 class="font-bold text-gray-900 mb-2">Registration Closed</h3>
+                    <p class="text-sm text-gray-600">This event has already occurred.</p>
                   </div>
 
-                  <!-- Registration Confirmed -->
-                  <div v-else-if="hasRegistered" class="text-center py-8">
-                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <!-- Registration Confirmed State -->
+                  <div v-else-if="hasRegistered" class="text-center py-6">
+                    <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 animate-bounce">
                       <UIcon name="i-heroicons-check-circle" class="w-8 h-8 text-green-600" />
                     </div>
-                    <h4 class="font-bold text-green-900 mb-2">Registration Confirmed!</h4>
-                    <p class="text-sm text-green-700 mb-4">Thank you! We have received your registration.</p>
+                    <h3 class="font-bold text-green-900 mb-2">Registration Confirmed!</h3>
+                    <p class="text-sm text-green-700 mb-4">Thank you for registering!</p>
                     
-                    <!-- Payment Instructions for Paid Events -->
-                    <div v-if="!event.is_free" class="bg-blue-50 rounded-lg p-4 border border-blue-200 mb-4 text-left">
-                      <h5 class="font-bold text-blue-900 mb-2 flex items-center">
+                    <div class="bg-blue-50 rounded-lg p-4 border border-blue-200 text-left">
+                      <h4 class="font-bold text-blue-900 mb-2 flex items-center">
                         <UIcon name="i-heroicons-credit-card" class="w-4 h-4 mr-2" />
-                        Payment Instructions
-                      </h5>
-                      <p class="text-sm text-blue-700 mb-3">
-                        Please complete your payment to secure your spot:
-                      </p>
-                      <ol class="list-decimal list-inside text-sm text-blue-700 space-y-1">
-                        <li>Transfer <span class="font-bold">{{ event.currency }}{{ event.admission_fee }}</span> to:</li>
-                        <li class="ml-5">
-                          <span class="font-semibold">Bank Name:</span> Zenith Bank<br>
-                          <span class="font-semibold">Account Name:</span> B&S Educational Services<br>
-                          <span class="font-semibold">Account Number:</span> 1011289196
+                        Next Steps
+                      </h4>
+                      <ul class="text-sm text-blue-700 space-y-2">
+                        <li class="flex items-start">
+                          <UIcon name="i-heroicons-check-badge" class="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" />
+                          <span>Check your email for confirmation</span>
                         </li>
-                        <li>Send proof of payment via WhatsApp to <span class="font-bold">+234 806 5442 707</span></li>
-                        <li>You'll receive a confirmation within 24 hours</li>
-                      </ol>
-                      <div class="mt-3">
-                        <UButton 
-                          to="https://wa.me/2348123456789?text=Payment%20Receipt%20for%20{{ encodeURIComponent(event.title) }}"
-                          target="_blank"
-                          class="w-full bg-green-600 hover:bg-green-700 text-white font-medium py-2 rounded-lg"
-                        >
-                          <UIcon name="i-heroicons-chat-bubble-left-right" class="w-4 h-4 mr-2" />
-                          Send Receipt on WhatsApp
-                        </UButton>
-                      </div>
-                    </div>
-                    
-                    <div class="bg-green-50 rounded-lg p-4 border border-green-200">
-                      <p class="text-xs text-green-600 font-medium">
-                        You will receive a confirmation email shortly with event details.
-                      </p>
+                        <li v-if="!event.is_free" class="flex items-start">
+                          <UIcon name="i-heroicons-currency-dollar" class="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" />
+                          <span>Complete payment to secure your spot</span>
+                        </li>
+                        <li class="flex items-start">
+                          <UIcon name="i-heroicons-calendar" class="w-4 h-4 mr-2 mt-0.5 flex-shrink-0" />
+                          <span>Add event to your calendar</span>
+                        </li>
+                      </ul>
                     </div>
                   </div>
                   
-                  <!-- Registration Form -->
+                  <!-- Registration Form State -->
                   <div v-else-if="event.form_fields && event.form_fields.length > 0">
-                    <div class="mb-6">
-                      <div class="bg-[#5d6b56]/10 rounded-lg p-4 mb-4">
-                        <div class="flex items-center text-[#5d6b56] mb-2">
-                          <UIcon name="i-heroicons-information-circle" class="w-4 h-4 mr-2" />
-                          <span class="font-medium text-sm">Registration Required</span>
-                        </div>
-                        <p class="text-xs text-gray-600">Please fill out the form below to secure your spot.</p>
-                        
-                        <!-- Admission Fee Notice -->
-                        <div v-if="!event.is_free" class="mt-3 bg-amber-50 rounded-lg p-3 border border-amber-200">
-                          <div class="flex items-start">
-                            <UIcon name="i-heroicons-exclamation-circle" class="w-4 h-4 text-amber-600 mt-0.5 mr-2" />
-                            <div>
-                              <p class="text-xs font-medium text-amber-700">
-                                This event requires a payment of <span class="font-bold">{{ event.currency }}{{ event.admission_fee }}</span>.
-                                Payment instructions will be provided after registration.
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <!-- Progress Bar for Multi-step Forms -->
+                    <!-- Progress Bar -->
                     <div v-if="isMultiStep" class="mb-6">
-                      <div class="flex items-center justify-between mb-2">
-                        <span class="text-sm font-medium text-gray-700">
-                          Step {{ currentStep + 1 }} of {{ formSteps.length }}
-                        </span>
-                        <span class="text-xs text-gray-500">
-                          {{ Math.round(((currentStep + 1) / formSteps.length) * 100) }}% Complete
-                        </span>
+                      <div class="flex justify-between text-xs text-gray-500 mb-2">
+                        <span>Step {{ currentStep + 1 }} of {{ formSteps.length }}</span>
+                        <span>{{ Math.round(((currentStep + 1) / formSteps.length) * 100) }}%</span>
                       </div>
-                      
-                      <div class="w-full bg-gray-200 rounded-full h-2 mb-4">
+                      <div class="w-full bg-gray-200 rounded-full h-2">
                         <div 
-                          class="bg-[#5d6b56] h-2 rounded-full transition-all duration-300" 
+                          class="bg-[#5d6b56] h-2 rounded-full transition-all duration-500" 
                           :style="{ width: `${((currentStep + 1) / formSteps.length) * 100}%` }"
                         ></div>
                       </div>
-
-                      <!-- Step Indicator -->
-                      <div class="flex justify-between mb-6">
-                        <div 
-                          v-for="(step, index) in formSteps" 
-                          :key="index"
-                          class="flex flex-col items-center"
-                          :class="{ 'flex-1': formSteps.length <= 4 }"
-                        >
-                          <div 
-                            class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-medium transition-all duration-200"
-                            :class="index <= currentStep 
-                              ? 'bg-[#5d6b56] text-white' 
-                              : 'bg-gray-200 text-gray-500'"
-                          >
-                            <UIcon 
-                              v-if="index < currentStep" 
-                              name="i-heroicons-check" 
-                              class="w-4 h-4" 
-                            />
-                            <span v-else>{{ index + 1 }}</span>
-                          </div>
-                          <span 
-                            class="text-xs mt-1 text-center max-w-16 leading-tight"
-                            :class="index <= currentStep ? 'text-[#5d6b56] font-medium' : 'text-gray-400'"
-                          >
-                            {{ step.title }}
-                          </span>
-                        </div>
-                      </div>
                     </div>
 
-                    <!-- Duplicate Registration Warning -->
+                    <!-- Duplicate Warning -->
                     <div v-if="duplicateWarning" class="mb-4">
                       <div class="bg-amber-50 border border-amber-200 rounded-lg p-4">
                         <div class="flex items-center text-amber-700 mb-2">
@@ -311,119 +282,59 @@
                           <span class="font-medium text-sm">Already Registered</span>
                         </div>
                         <p class="text-xs text-amber-600">
-                          This email is already registered for this event. If you believe this is an error, please contact support.
+                          This email is already registered. Please contact support if you need assistance.
                         </p>
                       </div>
                     </div>
 
-                    <!-- Form Content -->
                     <form @submit.prevent="handleFormSubmit" class="space-y-4">
-                      <!-- Multi-step Form Fields -->
-                      <div v-if="isMultiStep">
-                        <div class="mb-4">
-                          <h4 class="font-semibold text-gray-900 mb-2">
-                            {{ formSteps[currentStep].title }}
-                          </h4>
-                          <p class="text-sm text-gray-600 mb-4">
-                            {{ formSteps[currentStep].description }}
-                          </p>
-                        </div>
-
-                        <div class="space-y-4">
-                          <div 
-                            v-for="field in formSteps[currentStep].fields" 
-                            :key="field.label" 
-                            class="space-y-1"
-                          >
-                            <label 
-                              :for="field.label" 
-                              class="block text-sm font-medium text-gray-700"
-                            >
-                              {{ getFieldLabel(field) }}
-                              <span v-if="field.required" class="text-red-500 ml-1">*</span>
-                            </label>
-                            
-                            <input 
-                              v-if="field.type !== 'checkbox' && field.type !== 'select' && field.type !== 'textarea'"
-                              v-model="formData[field.label]" 
-                              :type="field.type" 
-                              :id="field.label"
-                              :name="field.label"
-                              :required="field.required"
-                              :placeholder="getFieldPlaceholder(field)"
+                      <!-- Form Fields -->
+                      <div :class="isMultiStep ? 'space-y-4' : 'space-y-4 max-h-[400px] overflow-y-auto pr-2'">
+                        <template v-if="isMultiStep">
+                          <div v-for="field in formSteps[currentStep]?.fields" :key="field._id || field.label">
+                            <FormField
+                              :field="field"
+                              :form-data="formData"
                               :disabled="duplicateWarning && field.type === 'email'"
-                              class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5d6b56] focus:border-[#5d6b56] disabled:bg-gray-100 disabled:cursor-not-allowed"
+                              @update="updateFormField"
                               @blur="field.type === 'email' ? checkDuplicateRegistration() : null"
                             />
-                            
-                            <textarea 
-                              v-else-if="field.type === 'textarea'"
-                              v-model="formData[field.label]" 
-                              :id="field.label"
-                              :name="field.label"
-                              :required="field.required"
-                              :placeholder="getFieldPlaceholder(field)"
-                              class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5d6b56] focus:border-[#5d6b56]"
-                              rows="3"
-                            ></textarea>
-                            
-                            <select 
-                              v-else-if="field.type === 'select'"
-                              v-model="formData[field.label]" 
-                              :id="field.label"
-                              :name="field.label"
-                              :required="field.required"
-                              class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5d6b56] focus:border-[#5d6b56]"
-                            >
-                              <option value="">{{ getFieldPlaceholder(field) }}</option>
-                              <option 
-                                v-for="option in field.options || []" 
-                                :key="option" 
-                                :value="option"
-                              >
-                                {{ option }}
-                              </option>
-                            </select>
-                            
-                            <div v-else class="flex items-center">
-                              <input 
-                                v-model="formData[field.label]" 
-                                type="checkbox"
-                                :id="field.label"
-                                :name="field.label"
-                                :required="field.required"
-                                class="h-4 w-4 text-[#5d6b56] focus:ring-[#5d6b56] border-gray-300 rounded"
-                              />
-                              <label :for="field.label" class="ml-2 text-sm text-gray-700">
-                                {{ getFieldLabel(field) }}
-                              </label>
-                            </div>
-
-                            <p v-if="getFieldHelp(field)" class="text-xs text-gray-500 mt-1">
-                              {{ getFieldHelp(field) }}
-                            </p>
                           </div>
-                        </div>
+                        </template>
+                        <template v-else>
+                          <div v-for="field in event.form_fields" :key="field._id || field.label">
+                            <FormField
+                              :field="field"
+                              :form-data="formData"
+                              :disabled="duplicateWarning && field.type === 'email'"
+                              @update="updateFormField"
+                              @blur="field.type === 'email' ? checkDuplicateRegistration() : null"
+                            />
+                          </div>
+                        </template>
+                      </div>
 
-                        <!-- Step Navigation -->
-                        <div class="flex justify-between pt-6 mt-6 border-t border-gray-100">
+                      <!-- Navigation Buttons -->
+                      <div class="flex gap-3 pt-4" :class="isMultiStep ? 'justify-between' : 'flex-col'">
+                        <template v-if="isMultiStep">
                           <UButton 
                             v-if="currentStep > 0"
                             @click="previousStep"
                             type="button"
-                            class="border border-gray-300 text-gray-700 hover:bg-gray-50 px-4 py-2 rounded-lg"
+                            variant="outline"
+                            class="flex-1"
                           >
                             <UIcon name="i-heroicons-arrow-left" class="w-4 h-4 mr-2" />
-                            Previous
+                            Back
                           </UButton>
-                          <div v-else></div>
+                          <div v-else class="flex-1"></div>
 
                           <UButton 
                             v-if="currentStep < formSteps.length - 1"
                             @click="nextStep"
                             type="button"
                             :disabled="!isCurrentStepValid"
-                            class="bg-[#5d6b56] hover:bg-[#9BAD94] text-white px-4 py-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                            class="flex-1 bg-[#5d6b56] hover:bg-[#9BAD94] text-white"
                           >
                             Next
                             <UIcon name="i-heroicons-arrow-right" class="w-4 h-4 ml-2" />
@@ -433,144 +344,123 @@
                             v-else
                             type="submit" 
                             :disabled="duplicateWarning || !isFormValid || isSubmitting"
-                            class="bg-[#5d6b56] hover:bg-[#9BAD94] text-white font-semibold px-4 py-2 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed"
+                            class="flex-1 bg-[#5d6b56] hover:bg-[#9BAD94] text-white font-semibold"
                           >
-                            <UIcon v-if="!isSubmitting" name="i-heroicons-paper-airplane" class="w-4 h-4 mr-2" />
-                            <span v-if="isSubmitting">Submitting...</span>
-                            <span v-else-if="duplicateWarning">Already Registered</span>
-                            <span v-else>Complete Registration</span>
+                            <div v-if="isSubmitting" class="flex items-center justify-center">
+                              <div class="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent mr-2"></div>
+                              Submitting...
+                            </div>
+                            <template v-else>
+                              <UIcon name="i-heroicons-paper-airplane" class="w-4 h-4 mr-2" />
+                              Complete Registration
+                            </template>
                           </UButton>
-                        </div>
-                      </div>
+                        </template>
 
-                      <!-- Single Step Form (5 or fewer fields) -->
-                      <div v-else>
-                        <div 
-                          v-for="field in event.form_fields" 
-                          :key="field.label" 
-                          class="space-y-1"
-                        >
-                          <label 
-                            :for="field.label" 
-                            class="block text-sm font-medium text-gray-700"
-                          >
-                            {{ getFieldLabel(field) }}
-                            <span v-if="field.required" class="text-red-500 ml-1">*</span>
-                          </label>
-                          
-                          <input 
-                            v-if="field.type !== 'checkbox' && field.type !== 'select' && field.type !== 'textarea'"
-                            v-model="formData[field.label]" 
-                            :type="field.type" 
-                            :id="field.label"
-                            :name="field.label"
-                            :required="field.required"
-                            :placeholder="getFieldPlaceholder(field)"
-                            :disabled="duplicateWarning && field.type === 'email'"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5d6b56] focus:border-[#5d6b56] disabled:bg-gray-100 disabled:cursor-not-allowed"
-                            @blur="field.type === 'email' ? checkDuplicateRegistration() : null"
-                          />
-                          
-                          <textarea 
-                            v-else-if="field.type === 'textarea'"
-                            v-model="formData[field.label]" 
-                            :id="field.label"
-                            :name="field.label"
-                            :required="field.required"
-                            :placeholder="getFieldPlaceholder(field)"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5d6b56] focus:border-[#5d6b56]"
-                            rows="3"
-                          ></textarea>
-                          
-                          <select 
-                            v-else-if="field.type === 'select'"
-                            v-model="formData[field.label]" 
-                            :id="field.label"
-                            :name="field.label"
-                            :required="field.required"
-                            class="w-full px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#5d6b56] focus:border-[#5d6b56]"
-                          >
-                            <option value="">{{ getFieldPlaceholder(field) }}</option>
-                            <option 
-                              v-for="option in field.options || []" 
-                              :key="option" 
-                              :value="option"
-                            >
-                              {{ option }}
-                            </option>
-                          </select>
-                          
-                          <div v-else class="flex items-center">
-                            <input 
-                              v-model="formData[field.label]" 
-                              type="checkbox"
-                              :id="field.label"
-                              :name="field.label"
-                              :required="field.required"
-                              class="h-4 w-4 text-[#5d6b56] focus:ring-[#5d6b56] border-gray-300 rounded"
-                            />
-                            <label :for="field.label" class="ml-2 text-sm text-gray-700">
-                              {{ getFieldLabel(field) }}
-                            </label>
-                          </div>
-
-                          <p v-if="getFieldHelp(field)" class="text-xs text-gray-500 mt-1">
-                            {{ getFieldHelp(field) }}
-                          </p>
-                        </div>
-                        
                         <UButton 
+                          v-else
                           type="submit" 
                           :disabled="duplicateWarning || isSubmitting"
-                          class="w-full bg-[#5d6b56] hover:bg-[#9BAD94] text-white font-semibold py-4 rounded-xl transition-all duration-200 hover:shadow-lg mt-6 disabled:opacity-50 disabled:cursor-not-allowed"
+                          class="w-full bg-[#5d6b56] hover:bg-[#9BAD94] text-white font-semibold py-3"
                         >
-                          <UIcon v-if="!isSubmitting" name="i-heroicons-paper-airplane" class="w-4 h-4 mr-2" />
-                          <span v-if="isSubmitting">Submitting Registration...</span>
-                          <span v-else-if="duplicateWarning">Already Registered</span>
-                          <span v-else>Register Now</span>
+                          <div v-if="isSubmitting" class="flex items-center justify-center">
+                            <div class="animate-spin rounded-full h-4 w-4 border-2 border-white border-t-transparent mr-2"></div>
+                            Processing...
+                          </div>
+                          <template v-else>
+                            <UIcon name="i-heroicons-paper-airplane" class="w-4 h-4 mr-2" />
+                            Register Now
+                          </template>
                         </UButton>
                       </div>
                     </form>
                   </div>
 
-                  <!-- No Registration Required -->
-                  <div v-else class="text-center py-8">
+                  <!-- No Registration Required State -->
+                  <div v-else class="text-center py-6">
                     <div class="bg-[#5d6b56]/10 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                      <UIcon name="i-heroicons-information-circle" class="w-8 h-8 text-[#5d6b56]" />
+                      <UIcon name="i-heroicons-sparkles" class="w-8 h-8 text-[#5d6b56]" />
                     </div>
-                    <h4 class="font-bold text-gray-900 mb-2">Open Event</h4>
-                    <p class="text-sm text-gray-600 mb-4">No registration required for this event.</p>
-                    <div class="bg-[#5d6b56]/5 rounded-lg p-4 border border-[#5d6b56]/20">
-                      <p class="text-xs text-gray-600">
-                        Simply show up at the venue on the event date and time.
-                      </p>
-                    </div>
+                    <h3 class="font-bold text-gray-900 mb-2">Open Event</h3>
+                    <p class="text-sm text-gray-600">No registration required. Just show up!</p>
                   </div>
                 </div>
 
-                <!-- Event Actions -->
-                <div class="bg-[#f4f5f3] p-6 border-t border-gray-100">
-                  <div class="flex flex-col space-y-3">
-                    <UButton 
-                      to="/events" 
-                      class="w-full  text-[#5d6b56] hover:bg-[#5d6b56] hover:text-white font-medium py-2 rounded-lg transition-all duration-200"
-                    >
-                      <UIcon name="i-heroicons-arrow-left" class="w-4 h-4 mr-2" />
-                      Back to All Events
-                    </UButton>
-                    
-                    <UButton 
-                      @click="shareEvent"
-                      class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2 rounded-lg transition-all duration-200"
-                    >
-                      <UIcon name="i-heroicons-share" class="w-4 h-4 mr-2" />
-                      Share Event
-                    </UButton>
+                <!-- Action Buttons -->
+                <div class="bg-gray-50 p-4 border-t border-gray-100 space-y-2">
+                  <UButton 
+                    @click="addToCalendar"
+                    variant="outline"
+                    class="w-full"
+                  >
+                    <UIcon name="i-heroicons-calendar" class="w-4 h-4 mr-2" />
+                    Add to Calendar
+                  </UButton>
+                  
+                  <UButton 
+                    @click="shareEvent"
+                    variant="ghost"
+                    class="w-full"
+                  >
+                    <UIcon name="i-heroicons-share" class="w-4 h-4 mr-2" />
+                    Share Event
+                  </UButton>
+                </div>
+              </div> <!-- End of Registration Card -->
+
+              <!-- Event Details Info Card -->
+              <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+                <h2 class="font-bold text-gray-900 mb-4 flex items-center text-xl">
+                  <UIcon name="i-heroicons-information-circle" class="w-5 h-5 mr-2 text-[#5d6b56]" />
+                  Event Details
+                </h2>
+                
+                <div class="space-y-3 text-sm">
+                  <div class="flex justify-between">
+                    <span class="text-gray-500">Date</span>
+                    <span class="font-medium text-gray-900">{{ formatDateFull(event.event_date) }}</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-gray-500">Time</span>
+                    <span class="font-medium text-gray-900">{{ formatTimeRange(event.event_date) }}</span>
+                  </div>
+                  <div v-if="event.venue" class="flex justify-between">
+                    <span class="text-gray-500">Venue</span>
+                    <span class="font-medium text-gray-900 text-right">{{ event.venue }}</span>
+                  </div>
+                  <div class="border-t border-gray-100 pt-3">
+                    <div class="flex justify-between">
+                      <span class="text-gray-500">Duration</span>
+                      <span class="font-medium text-gray-900">{{ getEventDuration() }}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              </div> <!-- End of Event Details Card -->
+
+            </div> <!-- End of sticky wrapper -->
+          </div> <!-- End of Registration Sidebar Column -->
+          
+        </div> <!-- End of Main Layout Grid -->
+      </div> <!-- End of Event Details Section -->
+    </div> <!-- End of container -->
+
+    <!-- Success Modal -->
+    <div v-if="showSuccessModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4" @click.self="showSuccessModal = false">
+      <div class="bg-white rounded-2xl max-w-md w-full overflow-hidden transform transition-all animate-slide-up">
+        <div class="bg-gradient-to-r from-green-500 to-green-600 p-6 text-center">
+          <div class="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+            <UIcon name="i-heroicons-check-circle" class="w-10 h-10 text-green-500" />
           </div>
+          <h2 class="text-xl font-bold text-white mb-2">Registration Successful!</h2>
+          <p class="text-green-50">You're all set for the event.</p>
+        </div>
+        <div class="p-6 space-y-3">
+          <p class="text-gray-600 text-sm text-center">
+            A confirmation email has been sent to your registered email address.
+          </p>
+          <UButton @click="closeSuccessModal" class="w-full bg-[#5d6b56] hover:bg-[#9BAD94] text-white">
+            Close
+          </UButton>
         </div>
       </div>
     </div>
@@ -578,529 +468,355 @@
 </template>
 
 <script setup>
+import { computed, reactive, ref, onMounted } from 'vue'
+import FormField from '~/components/FormField.vue'
+
+// SEO Meta
 useSeoMeta({
   title: computed(() => event?.value?.title || 'Event Details'),
-  description: computed(() => event?.value?.description || 'Details about the event'),
+  description: computed(() => event?.value?.description || 'Join us for this exciting educational event'),
   ogTitle: computed(() => event?.value?.title || 'Event Details'),
-  ogDescription: computed(() => event?.value?.description || 'Details about the event'),
-  ogImage: computed(() => event?.value?.image || '/img/main-logo.png')
-});
-const supabase = useSupabaseClient();
-const route = useRoute();
-const toast = useToast();
+  ogDescription: computed(() => event?.value?.description || 'Join us for this exciting educational event'),
+  ogImage: computed(() => event?.value?.banner_url || '/img/main-logo.png')
+})
 
-const eventId = route.params.id;
-const formData = reactive({});
-const isSubmitting = ref(false);
-const hasRegistered = ref(false);
-const duplicateWarning = ref(false);
-const isCheckingDuplicate = ref(false);
-const currentStep = ref(0);
+const supabase = useSupabaseClient()
+const route = useRoute()
+const toast = useToast()
 
-// Fetch the single event data
+const eventId = route.params.id
+const formData = reactive({})
+const isSubmitting = ref(false)
+const hasRegistered = ref(false)
+const duplicateWarning = ref(false)
+const currentStep = ref(0)
+const showSuccessModal = ref(false)
+
+// Fetch event data
 const { data: event, pending, error } = await useAsyncData(`event-${eventId}`, async () => {
   const { data, error } = await supabase
     .from('events')
     .select('*')
     .eq('id', eventId)
-    .single();
+    .single()
 
-  if (error) throw error;
+  if (error) throw error
 
-  // Initialize the formData object based on the form fields
+  // Initialize form data
   if (data && data.form_fields) {
     data.form_fields.forEach(field => {
-      // Set default for checkbox to false, others to empty string
-      formData[field.label] = field.type === 'checkbox' ? false : '';
-    });
+      formData[field.label] = field.type === 'checkbox' ? false : ''
+    })
   }
 
-  return data;
-});
+  return data
+})
 
-// Determine if this should be a multi-step form
+// Computed properties
 const isMultiStep = computed(() => {
-  return event.value?.form_fields && event.value.form_fields.length > 5;
-});
+  return event.value?.form_fields && event.value.form_fields.length > 5
+})
 
-// Create form steps for multi-step forms
 const formSteps = computed(() => {
-  if (!isMultiStep.value || !event.value?.form_fields) return [];
+  if (!isMultiStep.value || !event.value?.form_fields) return []
   
-  const fields = event.value.form_fields;
-  const steps = [];
+  const fields = event.value.form_fields
+  const steps = []
+  const fieldsPerStep = Math.ceil(fields.length / 3)
   
-  // Auto-group fields into logical steps
-  const personalFields = fields.filter(f => 
-    ['name', 'first name', 'last name', 'full name', 'email', 'phone', 'telephone', 'mobile'].some(keyword => 
-      f.label.toLowerCase().includes(keyword)
-    )
-  );
+  for (let i = 0; i < fields.length; i += fieldsPerStep) {
+    steps.push({
+      title: `Step ${Math.floor(i / fieldsPerStep) + 1}`,
+      fields: fields.slice(i, i + fieldsPerStep)
+    })
+  }
   
-  const organizationFields = fields.filter(f => 
-    ['organization', 'company', 'institution', 'workplace', 'job', 'title', 'position', 'department'].some(keyword => 
-      f.label.toLowerCase().includes(keyword)
-    )
-  );
-  
-  
-  const demographicFields = fields.filter(f => 
-    ['age', 'gender', 'location', 'city', 'state', 'country', 'address', 'experience', 'level'].some(keyword => 
-      f.label.toLowerCase().includes(keyword)
-    )
-  );
-  
-  const preferencesFields = fields.filter(f => 
-    ['preference', 'interest', 'dietary', 'accessibility', 'special', 'requirement', 'note', 'comment'].some(keyword => 
-      f.label.toLowerCase().includes(keyword)
-    )
-  );
-  
-  // Get remaining fields not categorized
-  const categorizedFields = [...personalFields, ...organizationFields, ...demographicFields, ...preferencesFields];
-  const otherFields = fields.filter(f => !categorizedFields.includes(f));
-  let otherFields1 = [];
-  let otherFields2 = [];
+  return steps
+})
 
-  if (otherFields.length > 5) {
-    const mid = Math.ceil(otherFields.length / 2);
-    otherFields1 = otherFields.slice(0, mid);
-    otherFields2 = otherFields.slice(mid);
-  } else {
-    otherFields1 = otherFields;
-  }
-
-  
-  
-  // Create steps based on available field categories
-  if (personalFields.length > 0) {
-    steps.push({
-      title: 'Personal Info',
-      description: 'Tell us a bit about yourself',
-      fields: personalFields
-    });
-  }
-  
-  if (organizationFields.length > 0) {
-    steps.push({
-      title: 'Professional',
-      description: 'Your professional background',
-      fields: organizationFields
-    });
-  }
-  
-  if (demographicFields.length > 0) {
-    steps.push({
-      title: 'Background',
-      description: 'Additional information',
-      fields: demographicFields
-    });
-  }
-  
-  if (preferencesFields.length > 0) {
-    steps.push({
-      title: 'Preferences',
-      description: 'Your preferences and requirements',
-      fields: preferencesFields
-    });
-  }
-  
-  if (otherFields1.length > 0) {
-    steps.push({
-      title: 'Additional',
-      description: 'Additional information',
-      fields: otherFields1
-    });
-  }
-  if (otherFields2.length > 0) {
-    steps.push({
-      title: 'Additional',
-      description: 'Additional information',
-      fields: otherFields2
-    });
-  }
-
-  
-  
-  // If we only have one step or categorization didn't work well, split evenly
-  if (steps.length <= 1) {
-    const fieldsPerStep = Math.ceil(fields.length / 3);
-    steps.length = 0; // Clear existing steps
-    
-    for (let i = 0; i < fields.length; i += fieldsPerStep) {
-      const stepFields = fields.slice(i, i + fieldsPerStep);
-      const stepNumber = Math.floor(i / fieldsPerStep) + 1;
-      
-      steps.push({
-        title: `Step ${stepNumber}`,
-        description: `Complete the following fields`,
-        fields: stepFields
-      });
-    }
-  }
-  
-  return steps;
-});
-
-// Validation for current step
 const isCurrentStepValid = computed(() => {
-  if (!isMultiStep.value) return true;
-  
-  const currentStepFields = formSteps.value[currentStep.value]?.fields || [];
-  return currentStepFields.every(field => {
-    if (!field.required) return true;
-    const value = formData[field.label];
-    return field.type === 'checkbox' ? value === true : (value && value.toString().trim() !== '');
-  });
-});
+  if (!isMultiStep.value) return true
+  const currentFields = formSteps.value[currentStep.value]?.fields || []
+  return currentFields.every(field => {
+    if (!field.required) return true
+    const value = formData[field.label]
+    return field.type === 'checkbox' ? value === true : (value && value.toString().trim() !== '')
+  })
+})
 
-// Overall form validation
 const isFormValid = computed(() => {
-  if (!event.value?.form_fields) return true;
-  
+  if (!event.value?.form_fields) return true
   return event.value.form_fields.every(field => {
-    if (!field.required) return true;
-    const value = formData[field.label];
-    return field.type === 'checkbox' ? value === true : (value && value.toString().trim() !== '');
-  });
-});
+    if (!field.required) return true
+    const value = formData[field.label]
+    return field.type === 'checkbox' ? value === true : (value && value.toString().trim() !== '')
+  })
+})
 
-// Step navigation
+const isEventPast = computed(() => {
+  if (!event.value) return false
+  return new Date(event.value.event_date) < new Date()
+})
+
+// Methods
+const updateFormField = ({ field, value }) => {
+  formData[field.label] = value
+}
+
+const getPriceDisplay = () => {
+  if (!event.value) return ''
+  if (event.value.is_free) return 'Free'
+  if (event.value.pricing_tiers?.length) {
+    const minPrice = Math.min(...event.value.pricing_tiers.map(t => t.price))
+    return `From ${event.value.currency}${minPrice}`
+  }
+  return `${event.value.currency}${event.value.admission_fee}`
+}
+
+const getEventStatus = () => {
+  if (!event.value) return ''
+  if (isEventPast.value) return 'Completed'
+  const eventDate = new Date(event.value.event_date)
+  const today = new Date()
+  const diffDays = Math.ceil((eventDate - today) / (1000 * 60 * 60 * 24))
+  
+  if (diffDays === 0) return 'Today'
+  if (diffDays === 1) return 'Tomorrow'
+  if (diffDays <= 7) return 'This Week'
+  return 'Upcoming'
+}
+
+const getStatusBadgeClass = () => {
+  if (isEventPast.value) return 'bg-gray-500/20 text-gray-100'
+  return 'bg-green-500/20 text-green-100'
+}
+
+const getRemainingDays = () => {
+  if (!event.value || isEventPast.value) return 'Expired'
+  const eventDate = new Date(event.value.event_date)
+  const today = new Date()
+  const diffDays = Math.ceil((eventDate - today) / (1000 * 60 * 60 * 24))
+  
+  if (diffDays === 0) return 'Today'
+  if (diffDays === 1) return 'Tomorrow'
+  return `${diffDays} days left`
+}
+
+const getEventDuration = () => {
+  if (!event.value) return 'Not specified'
+  // This would need event duration field in the database
+  return '3 hours'
+}
+
+const formatDateShort = (dateString) => {
+  if (!dateString) return ''
+  return new Date(dateString).toLocaleDateString('en-US', { 
+    month: 'short', 
+    day: 'numeric',
+    year: 'numeric'
+  })
+}
+
+const formatDateFull = (dateString) => {
+  if (!dateString) return ''
+  return new Date(dateString).toLocaleDateString('en-US', { 
+    weekday: 'long',
+    month: 'long', 
+    day: 'numeric',
+    year: 'numeric'
+  })
+}
+
+const formatTime = (dateString) => {
+  if (!dateString) return ''
+  return new Date(dateString).toLocaleTimeString('en-US', { 
+    hour: '2-digit', 
+    minute: '2-digit'
+  })
+}
+
+const formatTimeRange = (dateString) => {
+  if (!dateString) return ''
+  const date = new Date(dateString)
+  const endTime = new Date(date.getTime() + 3 * 60 * 60 * 1000) // Assume 3 hours duration
+  return `${formatTime(dateString)} - ${endTime.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}`
+}
+
 const nextStep = () => {
   if (currentStep.value < formSteps.value.length - 1 && isCurrentStepValid.value) {
-    currentStep.value++;
+    currentStep.value++
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
-};
+}
 
 const previousStep = () => {
   if (currentStep.value > 0) {
-    currentStep.value--;
+    currentStep.value--
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
-};
+}
 
-// Enhanced field labeling and helpers
-const getFieldLabel = (field) => {
-  // Improve field labels with proper formatting
-  const label = field.label || field.name || '';
-  return label.split(' ')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-    .join(' ');
-};
-
-const getFieldPlaceholder = (field) => {
-  const label = field.label.toLowerCase();
-  
-  // Custom placeholders based on field type and label
-  const placeholderMap = {
-    'email': 'Enter your email address',
-    'phone': 'Enter your phone number',
-    'name': 'Enter your full name',
-    'first name': 'Enter your first name',
-    'last name': 'Enter your last name',
-    'organization': 'Enter your organization name',
-    'company': 'Enter your company name',
-    'job title': 'Enter your job title',
-    'position': 'Enter your position',
-    'age': 'Enter your age',
-    'address': 'Enter your address',
-    'city': 'Enter your city',
-    'state': 'Enter your state',
-    'country': 'Enter your country',
-    'experience': 'Years of experience',
-    'website': 'https://example.com',
-    'linkedin': 'LinkedIn profile URL',
-    'twitter': 'Twitter handle',
-    'dietary': 'Any dietary restrictions?',
-    'accessibility': 'Any accessibility needs?',
-    'comments': 'Additional comments or notes',
-    'notes': 'Additional notes',
-    'emergency contact': 'Emergency contact information'
-  };
-
-  // Check for exact matches first
-  if (placeholderMap[label]) {
-    return placeholderMap[label];
-  }
-
-  // Check for partial matches
-  for (const [key, value] of Object.entries(placeholderMap)) {
-    if (label.includes(key)) {
-      return value;
-    }
-  }
-
-  // Default placeholder based on field type
-  switch (field.type) {
-    case 'email':
-      return 'Enter your email address';
-    case 'tel':
-    case 'phone':
-      return 'Enter your phone number';
-    case 'url':
-      return 'Enter URL';
-    case 'number':
-      return 'Enter a number';
-    case 'date':
-      return 'Select date';
-    case 'textarea':
-      return 'Enter your response here...';
-    case 'select':
-      return 'Please select an option';
-    default:
-      return `Enter your ${label}`;
-  }
-};
-
-const getFieldHelp = (field) => {
-  const label = field.label.toLowerCase();
-  
-  // Provide helpful hints based on field type and label
-  const helpMap = {
-    'email': 'We\'ll use this to send you event updates',
-    'phone': 'Include country code if international',
-    'dietary': 'Let us know about any food allergies or dietary restrictions',
-    'accessibility': 'Help us make this event accessible for you',
-    'emergency contact': 'Person to contact in case of emergency',
-    'experience': 'This helps us tailor the content to your level',
-    'linkedin': 'Optional: Your LinkedIn profile for networking',
-    'website': 'Optional: Your personal or company website',
-    'organization': 'The company or institution you represent'
-  };
-
-  // Check for matches
-  for (const [key, value] of Object.entries(helpMap)) {
-    if (label.includes(key)) {
-      return value;
-    }
-  }
-
-  // Field type specific help
-  if (field.type === 'checkbox' && field.required) {
-    return 'This field is required';
-  }
-
-  return null;
-};
-
-// Handle form submission (works for both single and multi-step)
-const handleFormSubmit = async () => {
-  if (isMultiStep.value) {
-    // For multi-step, this only triggers on the last step
-    await handleRegistration();
-  } else {
-    // For single step, submit immediately
-    await handleRegistration();
-  }
-};
-
-// Check localStorage for existing registration
-onMounted(() => {
-  if (process.client) {
-    const storageKey = `event_registered_${eventId}`;
-    const localRegistration = localStorage.getItem(storageKey);
-    
-    if (localRegistration) {
-      hasRegistered.value = true;
-    }
-  }
-});
-
-// Function to check for duplicate registration by email
 const checkDuplicateRegistration = async () => {
-  // Find email field
   const emailField = event.value.form_fields?.find(field => 
-    field.type === 'email' || 
-    field.label.toLowerCase().includes('email')
-  );
+    field.type === 'email' || field.label.toLowerCase().includes('email')
+  )
   
   if (!emailField || !formData[emailField.label]) {
-    duplicateWarning.value = false;
-    return;
+    duplicateWarning.value = false
+    return
   }
   
-  const emailValue = formData[emailField.label].trim().toLowerCase();
-  
-  if (!emailValue) {
-    duplicateWarning.value = false;
-    return;
-  }
-  
-  isCheckingDuplicate.value = true;
+  const emailValue = formData[emailField.label].trim().toLowerCase()
+  if (!emailValue) return
   
   try {
-    const { data, error } = await supabase
+    const { data } = await supabase
       .from('registrations')
       .select('id')
       .eq('event_id', eventId)
       .ilike(`form_data->>${emailField.label}`, emailValue)
-      .limit(1);
+      .limit(1)
     
-    if (error) throw error;
-    
-    duplicateWarning.value = data && data.length > 0;
-    
+    duplicateWarning.value = data && data.length > 0
   } catch (error) {
-    console.error('Error checking duplicate registration:', error);
-    // Don't show warning if there's an error checking
-    duplicateWarning.value = false;
-  } finally {
-    isCheckingDuplicate.value = false;
+    console.error('Error checking duplicate:', error)
   }
-};
+}
 
-// Computed property to check if the event date is in the past
-const isEventPast = computed(() => {
-  if (!event.value) return false;
-  return new Date(event.value.event_date) < new Date();
-});
-
-// Get event status
-const getEventStatus = () => {
-  if (!event.value) return '';
-  if (isEventPast.value) return 'Completed';
-  
-  const eventDate = new Date(event.value.event_date);
-  const today = new Date();
-  const diffTime = eventDate - today;
-  const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  
-  if (diffDays === 0) return 'Today';
-  if (diffDays === 1) return 'Tomorrow';
-  if (diffDays <= 7) return 'This Week';
-  return 'Upcoming';
-};
-
-// Get status styling class
-const getStatusClass = () => {
-  if (isEventPast.value) return 'text-white/70';
-  return 'text-white';
-};
-
-// The registration handler with duplicate prevention
-const handleRegistration = async () => {
-  // Double-check for duplicates before submission
-  await checkDuplicateRegistration();
-  
+const handleFormSubmit = async () => {
   if (duplicateWarning.value) {
     toast.add({
-      title: 'Registration Error',
+      title: 'Already Registered',
       description: 'This email is already registered for this event.',
-      color: 'red',
-      timeout: 5000
-    });
-    return;
+      color: 'red'
+    })
+    return
   }
   
-  isSubmitting.value = true;
+  isSubmitting.value = true
   
   try {
-    const { error } = await supabase.from('registrations').insert([
-      {
-        event_id: eventId,
-        form_data: formData,
-      },
-    ]);
+    const { error } = await supabase.from('registrations').insert([{
+      event_id: eventId,
+      form_data: formData,
+      registered_at: new Date().toISOString()
+    }])
 
-    if (error) throw error;
+    if (error) throw error
 
-    // Store registration in localStorage for UX
     if (process.client) {
-      const storageKey = `event_registered_${eventId}`;
-      localStorage.setItem(storageKey, JSON.stringify({
-        eventId,
-        registeredAt: new Date().toISOString(),
-        email: getEmailFromFormData()
-      }));
+      localStorage.setItem(`event_registered_${eventId}`, 'true')
     }
 
-    toast.add({ 
-      title: 'Registration Successful!', 
-      description: 'Your registration has been confirmed. Check your email for details.', 
-      color: 'green',
-      timeout: 7000
-    });
+    showSuccessModal.value = true
+    hasRegistered.value = true
     
-    hasRegistered.value = true;
+    toast.add({
+      title: 'Registration Successful!',
+      description: 'Check your email for confirmation details.',
+      color: 'green'
+    })
     
   } catch (error) {
-    // Check if it's a duplicate key error (database constraint)
-    if (error.message?.includes('duplicate') || error.code === '23505') {
-      toast.add({
-        title: 'Already Registered',
-        description: 'You have already registered for this event.',
-        color: 'orange',
-        timeout: 7000
-      });
-      duplicateWarning.value = true;
-    } else {
-      toast.add({ 
-        title: 'Registration Failed', 
-        description: error.message || 'An error occurred during registration. Please try again.', 
-        color: 'red',
-        timeout: 7000
-      });
-    }
+    toast.add({
+      title: 'Registration Failed',
+      description: error.message || 'Please try again.',
+      color: 'red'
+    })
   } finally {
-    isSubmitting.value = false;
+    isSubmitting.value = false
   }
-};
+}
 
-// Helper function to get email from form data
-const getEmailFromFormData = () => {
-  const emailField = event.value.form_fields?.find(field => 
-    field.type === 'email' || 
-    field.label.toLowerCase().includes('email')
-  );
-  return emailField ? formData[emailField.label] : null;
-};
+const closeSuccessModal = () => {
+  showSuccessModal.value = false
+}
 
-// Share event functionality
+const addToCalendar = () => {
+  if (!event.value) return
+  
+  const eventDate = new Date(event.value.event_date)
+  const endDate = new Date(eventDate.getTime() + 3 * 60 * 60 * 1000)
+  
+  const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.value.title)}&dates=${eventDate.toISOString().replace(/-|:|\./g, '')}/${endDate.toISOString().replace(/-|:|\./g, '')}&details=${encodeURIComponent(event.value.description || '')}&location=${encodeURIComponent(event.value.venue || '')}`
+  
+  window.open(calendarUrl, '_blank')
+}
+
 const shareEvent = async () => {
+  const shareData = {
+    title: event.value.title,
+    text: `Join me at ${event.value.title}!`,
+    url: window.location.href
+  }
+  
   if (navigator.share) {
     try {
-      await navigator.share({
-        title: event.value.title,
-        text: `Join me at ${event.value.title}`,
-        url: window.location.href
-      });
+      await navigator.share(shareData)
     } catch (error) {
-      // Fallback to copying URL
-      await navigator.clipboard.writeText(window.location.href);
-      toast.add({
-        title: 'Link Copied',
-        description: 'Event link has been copied to your clipboard.',
-        color: 'green'
-      });
+      copyToClipboard()
     }
   } else {
-    // Fallback for browsers without Web Share API
-    await navigator.clipboard.writeText(window.location.href);
-    toast.add({
-      title: 'Link Copied',
-      description: 'Event link has been copied to your clipboard.',
-      color: 'green'
-    });
+    copyToClipboard()
   }
-};
+}
 
-// Helper function to format the full date
-const formatDate = (dateString) => {
-  if (!dateString) return '';
-  const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-  return new Date(dateString).toLocaleDateString('en-NG', options);
-};
+const copyToClipboard = async () => {
+  try {
+    await navigator.clipboard.writeText(window.location.href)
+    toast.add({
+      title: 'Link Copied!',
+      description: 'Event link copied to clipboard',
+      color: 'green'
+    })
+  } catch (error) {
+    toast.add({
+      title: 'Copy Failed',
+      description: 'Please copy the URL manually',
+      color: 'red'
+    })
+  }
+}
 
-// Helper function to format date short version
-const formatDateShort = (dateString) => {
-  if (!dateString) return '';
-  const options = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
-  return new Date(dateString).toLocaleDateString('en-NG', options);
-};
-
-// Helper function to format time
-const formatTime = (dateString) => {
-  if (!dateString) return '';
-  const options = { hour: '2-digit', minute: '2-digit' };
-  return new Date(dateString).toLocaleTimeString('en-NG', options);
-};
+onMounted(() => {
+  if (process.client && localStorage.getItem(`event_registered_${eventId}`)) {
+    hasRegistered.value = true
+  }
+})
 </script>
+
+<style scoped>
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-up {
+  animation: slide-up 0.3s ease-out;
+}
+
+/* Custom scrollbar for form fields */
+.max-h-\[400px\]::-webkit-scrollbar {
+  width: 6px;
+}
+
+.max-h-\[400px\]::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
+}
+
+.max-h-\[400px\]::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+.max-h-\[400px\]::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+</style>
