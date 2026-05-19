@@ -11,8 +11,8 @@
           alt="University of Cambridge"
           class="w-full h-full object-cover object-center"
         />
-        <div class="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/20"></div>
-        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+        <div class="absolute inset-0 bg-linear-to-r from-black/85 via-black/60 to-black/20"></div>
+        <div class="absolute inset-0 bg-linear-to-t from-black/80 via-transparent to-transparent"></div>
       </div>
 
       <!-- Trust strip -->
@@ -48,21 +48,21 @@
             at the <span class="text-secondary">University of Cambridge</span>
           </h1>
 
-          <p class="text-white/75 text-base sm:text-lg max-w-2xl leading-relaxed mb-8">
+          <p class="text-white/75  sm:text-lg max-w-2xl leading-relaxed mb-8">
             A premium executive programme designed for Nigerian decision-makers, policymakers, and senior executives seeking global perspective and strategic clarity in an increasingly complex world.
           </p>
 
           <div class="flex flex-col sm:flex-row gap-4">
             <NuxtLink
-              to="/events/18"
-              class="inline-flex items-center justify-center gap-2 bg-secondary hover:bg-secondary/85 text-white font-bold text-base px-8 py-4 rounded-xl shadow-xl shadow-secondary/30 transition-all duration-200 hover:scale-105"
+              to="/events/19"
+              class="inline-flex items-center justify-center gap-2 bg-secondary hover:bg-secondary/85 text-white font-bold px-8 py-4 rounded-xl shadow-xl shadow-secondary/30 transition-all duration-200 hover:scale-105"
             >
               Reserve Executive Seat
               <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
             </NuxtLink>
             <a
               href="#overview"
-              class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur border border-white/30 text-white font-semibold text-base px-8 py-4 rounded-xl transition-all duration-200"
+              class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 backdrop-blur border border-white/30 text-white font-semibold  px-8 py-4 rounded-xl transition-all duration-200"
             >
               View Programme Details
             </a>
@@ -87,28 +87,28 @@
         <p class="text-xs font-bold text-secondary uppercase tracking-widest mb-4">Secure Your Spot</p>
         <div class="space-y-3 mb-5">
           <div class="flex items-start gap-3">
-            <UIcon name="i-heroicons-calendar" class="w-4 h-4 text-secondary mt-0.5 flex-shrink-0" />
+            <UIcon name="i-heroicons-calendar" class="w-4 h-4 text-secondary mt-0.5 shrink-0" />
             <div>
               <p class="text-xs text-gray-500 font-medium">Date</p>
               <p class="text-sm font-semibold text-gray-800">31 August – 4 September 2025</p>
             </div>
           </div>
           <div class="flex items-start gap-3">
-            <UIcon name="i-heroicons-map-pin" class="w-4 h-4 text-secondary mt-0.5 flex-shrink-0" />
+            <UIcon name="i-heroicons-map-pin" class="w-4 h-4 text-secondary mt-0.5 shrink-0" />
             <div>
               <p class="text-xs text-gray-500 font-medium">Location</p>
               <p class="text-sm font-semibold text-gray-800">Cambridge, United Kingdom</p>
             </div>
           </div>
           <div class="flex items-start gap-3">
-            <UIcon name="i-heroicons-clock" class="w-4 h-4 text-secondary mt-0.5 flex-shrink-0" />
+            <UIcon name="i-heroicons-clock" class="w-4 h-4 text-secondary mt-0.5 shrink-0" />
             <div>
               <p class="text-xs text-gray-500 font-medium">Duration</p>
               <p class="text-sm font-semibold text-gray-800">5 Days (Monday – Friday)</p>
             </div>
           </div>
           <div class="flex items-start gap-3">
-            <UIcon name="i-heroicons-currency-pound" class="w-4 h-4 text-secondary mt-0.5 flex-shrink-0" />
+            <UIcon name="i-heroicons-currency-pound" class="w-4 h-4 text-secondary mt-0.5 shrink-0" />
             <div>
               <p class="text-xs text-gray-500 font-medium">Investment</p>
               <p class="text-sm font-semibold text-gray-800">£3,500 per participant</p>
@@ -119,7 +119,7 @@
           <p class="text-xs text-secondary font-semibold text-center">Limited participant capacity available</p>
         </div>
         <NuxtLink
-          to="/events/18"
+          to="/events/19"
           class="block w-full text-center bg-secondary hover:bg-secondary/85 text-white font-bold text-sm px-4 py-3 rounded-xl transition-all duration-200"
         >
           Apply Now
@@ -145,7 +145,7 @@
           </div>
           <div class="mt-8">
             <NuxtLink
-              to="/events/18"
+              to="/events/19"
               class="inline-flex items-center justify-center gap-2 bg-secondary hover:bg-secondary/85 text-white font-bold px-7 py-3.5 rounded-xl transition-all duration-200 shadow-lg shadow-secondary/20"
             >
               Apply Now
@@ -159,10 +159,10 @@
             class="w-full h-80 sm:h-96 object-cover rounded-2xl shadow-xl"
           />
           <div class="absolute -bottom-6 -left-6 bg-white border border-gray-100 rounded-2xl shadow-xl p-5 max-w-xs">
-            <p class="text-2xl font-extrabold text-secondary">18+</p>
+            <p class="text-2xl font-extrabold text-secondary">19+</p>
             <p class="text-sm text-gray-600 font-medium">Years placing Nigerian leaders in premium international programmes</p>
           </div>
-          <blockquote class="absolute -top-5 -right-4 hidden xl:block bg-primary text-white text-xs leading-relaxed rounded-xl px-4 py-3 max-w-[180px] shadow-lg">
+          <blockquote class="absolute -top-5 -right-4 hidden xl:block bg-primary text-white text-xs leading-relaxed rounded-xl px-4 py-3 max-w-45 shadow-lg">
             "Great leaders don't just react to change, they shape the future."
           </blockquote>
         </div>
@@ -212,7 +212,7 @@
               This is not a traditional seminar. It is an executive-level learning experience designed for leaders responsible for making strategic decisions in complex environments.
             </p>
             <NuxtLink
-              to="/events/18"
+              to="/events/19"
               class="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/85 text-white font-bold px-7 py-3.5 rounded-xl transition-all duration-200 shadow-lg"
             >
               Reserve Your Place
@@ -234,6 +234,82 @@
       </div>
     </section>
 
+    <section id="faculty" class="py-20 px-4 sm:px-8 lg:px-16 bg-white">
+  <div class="max-w-7xl mx-auto">
+    <div class="text-center mb-14">
+      <span class="text-secondary text-sm font-bold uppercase tracking-widest">World-Class Instruction</span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-3 mb-4 leading-tight">
+        Faculty & Expertise
+      </h2>
+      <p class="text-gray-500 max-w-xl mx-auto  leading-relaxed">
+        Your programme is led by distinguished Cambridge scholars — practitioners and researchers at the forefront of global economics, finance, energy, sustainability, and technology.
+      </p>
+    </div>
+ 
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div
+        v-for="instructor in instructors"
+        :key="instructor.name"
+        class="group relative bg-white border border-gray-100 rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:border-secondary/30 transition-all duration-300"
+      >
+        <!-- Image -->
+        <div class="relative h-64 overflow-hidden bg-stone-100">
+          <img
+            :src="instructor.image"
+            :alt="instructor.name"
+            class="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+          />
+          <div class="absolute inset-0 bg-linear-to-t from-black/60 via-black/10 to-transparent"></div>
+          <!-- Institution badge -->
+          <div class="absolute top-4 left-4">
+            <span class="inline-flex items-center gap-1.5 bg-white/90 backdrop-blur-sm border border-white/60 text-primary text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wide shadow-sm">
+              <UIcon name="i-heroicons-academic-cap" class="w-3 h-3 text-secondary" />
+              University of Cambridge
+            </span>
+          </div>
+        </div>
+ 
+        <!-- Content -->
+        <div class="p-6">
+          <div class="flex items-start justify-between gap-3 mb-3">
+            <div>
+              <h3 class="font-extrabold text-gray-900  leading-snug group-hover:text-secondary transition-colors">
+                {{ instructor.name }}
+              </h3>
+              <p class="text-secondary text-xs font-semibold mt-0.5 leading-snug">{{ instructor.role }}</p>
+            </div>
+            <div class="w-9 h-9 rounded-xl bg-secondary/10 flex items-center justify-center shrink-0 group-hover:bg-secondary/20 transition-colors">
+              <UIcon :name="instructor.icon" class="w-4 h-4 text-secondary" />
+            </div>
+          </div>
+          <p class="text-gray-500 text-xs leading-relaxed">{{ instructor.expertise }}</p>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- Subtle reassurance strip -->
+    <div class="mt-12 flex flex-wrap justify-center items-center gap-6 sm:gap-10 text-center">
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center">
+          <UIcon name="i-heroicons-academic-cap" class="w-4 h-4 text-secondary" />
+        </div>
+        <span class="text-gray-500 text-sm font-medium">Cambridge-based faculty</span>
+      </div>
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center">
+          <UIcon name="i-heroicons-globe-alt" class="w-4 h-4 text-secondary" />
+        </div>
+        <span class="text-gray-500 text-sm font-medium">Globally recognised researchers</span>
+      </div>
+      <div class="flex items-center gap-2.5">
+        <div class="w-8 h-8 rounded-full bg-secondary/10 flex items-center justify-center">
+          <UIcon name="i-heroicons-briefcase" class="w-4 h-4 text-secondary" />
+        </div>
+        <span class="text-gray-500 text-sm font-medium">Policy &amp; industry advisers</span>
+      </div>
+    </div>
+  </div>
+</section>
 
     <!-- ═══════════════════════════════════════════
          WHO SHOULD ATTEND
@@ -254,7 +330,7 @@
               If you make decisions that shape organisations, policy, capital, or people — this programme was designed with you in mind.
             </p>
             <NuxtLink
-              to="/events/18"
+              to="/events/19"
               class="inline-flex items-center gap-2 bg-secondary hover:bg-secondary/85 text-white font-bold px-7 py-3.5 rounded-xl transition-all duration-200 shadow-lg shadow-secondary/20"
             >
               Apply Now
@@ -268,14 +344,14 @@
               :key="role.title"
               class="flex items-center gap-4 p-4 rounded-xl border border-gray-100 hover:border-secondary/30 hover:bg-secondary/5 transition-all duration-200 group"
             >
-              <div class="w-10 h-10 rounded-xl bg-stone-100 group-hover:bg-secondary/10 flex items-center justify-center flex-shrink-0 transition-colors">
+              <div class="w-10 h-10 rounded-xl bg-stone-100 group-hover:bg-secondary/10 flex items-center justify-center shrink-0 transition-colors">
                 <UIcon :name="role.icon" class="w-5 h-5 text-gray-400 group-hover:text-secondary transition-colors" />
               </div>
               <div>
                 <p class="font-semibold text-gray-900 text-sm group-hover:text-secondary transition-colors leading-snug">{{ role.title }}</p>
                 <p class="text-gray-400 text-xs mt-0.5">{{ role.subtitle }}</p>
               </div>
-              <UIcon name="i-heroicons-chevron-right" class="w-4 h-4 text-gray-300 group-hover:text-secondary ml-auto flex-shrink-0 transition-colors" />
+              <UIcon name="i-heroicons-chevron-right" class="w-4 h-4 text-gray-300 group-hover:text-secondary ml-auto shrink-0 transition-colors" />
             </div>
           </div>
 
@@ -302,14 +378,14 @@
               <p class="text-6xl font-extrabold text-white mb-1">£3,500</p>
               <p class="text-white/50 text-sm mb-8">Per Participant · All inclusive</p>
               <NuxtLink
-                to="/events/18"
-                class="inline-flex items-center justify-center gap-2 bg-secondary hover:bg-secondary/85 text-white font-bold px-7 py-4 rounded-xl transition-all duration-200 shadow-lg text-base"
+                to="/events/19"
+                class="inline-flex items-center justify-center gap-2 bg-secondary hover:bg-secondary/85 text-white font-bold px-7 py-4 rounded-xl transition-all duration-200 shadow-lg "
               >
                 Apply Now
                 <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
               </NuxtLink>
               <div class="mt-6 flex items-start gap-2.5">
-                <UIcon name="i-heroicons-information-circle" class="w-4 h-4 text-white/40 flex-shrink-0 mt-0.5" />
+                <UIcon name="i-heroicons-information-circle" class="w-4 h-4 text-white/40 shrink-0 mt-0.5" />
                 <p class="text-white/40 text-xs leading-relaxed">Payment plans and corporate sponsorship available. Contact our team for details.</p>
               </div>
             </div>
@@ -318,7 +394,7 @@
               <p class="text-gray-900 font-bold text-sm uppercase tracking-widest mb-6">What's Included</p>
               <ul class="space-y-4">
                 <li v-for="inclusion in inclusions" :key="inclusion.label" class="flex items-start gap-3">
-                  <div class="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center flex-shrink-0">
+                  <div class="w-8 h-8 rounded-lg bg-secondary/10 flex items-center justify-center shrink-0">
                     <UIcon :name="inclusion.icon" class="w-4 h-4 text-secondary" />
                   </div>
                   <div>
@@ -331,7 +407,7 @@
           </div>
 
           <div class="border-t border-gray-100 px-10 py-4 bg-amber-50 flex items-center gap-3">
-            <UIcon name="i-heroicons-exclamation-triangle" class="w-4 h-4 text-secondary flex-shrink-0" />
+            <UIcon name="i-heroicons-exclamation-triangle" class="w-4 h-4 text-secondary shrink-0" />
             <p class="text-xs text-secondary font-semibold">Limited participant capacity available for this executive cohort. Early application is strongly recommended.</p>
           </div>
         </div>
@@ -361,7 +437,7 @@
               <span class="font-semibold text-gray-900 text-sm sm:text-base">{{ faq.question }}</span>
               <UIcon
                 :name="openFaq === i ? 'i-heroicons-chevron-up' : 'i-heroicons-chevron-down'"
-                class="w-5 h-5 text-secondary flex-shrink-0"
+                class="w-5 h-5 text-secondary shrink-0"
               />
             </button>
             <div v-if="openFaq === i" class="px-6 pb-5">
@@ -387,8 +463,8 @@
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center mb-6">
           <NuxtLink
-            to="/events/18"
-            class="inline-flex items-center justify-center gap-2 bg-secondary hover:bg-secondary/85 text-white font-bold text-base px-10 py-4 rounded-xl shadow-xl shadow-secondary/30 transition-all duration-200 hover:scale-105"
+            to="/events/19"
+            class="inline-flex items-center justify-center gap-2 bg-secondary hover:bg-secondary/85 text-white font-bold  px-10 py-4 rounded-xl shadow-xl shadow-secondary/30 transition-all duration-200 hover:scale-105"
           >
             Apply Now
             <UIcon name="i-heroicons-arrow-right" class="w-4 h-4" />
@@ -396,7 +472,7 @@
           <a
             :href="`https://wa.me/2348065442707?text=${encodeURIComponent('Hello! I\'m interested in the Cambridge Executive Programme. Please send me more information.')}`"
             target="_blank"
-            class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold text-base px-10 py-4 rounded-xl transition-all duration-200"
+            class="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-semibold  px-10 py-4 rounded-xl transition-all duration-200"
           >
             <UIcon name="i-heroicons-chat-bubble-left-right" class="w-5 h-5" />
             Chat on WhatsApp
@@ -579,6 +655,44 @@ const inclusions = [
     icon: 'i-heroicons-phone',
     label: 'Full Onboarding Support',
     detail: 'Visa guidance, documentation assistance, and travel preparation'
+  },
+]
+
+const instructors = [
+  {
+    name: 'Prof. A. Fisher',
+    role: 'Professor of Energy and Electrochemistry',
+    expertise: 'Specialising in energy systems, micro-reactor technology, and next-generation sensors.',
+    image: '/img/instructors/fisher.jpg',
+    icon: 'i-heroicons-bolt',
+  },
+  {
+    name: 'W. Day',
+    role: 'Fellow, Cambridge Institute for Sustainability Leadership (CISL)',
+    expertise: 'Strategic adviser on sustainability transformation and corporate/government policy impact.',
+    image: '/img/instructors/day.jpg',
+    icon: 'i-heroicons-sparkles',
+  },
+  {
+    name: 'Prof. M. Crowley',
+    role: 'Professor of Economics',
+    expertise: 'Expert in international trade, finance, and global economic policy.',
+    image: '/img/instructors/crowley.jpg',
+    icon: 'i-heroicons-chart-bar',
+  },
+  {
+    name: 'Prof. Raghavendra Rau',
+    role: 'Sir Evelyn de Rothschild Professor of Finance, Judge Business School',
+    expertise: 'Founder and Director of the Cambridge Centre for Alternative Finance.',
+    image: '/img/instructors/rau.jpg',
+    icon: 'i-heroicons-currency-pound',
+  },
+  {
+    name: 'Dr. H. Gunes',
+    role: 'Associate Professor, School of Computer Science',
+    expertise: 'Leading researcher in AI, robotics, and human-computer interaction.',
+    image: '/img/instructors/gunes.jpg',
+    icon: 'i-heroicons-cpu-chip',
   },
 ]
 

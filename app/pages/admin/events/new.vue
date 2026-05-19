@@ -1400,7 +1400,6 @@ const serializeFields = () =>
         : undefined,
   }));
 
-// Add this helper above handleCreateEvent:
 const buildDatePayload = () => {
   if (formData.value.event_type === "single") {
     return {
