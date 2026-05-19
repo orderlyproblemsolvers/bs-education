@@ -119,7 +119,6 @@
                 </div>
                 <div>
                   <div class="text-sm font-semibold text-gray-900">{{ formatDateShort(event.event_date) }}</div>
-                  <div class="text-xs text-gray-500">{{ formatTime(event.event_date) }}</div>
                 </div>
               </div>
 

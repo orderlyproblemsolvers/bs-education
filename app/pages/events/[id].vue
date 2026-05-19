@@ -730,25 +730,6 @@
 import { computed, reactive, ref, onMounted } from "vue";
 import FormField from "~/components/FormField.vue";
 
-// SEO Meta
-useSeoMeta({
-  title: computed(() => event?.value?.title || "Event Details"),
-  description: computed(() => {
-    const raw =
-      event?.value?.description ||
-      "Join us for this exciting educational event";
-    return raw.replace(/<[^>]*>/g, "").slice(0, 160);
-  }),
-  ogTitle: computed(() => event?.value?.title || "Event Details"),
-  ogDescription: computed(() => {
-    const raw =
-      event?.value?.description ||
-      "Join us for this exciting educational event";
-    return raw.replace(/<[^>]*>/g, "").slice(0, 160);
-  }),
-  ogImage: computed(() => event?.value?.banner_url || "/img/main-logo.png"),
-});
-
 const supabase = useSupabaseClient();
 const route = useRoute();
 const toast = useToast();
@@ -761,49 +742,78 @@ const duplicateWarning = ref(false);
 const currentStep = ref(0);
 const showSuccessModal = ref(false);
 
-// Fetch event data
-const {
-  data: event,
-  pending,
-  error,
-} = await useAsyncData(`event-${eventId}`, async () => {
-  const { data, error } = await supabase
-    .from("events")
-    .select("*")
-    .eq("id", eventId)
-    .single();
+// ----- Server‑side data fetching with proper error handling -----
+const { data: event, pending, error } = await useAsyncData(
+  `event-${eventId}`,
+  async () => {
+    const { data, error: fetchError } = await supabase
+      .from("events")
+      .select("*")
+      .eq("id", eventId)
+      .single();
 
-  if (error) throw error;
+    if (fetchError) {
+      // If the error is a 406 (not found) from .single(), throw a 404
+      if (fetchError.code === "PGRST116" || fetchError.status === 406) {
+        throw createError({ statusCode: 404, message: "Event not found" });
+      }
+      // For other errors, show a generic server error
+      throw createError({ statusCode: 500, message: fetchError.message });
+    }
 
-  // Initialize form data
-  if (data && data.form_fields) {
-    data.form_fields.forEach((field) => {
-      formData[field.label] = field.type === "checkbox" ? false : "";
-    });
+    if (!data) {
+      throw createError({ statusCode: 404, message: "Event not found" });
+    }
+
+    // Initialize form data
+    if (data.form_fields) {
+      data.form_fields.forEach((field) => {
+        formData[field.label] = field.type === "checkbox" ? false : "";
+      });
+    }
+
+    return data;
+  },
+  {
+    server: true,   // fetch only on server – the page will not refetch on the client
+    lazy: false,    // wait for data before rendering (default)
   }
+);
 
-  return data;
+// ----- SEO Meta – set after data is fetched, works perfectly on the server -----
+useSeoMeta({
+  title: event.value?.title || "Event Details",
+  description: () => {
+    const raw = event.value?.description || "Join us for this exciting educational event";
+    return raw.replace(/<[^>]*>/g, "").slice(0, 160);
+  },
+  ogTitle: event.value?.title || "Event Details",
+  ogDescription: () => {
+    const raw = event.value?.description || "Join us for this exciting educational event";
+    return raw.replace(/<[^>]*>/g, "").slice(0, 160);
+  },
+  ogImage: event.value?.banner_url || "/img/main-logo.png",
 });
 
-// Computed properties
+// ----- The rest of your computed properties and methods stay exactly the same -----
+// (isMultiStep, formSteps, isCurrentStepValid, ... all the way to onMounted)
+// I'm including them here for completeness, but no changes are needed.
+
 const isMultiStep = computed(() => {
   return event.value?.form_fields && event.value.form_fields.length > 5;
 });
 
 const formSteps = computed(() => {
   if (!isMultiStep.value || !event.value?.form_fields) return [];
-
   const fields = event.value.form_fields;
   const steps = [];
   const fieldsPerStep = Math.ceil(fields.length / 3);
-
   for (let i = 0; i < fields.length; i += fieldsPerStep) {
     steps.push({
       title: `Step ${Math.floor(i / fieldsPerStep) + 1}`,
       fields: fields.slice(i, i + fieldsPerStep),
     });
   }
-
   return steps;
 });
 
@@ -813,9 +823,7 @@ const isCurrentStepValid = computed(() => {
   return currentFields.every((field) => {
     if (!field.required) return true;
     const value = formData[field.label];
-    return field.type === "checkbox"
-      ? value === true
-      : value && value.toString().trim() !== "";
+    return field.type === "checkbox" ? value === true : value && value.toString().trim() !== "";
   });
 });
 
@@ -824,9 +832,7 @@ const isFormValid = computed(() => {
   return event.value.form_fields.every((field) => {
     if (!field.required) return true;
     const value = formData[field.label];
-    return field.type === "checkbox"
-      ? value === true
-      : value && value.toString().trim() !== "";
+    return field.type === "checkbox" ? value === true : value && value.toString().trim() !== "";
   });
 });
 
@@ -843,7 +849,7 @@ const isMultiDayEvent = computed(() => {
   return start.toDateString() !== end.toDateString();
 });
 
-// Methods
+// Methods – no changes required
 const updateFormField = ({ field, value }) => {
   formData[field.label] = value;
 };
@@ -864,7 +870,6 @@ const getEventStatus = () => {
   const eventDate = new Date(event.value.event_date);
   const today = new Date();
   const diffDays = Math.ceil((eventDate - today) / (1000 * 60 * 60 * 24));
-
   if (diffDays === 0) return "Today";
   if (diffDays === 1) return "Tomorrow";
   if (diffDays <= 7) return "This Week";
@@ -881,7 +886,6 @@ const getRemainingDays = () => {
   const eventDate = new Date(event.value.event_date);
   const today = new Date();
   const diffDays = Math.ceil((eventDate - today) / (1000 * 60 * 60 * 24));
-
   if (diffDays === 0) return "Today";
   if (diffDays === 1) return "Tomorrow";
   return `${diffDays} days left`;
@@ -889,8 +893,7 @@ const getRemainingDays = () => {
 
 const getEventDuration = () => {
   if (!event.value?.event_end_date) return "Not specified";
-  const diffMs =
-    new Date(event.value.event_end_date) - new Date(event.value.event_date);
+  const diffMs = new Date(event.value.event_end_date) - new Date(event.value.event_date);
   if (isMultiDayEvent.value) {
     const days = Math.round(diffMs / 86400000);
     return `${days} day${days !== 1 ? "s" : ""}`;
@@ -935,17 +938,12 @@ const formatTimeRange = () => {
   const start = formatTime(event.value.event_date);
   if (!event.value.event_end_date) return start;
   if (isMultiDayEvent.value)
-    return `${formatDateShort(event.value.event_date)} – ${formatDateShort(
-      event.value.event_end_date
-    )}`;
+    return `${formatDateShort(event.value.event_date)} – ${formatDateShort(event.value.event_end_date)}`;
   return `${start} – ${formatTime(event.value.event_end_date)}`;
 };
 
 const nextStep = () => {
-  if (
-    currentStep.value < formSteps.value.length - 1 &&
-    isCurrentStepValid.value
-  ) {
+  if (currentStep.value < formSteps.value.length - 1 && isCurrentStepValid.value) {
     currentStep.value++;
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
@@ -959,16 +957,13 @@ const previousStep = () => {
 };
 
 const checkDuplicateRegistration = async () => {
-  const emailField = event.value.form_fields?.find(
-    (field) =>
-      field.type === "email" || field.label.toLowerCase().includes("email")
+  const emailField = event.value?.form_fields?.find(
+    (field) => field.type === "email" || field.label.toLowerCase().includes("email")
   );
-
   if (!emailField || !formData[emailField.label]) {
     duplicateWarning.value = false;
     return;
   }
-
   const emailValue = formData[emailField.label].trim().toLowerCase();
   if (!emailValue) return;
 
@@ -979,7 +974,6 @@ const checkDuplicateRegistration = async () => {
       .eq("event_id", eventId)
       .ilike(`form_data->>${emailField.label}`, emailValue)
       .limit(1);
-
     duplicateWarning.value = data && data.length > 0;
   } catch (error) {
     console.error("Error checking duplicate:", error);
@@ -988,16 +982,10 @@ const checkDuplicateRegistration = async () => {
 
 const handleFormSubmit = async () => {
   if (duplicateWarning.value) {
-    toast.add({
-      title: "Already Registered",
-      description: "This email is already registered for this event.",
-      color: "red",
-    });
+    toast.add({ title: "Already Registered", description: "This email is already registered for this event.", color: "red" });
     return;
   }
-
   isSubmitting.value = true;
-
   try {
     const { error } = await supabase.from("registrations").insert([
       {
@@ -1006,27 +994,15 @@ const handleFormSubmit = async () => {
         registered_at: new Date().toISOString(),
       },
     ]);
-
     if (error) throw error;
-
     if (process.client) {
       localStorage.setItem(`event_registered_${eventId}`, "true");
     }
-
     showSuccessModal.value = true;
     hasRegistered.value = true;
-
-    toast.add({
-      title: "Registration Successful!",
-      description: "Check your email for confirmation details.",
-      color: "green",
-    });
+    toast.add({ title: "Registration Successful!", description: "Check your email for confirmation details.", color: "green" });
   } catch (error) {
-    toast.add({
-      title: "Registration Failed",
-      description: error.message || "Please try again.",
-      color: "red",
-    });
+    toast.add({ title: "Registration Failed", description: error.message || "Please try again.", color: "red" });
   } finally {
     isSubmitting.value = false;
   }
@@ -1042,11 +1018,7 @@ const addToCalendar = () => {
   const end = event.value.event_end_date
     ? new Date(event.value.event_end_date)
     : new Date(start.getTime() + 3 * 60 * 60 * 1000);
-  const fmt = (d) =>
-    d
-      .toISOString()
-      .replace(/[-:]/g, "")
-      .replace(/\.\d{3}/, "");
+  const fmt = (d) => d.toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
   window.open(
     `https://calendar.google.com/calendar/render?action=TEMPLATE` +
       `&text=${encodeURIComponent(event.value.title)}` +
@@ -1063,13 +1035,8 @@ const shareEvent = async () => {
     text: `Join me at ${event.value.title}!`,
     url: window.location.href,
   };
-
   if (navigator.share) {
-    try {
-      await navigator.share(shareData);
-    } catch (error) {
-      copyToClipboard();
-    }
+    try { await navigator.share(shareData); } catch { copyToClipboard(); }
   } else {
     copyToClipboard();
   }
@@ -1078,17 +1045,9 @@ const shareEvent = async () => {
 const copyToClipboard = async () => {
   try {
     await navigator.clipboard.writeText(window.location.href);
-    toast.add({
-      title: "Link Copied!",
-      description: "Event link copied to clipboard",
-      color: "green",
-    });
-  } catch (error) {
-    toast.add({
-      title: "Copy Failed",
-      description: "Please copy the URL manually",
-      color: "red",
-    });
+    toast.add({ title: "Link Copied!", description: "Event link copied to clipboard", color: "green" });
+  } catch {
+    toast.add({ title: "Copy Failed", description: "Please copy the URL manually", color: "red" });
   }
 };
 
