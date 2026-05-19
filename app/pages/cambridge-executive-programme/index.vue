@@ -589,7 +589,7 @@ const faqs = [
   },
   {
     question: 'Is accommodation included in the programme fee?',
-    answer: 'Accommodation is not included in the standard programme fee but can be arranged through our team at additional cost. We assist all participants with hotel recommendations and bookings close to the venue.'
+    answer: 'Yes. The programme fee includes accomodation in student apartments, all meals (breakfast, lunch, dinner), courses, teaching materials, Cambridge excursions, and certificate. NOT INCLUDED: international flights, airport transportation, visas, phone calls, and personal expenses.'
   },
   {
     question: 'Can companies sponsor participants?',

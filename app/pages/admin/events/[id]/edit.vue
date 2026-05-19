@@ -1,27 +1,50 @@
 <template>
   <div class="min-h-screen bg-[#f4f5f3] p-6">
     <div class="max-w-4xl mx-auto">
-
       <!-- Header Section -->
-      <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
+      <div
+        class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6"
+      >
         <div class="flex items-center justify-between">
           <div class="flex items-center">
             <div class="bg-[#ACBEA3] p-3 rounded-xl mr-4">
-              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+              <svg
+                class="w-6 h-6 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                ></path>
               </svg>
             </div>
             <div>
               <h1 class="text-2xl font-bold text-gray-900">Edit Event</h1>
-              <p class="text-gray-600 mt-1">Update your educational programme details</p>
+              <p class="text-gray-600 mt-1">
+                Update your educational programme details
+              </p>
             </div>
           </div>
           <button
             @click="router.push('/admin/events')"
             class="flex items-center space-x-2 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
           >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+            <svg
+              class="w-4 h-4"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              ></path>
             </svg>
             <span>Back to Events</span>
           </button>
@@ -29,24 +52,49 @@
       </div>
 
       <!-- Main Form -->
-      <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-        
+      <div
+        class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden"
+      >
         <!-- Loading State -->
-        <div v-if="pending" class="p-12 flex flex-col items-center justify-center">
-          <div class="animate-spin w-8 h-8 border-4 border-[#ACBEA3] border-t-transparent rounded-full mb-4"></div>
+        <div
+          v-if="pending"
+          class="p-12 flex flex-col items-center justify-center"
+        >
+          <div
+            class="animate-spin w-8 h-8 border-4 border-[#ACBEA3] border-t-transparent rounded-full mb-4"
+          ></div>
           <p class="text-gray-600 font-medium">Loading event details...</p>
         </div>
 
         <!-- Error State -->
         <div v-else-if="error" class="p-12 text-center">
-          <div class="bg-red-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          <div
+            class="bg-red-50 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
+            <svg
+              class="w-8 h-8 text-red-500"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              ></path>
             </svg>
           </div>
-          <h3 class="text-lg font-semibold text-gray-900 mb-2">Failed to load event</h3>
-          <p class="text-gray-600 mb-6">{{ error.message || 'Something went wrong' }}</p>
-          <button @click="refresh()" class="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition-colors font-medium">
+          <h3 class="text-lg font-semibold text-gray-900 mb-2">
+            Failed to load event
+          </h3>
+          <p class="text-gray-600 mb-6">
+            {{ error.message || "Something went wrong" }}
+          </p>
+          <button
+            @click="refresh()"
+            class="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition-colors font-medium"
+          >
             Try Again
           </button>
         </div>
@@ -55,21 +103,36 @@
           <!-- Form Header -->
           <div class="bg-[#f4f5f3] p-6 border-b border-gray-200">
             <div class="flex items-center">
-              <svg class="w-6 h-6 text-[#ACBEA3] mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              <svg
+                class="w-6 h-6 text-[#ACBEA3] mr-3"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                ></path>
               </svg>
               <h2 class="text-xl font-semibold text-gray-900">Event Details</h2>
             </div>
-            <p class="text-gray-600 mt-1 text-sm">Update the information below</p>
+            <p class="text-gray-600 mt-1 text-sm">
+              Update the information below
+            </p>
           </div>
 
           <!-- Form Content -->
           <div class="p-8">
             <form @submit.prevent="handleUpdateEvent" class="space-y-10">
-
               <!-- ── BASIC INFORMATION ── -->
               <section class="space-y-6">
-                <h3 class="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">Basic Information</h3>
+                <h3
+                  class="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2"
+                >
+                  Basic Information
+                </h3>
 
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-2">
@@ -84,51 +147,162 @@
                   />
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Event Type Toggle -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2"
+                    >Event Duration</label
+                  >
+                  <div
+                    class="flex rounded-lg border border-gray-200 overflow-hidden w-fit"
+                  >
+                    <button
+                      type="button"
+                      @click="formData.event_type = 'single'"
+                      :class="
+                        formData.event_type === 'single'
+                          ? 'bg-[#ACBEA3] text-white'
+                          : 'bg-white text-gray-600 hover:bg-gray-50'
+                      "
+                      class="px-5 py-2 text-sm font-medium transition-colors"
+                    >
+                      Single Day
+                    </button>
+                    <button
+                      type="button"
+                      @click="formData.event_type = 'multi'"
+                      :class="
+                        formData.event_type === 'multi'
+                          ? 'bg-[#ACBEA3] text-white'
+                          : 'bg-white text-gray-600 hover:bg-gray-50'
+                      "
+                      class="px-5 py-2 text-sm font-medium transition-colors border-l border-gray-200"
+                    >
+                      Multi Day
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Single Day inputs -->
+                <div
+                  v-if="formData.event_type === 'single'"
+                  class="grid grid-cols-1 md:grid-cols-3 gap-6"
+                >
                   <div>
                     <label class="block text-sm font-medium text-gray-700 mb-2">
-                      Event Date & Time <span class="text-red-500">*</span>
+                      Date <span class="text-red-500">*</span>
                     </label>
                     <input
                       v-model="formData.event_date"
-                      type="datetime-local"
+                      type="date"
                       required
                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ACBEA3] focus:border-transparent transition-colors"
                     />
                   </div>
                   <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Venue</label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                      Start Time <span class="text-red-500">*</span>
+                    </label>
                     <input
-                      v-model="formData.venue"
-                      type="text"
+                      v-model="formData.event_start_time"
+                      type="time"
+                      required
                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ACBEA3] focus:border-transparent transition-colors"
-                      placeholder="e.g., Main Conference Hall"
                     />
                   </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                      End Time <span class="text-red-500">*</span>
+                    </label>
+                    <input
+                      v-model="formData.event_end_time"
+                      type="time"
+                      required
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ACBEA3] focus:border-transparent transition-colors"
+                    />
+                  </div>
+                </div>
+
+                <!-- Multi Day inputs -->
+                <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                      Start Date <span class="text-red-500">*</span>
+                    </label>
+                    <input
+                      v-model="formData.event_date"
+                      type="date"
+                      required
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ACBEA3] focus:border-transparent transition-colors"
+                    />
+                  </div>
+                  <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
+                      End Date <span class="text-red-500">*</span>
+                    </label>
+                    <input
+                      v-model="formData.event_end_date"
+                      type="date"
+                      :min="formData.event_date"
+                      required
+                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ACBEA3] focus:border-transparent transition-colors"
+                    />
+                  </div>
+                </div>
+
+                <!-- Venue -->
+                <div>
+                  <label class="block text-sm font-medium text-gray-700 mb-2"
+                    >Venue</label
+                  >
+                  <input
+                    v-model="formData.venue"
+                    type="text"
+                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ACBEA3] focus:border-transparent transition-colors"
+                    placeholder="e.g., Main Conference Hall"
+                  />
                 </div>
 
                 <!-- ── EVENT BANNER ── -->
                 <div>
                   <label class="block text-sm font-medium text-gray-700 mb-2">
                     Event Banner
-                    <span class="ml-2 text-xs font-normal text-gray-400">(Optional · max 5 MB · JPG, PNG, WEBP)</span>
+                    <span class="ml-2 text-xs font-normal text-gray-400"
+                      >(Optional · max 5 MB · JPG, PNG, WEBP)</span
+                    >
                   </label>
 
                   <!-- Drop Zone -->
                   <div
                     v-if="!bannerPreview"
                     class="relative border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-[#ACBEA3] transition-colors cursor-pointer"
-                    :class="{ 'border-[#ACBEA3] bg-[#f4f5f3]': isDraggingBanner }"
+                    :class="{
+                      'border-[#ACBEA3] bg-[#f4f5f3]': isDraggingBanner,
+                    }"
                     @dragover.prevent="isDraggingBanner = true"
                     @dragleave="isDraggingBanner = false"
                     @drop.prevent="handleBannerDrop"
                     @click="$refs.bannerInput.click()"
                   >
-                    <svg class="w-10 h-10 text-gray-400 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                    <svg
+                      class="w-10 h-10 text-gray-400 mx-auto mb-3"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="1.5"
+                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      ></path>
                     </svg>
-                    <p class="text-sm text-gray-600 font-medium">Drop your banner here or <span class="text-[#ACBEA3]">browse</span></p>
-                    <p class="text-xs text-gray-400 mt-1">Recommended: 1200 × 630 px</p>
+                    <p class="text-sm text-gray-600 font-medium">
+                      Drop your banner here or
+                      <span class="text-[#ACBEA3]">browse</span>
+                    </p>
+                    <p class="text-xs text-gray-400 mt-1">
+                      Recommended: 1200 × 630 px
+                    </p>
                     <input
                       ref="bannerInput"
                       type="file"
@@ -139,58 +313,188 @@
                   </div>
 
                   <!-- Preview -->
-                  <div v-else class="relative rounded-xl overflow-hidden border border-gray-200">
-                    <img :src="bannerPreview" class="w-full h-48 object-cover" />
-                    <div class="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
-                      <button type="button" @click="$refs.bannerInput.click()" class="bg-white text-gray-800 text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+                  <div
+                    v-else
+                    class="relative rounded-xl overflow-hidden border border-gray-200"
+                  >
+                    <img
+                      :src="bannerPreview"
+                      class="w-full h-48 object-cover"
+                    />
+                    <div
+                      class="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center gap-3"
+                    >
+                      <button
+                        type="button"
+                        @click="$refs.bannerInput.click()"
+                        class="bg-white text-gray-800 text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors"
+                      >
                         Replace
                       </button>
-                      <button type="button" @click="removeBanner" class="bg-red-500 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-red-600 transition-colors">
+                      <button
+                        type="button"
+                        @click="removeBanner"
+                        class="bg-red-500 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-red-600 transition-colors"
+                      >
                         Remove
                       </button>
                     </div>
-                    <input ref="bannerInput" type="file" accept="image/jpeg,image/png,image/webp" class="hidden" @change="handleBannerSelect" />
+                    <input
+                      ref="bannerInput"
+                      type="file"
+                      accept="image/jpeg,image/png,image/webp"
+                      class="hidden"
+                      @change="handleBannerSelect"
+                    />
                     <!-- Upload progress -->
-                    <div v-if="bannerUploading" class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center">
+                    <div
+                      v-if="bannerUploading"
+                      class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center"
+                    >
                       <div class="w-48 bg-gray-700 rounded-full h-2 mb-2">
-                        <div class="bg-[#ACBEA3] h-2 rounded-full transition-all" :style="{ width: bannerUploadProgress + '%' }"></div>
+                        <div
+                          class="bg-[#ACBEA3] h-2 rounded-full transition-all"
+                          :style="{ width: bannerUploadProgress + '%' }"
+                        ></div>
                       </div>
-                      <p class="text-white text-sm">Uploading… {{ bannerUploadProgress }}%</p>
+                      <p class="text-white text-sm">
+                        Uploading… {{ bannerUploadProgress }}%
+                      </p>
                     </div>
                   </div>
-                  <p v-if="bannerError" class="text-red-500 text-xs mt-1">{{ bannerError }}</p>
+                  <p v-if="bannerError" class="text-red-500 text-xs mt-1">
+                    {{ bannerError }}
+                  </p>
                 </div>
               </section>
 
               <!-- ── DESCRIPTION (Rich Text) ── -->
               <section class="space-y-4">
-                <h3 class="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">Event Description</h3>
+                <h3
+                  class="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2"
+                >
+                  Event Description
+                </h3>
 
                 <!-- Mini toolbar -->
-                <div class="flex flex-wrap items-center gap-1 p-2 border border-gray-200 rounded-t-lg bg-gray-50">
-                  <button type="button" @click="execCmd('bold')" title="Bold" class="px-2 py-1 rounded text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors flex items-center justify-center min-w-[28px] h-7 font-bold">B</button>
-                  <button type="button" @click="execCmd('italic')" title="Italic" class="px-2 py-1 rounded text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors flex items-center justify-center min-w-[28px] h-7 italic">I</button>
-                  <button type="button" @click="execCmd('underline')" title="Underline" class="px-2 py-1 rounded text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors flex items-center justify-center min-w-[28px] h-7 underline">U</button>
-                  <div class="w-px h-5 bg-gray-300 mx-1"></div>
-                  <button type="button" @click="execCmd('insertUnorderedList')" title="Bullet list" class="px-2 py-1 rounded text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors flex items-center justify-center min-w-[28px] h-7">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/></svg>
+                <div
+                  class="flex flex-wrap items-center gap-1 p-2 border border-gray-200 rounded-t-lg bg-gray-50"
+                >
+                  <button
+                    type="button"
+                    @click="execCmd('bold')"
+                    title="Bold"
+                    class="px-2 py-1 rounded text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors flex items-center justify-center min-w-[28px] h-7 font-bold"
+                  >
+                    B
                   </button>
-                  <button type="button" @click="execCmd('insertOrderedList')" title="Numbered list" class="px-2 py-1 rounded text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors flex items-center justify-center min-w-[28px] h-7">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                  <button
+                    type="button"
+                    @click="execCmd('italic')"
+                    title="Italic"
+                    class="px-2 py-1 rounded text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors flex items-center justify-center min-w-[28px] h-7 italic"
+                  >
+                    I
+                  </button>
+                  <button
+                    type="button"
+                    @click="execCmd('underline')"
+                    title="Underline"
+                    class="px-2 py-1 rounded text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors flex items-center justify-center min-w-[28px] h-7 underline"
+                  >
+                    U
                   </button>
                   <div class="w-px h-5 bg-gray-300 mx-1"></div>
-                  <select @change="execFormatBlock($event)" class="text-xs border border-gray-300 rounded px-2 py-1 bg-white focus:ring-1 focus:ring-[#ACBEA3]">
+                  <button
+                    type="button"
+                    @click="execCmd('insertUnorderedList')"
+                    title="Bullet list"
+                    class="px-2 py-1 rounded text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors flex items-center justify-center min-w-[28px] h-7"
+                  >
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 6h16M4 10h16M4 14h16M4 18h16"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    type="button"
+                    @click="execCmd('insertOrderedList')"
+                    title="Numbered list"
+                    class="px-2 py-1 rounded text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors flex items-center justify-center min-w-[28px] h-7"
+                  >
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+                      />
+                    </svg>
+                  </button>
+                  <div class="w-px h-5 bg-gray-300 mx-1"></div>
+                  <select
+                    @change="execFormatBlock($event)"
+                    class="text-xs border border-gray-300 rounded px-2 py-1 bg-white focus:ring-1 focus:ring-[#ACBEA3]"
+                  >
                     <option value="">Paragraph</option>
                     <option value="h2">Heading 2</option>
                     <option value="h3">Heading 3</option>
                     <option value="blockquote">Quote</option>
                   </select>
                   <div class="w-px h-5 bg-gray-300 mx-1"></div>
-                  <button type="button" @click="insertLink" title="Insert link" class="px-2 py-1 rounded text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors flex items-center justify-center min-w-[28px] h-7">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/></svg>
+                  <button
+                    type="button"
+                    @click="insertLink"
+                    title="Insert link"
+                    class="px-2 py-1 rounded text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors flex items-center justify-center min-w-[28px] h-7"
+                  >
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"
+                      />
+                    </svg>
                   </button>
-                  <button type="button" @click="execCmd('removeFormat')" title="Clear formatting" class="px-2 py-1 rounded text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors flex items-center justify-center min-w-[28px] h-7 text-red-400">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                  <button
+                    type="button"
+                    @click="execCmd('removeFormat')"
+                    title="Clear formatting"
+                    class="px-2 py-1 rounded text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors flex items-center justify-center min-w-[28px] h-7 text-red-400"
+                  >
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
                   </button>
                 </div>
                 <div
@@ -205,7 +509,9 @@
 
               <!-- ── PRICING ── -->
               <section class="space-y-6">
-                <div class="flex items-center justify-between border-b border-gray-200 pb-2">
+                <div
+                  class="flex items-center justify-between border-b border-gray-200 pb-2"
+                >
                   <h3 class="text-lg font-semibold text-gray-900">Pricing</h3>
                   <label class="flex items-center cursor-pointer">
                     <input
@@ -214,35 +520,68 @@
                       type="checkbox"
                       class="mr-2 text-[#ACBEA3] focus:ring-[#ACBEA3] rounded"
                     />
-                    <span class="text-sm text-gray-700">This is a free event</span>
+                    <span class="text-sm text-gray-700"
+                      >This is a free event</span
+                    >
                   </label>
                 </div>
 
-                <div v-if="formData.is_free" class="bg-green-50 border border-green-200 rounded-lg p-4 flex items-center">
-                  <svg class="w-5 h-5 text-green-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                <div
+                  v-if="formData.is_free"
+                  class="bg-green-50 border border-green-200 rounded-lg p-4 flex items-center"
+                >
+                  <svg
+                    class="w-5 h-5 text-green-600 mr-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    ></path>
                   </svg>
-                  <span class="text-green-800 font-medium text-sm">This event is free for all participants</span>
+                  <span class="text-green-800 font-medium text-sm"
+                    >This event is free for all participants</span
+                  >
                 </div>
 
                 <template v-else>
-                  <div class="flex rounded-lg border border-gray-200 overflow-hidden w-fit">
+                  <div
+                    class="flex rounded-lg border border-gray-200 overflow-hidden w-fit"
+                  >
                     <button
                       type="button"
                       @click="formData.pricing_mode = 'flat'"
-                      :class="formData.pricing_mode === 'flat' ? 'bg-[#ACBEA3] text-white' : 'bg-white text-gray-600 hover:bg-gray-50'"
+                      :class="
+                        formData.pricing_mode === 'flat'
+                          ? 'bg-[#ACBEA3] text-white'
+                          : 'bg-white text-gray-600 hover:bg-gray-50'
+                      "
                       class="px-5 py-2 text-sm font-medium transition-colors"
-                    >Flat Price</button>
+                    >
+                      Flat Price
+                    </button>
                     <button
                       type="button"
                       @click="initTieredPricing"
-                      :class="formData.pricing_mode === 'tiered' ? 'bg-[#ACBEA3] text-white' : 'bg-white text-gray-600 hover:bg-gray-50'"
+                      :class="
+                        formData.pricing_mode === 'tiered'
+                          ? 'bg-[#ACBEA3] text-white'
+                          : 'bg-white text-gray-600 hover:bg-gray-50'
+                      "
                       class="px-5 py-2 text-sm font-medium transition-colors border-l border-gray-200"
-                    >Tiered Pricing</button>
+                    >
+                      Tiered Pricing
+                    </button>
                   </div>
 
                   <div class="w-48">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Currency <span class="text-red-500">*</span></label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2"
+                      >Currency <span class="text-red-500">*</span></label
+                    >
                     <select
                       v-model="formData.currency"
                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ACBEA3] focus:border-transparent transition-colors"
@@ -255,14 +594,22 @@
                   </div>
 
                   <div v-if="formData.pricing_mode === 'flat'">
-                    <label class="block text-sm font-medium text-gray-700 mb-2">Admission Fee <span class="text-red-500">*</span></label>
+                    <label class="block text-sm font-medium text-gray-700 mb-2"
+                      >Admission Fee <span class="text-red-500">*</span></label
+                    >
                     <div class="relative w-56">
-                      <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                        <span class="text-gray-500 text-sm">{{ formData.currency }}</span>
+                      <div
+                        class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
+                      >
+                        <span class="text-gray-500 text-sm">{{
+                          formData.currency
+                        }}</span>
                       </div>
                       <input
                         v-model.number="formData.admission_fee"
-                        type="number" step="0.01" min="0"
+                        type="number"
+                        step="0.01"
+                        min="0"
                         :required="!formData.is_free"
                         class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ACBEA3] focus:border-transparent transition-colors"
                         placeholder="0.00"
@@ -284,43 +631,118 @@
                           class="flex-1 mr-4 px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium focus:ring-1 focus:ring-[#ACBEA3] focus:border-transparent"
                         />
                         <div class="relative w-36">
-                          <span class="absolute inset-y-0 left-3 flex items-center text-gray-500 text-sm pointer-events-none">{{ formData.currency }}</span>
+                          <span
+                            class="absolute inset-y-0 left-3 flex items-center text-gray-500 text-sm pointer-events-none"
+                            >{{ formData.currency }}</span
+                          >
                           <input
                             v-model.number="tier.price"
-                            type="number" step="0.01" min="0"
+                            type="number"
+                            step="0.01"
+                            min="0"
                             placeholder="0.00"
                             class="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-1 focus:ring-[#ACBEA3] focus:border-transparent"
                           />
                         </div>
-                        <button type="button" @click="removeTier(ti)" class="ml-3 text-red-400 hover:text-red-600 p-1">
-                          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                        <button
+                          type="button"
+                          @click="removeTier(ti)"
+                          class="ml-3 text-red-400 hover:text-red-600 p-1"
+                        >
+                          <svg
+                            class="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M6 18L18 6M6 6l12 12"
+                            />
+                          </svg>
                         </button>
                       </div>
 
                       <div>
-                        <label class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2 block">What's included</label>
+                        <label
+                          class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2 block"
+                          >What's included</label
+                        >
                         <div class="space-y-2">
-                          <div v-for="(perk, pi) in tier.perks" :key="pi" class="flex items-center gap-2">
-                            <svg class="w-4 h-4 text-[#ACBEA3] shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                          <div
+                            v-for="(perk, pi) in tier.perks"
+                            :key="pi"
+                            class="flex items-center gap-2"
+                          >
+                            <svg
+                              class="w-4 h-4 text-[#ACBEA3] shrink-0"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M5 13l4 4L19 7"
+                              />
+                            </svg>
                             <input
                               v-model="tier.perks[pi]"
                               type="text"
                               placeholder="e.g., Access to all sessions"
                               class="flex-1 px-3 py-1.5 text-sm border border-gray-200 rounded-md focus:ring-1 focus:ring-[#ACBEA3] focus:border-transparent bg-white"
                             />
-                            <button type="button" @click="removePerk(ti, pi)" class="text-gray-400 hover:text-red-400 shrink-0">
-                              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+                            <button
+                              type="button"
+                              @click="removePerk(ti, pi)"
+                              class="text-gray-400 hover:text-red-400 shrink-0"
+                            >
+                              <svg
+                                class="w-3.5 h-3.5"
+                                fill="none"
+                                stroke="currentColor"
+                                viewBox="0 0 24 24"
+                              >
+                                <path
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round"
+                                  stroke-width="2"
+                                  d="M6 18L18 6M6 6l12 12"
+                                />
+                              </svg>
                             </button>
                           </div>
-                          <button type="button" @click="addPerk(ti)" class="text-xs text-[#ACBEA3] hover:text-[#9BAD94] font-medium mt-1 flex items-center gap-1">
-                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                          <button
+                            type="button"
+                            @click="addPerk(ti)"
+                            class="text-xs text-[#ACBEA3] hover:text-[#9BAD94] font-medium mt-1 flex items-center gap-1"
+                          >
+                            <svg
+                              class="w-3 h-3"
+                              fill="none"
+                              stroke="currentColor"
+                              viewBox="0 0 24 24"
+                            >
+                              <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                              />
+                            </svg>
                             Add item
                           </button>
                         </div>
                       </div>
 
                       <div>
-                        <label class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-1 block">Description (optional)</label>
+                        <label
+                          class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-1 block"
+                          >Description (optional)</label
+                        >
                         <input
                           v-model="tier.description"
                           type="text"
@@ -330,8 +752,24 @@
                       </div>
                     </div>
 
-                    <button type="button" @click="addTier" class="flex items-center gap-2 text-sm text-[#ACBEA3] hover:text-[#9BAD94] font-medium">
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+                    <button
+                      type="button"
+                      @click="addTier"
+                      class="flex items-center gap-2 text-sm text-[#ACBEA3] hover:text-[#9BAD94] font-medium"
+                    >
+                      <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                        />
+                      </svg>
                       Add Tier
                     </button>
                   </div>
@@ -340,10 +778,17 @@
 
               <!-- ── REGISTRATION FORM FIELDS ── -->
               <section class="space-y-6">
-                <div class="flex items-center justify-between border-b border-gray-200 pb-2">
+                <div
+                  class="flex items-center justify-between border-b border-gray-200 pb-2"
+                >
                   <div>
-                    <h3 class="text-lg font-semibold text-gray-900">Registration Form</h3>
-                    <p class="text-xs text-gray-500 mt-0.5">Drag rows to reorder · Full Name and Email are always collected</p>
+                    <h3 class="text-lg font-semibold text-gray-900">
+                      Registration Form
+                    </h3>
+                    <p class="text-xs text-gray-500 mt-0.5">
+                      Drag rows to reorder · Full Name and Email are always
+                      collected
+                    </p>
                   </div>
                   <div class="flex items-center gap-2">
                     <select
@@ -366,8 +811,18 @@
                       @click="addFormField"
                       class="flex items-center space-x-2 bg-[#ACBEA3] text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-[#9BAD94] transition-colors"
                     >
-                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                      <svg
+                        class="w-4 h-4"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                        ></path>
                       </svg>
                       <span>Add Field</span>
                     </button>
@@ -390,22 +845,44 @@
                     @drop.prevent="onDropOnField($event, index)"
                     :class="[
                       'border rounded-xl bg-white transition-all',
-                      dragOverIndex === index ? 'border-[#ACBEA3] ring-2 ring-[#ACBEA3]/30' : 'border-gray-200',
-                      draggingIndex === index ? 'opacity-40' : ''
+                      dragOverIndex === index
+                        ? 'border-[#ACBEA3] ring-2 ring-[#ACBEA3]/30'
+                        : 'border-gray-200',
+                      draggingIndex === index ? 'opacity-40' : '',
                     ]"
                   >
                     <!-- Field header row -->
                     <div class="flex items-center gap-3 px-4 py-3">
-                      <svg class="w-4 h-4 text-gray-400 cursor-grab shrink-0" fill="currentColor" viewBox="0 0 24 24"><circle cx="9" cy="6" r="1.5"/><circle cx="15" cy="6" r="1.5"/><circle cx="9" cy="12" r="1.5"/><circle cx="15" cy="12" r="1.5"/><circle cx="9" cy="18" r="1.5"/><circle cx="15" cy="18" r="1.5"/></svg>
+                      <svg
+                        class="w-4 h-4 text-gray-400 cursor-grab shrink-0"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <circle cx="9" cy="6" r="1.5" />
+                        <circle cx="15" cy="6" r="1.5" />
+                        <circle cx="9" cy="12" r="1.5" />
+                        <circle cx="15" cy="12" r="1.5" />
+                        <circle cx="9" cy="18" r="1.5" />
+                        <circle cx="15" cy="18" r="1.5" />
+                      </svg>
                       <input
                         v-model="field.label"
                         type="text"
                         placeholder="Field Label"
                         class="flex-1 px-3 py-1.5 border border-gray-200 rounded-md text-sm focus:ring-1 focus:ring-[#ACBEA3] focus:border-transparent"
                       />
-                      <span class="text-xs px-2 py-1 rounded bg-gray-100 text-gray-500 whitespace-nowrap">{{ fieldTypeLabel(field.type) }}</span>
-                      <label class="flex items-center text-xs text-gray-600 whitespace-nowrap cursor-pointer">
-                        <input v-model="field.required" type="checkbox" class="mr-1.5 text-[#ACBEA3] focus:ring-[#ACBEA3] rounded" />
+                      <span
+                        class="text-xs px-2 py-1 rounded bg-gray-100 text-gray-500 whitespace-nowrap"
+                        >{{ fieldTypeLabel(field.type) }}</span
+                      >
+                      <label
+                        class="flex items-center text-xs text-gray-600 whitespace-nowrap cursor-pointer"
+                      >
+                        <input
+                          v-model="field.required"
+                          type="checkbox"
+                          class="mr-1.5 text-[#ACBEA3] focus:ring-[#ACBEA3] rounded"
+                        />
                         Required
                       </label>
                       <button
@@ -414,17 +891,52 @@
                         class="text-gray-400 hover:text-gray-600 p-1 transition-colors"
                         :title="field._expanded ? 'Collapse' : 'Options'"
                       >
-                        <svg class="w-4 h-4 transition-transform" :class="{ 'rotate-180': field._expanded }" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                        <svg
+                          class="w-4 h-4 transition-transform"
+                          :class="{ 'rotate-180': field._expanded }"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </svg>
                       </button>
-                      <button type="button" @click="removeFormField(index)" class="text-red-400 hover:text-red-600 p-1 transition-colors">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                      <button
+                        type="button"
+                        @click="removeFormField(index)"
+                        class="text-red-400 hover:text-red-600 p-1 transition-colors"
+                      >
+                        <svg
+                          class="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                          ></path>
+                        </svg>
                       </button>
                     </div>
 
                     <!-- Expandable options -->
-                    <div v-if="field._expanded" class="px-4 pb-4 border-t border-gray-100 pt-3 space-y-3">
+                    <div
+                      v-if="field._expanded"
+                      class="px-4 pb-4 border-t border-gray-100 pt-3 space-y-3"
+                    >
                       <div>
-                        <label class="text-xs text-gray-500 font-medium mb-1 block">Placeholder / Helper text</label>
+                        <label
+                          class="text-xs text-gray-500 font-medium mb-1 block"
+                          >Placeholder / Helper text</label
+                        >
                         <input
                           v-model="field.placeholder"
                           type="text"
@@ -432,8 +944,13 @@
                           class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:ring-1 focus:ring-[#ACBEA3] focus:border-transparent"
                         />
                       </div>
-                      <div v-if="field.type === 'select' || field.type === 'radio'">
-                        <label class="text-xs text-gray-500 font-medium mb-2 block">Options (one per line)</label>
+                      <div
+                        v-if="field.type === 'select' || field.type === 'radio'"
+                      >
+                        <label
+                          class="text-xs text-gray-500 font-medium mb-2 block"
+                          >Options (one per line)</label
+                        >
                         <textarea
                           v-model="field.optionsRaw"
                           rows="3"
@@ -442,7 +959,10 @@
                         ></textarea>
                       </div>
                       <div v-if="field.type === 'file'">
-                        <label class="text-xs text-gray-500 font-medium mb-1 block">Accepted file types</label>
+                        <label
+                          class="text-xs text-gray-500 font-medium mb-1 block"
+                          >Accepted file types</label
+                        >
                         <input
                           v-model="field.accept"
                           type="text"
@@ -453,12 +973,29 @@
                     </div>
                   </div>
 
-                  <div v-if="formData.form_fields.length === 0" class="text-center py-8 border-2 border-dashed border-gray-200 rounded-xl">
-                    <svg class="w-10 h-10 text-gray-300 mx-auto mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                  <div
+                    v-if="formData.form_fields.length === 0"
+                    class="text-center py-8 border-2 border-dashed border-gray-200 rounded-xl"
+                  >
+                    <svg
+                      class="w-10 h-10 text-gray-300 mx-auto mb-3"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                      ></path>
                     </svg>
-                    <p class="text-sm text-gray-500 mb-1">No extra fields added yet</p>
-                    <p class="text-xs text-gray-400">Choose a type above and click "Add Field"</p>
+                    <p class="text-sm text-gray-500 mb-1">
+                      No extra fields added yet
+                    </p>
+                    <p class="text-xs text-gray-400">
+                      Choose a type above and click "Add Field"
+                    </p>
                   </div>
                 </div>
               </section>
@@ -477,75 +1014,121 @@
                   :disabled="isUpdating || bannerUploading"
                   class="flex-1 bg-[#ACBEA3] text-white px-6 py-3 rounded-lg hover:bg-[#9BAD94] disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
                 >
-                  <span v-if="isUpdating" class="flex items-center justify-center">
-                    <div class="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full mr-2"></div>
+                  <span
+                    v-if="isUpdating"
+                    class="flex items-center justify-center"
+                  >
+                    <div
+                      class="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full mr-2"
+                    ></div>
                     Updating Event…
                   </span>
                   <span v-else>Update Event</span>
                 </button>
               </div>
-
             </form>
           </div>
         </template>
       </div>
 
       <!-- Help Section -->
-      <div class="mt-6 bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+      <div
+        class="mt-6 bg-white rounded-xl shadow-sm border border-gray-200 p-6"
+      >
         <div class="flex items-start">
           <div class="bg-[#EB6534]/10 p-2 rounded-lg mr-4 mt-1">
-            <svg class="w-5 h-5 text-[#EB6534]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+            <svg
+              class="w-5 h-5 text-[#EB6534]"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+              ></path>
             </svg>
           </div>
           <div>
-            <h3 class="font-semibold text-gray-900 mb-2">Tips for Updating Events</h3>
+            <h3 class="font-semibold text-gray-900 mb-2">
+              Tips for Updating Events
+            </h3>
             <ul class="text-sm text-gray-600 space-y-1">
               <li>• Keep descriptions up to date as agendas finalize.</li>
-              <li>• Be mindful when changing ticket pricing or custom fields if attendees have already registered.</li>
-              <li>• Re-upload your banner only if necessary; the current one stays unless replaced or removed.</li>
+              <li>
+                • Be mindful when changing ticket pricing or custom fields if
+                attendees have already registered.
+              </li>
+              <li>
+                • Re-upload your banner only if necessary; the current one stays
+                unless replaced or removed.
+              </li>
             </ul>
           </div>
         </div>
       </div>
-
     </div>
 
     <!-- Success Modal -->
-    <div v-if="showSuccessModal" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div class="bg-white rounded-xl max-w-md w-full overflow-hidden shadow-2xl">
+    <div
+      v-if="showSuccessModal"
+      class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+    >
+      <div
+        class="bg-white rounded-xl max-w-md w-full overflow-hidden shadow-2xl"
+      >
         <div class="bg-green-50 p-6 text-center">
-          <div class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-            <svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+          <div
+            class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
+          >
+            <svg
+              class="w-8 h-8 text-green-600"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M5 13l4 4L19 7"
+              ></path>
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-green-900 mb-2">Event Updated Successfully!</h3>
-          <p class="text-green-700">The event changes are now live on your calendar.</p>
+          <h3 class="text-xl font-semibold text-green-900 mb-2">
+            Event Updated Successfully!
+          </h3>
+          <p class="text-green-700">
+            The event changes are now live on your calendar.
+          </p>
         </div>
         <div class="p-6 bg-white text-center">
-          <NuxtLink to="/admin/events" class="w-full bg-gray-900 text-white font-medium py-3 rounded-lg hover:bg-gray-800 transition-colors">
+          <NuxtLink
+            to="/admin/events"
+            class="w-full bg-gray-900 text-white font-medium py-3 rounded-lg hover:bg-gray-800 transition-colors"
+          >
             Return to Events
           </NuxtLink>
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
 <script setup>
-import { ref, watch, nextTick } from 'vue';
+import { ref, watch, nextTick } from "vue";
 
 definePageMeta({
-  layout: 'admin',
-  title: 'Edit Event',
+  layout: "admin",
+  title: "Edit Event",
   middleware: (to) => {
-    const user = useSupabaseUser()
-    const { isAdmin } = useAuth()
+    const user = useSupabaseUser();
+    const { isAdmin } = useAuth();
 
     if (!user.value && !isAdmin.value) {
-      return navigateTo('/admin/login')
+      return navigateTo("/admin/login");
     }
   },
 });
@@ -561,80 +1144,131 @@ const showSuccessModal = ref(false);
 
 // Form Data structure
 const formData = ref({
-  title: '',
-  event_date: '',
-  venue: '',
-  description: '',
+  title: "",
+  event_type: "single", // 'single' | 'multi'
+  event_date: "", // YYYY-MM-DD
+  event_start_time: "", // HH:MM  (single only)
+  event_end_time: "", // HH:MM  (single only)
+  event_end_date: "", // YYYY-MM-DD (multi only)
+  venue: "",
+  description: "",
   form_fields: [],
-  pricing_mode: 'flat', // 'flat' | 'tiered'
+  pricing_mode: "flat", // 'flat' | 'tiered'
   pricing_tiers: [],
-  admission_fee: 0.00,
-  currency: '₦',
+  admission_fee: 0.0,
+  currency: "₦",
   is_free: true,
-  banner_url: ''
+  banner_url: "",
 });
 
 // Banner Refs
 const isDraggingBanner = ref(false);
-const bannerPreview = ref('');
+const bannerPreview = ref("");
 const bannerFile = ref(null);
 const bannerUploading = ref(false);
 const bannerUploadProgress = ref(0);
-const bannerError = ref('');
+const bannerError = ref("");
 const bannerInput = ref(null);
 
 // Rich Editor Ref
 const descriptionEditor = ref(null);
 
 // Form Builder Refs
-const newFieldType = ref('text');
+const newFieldType = ref("text");
 const draggingIndex = ref(null);
 const dragOverIndex = ref(null);
 
 // Fetch the specific event
-const { data: event, pending, error, refresh } = await useAsyncData(`event-${eventId}`, async () => {
-  const { data, error } = await supabase
-    .from('events')
-    .select('*')
-    .eq('id', eventId)
-    .single();
+const {
+  data: event,
+  pending,
+  error,
+  refresh,
+} = await useAsyncData(
+  `event-${eventId}`,
+  async () => {
+    const { data, error } = await supabase
+      .from("events")
+      .select("*")
+      .eq("id", eventId)
+      .single();
 
-  if (error) throw error;
-  return data;
-}, { server: false });
+    if (error) throw error;
+    return data;
+  },
+  { server: false }
+);
 
 // Fill form when event data loads
-watch(event, async (newEvent) => {
-  if (newEvent) {
-    formData.value = {
-      title: newEvent.title || '',
-      event_date: newEvent.event_date ? formatDateForInput(newEvent.event_date) : '',
-      venue: newEvent.venue || '',
-      description: newEvent.description || '',
-      form_fields: Array.isArray(newEvent.form_fields) ? newEvent.form_fields.map(f => ({ ...f, _expanded: false, _id: crypto.randomUUID() })) : [],
-      pricing_mode: newEvent.pricing_mode || 'flat',
-      pricing_tiers: Array.isArray(newEvent.pricing_tiers) ? newEvent.pricing_tiers : [],
-      admission_fee: newEvent.admission_fee || 0.00,
-      currency: newEvent.currency || '₦',
-      is_free: newEvent.is_free !== undefined ? newEvent.is_free : true,
-      banner_url: newEvent.banner_url || ''
-    };
+watch(
+  event,
+  async (newEvent) => {
+    if (newEvent) {
+      const start = parseDateParts(newEvent.event_date);
+      const end = parseDateParts(newEvent.event_end_date);
 
-    bannerPreview.value = newEvent.banner_url || '';
+      // Infer type: if end date exists and differs from start date → multi-day
+      const isMulti = !!end.date && end.date !== start.date;
+      formData.value = {
+        title: newEvent.title || "",
+        venue: newEvent.venue || "",
+        event_type: isMulti ? "multi" : "single",
+        event_date: start.date,
+        event_start_time: start.time,
+        event_end_time: isMulti ? "" : end.time,
+        event_end_date: isMulti ? end.date : "",
+        description: newEvent.description || "",
+        form_fields: Array.isArray(newEvent.form_fields)
+  ? newEvent.form_fields.map(f => ({
+      ...f,
+      _expanded: false,
+      _id: crypto.randomUUID(),
+      optionsRaw: Array.isArray(f.options) ? f.options.join('\n') : '',
+      accept: f.accept || '',
+    }))
+  : [],
+        pricing_mode: newEvent.pricing_mode || "flat",
+        pricing_tiers: Array.isArray(newEvent.pricing_tiers)
+          ? newEvent.pricing_tiers
+          : [],
+        admission_fee: newEvent.admission_fee || 0.0,
+        currency: newEvent.currency || "₦",
+        is_free: newEvent.is_free !== undefined ? newEvent.is_free : true,
+        banner_url: newEvent.banner_url || "",
+      };
 
-    // Wait for DOM to load editor div before assigning innerHTML
-    await nextTick();
-    if (descriptionEditor.value) {
-      descriptionEditor.value.innerHTML = formData.value.description;
+      bannerPreview.value = newEvent.banner_url || "";
+
+      // Wait for DOM to load editor div before assigning innerHTML
+      await nextTick();
+      if (descriptionEditor.value) {
+        descriptionEditor.value.innerHTML = formData.value.description;
+      }
     }
-  }
-}, { immediate: true });
+  },
+  { immediate: true }
+);
 
 function formatDateForInput(dateString) {
-  if (!dateString) return '';
+  if (!dateString) return "";
   const date = new Date(dateString);
   return date.toISOString().slice(0, 16);
 }
+
+const parseDateParts = (isoString) => {
+  if (!isoString) return { date: "", time: "" };
+  const d = new Date(isoString);
+  const date = [
+    d.getFullYear(),
+    String(d.getMonth() + 1).padStart(2, "0"),
+    String(d.getDate()).padStart(2, "0"),
+  ].join("-");
+  const time = [
+    String(d.getHours()).padStart(2, "0"),
+    String(d.getMinutes()).padStart(2, "0"),
+  ].join(":");
+  return { date, time };
+};
 
 // --- Banner Upload Logic ---
 const handleBannerDrop = (e) => {
@@ -649,22 +1283,24 @@ const handleBannerSelect = (e) => {
 };
 
 const processBannerFile = (file) => {
-  bannerError.value = '';
+  bannerError.value = "";
   if (file.size > 5 * 1024 * 1024) {
-    bannerError.value = 'File is too large. Max size is 5MB.';
+    bannerError.value = "File is too large. Max size is 5MB.";
     return;
   }
   const reader = new FileReader();
-  reader.onload = (e) => { bannerPreview.value = e.target.result; };
+  reader.onload = (e) => {
+    bannerPreview.value = e.target.result;
+  };
   reader.readAsDataURL(file);
   bannerFile.value = file;
 };
 
 const removeBanner = () => {
-  bannerPreview.value = '';
+  bannerPreview.value = "";
   bannerFile.value = null;
-  formData.value.banner_url = '';
-  if (bannerInput.value) bannerInput.value.value = '';
+  formData.value.banner_url = "";
+  if (bannerInput.value) bannerInput.value.value = "";
 };
 
 // --- Rich Text Editor Logic ---
@@ -680,29 +1316,29 @@ const handlePaste = (e) => {
   e.preventDefault();
 
   // Get both HTML and Plain Text flavors from the clipboard
-  const html = e.clipboardData.getData('text/html');
-  const text = e.clipboardData.getData('text/plain');
+  const html = e.clipboardData.getData("text/html");
+  const text = e.clipboardData.getData("text/plain");
 
   if (html) {
     // Parse the clipboard HTML so we can manipulate its DOM structure safely
     const parser = new DOMParser();
-    const doc = parser.parseFromString(html, 'text/html');
+    const doc = parser.parseFromString(html, "text/html");
 
     // Find every single element within the pasted block
-    const allElements = doc.body.querySelectorAll('*');
-    
+    const allElements = doc.body.querySelectorAll("*");
+
     allElements.forEach((el) => {
       // Strip explicit inline styles (kills bad colors, alignments, fonts, backgrounds)
-      el.removeAttribute('style');
+      el.removeAttribute("style");
       // Strip source framework classes (kills external layout rules)
-      el.removeAttribute('class');
+      el.removeAttribute("class");
     });
 
     // Cleanly insert the sanitized HTML layout at the current cursor position
-    document.execCommand('insertHTML', false, doc.body.innerHTML);
+    document.execCommand("insertHTML", false, doc.body.innerHTML);
   } else {
     // Fallback for cases where only plain text is available
-    document.execCommand('insertText', false, text);
+    document.execCommand("insertText", false, text);
   }
 
   // Sync back to your reactive formData structure
@@ -710,14 +1346,14 @@ const handlePaste = (e) => {
 };
 const execFormatBlock = (e) => {
   const val = e.target.value;
-  document.execCommand('formatBlock', false, val || 'P');
+  document.execCommand("formatBlock", false, val || "P");
   syncDescription();
-  e.target.value = '';
+  e.target.value = "";
   descriptionEditor.value?.focus();
 };
 const insertLink = () => {
-  const url = prompt('Enter the link URL:');
-  if (url) document.execCommand('createLink', false, url);
+  const url = prompt("Enter the link URL:");
+  if (url) document.execCommand("createLink", false, url);
   syncDescription();
 };
 const syncDescription = () => {
@@ -729,23 +1365,28 @@ const syncDescription = () => {
 // --- Pricing Logic ---
 const handleFreeEventToggle = () => {
   if (formData.value.is_free) {
-    formData.value.admission_fee = 0.00;
+    formData.value.admission_fee = 0.0;
   }
 };
 const initTieredPricing = () => {
-  formData.value.pricing_mode = 'tiered';
+  formData.value.pricing_mode = "tiered";
   if (formData.value.pricing_tiers.length === 0) {
     addTier();
   }
 };
 const addTier = () => {
-  formData.value.pricing_tiers.push({ name: '', price: 0, description: '', perks: [''] });
+  formData.value.pricing_tiers.push({
+    name: "",
+    price: 0,
+    description: "",
+    perks: [""],
+  });
 };
 const removeTier = (index) => {
   formData.value.pricing_tiers.splice(index, 1);
 };
 const addPerk = (tierIndex) => {
-  formData.value.pricing_tiers[tierIndex].perks.push('');
+  formData.value.pricing_tiers[tierIndex].perks.push("");
 };
 const removePerk = (tierIndex, perkIndex) => {
   formData.value.pricing_tiers[tierIndex].perks.splice(perkIndex, 1);
@@ -753,19 +1394,30 @@ const removePerk = (tierIndex, perkIndex) => {
 
 // --- Form Builder Logic ---
 const fieldTypeLabel = (type) => {
-  const map = { text: 'Short Text', textarea: 'Long Text', email: 'Email', tel: 'Phone', number: 'Number', select: 'Dropdown', radio: 'Multiple Choice', checkbox: 'Checkbox', date: 'Date', file: 'File Upload' };
+  const map = {
+    text: "Short Text",
+    textarea: "Long Text",
+    email: "Email",
+    tel: "Phone",
+    number: "Number",
+    select: "Dropdown",
+    radio: "Multiple Choice",
+    checkbox: "Checkbox",
+    date: "Date",
+    file: "File Upload",
+  };
   return map[type] || type;
 };
 const addFormField = () => {
   formData.value.form_fields.push({
     _id: crypto.randomUUID(),
-    label: '',
+    label: "",
     type: newFieldType.value,
     required: false,
     _expanded: true,
-    placeholder: '',
-    optionsRaw: '',
-    accept: ''
+    placeholder: "",
+    optionsRaw: "",
+    accept: "",
   });
 };
 const removeFormField = (index) => {
@@ -773,7 +1425,7 @@ const removeFormField = (index) => {
 };
 const onDragStart = (e, index) => {
   draggingIndex.value = index;
-  e.dataTransfer.effectAllowed = 'move';
+  e.dataTransfer.effectAllowed = "move";
 };
 const onDropOnField = (e, index) => {
   if (draggingIndex.value !== null && draggingIndex.value !== index) {
@@ -789,71 +1441,96 @@ const onDropField = (e) => {
   dragOverIndex.value = null;
 };
 
+const buildDatePayload = () => {
+  if (formData.value.event_type === 'single') {
+    return {
+      event_date: formData.value.event_start_time
+        ? `${formData.value.event_date}T${formData.value.event_start_time}`
+        : formData.value.event_date,
+      event_end_date: formData.value.event_end_time
+        ? `${formData.value.event_date}T${formData.value.event_end_time}`
+        : null,
+    }
+  }
+  return {
+    event_date: formData.value.event_date,
+    event_end_date: formData.value.event_end_date || null,
+  }
+}
+
 // --- Submission Logic ---
 const handleUpdateEvent = async () => {
   isUpdating.value = true;
-  
+
   try {
     let finalBannerUrl = formData.value.banner_url;
 
     // Upload new banner if selected
     if (bannerFile.value) {
       bannerUploading.value = true;
-      const fileExt = bannerFile.value.name.split('.').pop();
-      const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`;
+      const fileExt = bannerFile.value.name.split(".").pop();
+      const fileName = `${Date.now()}-${Math.random()
+        .toString(36)
+        .substring(7)}.${fileExt}`;
       const filePath = `event-banners/${fileName}`;
 
       const { data: uploadData, error: uploadError } = await supabase.storage
-        .from('events') // Ensure this bucket matches your setup
+        .from("events") // Ensure this bucket matches your setup
         .upload(filePath, bannerFile.value);
 
       if (uploadError) throw uploadError;
 
-      const { data: { publicUrl } } = supabase.storage
-        .from('events')
-        .getPublicUrl(filePath);
+      const {
+        data: { publicUrl },
+      } = supabase.storage.from("events").getPublicUrl(filePath);
 
       finalBannerUrl = publicUrl;
       bannerUploading.value = false;
     } else if (!bannerPreview.value) {
-       finalBannerUrl = '';
+      finalBannerUrl = "";
     }
 
     // Prepare fields by stripping private UI properties (_expanded, _id)
-    const cleanFormFields = formData.value.form_fields.map(f => {
+    const cleanFormFields = formData.value.form_fields.map((f) => {
       const { _expanded, _id, ...rest } = f;
       return rest;
     });
 
     const updateData = {
       title: formData.value.title,
-      event_date: formData.value.event_date,
+      ...buildDatePayload(),
       description: formData.value.description,
       venue: formData.value.venue,
       form_fields: cleanFormFields,
       banner_url: finalBannerUrl,
-      pricing_mode: formData.value.is_free ? 'flat' : formData.value.pricing_mode,
-      pricing_tiers: formData.value.pricing_mode === 'tiered' ? formData.value.pricing_tiers : [],
-      admission_fee: formData.value.is_free ? 0.00 : parseFloat(formData.value.admission_fee || 0),
+      pricing_mode: formData.value.is_free
+        ? "flat"
+        : formData.value.pricing_mode,
+      pricing_tiers:
+        formData.value.pricing_mode === "tiered"
+          ? formData.value.pricing_tiers
+          : [],
+      admission_fee: formData.value.is_free
+        ? 0.0
+        : parseFloat(formData.value.admission_fee || 0),
       currency: formData.value.currency,
       is_free: formData.value.is_free,
-      updated_at: new Date().toISOString()
+      updated_at: new Date().toISOString(),
     };
 
     const { error: dbError } = await supabase
-      .from('events')
+      .from("events")
       .update(updateData)
-      .eq('id', eventId);
+      .eq("id", eventId);
 
     if (dbError) throw dbError;
 
     showSuccessModal.value = true;
-    
   } catch (err) {
-    toast.add({ 
-      title: 'Error updating event', 
-      description: err.message, 
-      color: 'red' 
+    toast.add({
+      title: "Error updating event",
+      description: err.message,
+      color: "red",
     });
   } finally {
     isUpdating.value = false;
