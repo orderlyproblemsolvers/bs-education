@@ -6,7 +6,7 @@
         <div class="grid lg:grid-cols-[1fr_320px]">
 
           <!-- Left: image with overlay -->
-          <div class="relative min-h-[220px] overflow-hidden">
+          <div class="relative min-h-55 overflow-hidden">
             <img
               src="/img/cambridge-overview.jpg"
               alt="University of Cambridge"
@@ -23,7 +23,7 @@
                 <span class="text-secondary">University of Cambridge</span>
               </h2>
               <p class="text-white/65 text-sm max-w-sm leading-relaxed">
-                For Nigerian decision-makers and senior executives. 31 Aug – 4 Sep 2025, Cambridge UK.
+                For decision-makers and senior executives. 31 Aug – 4 Sep 2025, Cambridge UK.
               </p>
             </div>
           </div>

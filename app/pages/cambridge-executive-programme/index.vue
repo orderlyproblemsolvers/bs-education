@@ -49,7 +49,7 @@
           </h1>
 
           <p class="text-white/75  sm:text-lg max-w-2xl leading-relaxed mb-8">
-            A premium executive programme designed for Nigerian decision-makers, policymakers, and senior executives seeking global perspective and strategic clarity in an increasingly complex world.
+            A premium executive programme designed for decision-makers, policymakers, and senior executives seeking global perspective and strategic clarity in an increasingly complex world.
           </p>
 
           <div class="flex flex-col sm:flex-row gap-4">
