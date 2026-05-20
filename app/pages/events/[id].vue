@@ -895,7 +895,7 @@ const getEventDuration = () => {
   if (!event.value?.event_end_date) return "Not specified";
   const diffMs = new Date(event.value.event_end_date) - new Date(event.value.event_date);
   if (isMultiDayEvent.value) {
-    const days = Math.round(diffMs / 86400000);
+    const days = Math.round(diffMs / 86400000) + 1;
     return `${days} day${days !== 1 ? "s" : ""}`;
   }
   const totalMins = Math.round(diffMs / 60000);
