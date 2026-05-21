@@ -244,6 +244,10 @@
       <p class="text-gray-500 max-w-xl mx-auto  leading-relaxed">
         Your programme is led by distinguished Cambridge scholars — practitioners and researchers at the forefront of global economics, finance, energy, sustainability, and technology.
       </p>
+      <p class="text-gray-500 max-w-xl mx-auto  leading-relaxed">
+        <!--these are sample facilitators. they have not been 100% confirmed-->
+        <em>Note:</em> These are sample facilitators. They have not been 100% confirmed.
+      </p>
     </div>
  
     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">

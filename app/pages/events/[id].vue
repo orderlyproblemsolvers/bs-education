@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen bg-gradient-to-b from-[#f4f5f3] to-white">
+  <div class="min-h-screen bg-linear-to-b from-[#f4f5f3] to-white">
     <div class="container mx-auto px-4 py-12">
       <!-- Loading State -->
       <div v-if="pending" class="max-w-6xl mx-auto">
@@ -83,7 +83,7 @@
 
               <!-- Text Header -->
               <div
-                class="bg-gradient-to-r from-[#5d6b56] to-[#9BAD94] p-8 text-white"
+                class="bg-linear-to-r from-[#5d6b56] to-[#9BAD94] p-8 text-white"
               >
                 <div class="flex items-center gap-3 mb-4 flex-wrap">
                   <div class="bg-white/20 p-2 rounded-lg">
@@ -229,7 +229,7 @@
                       class="border border-gray-200 rounded-xl p-4 hover:shadow-md transition-all duration-300"
                     >
                       <div class="flex justify-between items-start mb-2">
-                        <h3 class="font-bold text-gray-900 text-base">
+                        <h3 class="font-bold text-gray-900 ">
                           {{ tier.name }}
                         </h3>
                         <span class="text-lg font-bold text-[#5d6b56]">
@@ -312,7 +312,7 @@
               <div
                 class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden"
               >
-                <div class="bg-gradient-to-r from-[#5d6b56] to-[#9BAD94] p-4">
+                <div class="bg-linear-to-r from-[#5d6b56] to-[#9BAD94] p-4">
                   <h2 class="text-xl font-bold text-white flex items-center">
                     <UIcon
                       name="i-heroicons-clipboard-document-check"
@@ -458,7 +458,7 @@
                         :class="
                           isMultiStep
                             ? 'space-y-4'
-                            : 'space-y-4 max-h-[400px] overflow-y-auto pr-2'
+                            : 'space-y-4 max-h-100 overflow-y-auto pr-2'
                         "
                       >
                         <template v-if="isMultiStep">
@@ -695,7 +695,7 @@
         class="bg-white rounded-2xl max-w-md w-full overflow-hidden transform transition-all animate-slide-up"
       >
         <div
-          class="bg-gradient-to-r from-green-500 to-green-600 p-6 text-center"
+          class="bg-linear-to-r from-green-500 to-green-600 p-6 text-center"
         >
           <div
             class="bg-white w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
