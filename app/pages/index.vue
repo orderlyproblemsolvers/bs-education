@@ -1,12 +1,12 @@
 <template>
   <div class="max-w-screen overflow-x-hidden">
     <HeroSection />
-    <OurServices />
-    <Locations />
-    <ApplicationForm />
+    <LazyOurServices />
+    <LazyLocations />
+    <LazyApplicationForm />
     <CambridgeSection />
     <Blog />
-    <Testimonials />
+    <LazyTestimonials />
     <Faq />
   </div>
 </template>

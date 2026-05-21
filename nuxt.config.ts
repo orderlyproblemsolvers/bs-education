@@ -136,6 +136,13 @@ export default defineNuxtConfig({
     // Global options
     quality: 80,
     format: ["webp", "avif", "jpg", "png", "jpeg"],
+    screens: {
+      xs: 320,
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+    },
     domains: ["minjvvxdfdwmbrtphzpr.supabase.co", "res.cloudinary.com"],
   },
   ogImage: {

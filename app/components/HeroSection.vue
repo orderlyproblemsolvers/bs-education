@@ -69,17 +69,18 @@
   </div>
 </div>
 
-      <div
-        class="w-full md:w-[45%] flex justify-center items-center"
-      >
-        <img
-          src="/img/heroimage.png"
-          width="1200"
-          height="800"
-          alt="Graduated student abroad"
-          class="w-[90%] sm:w-[80%] md:w-full max-w-sm sm:max-w-md md:max-w-lg h-auto object-cover rounded-tl-[80px] sm:rounded-tl-[100px] md:rounded-tl-[140px] rounded-br-[80px] sm:rounded-br-[100px] md:rounded-br-[140px]"
-        />
-      </div>
+<div class="w-full md:w-[45%] flex justify-center items-center">
+  <NuxtImg
+    src="/img/heroimage.png"
+    width="1200"
+    height="800"
+    preload
+    loading="eager"
+    sizes="xs:90vw sm:80vw md:45vw"
+    alt="Graduated student abroad"
+    class="w-[90%] sm:w-[80%] md:w-full max-w-sm sm:max-w-md md:max-w-lg h-auto object-cover rounded-tl-[80px] sm:rounded-tl-[100px] md:rounded-tl-[140px] rounded-br-[80px] sm:rounded-br-[100px] md:rounded-br-[140px]"
+  />
+</div>
     </div>
   </section>
   <HomeStats/>
