@@ -991,7 +991,7 @@ const handleFormSubmit = async () => {
       {
         event_id: eventId,
         form_data: formData,
-        registered_at: new Date().toISOString(),
+       created_at: new Date().toISOString(),
       },
     ]);
     if (error) throw error;
