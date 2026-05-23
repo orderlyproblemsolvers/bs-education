@@ -39,7 +39,7 @@
               <UIcon name="i-heroicons-map-pin" class="w-3 h-3" /> University of Cambridge, UK
             </span>
             <span class="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white/80 text-xs px-3 py-1.5 rounded-full">
-              <UIcon name="i-heroicons-calendar" class="w-3 h-3" /> 31 Aug - 4 Sep 2025
+              <UIcon name="i-heroicons-calendar" class="w-3 h-3" /> 31 Aug - 4 Sep 2026
             </span>
           </div>
 
@@ -90,7 +90,7 @@
             <UIcon name="i-heroicons-calendar" class="w-4 h-4 text-secondary mt-0.5 shrink-0" />
             <div>
               <p class="text-xs text-gray-500 font-medium">Date</p>
-              <p class="text-sm font-semibold text-gray-800">31 August – 4 September 2025</p>
+              <p class="text-sm font-semibold text-gray-800">31 August – 4 September 2026</p>
             </div>
           </div>
           <div class="flex items-start gap-3">
@@ -504,7 +504,7 @@ definePageMeta({
 
 useSeoMeta({
   title: 'Executive Leadership Programme at the University of Cambridge | B&S Educational Services',
-  description: 'A premium 5-day executive leadership programme at the University of Cambridge for Nigerian decision-makers, policymakers, and senior executives. 31 Aug – 4 Sep 2025.',
+  description: 'A premium 5-day executive leadership programme at the University of Cambridge for Nigerian decision-makers, policymakers, and senior executives. 31 Aug – 4 Sep 2026.',
   ogTitle: 'Executive Leadership Programme at the University of Cambridge | B&S Educational Services',
   ogDescription: 'Join senior professionals and policymakers for a premium executive learning experience at the University of Cambridge. Limited capacity — apply now.',
   ogImage: '/img/cambridge-hero.jpg',

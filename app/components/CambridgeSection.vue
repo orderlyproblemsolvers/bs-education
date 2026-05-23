@@ -23,7 +23,7 @@
                 <span class="text-secondary">University of Cambridge</span>
               </h2>
               <p class="text-white/65 text-sm max-w-sm leading-relaxed">
-                For decision-makers and senior executives. 31 Aug – 4 Sep 2025, Cambridge UK.
+                For decision-makers and senior executives. 31 Aug – 4 Sep 2026, Cambridge UK.
               </p>
             </div>
           </div>
@@ -69,7 +69,7 @@
 
 <script setup>
 const details = [
-  { icon: 'i-heroicons-calendar', label: 'Date', value: '31 Aug – 4 Sep 2025' },
+  { icon: 'i-heroicons-calendar', label: 'Date', value: '31 Aug – 4 Sep 2026' },
   { icon: 'i-heroicons-map-pin', label: 'Location', value: 'Cambridge, UK' },
   { icon: 'i-heroicons-clock', label: 'Duration', value: '5 Days' },
   { icon: 'i-heroicons-trophy', label: 'Award', value: 'Certificate of Participation' },

@@ -376,7 +376,7 @@
                             name="i-heroicons-check-badge"
                             class="w-4 h-4 mr-2 mt-0.5 shrink-0"
                           />
-                          <span>Check your email for confirmation</span>
+                          <span>Expect an email from B&S Education</span>
                         </li>
                         <li v-if="!event.is_free" class="flex items-start">
                           <UIcon
@@ -712,7 +712,7 @@
         </div>
         <div class="p-6 space-y-3">
           <p class="text-gray-600 text-sm text-center">
-            A confirmation email has been sent to your registered email address.
+            Expect a confirmation email from B&S Education
           </p>
           <UButton
             @click="closeSuccessModal"
@@ -1000,7 +1000,7 @@ const handleFormSubmit = async () => {
     }
     showSuccessModal.value = true;
     hasRegistered.value = true;
-    toast.add({ title: "Registration Successful!", description: "Check your email for confirmation details.", color: "green" });
+    toast.add({ title: "Registration Successful!", description: "Expect an email from B&S Education", color: "green" });
   } catch (error) {
     toast.add({ title: "Registration Failed", description: error.message || "Please try again.", color: "red" });
   } finally {
