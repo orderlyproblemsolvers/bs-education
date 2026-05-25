@@ -111,7 +111,7 @@ export default defineNuxtConfig({
     compressPublicAssets: true,
     minify: true
   },
-  modules: ["@nuxt/image", "@nuxt/ui", "@nuxtjs/supabase", "@vueuse/nuxt", "@nuxtjs/leaflet", "nuxt-security", "@nuxtjs/seo", "nuxt-og-image", "nuxt-seo-utils"],
+  modules: ["@nuxt/image", "@nuxt/ui", "@nuxtjs/supabase", "@vueuse/nuxt", "@nuxtjs/leaflet", "nuxt-security", "@nuxtjs/seo", "nuxt-og-image", "nuxt-seo-utils", "@nuxt/scripts"],
   css: [
     "~/assets/css/main.css",
     "quill/dist/quill.snow.css",
@@ -129,6 +129,15 @@ export default defineNuxtConfig({
     url: process.env.SUPABASE_URL,
     key: process.env.SUPABASE_ANON_KEY,
     redirect: false,
+  },
+  scripts: {
+    registry: {
+      googleTagManager: {
+        id: 'GTM-MB96C49T',
+        // Optional: loads GTM after Nuxt is fully ready to maximize performance
+        trigger: 'onNuxtReady' 
+      }
+    }
   },
   image: {
     provider: process.env.NODE_ENV === "development" ? "ipx" : "netlify",
