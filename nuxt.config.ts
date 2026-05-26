@@ -1,5 +1,4 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-import tailwindcss from "@tailwindcss/vite";
 
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
@@ -54,19 +53,33 @@ export default defineNuxtConfig({
         { name: "twitter:site", content: "@bs_education" },
         { name: "twitter:creator", content: "@bs_education" },
       ],
-        link: [
-          {
+      link: [
+        {
           rel: "stylesheet",
           href: "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css",
           integrity: "sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=",
           crossorigin: "",
         },
-        { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
-        { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/icon-32x32.png' },
-        { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/icon-16x16.png' },
-        { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
-        { rel: 'manifest', href: '/site.webmanifest' }
-      ]
+        { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+        {
+          rel: "icon",
+          type: "image/png",
+          sizes: "32x32",
+          href: "/icon-32x32.png",
+        },
+        {
+          rel: "icon",
+          type: "image/png",
+          sizes: "16x16",
+          href: "/icon-16x16.png",
+        },
+        {
+          rel: "apple-touch-icon",
+          sizes: "180x180",
+          href: "/apple-touch-icon.png",
+        },
+        { rel: "manifest", href: "/site.webmanifest" },
+      ],
     },
   },
   ssr: true,
@@ -81,6 +94,14 @@ export default defineNuxtConfig({
           "https://*.cloudinary.com",
           "https://api.cloudinary.com",
           "https://res.cloudinary.com",
+          "https://www.googletagmanager.com",
+          "https://*.google-analytics.com",
+        ],
+        "script-src": [
+          "'self'",
+          "'strict-dynamic'",
+          "'nonce-{{nonce}}'", // Cooperates with Nuxt's auto-generated nonces
+          "https://www.googletagmanager.com",
         ],
         "img-src": [
           "'self'",
@@ -91,7 +112,10 @@ export default defineNuxtConfig({
           "https://api.cloudinary.com",
           "https://*.cloudinary.com",
           "https://res.cloudinary.com",
+          "https://www.googletagmanager.com",
+          "https://*.google-analytics.com",
         ],
+        "frame-src": ["'self'", "https://www.googletagmanager.com"],
       },
       xXSSProtection: "1; mode=block",
       xFrameOptions: "DENY",
@@ -105,13 +129,32 @@ export default defineNuxtConfig({
     shim: false,
     strict: true,
   },
+  routeRules: {
+    // Completely disable the rate limiter only for Nuxt Scripts proxy routes
+    "/_scripts/**": {
+      security: {
+        rateLimiter: false,
+      },
+    },
+  },
 
   nitro: {
     preset: "netlify",
     compressPublicAssets: true,
-    minify: true
+    minify: true,
   },
-  modules: ["@nuxt/image", "@nuxt/ui", "@nuxtjs/supabase", "@vueuse/nuxt", "@nuxtjs/leaflet", "nuxt-security", "@nuxtjs/seo", "nuxt-og-image", "nuxt-seo-utils", "@nuxt/scripts"],
+  modules: [
+    "@nuxt/image",
+    "@nuxt/ui",
+    "@nuxtjs/supabase",
+    "@vueuse/nuxt",
+    "@nuxtjs/leaflet",
+    "nuxt-security",
+    "@nuxtjs/seo",
+    "nuxt-og-image",
+    "nuxt-seo-utils",
+    "@nuxt/scripts",
+  ],
   css: [
     "~/assets/css/main.css",
     "quill/dist/quill.snow.css",
@@ -133,11 +176,17 @@ export default defineNuxtConfig({
   scripts: {
     registry: {
       googleTagManager: {
-        id: 'GTM-MB96C49T',
+        id: "GTM-MB96C49T",
         // Optional: loads GTM after Nuxt is fully ready to maximize performance
-        trigger: 'onNuxtReady' 
-      }
-    }
+        trigger: "onNuxtReady",
+        defaultConsent: {
+          ad_storage: "denied",
+          analytics_storage: "denied",
+          ad_user_data: "denied",
+          ad_personalization: "denied",
+        },
+      },
+    },
   },
   image: {
     provider: process.env.NODE_ENV === "development" ? "ipx" : "netlify",
@@ -158,11 +207,11 @@ export default defineNuxtConfig({
     enabled: true,
     fontSubsets: [
       // Tell Satori exactly which font weights to download
-      'Plus+Jakarta+Sans:400',
-      'Plus+Jakarta+Sans:500',
-      'Plus+Jakarta+Sans:700',
-      'Plus+Jakarta+Sans:900'
-    ]
+      "Plus+Jakarta+Sans:400",
+      "Plus+Jakarta+Sans:500",
+      "Plus+Jakarta+Sans:700",
+      "Plus+Jakarta+Sans:900",
+    ],
   },
 
   vite: {
@@ -170,17 +219,16 @@ export default defineNuxtConfig({
       rollupOptions: {
         output: {
           manualChunks: {
-            vendor: ['vue', 'vue-router']
-          }
-        }
-      }
+            vendor: ["vue", "vue-router"],
+          },
+        },
+      },
     },
-    
   },
   site: {
-    url: 'https://bs-education.com',
-    name: 'B&S Educational Services',
-    description: 'Your trusted partner for studying abroad',
-    defaultLocale: 'en',
+    url: "https://bs-education.com",
+    name: "B&S Educational Services",
+    description: "Your trusted partner for studying abroad",
+    defaultLocale: "en",
   },
 });
