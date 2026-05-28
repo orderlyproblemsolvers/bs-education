@@ -177,6 +177,7 @@ export default defineNuxtConfig({
     registry: {
       googleTagManager: {
         id: "GTM-MB96C49T",
+        bundle: false,
         // Optional: loads GTM after Nuxt is fully ready to maximize performance
         trigger: "onNuxtReady",
         defaultConsent: {
