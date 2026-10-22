@@ -1,18 +1,21 @@
 <template>
-  <div class="min-h-screen bg-[#f4f5f3] p-6">
+  <div class="min-h-screen bg-[#f4f5f3] p-4 sm:p-6">
     <div class="max-w-4xl mx-auto">
-      <!-- Header Section -->
+      <!-- Header -->
       <div
-        class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6"
+        class="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6 mb-6"
       >
-        <div class="flex items-center justify-between">
+        <div
+          class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+        >
           <div class="flex items-center">
-            <div class="bg-[#ACBEA3] p-3 rounded-xl mr-4">
+            <div class="bg-[#5F7A55] p-3 rounded-xl mr-4 shrink-0">
               <svg
                 class="w-6 h-6 text-white"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
+                aria-hidden="true"
               >
                 <path
                   stroke-linecap="round"
@@ -30,14 +33,17 @@
             </div>
           </div>
           <button
-            @click="router.push('/admin/events')"
-            class="flex items-center space-x-2 px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+            type="button"
+            @click="goBack"
+            :class="secondaryBtn"
+            class="flex items-center justify-center space-x-2 px-4 py-2"
           >
             <svg
               class="w-4 h-4"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               <path
                 stroke-linecap="round"
@@ -52,18 +58,19 @@
       </div>
 
       <!-- Main Form -->
-      <div
-        class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden"
-      >
+      <div class="bg-white rounded-xl shadow-sm border border-gray-200">
         <!-- Loading State -->
         <div
           v-if="pending"
           class="p-12 flex flex-col items-center justify-center"
+          role="status"
+          aria-live="polite"
         >
           <div
-            class="animate-spin w-8 h-8 border-4 border-[#ACBEA3] border-t-transparent rounded-full mb-4"
+            class="animate-spin w-8 h-8 border-4 border-[#5F7A55] border-t-transparent rounded-full mb-4"
+            aria-hidden="true"
           ></div>
-          <p class="text-gray-600 font-medium">Loading event details...</p>
+          <p class="text-gray-600 font-medium">Loading event details…</p>
         </div>
 
         <!-- Error State -->
@@ -76,6 +83,7 @@
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               <path
                 stroke-linecap="round"
@@ -99,195 +107,305 @@
           </button>
         </div>
 
-        <template v-else>
-          <!-- Form Header -->
-          <div class="bg-[#f4f5f3] p-6 border-b border-gray-200">
-            <div class="flex items-center">
-              <svg
-                class="w-6 h-6 text-[#ACBEA3] mr-3"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+        <div v-else class="p-4 sm:p-8">
+          <form
+            novalidate
+            @submit.prevent="handleUpdateEvent"
+            class="space-y-10"
+          >
+            <!-- ── BASIC INFORMATION ── -->
+            <section class="space-y-6" aria-labelledby="basic-heading">
+              <h2
+                id="basic-heading"
+                class="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2"
               >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                ></path>
-              </svg>
-              <h2 class="text-xl font-semibold text-gray-900">Event Details</h2>
-            </div>
-            <p class="text-gray-600 mt-1 text-sm">
-              Update the information below
-            </p>
-          </div>
+                Basic Information
+              </h2>
 
-          <!-- Form Content -->
-          <div class="p-8">
-            <form @submit.prevent="handleUpdateEvent" class="space-y-10">
-              <!-- ── BASIC INFORMATION ── -->
-              <section class="space-y-6">
-                <h3
-                  class="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2"
+              <!-- Title -->
+              <div>
+                <label for="event-title" :class="labelCls">
+                  Event Title <span class="text-red-600" aria-hidden="true">*</span>
+                </label>
+                <input
+                  id="event-title"
+                  v-model="formData.title"
+                  type="text"
+                  aria-required="true"
+                  :aria-invalid="!!errors.title"
+                  :aria-describedby="errors.title ? 'event-title-error' : null"
+                  :class="inputClass(errors.title)"
+                  placeholder="e.g., Introduction to Digital Marketing"
+                />
+                <p
+                  v-if="errors.title"
+                  id="event-title-error"
+                  role="alert"
+                  :class="errorCls"
                 >
-                  Basic Information
-                </h3>
+                  {{ errors.title }}
+                </p>
+              </div>
 
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">
-                    Event Title <span class="text-red-500">*</span>
-                  </label>
-                  <input
-                    v-model="formData.title"
-                    type="text"
-                    required
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ACBEA3] focus:border-transparent transition-colors"
-                    placeholder="e.g., Introduction to Digital Marketing"
-                  />
-                </div>
-
-                <!-- Event Type Toggle -->
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2"
-                    >Event Duration</label
-                  >
-                  <div
-                    class="flex rounded-lg border border-gray-200 overflow-hidden w-fit"
-                  >
-                    <button
-                      type="button"
-                      @click="formData.event_type = 'single'"
-                      :class="
-                        formData.event_type === 'single'
-                          ? 'bg-[#ACBEA3] text-white'
-                          : 'bg-white text-gray-600 hover:bg-gray-50'
-                      "
-                      class="px-5 py-2 text-sm font-medium transition-colors"
-                    >
-                      Single Day
-                    </button>
-                    <button
-                      type="button"
-                      @click="formData.event_type = 'multi'"
-                      :class="
-                        formData.event_type === 'multi'
-                          ? 'bg-[#ACBEA3] text-white'
-                          : 'bg-white text-gray-600 hover:bg-gray-50'
-                      "
-                      class="px-5 py-2 text-sm font-medium transition-colors border-l border-gray-200"
-                    >
-                      Multi Day
-                    </button>
-                  </div>
-                </div>
-
-                <!-- Single Day inputs -->
+              <!-- Duration toggle -->
+              <div>
+                <span :class="labelCls" id="duration-label">Event Duration</span>
                 <div
-                  v-if="formData.event_type === 'single'"
-                  class="grid grid-cols-1 md:grid-cols-3 gap-6"
+                  role="group"
+                  aria-labelledby="duration-label"
+                  class="flex rounded-lg border border-gray-300 overflow-hidden w-fit"
                 >
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                      Date <span class="text-red-500">*</span>
-                    </label>
-                    <input
-                      v-model="formData.event_date"
-                      type="date"
-                      required
-                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ACBEA3] focus:border-transparent transition-colors"
-                    />
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                      Start Time <span class="text-red-500">*</span>
-                    </label>
-                    <input
-                      v-model="formData.event_start_time"
-                      type="time"
-                      required
-                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ACBEA3] focus:border-transparent transition-colors"
-                    />
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                      End Time <span class="text-red-500">*</span>
-                    </label>
-                    <input
-                      v-model="formData.event_end_time"
-                      type="time"
-                      required
-                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ACBEA3] focus:border-transparent transition-colors"
-                    />
-                  </div>
-                </div>
-
-                <!-- Multi Day inputs -->
-                <div v-else class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                      Start Date <span class="text-red-500">*</span>
-                    </label>
-                    <input
-                      v-model="formData.event_date"
-                      type="date"
-                      required
-                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ACBEA3] focus:border-transparent transition-colors"
-                    />
-                  </div>
-                  <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-2">
-                      End Date <span class="text-red-500">*</span>
-                    </label>
-                    <input
-                      v-model="formData.event_end_date"
-                      type="date"
-                      :min="formData.event_date"
-                      required
-                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ACBEA3] focus:border-transparent transition-colors"
-                    />
-                  </div>
-                </div>
-
-                <!-- Venue -->
-                <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2"
-                    >Venue</label
+                  <button
+                    type="button"
+                    :aria-pressed="formData.event_type === 'single'"
+                    @click="formData.event_type = 'single'"
+                    :class="formData.event_type === 'single' ? segActive : segIdle"
+                    class="px-5 py-2 text-sm font-medium transition-colors"
                   >
+                    Single Day
+                  </button>
+                  <button
+                    type="button"
+                    :aria-pressed="formData.event_type === 'multi'"
+                    @click="formData.event_type = 'multi'"
+                    :class="formData.event_type === 'multi' ? segActive : segIdle"
+                    class="px-5 py-2 text-sm font-medium transition-colors border-l border-gray-300"
+                  >
+                    Multi Day
+                  </button>
+                </div>
+              </div>
+
+              <!-- Single day -->
+              <div
+                v-if="formData.event_type === 'single'"
+                class="grid grid-cols-1 md:grid-cols-3 gap-6"
+              >
+                <div>
+                  <label for="event-date" :class="labelCls">
+                    Date <span class="text-red-600" aria-hidden="true">*</span>
+                  </label>
                   <input
-                    v-model="formData.venue"
-                    type="text"
-                    class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ACBEA3] focus:border-transparent transition-colors"
-                    placeholder="e.g., Main Conference Hall"
+                    id="event-date"
+                    v-model="formData.event_date"
+                    type="date"
+                    aria-required="true"
+                    :aria-invalid="!!errors.event_date"
+                    :aria-describedby="errors.event_date ? 'event-date-error' : null"
+                    :class="inputClass(errors.event_date)"
+                  />
+                  <p
+                    v-if="errors.event_date"
+                    id="event-date-error"
+                    role="alert"
+                    :class="errorCls"
+                  >
+                    {{ errors.event_date }}
+                  </p>
+                </div>
+                <div>
+                  <label for="event-start-time" :class="labelCls">
+                    Start Time <span class="text-red-600" aria-hidden="true">*</span>
+                  </label>
+                  <input
+                    id="event-start-time"
+                    v-model="formData.event_start_time"
+                    type="time"
+                    aria-required="true"
+                    :aria-invalid="!!errors.event_start_time"
+                    :aria-describedby="
+                      errors.event_start_time ? 'event-start-time-error' : null
+                    "
+                    :class="inputClass(errors.event_start_time)"
+                  />
+                  <p
+                    v-if="errors.event_start_time"
+                    id="event-start-time-error"
+                    role="alert"
+                    :class="errorCls"
+                  >
+                    {{ errors.event_start_time }}
+                  </p>
+                </div>
+                <div>
+                  <label for="event-end-time" :class="labelCls">
+                    End Time <span class="text-red-600" aria-hidden="true">*</span>
+                  </label>
+                  <input
+                    id="event-end-time"
+                    v-model="formData.event_end_time"
+                    type="time"
+                    aria-required="true"
+                    :aria-invalid="!!errors.event_end_time"
+                    :aria-describedby="
+                      errors.event_end_time ? 'event-end-time-error' : null
+                    "
+                    :class="inputClass(errors.event_end_time)"
+                  />
+                  <p
+                    v-if="errors.event_end_time"
+                    id="event-end-time-error"
+                    role="alert"
+                    :class="errorCls"
+                  >
+                    {{ errors.event_end_time }}
+                  </p>
+                </div>
+              </div>
+
+              <!-- Multi day -->
+              <div v-else class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div>
+                  <label for="event-date-multi" :class="labelCls">
+                    Start Date <span class="text-red-600" aria-hidden="true">*</span>
+                  </label>
+                  <input
+                    id="event-date-multi"
+                    v-model="formData.event_date"
+                    type="date"
+                    aria-required="true"
+                    :aria-invalid="!!errors.event_date"
+                    :aria-describedby="errors.event_date ? 'event-date-error' : null"
+                    :class="inputClass(errors.event_date)"
+                  />
+                  <p
+                    v-if="errors.event_date"
+                    id="event-date-error"
+                    role="alert"
+                    :class="errorCls"
+                  >
+                    {{ errors.event_date }}
+                  </p>
+                </div>
+                <div>
+                  <label for="event-start-time-multi" :class="labelCls">
+                    Start Time
+                    <span class="text-xs font-normal text-gray-500">(optional)</span>
+                  </label>
+                  <input
+                    id="event-start-time-multi"
+                    v-model="formData.event_start_time"
+                    type="time"
+                    :class="inputClass(false)"
                   />
                 </div>
-
-                <!-- ── EVENT BANNER ── -->
                 <div>
-                  <label class="block text-sm font-medium text-gray-700 mb-2">
-                    Event Banner
-                    <span class="ml-2 text-xs font-normal text-gray-400"
-                      >(Optional · max 5 MB · JPG, PNG, WEBP)</span
-                    >
+                  <label for="event-end-date" :class="labelCls">
+                    End Date <span class="text-red-600" aria-hidden="true">*</span>
                   </label>
-
-                  <!-- Drop Zone -->
-                  <div
-                    v-if="!bannerPreview"
-                    class="relative border-2 border-dashed border-gray-300 rounded-xl p-8 text-center hover:border-[#ACBEA3] transition-colors cursor-pointer"
-                    :class="{
-                      'border-[#ACBEA3] bg-[#f4f5f3]': isDraggingBanner,
-                    }"
-                    @dragover.prevent="isDraggingBanner = true"
-                    @dragleave="isDraggingBanner = false"
-                    @drop.prevent="handleBannerDrop"
-                    @click="$refs.bannerInput.click()"
+                  <input
+                    id="event-end-date"
+                    v-model="formData.event_end_date"
+                    type="date"
+                    :min="formData.event_date"
+                    aria-required="true"
+                    :aria-invalid="!!errors.event_end_date"
+                    :aria-describedby="
+                      errors.event_end_date ? 'event-end-date-error' : null
+                    "
+                    :class="inputClass(errors.event_end_date)"
+                  />
+                  <p
+                    v-if="errors.event_end_date"
+                    id="event-end-date-error"
+                    role="alert"
+                    :class="errorCls"
                   >
+                    {{ errors.event_end_date }}
+                  </p>
+                </div>
+                <div>
+                  <label for="event-end-time-multi" :class="labelCls">
+                    End Time
+                    <span class="text-xs font-normal text-gray-500">(optional)</span>
+                  </label>
+                  <input
+                    id="event-end-time-multi"
+                    v-model="formData.event_end_time"
+                    type="time"
+                    :aria-invalid="!!errors.event_end_time"
+                    :aria-describedby="
+                      errors.event_end_time ? 'event-end-time-error' : null
+                    "
+                    :class="inputClass(errors.event_end_time)"
+                  />
+                  <p
+                    v-if="errors.event_end_time"
+                    id="event-end-time-error"
+                    role="alert"
+                    :class="errorCls"
+                  >
+                    {{ errors.event_end_time }}
+                  </p>
+                </div>
+              </div>
+
+              <div class="-mt-3 space-y-1">
+                <p :class="hintCls">
+                  Times use your browser's timezone ({{ timezone }}).
+                  <span v-if="formData.event_type === 'multi'">
+                    Leave times empty for full days.
+                  </span>
+                </p>
+              </div>
+
+              <!-- Venue -->
+              <div>
+                <label for="event-venue" :class="labelCls">Venue</label>
+                <input
+                  id="event-venue"
+                  v-model="formData.venue"
+                  type="text"
+                  :class="inputClass(false)"
+                  placeholder="e.g., Main Conference Hall"
+                />
+              </div>
+
+              <!-- Banner -->
+              <div>
+                <span :class="labelCls" id="banner-label">
+                  Event Banner
+                  <span class="ml-2 text-xs font-normal text-gray-500"
+                    >(Optional · max 5 MB · JPG, PNG, WEBP)</span
+                  >
+                </span>
+
+                <input
+                  ref="bannerInput"
+                  type="file"
+                  accept="image/jpeg,image/png,image/webp"
+                  class="hidden"
+                  tabindex="-1"
+                  aria-hidden="true"
+                  @change="handleBannerSelect"
+                />
+
+                <!-- Drop zone -->
+                <div
+                  v-if="!bannerPreview"
+                  role="button"
+                  tabindex="0"
+                  aria-labelledby="banner-label"
+                  class="border-2 border-dashed rounded-xl p-8 text-center transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-[#5F7A55]"
+                  :class="
+                    isDraggingBanner
+                      ? 'border-[#5F7A55] bg-[#f4f5f3]'
+                      : 'border-gray-300 hover:border-[#5F7A55]'
+                  "
+                  @dragover.prevent="isDraggingBanner = true"
+                  @dragleave="isDraggingBanner = false"
+                  @drop.prevent="handleBannerDrop"
+                  @click="triggerBannerPicker"
+                  @keydown.enter.prevent="triggerBannerPicker"
+                  @keydown.space.prevent="triggerBannerPicker"
+                >
+                  <div class="pointer-events-none">
                     <svg
-                      class="w-10 h-10 text-gray-400 mx-auto mb-3"
+                      class="w-10 h-10 text-gray-500 mx-auto mb-3"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
+                      aria-hidden="true"
                     >
                       <path
                         stroke-linecap="round"
@@ -296,59 +414,30 @@
                         d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
                       ></path>
                     </svg>
-                    <p class="text-sm text-gray-600 font-medium">
+                    <p class="text-sm text-gray-700 font-medium">
                       Drop your banner here or
-                      <span class="text-[#ACBEA3]">browse</span>
+                      <span class="text-[#4E6646] underline">browse</span>
                     </p>
-                    <p class="text-xs text-gray-400 mt-1">
-                      Recommended: 1200 × 630 px
+                    <p class="text-sm text-gray-500 mt-1">
+                      Recommended: 1200 × 630 px for best display on all devices
                     </p>
-                    <input
-                      ref="bannerInput"
-                      type="file"
-                      accept="image/jpeg,image/png,image/webp"
-                      class="hidden"
-                      @change="handleBannerSelect"
-                    />
                   </div>
+                </div>
 
-                  <!-- Preview -->
+                <!-- Preview -->
+                <div v-else class="space-y-3">
                   <div
-                    v-else
                     class="relative rounded-xl overflow-hidden border border-gray-200"
                   >
                     <img
                       :src="bannerPreview"
+                      alt="Event banner preview"
                       class="w-full h-48 object-cover"
                     />
                     <div
-                      class="absolute inset-0 bg-black/40 opacity-0 hover:opacity-100 transition-opacity flex items-center justify-center gap-3"
-                    >
-                      <button
-                        type="button"
-                        @click="$refs.bannerInput.click()"
-                        class="bg-white text-gray-800 text-sm font-medium px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors"
-                      >
-                        Replace
-                      </button>
-                      <button
-                        type="button"
-                        @click="removeBanner"
-                        class="bg-red-500 text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-red-600 transition-colors"
-                      >
-                        Remove
-                      </button>
-                    </div>
-                    <input
-                      ref="bannerInput"
-                      type="file"
-                      accept="image/jpeg,image/png,image/webp"
-                      class="hidden"
-                      @change="handleBannerSelect"
-                    />
-                    <!-- Upload progress -->
-                    <div
                       v-if="bannerUploading"
+                      role="status"
+                      aria-live="polite"
                       class="absolute inset-0 bg-black/60 flex flex-col items-center justify-center"
                     >
                       <div class="w-48 bg-gray-700 rounded-full h-2 mb-2">
@@ -362,60 +451,119 @@
                       </p>
                     </div>
                   </div>
-                  <p v-if="bannerError" class="text-red-500 text-xs mt-1">
-                    {{ bannerError }}
-                  </p>
+
+                  <div class="flex flex-wrap items-center gap-3">
+                    <button
+                      type="button"
+                      :disabled="bannerUploading"
+                      @click="triggerBannerPicker"
+                      :class="secondaryBtn"
+                      class="px-4 py-2 text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+                    >
+                      Replace
+                    </button>
+                    <button
+                      type="button"
+                      @click="removeBanner"
+                      class="px-4 py-2 text-sm border border-red-300 text-red-700 rounded-lg hover:bg-red-50 transition-colors"
+                    >
+                      Remove
+                    </button>
+                    <template v-if="bannerFailed">
+                      <span class="text-sm text-red-700">Upload failed.</span>
+                      <button
+                        type="button"
+                        @click="retryBannerUpload"
+                        :class="primaryBtn"
+                        class="px-4 py-2 text-sm rounded-lg"
+                      >
+                        Retry upload
+                      </button>
+                    </template>
+                    <span
+                      v-else-if="formData.banner_url && !bannerUploading"
+                      class="text-sm text-green-700"
+                      role="status"
+                    >
+                      Uploaded
+                    </span>
+                  </div>
                 </div>
-              </section>
 
-              <!-- ── DESCRIPTION (Rich Text) ── -->
-              <section class="space-y-4">
-                <h3
-                  class="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2"
-                >
-                  Event Description
-                </h3>
+                <p v-if="bannerError" role="alert" :class="errorCls">
+                  {{ bannerError }}
+                </p>
+                <p v-if="errors.banner" role="alert" :class="errorCls">
+                  {{ errors.banner }}
+                </p>
+              </div>
+            </section>
 
-                <!-- Mini toolbar -->
+            <!-- ── DESCRIPTION ── -->
+            <section class="space-y-4" aria-labelledby="desc-heading">
+              <h2
+                id="desc-heading"
+                class="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2"
+              >
+                Event Description
+              </h2>
+
+              <div>
+                <!-- Toolbar -->
                 <div
-                  class="flex flex-wrap items-center gap-1 p-2 border border-gray-200 rounded-t-lg bg-gray-50"
+                  role="toolbar"
+                  aria-label="Text formatting"
+                  class="flex flex-wrap items-center gap-1 p-2 border border-gray-300 rounded-t-lg bg-gray-50"
                 >
                   <button
                     type="button"
+                    @mousedown.prevent
                     @click="execCmd('bold')"
                     title="Bold"
-                    class="px-2 py-1 rounded text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors flex items-center justify-center min-w-[28px] h-7 font-bold"
+                    aria-label="Bold"
+                    :aria-pressed="activeFormats.bold"
+                    :class="[toolbarBtn, activeFormats.bold ? tbActive : tbIdle, 'font-bold']"
                   >
                     B
                   </button>
                   <button
                     type="button"
+                    @mousedown.prevent
                     @click="execCmd('italic')"
                     title="Italic"
-                    class="px-2 py-1 rounded text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors flex items-center justify-center min-w-[28px] h-7 italic"
+                    aria-label="Italic"
+                    :aria-pressed="activeFormats.italic"
+                    :class="[toolbarBtn, activeFormats.italic ? tbActive : tbIdle, 'italic']"
                   >
                     I
                   </button>
                   <button
                     type="button"
+                    @mousedown.prevent
                     @click="execCmd('underline')"
                     title="Underline"
-                    class="px-2 py-1 rounded text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors flex items-center justify-center min-w-[28px] h-7 underline"
+                    aria-label="Underline"
+                    :aria-pressed="activeFormats.underline"
+                    :class="[toolbarBtn, activeFormats.underline ? tbActive : tbIdle, 'underline']"
                   >
                     U
                   </button>
-                  <div class="w-px h-5 bg-gray-300 mx-1"></div>
+                  <div class="w-px h-5 bg-gray-300 mx-1" aria-hidden="true"></div>
                   <button
                     type="button"
+                    @mousedown.prevent
                     @click="execCmd('insertUnorderedList')"
                     title="Bullet list"
-                    class="px-2 py-1 rounded text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors flex items-center justify-center min-w-[28px] h-7"
+                    aria-label="Bullet list"
+                    :aria-pressed="activeFormats.ul"
+                    :class="[toolbarBtn, activeFormats.ul ? tbActive : tbIdle]"
                   >
                     <svg
                       class="w-4 h-4"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
+                      aria-hidden="true"
                     >
                       <path
                         stroke-linecap="round"
@@ -427,46 +575,43 @@
                   </button>
                   <button
                     type="button"
+                    @mousedown.prevent
                     @click="execCmd('insertOrderedList')"
                     title="Numbered list"
-                    class="px-2 py-1 rounded text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors flex items-center justify-center min-w-[28px] h-7"
+                    aria-label="Numbered list"
+                    :aria-pressed="activeFormats.ol"
+                    :class="[toolbarBtn, activeFormats.ol ? tbActive : tbIdle, 'text-xs font-semibold']"
                   >
-                    <svg
-                      class="w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
-                      />
-                    </svg>
+                    1.
                   </button>
-                  <div class="w-px h-5 bg-gray-300 mx-1"></div>
+                  <div class="w-px h-5 bg-gray-300 mx-1" aria-hidden="true"></div>
+                  <label for="block-format" class="sr-only">Text style</label>
                   <select
-                    @change="execFormatBlock($event)"
-                    class="text-xs border border-gray-300 rounded px-2 py-1 bg-white focus:ring-1 focus:ring-[#ACBEA3]"
+                    id="block-format"
+                    :value="currentBlock"
+                    @change="execFormatBlock"
+                    class="text-xs border border-gray-300 rounded px-2 py-1 bg-white focus:ring-1 focus:ring-[#5F7A55]"
                   >
-                    <option value="">Paragraph</option>
+                    <option value="p">Paragraph</option>
                     <option value="h2">Heading 2</option>
                     <option value="h3">Heading 3</option>
                     <option value="blockquote">Quote</option>
                   </select>
-                  <div class="w-px h-5 bg-gray-300 mx-1"></div>
+                  <div class="w-px h-5 bg-gray-300 mx-1" aria-hidden="true"></div>
                   <button
                     type="button"
-                    @click="insertLink"
+                    @mousedown.prevent
+                    @click="openLinkPopover"
                     title="Insert link"
-                    class="px-2 py-1 rounded text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors flex items-center justify-center min-w-[28px] h-7"
+                    aria-label="Insert link"
+                    :class="[toolbarBtn, tbIdle]"
                   >
                     <svg
                       class="w-4 h-4"
                       fill="none"
                       stroke="currentColor"
                       viewBox="0 0 24 24"
+                      aria-hidden="true"
                     >
                       <path
                         stroke-linecap="round"
@@ -478,386 +623,528 @@
                   </button>
                   <button
                     type="button"
+                    @mousedown.prevent
                     @click="execCmd('removeFormat')"
                     title="Clear formatting"
-                    class="px-2 py-1 rounded text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-900 transition-colors flex items-center justify-center min-w-[28px] h-7 text-red-400"
+                    aria-label="Clear formatting"
+                    :class="[toolbarBtn, tbIdle, 'text-xs px-2']"
                   >
-                    <svg
-                      class="w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
+                    Clear
                   </button>
                 </div>
+
+                <!-- Inline link popover -->
+                <div
+                  v-if="linkOpen"
+                  class="flex flex-wrap items-center gap-2 p-2 border-x border-b border-gray-300 bg-white"
+                >
+                  <label for="link-url" class="sr-only">Link URL</label>
+                  <input
+                    id="link-url"
+                    ref="linkInput"
+                    v-model="linkUrl"
+                    type="url"
+                    placeholder="https://example.com"
+                    class="flex-1 min-w-[12rem] px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:ring-1 focus:ring-[#5F7A55]"
+                    @keydown.enter.prevent="applyLink"
+                    @keydown.esc.prevent="closeLinkPopover"
+                  />
+                  <button
+                    type="button"
+                    @click="applyLink"
+                    :class="primaryBtn"
+                    class="px-3 py-1.5 text-sm rounded-md"
+                  >
+                    Add link
+                  </button>
+                  <button
+                    type="button"
+                    @click="closeLinkPopover"
+                    class="px-3 py-1.5 text-sm text-gray-700 border border-gray-300 rounded-md hover:bg-gray-50"
+                  >
+                    Cancel
+                  </button>
+                  <p
+                    v-if="linkError"
+                    role="alert"
+                    class="w-full text-sm text-red-700"
+                  >
+                    {{ linkError }}
+                  </p>
+                </div>
+
                 <div
                   ref="descriptionEditor"
                   contenteditable="true"
-                  @paste="handlePaste"
+                  role="textbox"
+                  aria-multiline="true"
+                  aria-label="Event description"
                   @input="syncDescription"
-                  class="rich-editor w-full min-h-[140px] px-4 py-3 border border-gray-300 border-t-0 rounded-b-lg focus:ring-2 focus:ring-[#ACBEA3] focus:border-transparent transition-colors outline-none text-sm text-gray-800"
+                  @paste="handlePaste"
+                  @blur="saveSelection"
+                  class="rich-editor w-full min-h-[140px] px-4 py-3 border border-gray-300 border-t-0 rounded-b-lg focus:ring-2 focus:ring-[#5F7A55] focus:border-transparent transition-colors outline-none text-sm text-gray-800"
                   data-placeholder="Describe what participants will learn and what to expect…"
                 ></div>
-              </section>
+                <p :class="hintCls">
+                  Use headings and lists to make the description easy to scan.
+                </p>
+              </div>
+            </section>
 
-              <!-- ── PRICING ── -->
-              <section class="space-y-6">
-                <div
-                  class="flex items-center justify-between border-b border-gray-200 pb-2"
+            <!-- ── PRICING ── -->
+            <section class="space-y-6" aria-labelledby="pricing-heading">
+              <div
+                class="flex flex-wrap items-center justify-between gap-3 border-b border-gray-200 pb-2"
+              >
+                <h2
+                  id="pricing-heading"
+                  class="text-lg font-semibold text-gray-900"
                 >
-                  <h3 class="text-lg font-semibold text-gray-900">Pricing</h3>
-                  <label class="flex items-center cursor-pointer">
-                    <input
-                      v-model="formData.is_free"
-                      @change="handleFreeEventToggle"
-                      type="checkbox"
-                      class="mr-2 text-[#ACBEA3] focus:ring-[#ACBEA3] rounded"
-                    />
-                    <span class="text-sm text-gray-700"
-                      >This is a free event</span
-                    >
-                  </label>
+                  Pricing
+                </h2>
+                <div
+                  role="group"
+                  aria-label="Event pricing"
+                  class="flex rounded-lg border border-gray-300 overflow-hidden"
+                >
+                  <button
+                    type="button"
+                    :aria-pressed="formData.is_free"
+                    @click="setFree(true)"
+                    :class="formData.is_free ? segActive : segIdle"
+                    class="px-5 py-2 text-sm font-medium transition-colors"
+                  >
+                    Free
+                  </button>
+                  <button
+                    type="button"
+                    :aria-pressed="!formData.is_free"
+                    @click="setFree(false)"
+                    :class="!formData.is_free ? segActive : segIdle"
+                    class="px-5 py-2 text-sm font-medium transition-colors border-l border-gray-300"
+                  >
+                    Paid
+                  </button>
+                </div>
+              </div>
+
+              <div
+                v-if="formData.is_free"
+                class="bg-green-50 border border-green-200 rounded-lg p-4 flex items-center"
+              >
+                <svg
+                  class="w-5 h-5 text-green-700 mr-2 shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  aria-hidden="true"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                  ></path>
+                </svg>
+                <span class="text-green-800 font-medium text-sm"
+                  >This event is free for all participants</span
+                >
+              </div>
+
+              <template v-else>
+                <div
+                  role="group"
+                  aria-label="Pricing mode"
+                  class="flex rounded-lg border border-gray-300 overflow-hidden w-fit"
+                >
+                  <button
+                    type="button"
+                    :aria-pressed="formData.pricing_mode === 'flat'"
+                    @click="formData.pricing_mode = 'flat'"
+                    :class="formData.pricing_mode === 'flat' ? segActive : segIdle"
+                    class="px-5 py-2 text-sm font-medium transition-colors"
+                  >
+                    Flat Price
+                  </button>
+                  <button
+                    type="button"
+                    :aria-pressed="formData.pricing_mode === 'tiered'"
+                    @click="initTieredPricing"
+                    :class="formData.pricing_mode === 'tiered' ? segActive : segIdle"
+                    class="px-5 py-2 text-sm font-medium transition-colors border-l border-gray-300"
+                  >
+                    Tiered Pricing
+                  </button>
                 </div>
 
-                <div
-                  v-if="formData.is_free"
-                  class="bg-green-50 border border-green-200 rounded-lg p-4 flex items-center"
-                >
-                  <svg
-                    class="w-5 h-5 text-green-600 mr-2"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
+                <div class="w-full sm:w-48">
+                  <label for="event-currency" :class="labelCls"
+                    >Currency <span class="text-red-600" aria-hidden="true">*</span></label
                   >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                    ></path>
-                  </svg>
-                  <span class="text-green-800 font-medium text-sm"
-                    >This event is free for all participants</span
+                  <select
+                    id="event-currency"
+                    v-model="formData.currency"
+                    :class="inputClass(false)"
                   >
+                    <option value="₦">NGN (₦)</option>
+                    <option value="$">USD ($)</option>
+                    <option value="£">GBP (£)</option>
+                    <option value="€">EUR (€)</option>
+                  </select>
                 </div>
 
-                <template v-else>
-                  <div
-                    class="flex rounded-lg border border-gray-200 overflow-hidden w-fit"
+                <!-- FLAT -->
+                <div v-if="formData.pricing_mode === 'flat'">
+                  <label for="event-fee" :class="labelCls"
+                    >Admission Fee
+                    <span class="text-red-600" aria-hidden="true">*</span></label
                   >
-                    <button
-                      type="button"
-                      @click="formData.pricing_mode = 'flat'"
-                      :class="
-                        formData.pricing_mode === 'flat'
-                          ? 'bg-[#ACBEA3] text-white'
-                          : 'bg-white text-gray-600 hover:bg-gray-50'
-                      "
-                      class="px-5 py-2 text-sm font-medium transition-colors"
-                    >
-                      Flat Price
-                    </button>
-                    <button
-                      type="button"
-                      @click="initTieredPricing"
-                      :class="
-                        formData.pricing_mode === 'tiered'
-                          ? 'bg-[#ACBEA3] text-white'
-                          : 'bg-white text-gray-600 hover:bg-gray-50'
-                      "
-                      class="px-5 py-2 text-sm font-medium transition-colors border-l border-gray-200"
-                    >
-                      Tiered Pricing
-                    </button>
-                  </div>
-
-                  <div class="w-48">
-                    <label class="block text-sm font-medium text-gray-700 mb-2"
-                      >Currency <span class="text-red-500">*</span></label
-                    >
-                    <select
-                      v-model="formData.currency"
-                      class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ACBEA3] focus:border-transparent transition-colors"
-                    >
-                      <option value="₦">NGN (₦)</option>
-                      <option value="$">USD ($)</option>
-                      <option value="£">GBP (£)</option>
-                      <option value="€">EUR (€)</option>
-                    </select>
-                  </div>
-
-                  <div v-if="formData.pricing_mode === 'flat'">
-                    <label class="block text-sm font-medium text-gray-700 mb-2"
-                      >Admission Fee <span class="text-red-500">*</span></label
-                    >
-                    <div class="relative w-56">
-                      <div
-                        class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
-                      >
-                        <span class="text-gray-500 text-sm">{{
-                          formData.currency
-                        }}</span>
-                      </div>
-                      <input
-                        v-model.number="formData.admission_fee"
-                        type="number"
-                        step="0.01"
-                        min="0"
-                        :required="!formData.is_free"
-                        class="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#ACBEA3] focus:border-transparent transition-colors"
-                        placeholder="0.00"
-                      />
-                    </div>
-                  </div>
-
-                  <div v-else class="space-y-4">
+                  <div class="relative w-full sm:w-56">
                     <div
-                      v-for="(tier, ti) in formData.pricing_tiers"
-                      :key="ti"
-                      class="border border-gray-200 rounded-xl p-5 bg-gray-50 space-y-4"
+                      class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none"
                     >
-                      <div class="flex items-center justify-between">
+                      <span class="text-gray-600 text-sm">{{
+                        formData.currency
+                      }}</span>
+                    </div>
+                    <input
+                      id="event-fee"
+                      v-model.number="formData.admission_fee"
+                      type="number"
+                      step="0.01"
+                      min="0.01"
+                      inputmode="decimal"
+                      aria-required="true"
+                      :aria-invalid="!!errors.fee"
+                      :aria-describedby="errors.fee ? 'event-fee-error' : null"
+                      :class="inputClass(errors.fee)"
+                      class="!pl-10"
+                      placeholder="0.00"
+                    />
+                  </div>
+                  <p
+                    v-if="errors.fee"
+                    id="event-fee-error"
+                    role="alert"
+                    :class="errorCls"
+                  >
+                    {{ errors.fee }}
+                  </p>
+                </div>
+
+                <!-- TIERED -->
+                <div v-else class="space-y-4">
+                  <p :class="hintCls" class="-mt-2">
+                    Tiers work well for early-bird or VIP pricing.
+                  </p>
+                  <div
+                    v-for="(tier, ti) in formData.pricing_tiers"
+                    :key="ti"
+                    class="border border-gray-200 rounded-xl p-4 sm:p-5 bg-gray-50 space-y-4"
+                  >
+                    <div class="flex flex-col sm:flex-row sm:items-start gap-3">
+                      <div class="flex-1">
                         <input
                           v-model="tier.name"
                           type="text"
+                          :aria-label="`Tier ${ti + 1} name`"
+                          :aria-invalid="!!errors.tiers[ti]?.name"
                           placeholder="Tier name (e.g. Early Bird, VIP)"
-                          class="flex-1 mr-4 px-3 py-2 border border-gray-300 rounded-lg text-sm font-medium focus:ring-1 focus:ring-[#ACBEA3] focus:border-transparent"
+                          :class="[
+                            'w-full px-3 py-2 border rounded-lg text-sm font-medium focus:ring-1 focus:ring-[#5F7A55] focus:border-transparent',
+                            errors.tiers[ti]?.name
+                              ? 'border-red-400 ring-1 ring-red-300'
+                              : 'border-gray-300',
+                          ]"
                         />
-                        <div class="relative w-36">
+                        <p
+                          v-if="errors.tiers[ti]?.name"
+                          role="alert"
+                          :class="errorCls"
+                        >
+                          {{ errors.tiers[ti].name }}
+                        </p>
+                      </div>
+                      <div class="sm:w-40">
+                        <div class="relative">
                           <span
-                            class="absolute inset-y-0 left-3 flex items-center text-gray-500 text-sm pointer-events-none"
+                            class="absolute inset-y-0 left-3 flex items-center text-gray-600 text-sm pointer-events-none"
                             >{{ formData.currency }}</span
                           >
                           <input
                             v-model.number="tier.price"
                             type="number"
                             step="0.01"
-                            min="0"
+                            min="0.01"
+                            inputmode="decimal"
+                            :aria-label="`Tier ${ti + 1} price`"
+                            :aria-invalid="!!errors.tiers[ti]?.price"
                             placeholder="0.00"
-                            class="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-1 focus:ring-[#ACBEA3] focus:border-transparent"
+                            :class="[
+                              'w-full pl-8 pr-3 py-2 border rounded-lg text-sm focus:ring-1 focus:ring-[#5F7A55] focus:border-transparent',
+                              errors.tiers[ti]?.price
+                                ? 'border-red-400 ring-1 ring-red-300'
+                                : 'border-gray-300',
+                            ]"
                           />
                         </div>
-                        <button
-                          type="button"
-                          @click="removeTier(ti)"
-                          class="ml-3 text-red-400 hover:text-red-600 p-1"
+                        <p
+                          v-if="errors.tiers[ti]?.price"
+                          role="alert"
+                          :class="errorCls"
+                        >
+                          {{ errors.tiers[ti].price }}
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        @click="removeTier(ti)"
+                        :disabled="formData.pricing_tiers.length === 1"
+                        :title="
+                          formData.pricing_tiers.length === 1
+                            ? 'At least one tier is required'
+                            : 'Remove tier'
+                        "
+                        :aria-label="`Remove tier ${ti + 1}`"
+                        class="self-end sm:self-auto text-red-600 hover:text-red-700 p-2 disabled:opacity-30 disabled:cursor-not-allowed"
+                      >
+                        <svg
+                          class="w-4 h-4"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                          aria-hidden="true"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+
+                    <div>
+                      <span
+                        class="text-xs font-medium text-gray-600 uppercase tracking-wide mb-2 block"
+                        >What's included</span
+                      >
+                      <div class="space-y-2">
+                        <div
+                          v-for="(perk, pi) in tier.perks"
+                          :key="pi"
+                          class="flex items-center gap-2"
                         >
                           <svg
-                            class="w-4 h-4"
+                            class="w-4 h-4 text-[#5F7A55] shrink-0"
                             fill="none"
                             stroke="currentColor"
                             viewBox="0 0 24 24"
+                            aria-hidden="true"
                           >
                             <path
                               stroke-linecap="round"
                               stroke-linejoin="round"
                               stroke-width="2"
-                              d="M6 18L18 6M6 6l12 12"
+                              d="M5 13l4 4L19 7"
                             />
                           </svg>
-                        </button>
-                      </div>
-
-                      <div>
-                        <label
-                          class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2 block"
-                          >What's included</label
-                        >
-                        <div class="space-y-2">
-                          <div
-                            v-for="(perk, pi) in tier.perks"
-                            :key="pi"
-                            class="flex items-center gap-2"
-                          >
-                            <svg
-                              class="w-4 h-4 text-[#ACBEA3] shrink-0"
-                              fill="none"
-                              stroke="currentColor"
-                              viewBox="0 0 24 24"
-                            >
-                              <path
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                stroke-width="2"
-                                d="M5 13l4 4L19 7"
-                              />
-                            </svg>
-                            <input
-                              v-model="tier.perks[pi]"
-                              type="text"
-                              placeholder="e.g., Access to all sessions"
-                              class="flex-1 px-3 py-1.5 text-sm border border-gray-200 rounded-md focus:ring-1 focus:ring-[#ACBEA3] focus:border-transparent bg-white"
-                            />
-                            <button
-                              type="button"
-                              @click="removePerk(ti, pi)"
-                              class="text-gray-400 hover:text-red-400 shrink-0"
-                            >
-                              <svg
-                                class="w-3.5 h-3.5"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
-                              >
-                                <path
-                                  stroke-linecap="round"
-                                  stroke-linejoin="round"
-                                  stroke-width="2"
-                                  d="M6 18L18 6M6 6l12 12"
-                                />
-                              </svg>
-                            </button>
-                          </div>
+                          <input
+                            v-model="tier.perks[pi]"
+                            type="text"
+                            :aria-label="`Tier ${ti + 1} included item ${pi + 1}`"
+                            placeholder="e.g., Access to all sessions"
+                            class="flex-1 px-3 py-1.5 text-sm border border-gray-300 rounded-md focus:ring-1 focus:ring-[#5F7A55] focus:border-transparent bg-white"
+                          />
                           <button
                             type="button"
-                            @click="addPerk(ti)"
-                            class="text-xs text-[#ACBEA3] hover:text-[#9BAD94] font-medium mt-1 flex items-center gap-1"
+                            @click="removePerk(ti, pi)"
+                            :aria-label="`Remove included item ${pi + 1} from tier ${ti + 1}`"
+                            class="text-gray-500 hover:text-red-600 shrink-0 p-1"
                           >
                             <svg
-                              class="w-3 h-3"
+                              class="w-3.5 h-3.5"
                               fill="none"
                               stroke="currentColor"
                               viewBox="0 0 24 24"
+                              aria-hidden="true"
                             >
                               <path
                                 stroke-linecap="round"
                                 stroke-linejoin="round"
                                 stroke-width="2"
-                                d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                                d="M6 18L18 6M6 6l12 12"
                               />
                             </svg>
-                            Add item
                           </button>
                         </div>
-                      </div>
-
-                      <div>
-                        <label
-                          class="text-xs font-medium text-gray-500 uppercase tracking-wide mb-1 block"
-                          >Description (optional)</label
+                        <button
+                          type="button"
+                          @click="addPerk(ti)"
+                          class="text-sm text-[#4E6646] hover:text-[#3F5438] font-medium mt-1 flex items-center gap-1"
                         >
-                        <input
-                          v-model="tier.description"
-                          type="text"
-                          placeholder="Short tagline for this tier"
-                          class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg bg-white focus:ring-1 focus:ring-[#ACBEA3] focus:border-transparent"
-                        />
+                          <svg
+                            class="w-3 h-3"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                            aria-hidden="true"
+                          >
+                            <path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                            />
+                          </svg>
+                          Add item
+                        </button>
                       </div>
                     </div>
 
-                    <button
-                      type="button"
-                      @click="addTier"
-                      class="flex items-center gap-2 text-sm text-[#ACBEA3] hover:text-[#9BAD94] font-medium"
-                    >
-                      <svg
-                        class="w-4 h-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
+                    <div>
+                      <label
+                        :for="`tier-desc-${ti}`"
+                        class="text-xs font-medium text-gray-600 uppercase tracking-wide mb-1 block"
+                        >Description (optional)</label
                       >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                        />
-                      </svg>
-                      Add Tier
-                    </button>
+                      <input
+                        :id="`tier-desc-${ti}`"
+                        v-model="tier.description"
+                        type="text"
+                        placeholder="Short tagline for this tier"
+                        class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg bg-white focus:ring-1 focus:ring-[#5F7A55] focus:border-transparent"
+                      />
+                    </div>
                   </div>
-                </template>
-              </section>
 
-              <!-- ── REGISTRATION FORM FIELDS ── -->
-              <section class="space-y-6">
-                <div
-                  class="flex items-center justify-between border-b border-gray-200 pb-2"
-                >
-                  <div>
-                    <h3 class="text-lg font-semibold text-gray-900">
-                      Registration Form
-                    </h3>
-                    <p class="text-xs text-gray-500 mt-0.5">
-                      Drag rows to reorder · Full Name and Email are always
-                      collected
-                    </p>
-                  </div>
-                  <div class="flex items-center gap-2">
-                    <select
-                      v-model="newFieldType"
-                      class="text-sm border border-gray-200 rounded-lg px-3 py-2 focus:ring-1 focus:ring-[#ACBEA3] bg-white"
-                    >
-                      <option value="text">Short Text</option>
-                      <option value="textarea">Long Text</option>
-                      <option value="email">Email</option>
-                      <option value="tel">Phone</option>
-                      <option value="number">Number</option>
-                      <option value="select">Dropdown</option>
-                      <option value="radio">Multiple Choice</option>
-                      <option value="checkbox">Checkbox</option>
-                      <option value="date">Date</option>
-                      <option value="file">File Upload</option>
-                    </select>
-                    <button
-                      type="button"
-                      @click="addFormField"
-                      class="flex items-center space-x-2 bg-[#ACBEA3] text-white text-sm font-medium px-4 py-2 rounded-lg hover:bg-[#9BAD94] transition-colors"
-                    >
-                      <svg
-                        class="w-4 h-4"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          stroke-width="2"
-                          d="M12 6v6m0 0v6m0-6h6m-6 0H6"
-                        ></path>
-                      </svg>
-                      <span>Add Field</span>
-                    </button>
-                  </div>
-                </div>
-
-                <!-- Drag List -->
-                <div
-                  class="space-y-3"
-                  @dragover.prevent
-                  @drop.prevent="onDropField($event)"
-                >
-                  <div
-                    v-for="(field, index) in formData.form_fields"
-                    :key="field._id || index"
-                    draggable="true"
-                    @dragstart="onDragStart($event, index)"
-                    @dragover.prevent="dragOverIndex = index"
-                    @dragleave="dragOverIndex = null"
-                    @drop.prevent="onDropOnField($event, index)"
-                    :class="[
-                      'border rounded-xl bg-white transition-all',
-                      dragOverIndex === index
-                        ? 'border-[#ACBEA3] ring-2 ring-[#ACBEA3]/30'
-                        : 'border-gray-200',
-                      draggingIndex === index ? 'opacity-40' : '',
-                    ]"
+                  <button
+                    type="button"
+                    @click="addTier"
+                    class="flex items-center gap-2 text-sm text-[#4E6646] hover:text-[#3F5438] font-medium"
                   >
-                    <!-- Field header row -->
-                    <div class="flex items-center gap-3 px-4 py-3">
-                      <svg
-                        class="w-4 h-4 text-gray-400 cursor-grab shrink-0"
-                        fill="currentColor"
-                        viewBox="0 0 24 24"
-                      >
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                      />
+                    </svg>
+                    Add Tier
+                  </button>
+                </div>
+              </template>
+            </section>
+
+            <!-- ── REGISTRATION FORM FIELDS ── -->
+            <section class="space-y-6" aria-labelledby="reg-heading">
+              <div
+                class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-gray-200 pb-2"
+              >
+                <div>
+                  <h2 id="reg-heading" class="text-lg font-semibold text-gray-900">
+                    Registration Form
+                  </h2>
+                  <p class="text-sm text-gray-500 mt-0.5">
+                    Use the handle or arrow buttons to reorder · Full Name and
+                    Email are always collected
+                  </p>
+                </div>
+                <div class="flex items-center gap-2">
+                  <label for="new-field-type" class="sr-only">New field type</label>
+                  <select
+                    id="new-field-type"
+                    v-model="newFieldType"
+                    class="text-sm border border-gray-300 rounded-lg px-3 py-2 focus:ring-1 focus:ring-[#5F7A55] bg-white"
+                  >
+                    <option v-for="(label, key) in FIELD_LABELS" :key="key" :value="key">
+                      {{ label }}
+                    </option>
+                  </select>
+                  <button
+                    type="button"
+                    @click="addFormField"
+                    :class="primaryBtn"
+                    class="flex items-center space-x-2 text-sm font-medium px-4 py-2 rounded-lg whitespace-nowrap"
+                  >
+                    <svg
+                      class="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M12 6v6m0 0v6m0-6h6m-6 0H6"
+                      ></path>
+                    </svg>
+                    <span>Add Field</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Undo bar -->
+              <div
+                v-if="lastRemoved"
+                role="status"
+                class="flex items-center justify-between gap-3 bg-gray-900 text-white text-sm rounded-lg px-4 py-3"
+              >
+                <span>
+                  Removed
+                  “{{ lastRemoved.field.label || "Untitled field" }}”
+                </span>
+                <button
+                  type="button"
+                  @click="undoRemove"
+                  class="font-semibold underline hover:no-underline"
+                >
+                  Undo
+                </button>
+              </div>
+
+              <div
+                class="space-y-3"
+                @dragover.prevent
+                @drop.prevent="onDropField"
+              >
+                <div
+                  v-for="(field, index) in formData.form_fields"
+                  :key="field._id"
+                  :draggable="dragArmed === index"
+                  @dragstart="onDragStart($event, index)"
+                  @dragend="onDragEnd"
+                  @dragover.prevent="dragOverIndex = index"
+                  @dragleave="dragOverIndex = null"
+                  @drop.prevent="onDropOnField($event, index)"
+                  :class="[
+                    'border rounded-xl bg-white transition-all',
+                    dragOverIndex === index
+                      ? 'border-[#5F7A55] ring-2 ring-[#5F7A55]/30'
+                      : 'border-gray-200',
+                    draggingIndex === index ? 'opacity-40' : '',
+                  ]"
+                >
+                  <div class="flex flex-wrap items-center gap-2 sm:gap-3 px-3 sm:px-4 py-3">
+                    <!-- Drag handle -->
+                    <span
+                      class="text-gray-500 cursor-grab shrink-0 p-1"
+                      title="Drag to reorder"
+                      aria-hidden="true"
+                      @mousedown="dragArmed = index"
+                      @mouseup="dragArmed = null"
+                    >
+                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
                         <circle cx="9" cy="6" r="1.5" />
                         <circle cx="15" cy="6" r="1.5" />
                         <circle cx="9" cy="12" r="1.5" />
@@ -865,175 +1152,252 @@
                         <circle cx="9" cy="18" r="1.5" />
                         <circle cx="15" cy="18" r="1.5" />
                       </svg>
-                      <input
-                        v-model="field.label"
-                        type="text"
-                        placeholder="Field Label"
-                        class="flex-1 px-3 py-1.5 border border-gray-200 rounded-md text-sm focus:ring-1 focus:ring-[#ACBEA3] focus:border-transparent"
-                      />
-                      <span
-                        class="text-xs px-2 py-1 rounded bg-gray-100 text-gray-500 whitespace-nowrap"
-                        >{{ fieldTypeLabel(field.type) }}</span
-                      >
-                      <label
-                        class="flex items-center text-xs text-gray-600 whitespace-nowrap cursor-pointer"
-                      >
-                        <input
-                          v-model="field.required"
-                          type="checkbox"
-                          class="mr-1.5 text-[#ACBEA3] focus:ring-[#ACBEA3] rounded"
-                        />
-                        Required
-                      </label>
+                    </span>
+
+                    <!-- Up / down -->
+                    <div class="flex flex-col shrink-0">
                       <button
                         type="button"
-                        @click="field._expanded = !field._expanded"
-                        class="text-gray-400 hover:text-gray-600 p-1 transition-colors"
-                        :title="field._expanded ? 'Collapse' : 'Options'"
+                        @click="moveField(index, -1)"
+                        :disabled="index === 0"
+                        :aria-label="`Move field ${index + 1} up`"
+                        class="text-gray-500 hover:text-gray-800 disabled:opacity-30 disabled:cursor-not-allowed leading-none"
                       >
-                        <svg
-                          class="w-4 h-4 transition-transform"
-                          :class="{ 'rotate-180': field._expanded }"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M19 9l-7 7-7-7"
-                          />
+                        <svg class="w-4 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 15l7-7 7 7" />
                         </svg>
                       </button>
                       <button
                         type="button"
-                        @click="removeFormField(index)"
-                        class="text-red-400 hover:text-red-600 p-1 transition-colors"
+                        @click="moveField(index, 1)"
+                        :disabled="index === formData.form_fields.length - 1"
+                        :aria-label="`Move field ${index + 1} down`"
+                        class="text-gray-500 hover:text-gray-800 disabled:opacity-30 disabled:cursor-not-allowed leading-none"
                       >
-                        <svg
-                          class="w-4 h-4"
-                          fill="none"
-                          stroke="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                            stroke-width="2"
-                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
-                          ></path>
+                        <svg class="w-4 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7" />
                         </svg>
                       </button>
                     </div>
 
-                    <!-- Expandable options -->
-                    <div
-                      v-if="field._expanded"
-                      class="px-4 pb-4 border-t border-gray-100 pt-3 space-y-3"
+                    <input
+                      :id="`${field._id}-label`"
+                      v-model="field.label"
+                      type="text"
+                      :aria-label="`Field ${index + 1} label`"
+                      :aria-invalid="!!errors.fields[field._id]?.label"
+                      placeholder="Field label"
+                      :class="[
+                        'flex-1 min-w-[10rem] px-3 py-1.5 border rounded-md text-sm focus:ring-1 focus:ring-[#5F7A55] focus:border-transparent',
+                        errors.fields[field._id]?.label
+                          ? 'border-red-400 ring-1 ring-red-300'
+                          : 'border-gray-300',
+                      ]"
+                    />
+
+                    <select
+                      v-model="field.type"
+                      @change="onFieldTypeChange(field)"
+                      :aria-label="`Field ${index + 1} type`"
+                      class="text-xs px-2 py-1.5 rounded border border-gray-300 bg-white text-gray-700 focus:ring-1 focus:ring-[#5F7A55]"
                     >
-                      <div>
-                        <label
-                          class="text-xs text-gray-500 font-medium mb-1 block"
-                          >Placeholder / Helper text</label
-                        >
-                        <input
-                          v-model="field.placeholder"
-                          type="text"
-                          placeholder="Hint shown inside the field"
-                          class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:ring-1 focus:ring-[#ACBEA3] focus:border-transparent"
-                        />
-                      </div>
-                      <div
-                        v-if="field.type === 'select' || field.type === 'radio'"
+                      <option v-for="(label, key) in FIELD_LABELS" :key="key" :value="key">
+                        {{ label }}
+                      </option>
+                    </select>
+
+                    <label
+                      class="flex items-center text-sm text-gray-700 whitespace-nowrap cursor-pointer"
+                    >
+                      <input
+                        v-model="field.required"
+                        type="checkbox"
+                        class="mr-1.5 text-[#5F7A55] focus:ring-[#5F7A55] rounded"
+                      />
+                      Required
+                    </label>
+
+                    <button
+                      type="button"
+                      @click="field._expanded = !field._expanded"
+                      :aria-expanded="!!field._expanded"
+                      :aria-controls="`${field._id}-options`"
+                      :aria-label="field._expanded ? 'Hide field options' : 'Show field options'"
+                      class="text-gray-500 hover:text-gray-800 p-1 transition-colors"
+                    >
+                      <svg
+                        class="w-4 h-4 transition-transform"
+                        :class="{ 'rotate-180': field._expanded }"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                        aria-hidden="true"
                       >
-                        <label
-                          class="text-xs text-gray-500 font-medium mb-2 block"
-                          >Options (one per line)</label
-                        >
-                        <textarea
-                          v-model="field.optionsRaw"
-                          rows="3"
-                          placeholder="Option 1&#10;Option 2&#10;Option 3"
-                          class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:ring-1 focus:ring-[#ACBEA3] focus:border-transparent"
-                        ></textarea>
-                      </div>
-                      <div v-if="field.type === 'file'">
-                        <label
-                          class="text-xs text-gray-500 font-medium mb-1 block"
-                          >Accepted file types</label
-                        >
-                        <input
-                          v-model="field.accept"
-                          type="text"
-                          placeholder=".pdf,.docx,.jpg"
-                          class="w-full px-3 py-2 text-sm border border-gray-200 rounded-lg focus:ring-1 focus:ring-[#ACBEA3] focus:border-transparent"
-                        />
-                      </div>
-                    </div>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+
+                    <button
+                      type="button"
+                      @click="removeFormField(index)"
+                      :aria-label="`Delete field ${field.label || index + 1}`"
+                      class="text-red-600 hover:text-red-700 p-1 transition-colors"
+                    >
+                      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          stroke-width="2"
+                          d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"
+                        ></path>
+                      </svg>
+                    </button>
                   </div>
 
-                  <div
-                    v-if="formData.form_fields.length === 0"
-                    class="text-center py-8 border-2 border-dashed border-gray-200 rounded-xl"
+                  <p
+                    v-if="errors.fields[field._id]?.label"
+                    role="alert"
+                    :class="errorCls"
+                    class="px-4 pb-3 -mt-1"
                   >
-                    <svg
-                      class="w-10 h-10 text-gray-300 mx-auto mb-3"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+                    {{ errors.fields[field._id].label }}
+                  </p>
+
+                  <div
+                    v-if="field._expanded"
+                    :id="`${field._id}-options`"
+                    class="px-4 pb-4 border-t border-gray-100 pt-3 space-y-3"
+                  >
+                    <div v-if="supportsPlaceholder(field.type)">
+                      <label
+                        :for="`${field._id}-placeholder`"
+                        class="text-xs text-gray-600 font-medium mb-1 block"
+                        >Placeholder / helper text</label
+                      >
+                      <input
+                        :id="`${field._id}-placeholder`"
+                        v-model="field.placeholder"
+                        type="text"
+                        placeholder="Hint shown inside the field"
+                        class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-[#5F7A55] focus:border-transparent"
+                      />
+                    </div>
+
+                    <div v-if="field.type === 'select' || field.type === 'radio'">
+                      <label
+                        :for="`${field._id}-choices`"
+                        class="text-xs text-gray-600 font-medium mb-1 block"
+                        >Options (one per line, at least 2)</label
+                      >
+                      <textarea
+                        :id="`${field._id}-choices`"
+                        v-model="field.optionsRaw"
+                        rows="3"
+                        :aria-invalid="!!errors.fields[field._id]?.options"
+                        placeholder="Option 1&#10;Option 2&#10;Option 3"
+                        :class="[
+                          'w-full px-3 py-2 text-sm border rounded-lg focus:ring-1 focus:ring-[#5F7A55] focus:border-transparent',
+                          errors.fields[field._id]?.options
+                            ? 'border-red-400 ring-1 ring-red-300'
+                            : 'border-gray-300',
+                        ]"
+                      ></textarea>
+                      <p
+                        v-if="errors.fields[field._id]?.options"
+                        role="alert"
+                        :class="errorCls"
+                      >
+                        {{ errors.fields[field._id].options }}
+                      </p>
+                    </div>
+
+                    <div v-if="field.type === 'file'">
+                      <label
+                        :for="`${field._id}-accept`"
+                        class="text-xs text-gray-600 font-medium mb-1 block"
+                        >Accepted file types</label
+                      >
+                      <input
+                        :id="`${field._id}-accept`"
+                        v-model="field.accept"
+                        type="text"
+                        placeholder=".pdf,.docx,.jpg"
+                        class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-1 focus:ring-[#5F7A55] focus:border-transparent"
+                      />
+                    </div>
+
+                    <p
+                      v-if="
+                        !supportsPlaceholder(field.type) &&
+                        field.type !== 'select' &&
+                        field.type !== 'radio' &&
+                        field.type !== 'file'
+                      "
+                      class="text-sm text-gray-500"
                     >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-                      ></path>
-                    </svg>
-                    <p class="text-sm text-gray-500 mb-1">
-                      No extra fields added yet
-                    </p>
-                    <p class="text-xs text-gray-400">
-                      Choose a type above and click "Add Field"
+                      No extra options for this field type.
                     </p>
                   </div>
                 </div>
-              </section>
 
-              <!-- ── ACTIONS ── -->
-              <div class="flex space-x-4 pt-6 border-t border-gray-200">
+                <div
+                  v-if="formData.form_fields.length === 0"
+                  class="text-center py-8 border-2 border-dashed border-gray-200 rounded-xl"
+                >
+                  <p class="text-sm text-gray-600 mb-1">No extra fields added yet</p>
+                  <p class="text-sm text-gray-500">
+                    Only add fields you truly need — shorter forms convert better.
+                    Choose a type above and select "Add Field".
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            <!-- ── ACTIONS (sticky) ── -->
+            <div
+              class="sticky bottom-0 z-20 -mx-4 sm:-mx-8 -mb-4 sm:-mb-8 px-4 sm:px-8 py-4 bg-white/95 backdrop-blur border-t border-gray-200 rounded-b-xl"
+            >
+              <p
+                v-if="attempted && hasErrors"
+                role="alert"
+                class="text-sm text-red-700 mb-3"
+              >
+                Please fix the highlighted fields before saving changes.
+              </p>
+              <div class="flex flex-col-reverse sm:flex-row gap-3">
                 <button
                   type="button"
-                  @click="router.push('/admin/events')"
-                  class="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors font-medium"
+                  @click="goBack"
+                  :class="secondaryBtn"
+                  class="sm:flex-1 px-6 py-3 font-medium"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   :disabled="isUpdating || bannerUploading"
-                  class="flex-1 bg-[#ACBEA3] text-white px-6 py-3 rounded-lg hover:bg-[#9BAD94] disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-medium"
+                  :class="primaryBtn"
+                  class="sm:flex-1 px-6 py-3 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed font-medium"
                 >
-                  <span
-                    v-if="isUpdating"
-                    class="flex items-center justify-center"
-                  >
-                    <div
+                  <span v-if="isUpdating" class="flex items-center justify-center">
+                    <span
                       class="animate-spin w-4 h-4 border-2 border-white border-t-transparent rounded-full mr-2"
-                    ></div>
-                    Updating Event…
+                      aria-hidden="true"
+                    ></span>
+                    Updating event…
                   </span>
+                  <span v-else-if="bannerUploading">Uploading banner…</span>
                   <span v-else>Update Event</span>
                 </button>
               </div>
-            </form>
-          </div>
-        </template>
+            </div>
+          </form>
+        </div>
       </div>
 
-      <!-- Help Section -->
+      <!-- Help card -->
       <div
-        class="mt-6 bg-white rounded-xl shadow-sm border border-gray-200 p-6"
+        class="mt-6 bg-white rounded-xl shadow-sm border border-gray-200 p-4 sm:p-6"
       >
         <div class="flex items-start">
           <div class="bg-[#EB6534]/10 p-2 rounded-lg mr-4 mt-1">
@@ -1042,6 +1406,7 @@
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               <path
                 stroke-linecap="round"
@@ -1075,19 +1440,26 @@
     <div
       v-if="showSuccessModal"
       class="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4"
+      @keydown="onDialogKeydown"
     >
       <div
-        class="bg-white rounded-xl max-w-md w-full overflow-hidden shadow-2xl"
+        ref="successDialog"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="success-title"
+        aria-describedby="success-desc"
+        class="bg-white rounded-xl max-w-md w-full overflow-hidden"
       >
         <div class="bg-green-50 p-6 text-center">
           <div
             class="bg-green-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4"
           >
             <svg
-              class="w-8 h-8 text-green-600"
+              class="w-8 h-8 text-green-700"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
+              aria-hidden="true"
             >
               <path
                 stroke-linecap="round"
@@ -1097,20 +1469,36 @@
               ></path>
             </svg>
           </div>
-          <h3 class="text-xl font-semibold text-green-900 mb-2">
-            Event Updated Successfully!
-          </h3>
-          <p class="text-green-700">
-            The event changes are now live on your calendar.
+          <h2 id="success-title" class="text-xl font-semibold text-green-900 mb-2">
+            Event updated
+          </h2>
+          <p id="success-desc" class="text-green-800">
+            Your changes are now live on the events calendar.
           </p>
         </div>
-        <div class="p-6 bg-white text-center">
-          <NuxtLink
-            to="/admin/events"
-            class="w-full bg-gray-900 text-white font-medium py-3 rounded-lg hover:bg-gray-800 transition-colors"
+        <div class="p-6 flex flex-col space-y-3">
+          <button
+            type="button"
+            @click="goToEventsList"
+            :class="primaryBtn"
+            class="w-full font-medium py-3 px-4 rounded-lg"
           >
             Return to Events
-          </NuxtLink>
+          </button>
+          <button
+            type="button"
+            @click="stayOnPage"
+            class="w-full border border-[#5F7A55] text-[#4E6646] hover:bg-[#f4f5f3] font-medium py-3 px-4 rounded-lg transition-colors"
+          >
+            Keep Editing
+          </button>
+          <button
+            type="button"
+            @click="goToEventsList"
+            class="w-full border border-gray-300 text-gray-700 hover:bg-gray-50 font-medium py-3 px-4 rounded-lg transition-colors"
+          >
+            View All Events
+          </button>
         </div>
       </div>
     </div>
@@ -1118,15 +1506,14 @@
 </template>
 
 <script setup>
-import { ref, watch, nextTick } from "vue";
+import { ref, reactive, computed, watch, nextTick } from "vue";
 
 definePageMeta({
   layout: "admin",
-  title: "Edit Event",
+  title: "Edit Event - Admin Dashboard",
   middleware: (to) => {
     const user = useSupabaseUser();
     const { isAdmin } = useAuth();
-
     if (!user.value && !isAdmin.value) {
       return navigateTo("/admin/login");
     }
@@ -1139,121 +1526,119 @@ const route = useRoute();
 const toast = useToast();
 
 const eventId = route.params.id;
+
+// ──────────────────────────────────────────────
+// STYLE TOKENS
+// ──────────────────────────────────────────────
+const primaryBtn =
+  "bg-[#5F7A55] text-white hover:bg-[#4E6646] transition-colors";
+const secondaryBtn =
+  "border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors";
+const segActive = "bg-[#5F7A55] text-white";
+const segIdle = "bg-white text-gray-700 hover:bg-gray-50";
+const toolbarBtn =
+  "px-2 py-1 rounded text-sm flex items-center justify-center min-w-[28px] h-7 transition-colors";
+const tbActive = "bg-[#5F7A55] text-white";
+const tbIdle = "text-gray-700 hover:bg-gray-200 hover:text-gray-900";
+const labelCls = "block text-sm font-medium text-gray-700 mb-2";
+const hintCls = "text-sm text-gray-500 mt-1";
+const errorCls = "text-sm text-red-700 mt-1";
+const inputClass = (err) => [
+  "w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#5F7A55] focus:border-transparent transition-colors",
+  err ? "border-red-400 ring-1 ring-red-300" : "border-gray-300",
+];
+
+// ── refs ──
+const descriptionEditor = ref(null);
+const bannerInput = ref(null);
+const linkInput = ref(null);
+const successDialog = ref(null);
+
+// ── state ──
 const isUpdating = ref(false);
 const showSuccessModal = ref(false);
+const attempted = ref(false);
+const justSaved = ref(false);
+const errors = ref({ tiers: [], fields: {} });
 
-// Form Data structure
-const formData = ref({
-  title: "",
-  event_type: "single", // 'single' | 'multi'
-  event_date: "", // YYYY-MM-DD
-  event_start_time: "", // HH:MM  (single only)
-  event_end_time: "", // HH:MM  (single only)
-  event_end_date: "", // YYYY-MM-DD (multi only)
-  venue: "",
-  description: "",
-  form_fields: [],
-  pricing_mode: "flat", // 'flat' | 'tiered'
-  pricing_tiers: [],
-  admission_fee: 0.0,
-  currency: "₦",
-  is_free: true,
-  banner_url: "",
-});
+const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
-// Banner Refs
-const isDraggingBanner = ref(false);
-const bannerPreview = ref("");
+// Banner
 const bannerFile = ref(null);
+const bannerPreview = ref(null);
 const bannerUploading = ref(false);
 const bannerUploadProgress = ref(0);
 const bannerError = ref("");
-const bannerInput = ref(null);
+const bannerFailed = ref(false);
+const isDraggingBanner = ref(false);
+let uploadToken = 0;
+let currentXhr = null;
+let objectUrlToRevoke = null;
 
-// Rich Editor Ref
-const descriptionEditor = ref(null);
-
-// Form Builder Refs
-const newFieldType = ref("text");
+// Drag-and-drop for form fields
 const draggingIndex = ref(null);
 const dragOverIndex = ref(null);
+const dragArmed = ref(null);
 
-// Fetch the specific event
-const {
-  data: event,
-  pending,
-  error,
-  refresh,
-} = await useAsyncData(
-  `event-${eventId}`,
-  async () => {
-    const { data, error } = await supabase
-      .from("events")
-      .select("*")
-      .eq("id", eventId)
-      .single();
+// Undo for removed fields
+const lastRemoved = ref(null);
+let undoTimer = null;
 
-    if (error) throw error;
-    return data;
-  },
-  { server: false }
-);
+// New field type selector
+const newFieldType = ref("text");
 
-// Fill form when event data loads
-watch(
-  event,
-  async (newEvent) => {
-    if (newEvent) {
-      const start = parseDateParts(newEvent.event_date);
-      const end = parseDateParts(newEvent.event_end_date);
+// Rich text toolbar state
+const activeFormats = reactive({
+  bold: false,
+  italic: false,
+  underline: false,
+  ul: false,
+  ol: false,
+});
+const currentBlock = ref("p");
+const linkOpen = ref(false);
+const linkUrl = ref("https://");
+const linkError = ref("");
+let savedRange = null;
 
-      // Infer type: if end date exists and differs from start date → multi-day
-      const isMulti = !!end.date && end.date !== start.date;
-      formData.value = {
-        title: newEvent.title || "",
-        venue: newEvent.venue || "",
-        event_type: isMulti ? "multi" : "single",
-        event_date: start.date,
-        event_start_time: start.time,
-        event_end_time: isMulti ? "" : end.time,
-        event_end_date: isMulti ? end.date : "",
-        description: newEvent.description || "",
-        form_fields: Array.isArray(newEvent.form_fields)
-  ? newEvent.form_fields.map(f => ({
-      ...f,
-      _expanded: false,
-      _id: crypto.randomUUID(),
-      optionsRaw: Array.isArray(f.options) ? f.options.join('\n') : '',
-      accept: f.accept || '',
-    }))
-  : [],
-        pricing_mode: newEvent.pricing_mode || "flat",
-        pricing_tiers: Array.isArray(newEvent.pricing_tiers)
-          ? newEvent.pricing_tiers
-          : [],
-        admission_fee: newEvent.admission_fee || 0.0,
-        currency: newEvent.currency || "₦",
-        is_free: newEvent.is_free !== undefined ? newEvent.is_free : true,
-        banner_url: newEvent.banner_url || "",
-      };
+// Unique id counter
+let _fieldIdCounter = 0;
+const makeFieldId = () => `field_${++_fieldIdCounter}`;
 
-      bannerPreview.value = newEvent.banner_url || "";
+// ── form data ──
+const formData = ref({
+  title: "",
+  event_type: "single",
+  event_date: "",
+  event_start_time: "",
+  event_end_time: "",
+  event_end_date: "",
+  venue: "",
+  description: "",
+  admission_fee: 0,
+  currency: "₦",
+  is_free: true,
+  pricing_mode: "flat",
+  pricing_tiers: [],
+  form_fields: [],
+  banner_url: "",
+});
 
-      // Wait for DOM to load editor div before assigning innerHTML
-      await nextTick();
-      if (descriptionEditor.value) {
-        descriptionEditor.value.innerHTML = formData.value.description;
-      }
-    }
-  },
-  { immediate: true }
-);
+// ── unsaved-changes tracking ──
+const snapshot = () =>
+  JSON.stringify(formData.value, (k, v) => (k.startsWith("_") ? undefined : v));
+const initialSnapshot = ref(snapshot());
+const isDirty = computed(() => snapshot() !== initialSnapshot.value);
 
-function formatDateForInput(dateString) {
-  if (!dateString) return "";
-  const date = new Date(dateString);
-  return date.toISOString().slice(0, 16);
-}
+// ──────────────────────────────────────────────
+// HELPERS
+// ──────────────────────────────────────────────
+
+const toISO = (dateStr, timeStr = "00:00") => {
+  if (!dateStr) return null;
+  const local = new Date(`${dateStr}T${timeStr || "00:00"}:00`);
+  return isNaN(local.getTime()) ? null : local.toISOString();
+};
 
 const parseDateParts = (isoString) => {
   if (!isoString) return { date: "", time: "" };
@@ -1270,251 +1655,694 @@ const parseDateParts = (isoString) => {
   return { date, time };
 };
 
-// --- Banner Upload Logic ---
-const handleBannerDrop = (e) => {
-  isDraggingBanner.value = false;
-  const files = e.dataTransfer?.files;
-  if (files && files.length > 0) processBannerFile(files[0]);
+const cleanTiers = (tiers) =>
+  (tiers || []).map((t) => ({
+    name: (t.name || "").trim(),
+    price: Number(t.price) || 0,
+    description: (t.description || "").trim(),
+    perks: (t.perks || []).map((p) => (p || "").trim()).filter(Boolean),
+  }));
+
+const deriveAdmissionFee = (data) => {
+  if (data.is_free) return 0;
+  if (data.pricing_mode === "tiered") {
+    const prices = cleanTiers(data.pricing_tiers)
+      .map((t) => t.price)
+      .filter((p) => p > 0);
+    return prices.length ? Math.min(...prices) : 0;
+  }
+  return Number(data.admission_fee) || 0;
+};
+
+// ──────────────────────────────────────────────
+// FETCH EVENT
+// ──────────────────────────────────────────────
+
+const {
+  data: event,
+  pending,
+  error,
+  refresh,
+} = await useAsyncData(
+  `event-${eventId}`,
+  async () => {
+    const { data, error } = await supabase
+      .from("events")
+      .select("*")
+      .eq("id", eventId)
+      .single();
+    if (error) throw error;
+    return data;
+  },
+  { server: false }
+);
+
+watch(
+  event,
+  async (newEvent) => {
+    if (!newEvent) return;
+    const start = parseDateParts(newEvent.event_date);
+    const end = parseDateParts(newEvent.event_end_date);
+    const isMulti = !!end.date && end.date !== start.date;
+
+    formData.value = {
+      title: newEvent.title || "",
+      venue: newEvent.venue || "",
+      event_type: isMulti ? "multi" : "single",
+      event_date: start.date,
+      event_start_time: start.time,
+      event_end_time: isMulti ? "" : end.time,
+      event_end_date: isMulti ? end.date : "",
+      description: newEvent.description || "",
+      form_fields: Array.isArray(newEvent.form_fields)
+        ? newEvent.form_fields.map((f) => ({
+            ...f,
+            _expanded: false,
+            _id: makeFieldId(),
+            optionsRaw: Array.isArray(f.options) ? f.options.join("\n") : "",
+            accept: f.accept || "",
+          }))
+        : [],
+      pricing_mode: newEvent.pricing_mode || "flat",
+      pricing_tiers: Array.isArray(newEvent.pricing_tiers)
+        ? newEvent.pricing_tiers.map((t) => ({
+            ...t,
+            perks: Array.isArray(t.perks) && t.perks.length ? t.perks : [""],
+          }))
+        : [],
+      admission_fee: newEvent.admission_fee ?? 0,
+      currency: newEvent.currency || "₦",
+      is_free: newEvent.is_free !== undefined ? newEvent.is_free : true,
+      banner_url: newEvent.banner_url || "",
+    };
+
+    bannerPreview.value = newEvent.banner_url || "";
+
+    await nextTick();
+    if (descriptionEditor.value) {
+      descriptionEditor.value.innerHTML = formData.value.description;
+    }
+    initialSnapshot.value = snapshot();
+  },
+  { immediate: true }
+);
+
+// ──────────────────────────────────────────────
+// VALIDATION
+// ──────────────────────────────────────────────
+
+const hasAnyError = (e) =>
+  !!(
+    e.title ||
+    e.event_date ||
+    e.event_start_time ||
+    e.event_end_time ||
+    e.event_end_date ||
+    e.fee ||
+    e.banner ||
+    e.tiers.some((t) => t && (t.name || t.price)) ||
+    Object.keys(e.fields).length
+  );
+
+const hasErrors = computed(() => hasAnyError(errors.value));
+
+const validate = (focusFirst = true) => {
+  const d = formData.value;
+  const e = { tiers: [], fields: {} };
+
+  if (!d.title.trim()) e.title = "Enter an event title.";
+  if (!d.event_date) e.event_date = "Choose a date.";
+
+  if (d.event_type === "single") {
+    if (!d.event_start_time) e.event_start_time = "Choose a start time.";
+    if (!d.event_end_time) e.event_end_time = "Choose an end time.";
+    if (
+      d.event_start_time &&
+      d.event_end_time &&
+      d.event_end_time <= d.event_start_time
+    ) {
+      e.event_end_time = "End time must be after the start time.";
+    }
+  } else {
+    if (!d.event_end_date) {
+      e.event_end_date = "Choose an end date.";
+    } else if (d.event_date && d.event_end_date < d.event_date) {
+      e.event_end_date = "End date can't be before the start date.";
+    } else if (
+      d.event_date &&
+      d.event_end_date === d.event_date &&
+      d.event_start_time &&
+      d.event_end_time &&
+      d.event_end_time <= d.event_start_time
+    ) {
+      e.event_end_time = "End time must be after the start time.";
+    }
+  }
+
+  if (!d.is_free) {
+    if (d.pricing_mode === "flat") {
+      if (!(Number(d.admission_fee) > 0))
+        e.fee = "Enter an amount greater than 0.";
+    } else {
+      d.pricing_tiers.forEach((t, i) => {
+        const te = {};
+        if (!(t.name || "").trim()) te.name = "Name this tier.";
+        if (!(Number(t.price) > 0)) te.price = "Price must be above 0.";
+        e.tiers[i] = te;
+      });
+    }
+  }
+
+  d.form_fields.forEach((f) => {
+    const fe = {};
+    if (!f.label.trim()) fe.label = "Give this field a label.";
+    if (f.type === "select" || f.type === "radio") {
+      const opts = (f.optionsRaw || "")
+        .split("\n")
+        .map((s) => s.trim())
+        .filter(Boolean);
+      if (opts.length < 2) fe.options = "Add at least two options.";
+    }
+    if (Object.keys(fe).length) e.fields[f._id] = fe;
+  });
+
+  if (bannerFailed.value) {
+    e.banner = "The banner failed to upload. Retry the upload or remove it.";
+  }
+
+  errors.value = e;
+  const ok = !hasAnyError(e);
+
+  if (!ok && focusFirst) {
+    d.form_fields.forEach((f) => {
+      if (e.fields[f._id]?.options) f._expanded = true;
+    });
+    nextTick(() => {
+      const el = document.querySelector('[aria-invalid="true"]');
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "center" });
+        el.focus?.({ preventScroll: true });
+      }
+    });
+  }
+  return ok;
+};
+
+watch(
+  [formData, bannerFailed],
+  () => {
+    if (attempted.value) validate(false);
+  },
+  { deep: true }
+);
+
+// ──────────────────────────────────────────────
+// BANNER UPLOAD (Cloudinary)
+// ──────────────────────────────────────────────
+
+// ⚠️  Replace with your own Cloudinary credentials (must match Create page)
+const CLOUDINARY_CLOUD_NAME = "dkw2vy90z";
+const CLOUDINARY_UPLOAD_PRESET = "bs_events";
+const MAX_BANNER_SIZE = 5 * 1024 * 1024;
+
+const triggerBannerPicker = () => {
+  if (!bannerUploading.value) bannerInput.value?.click();
 };
 
 const handleBannerSelect = (e) => {
-  const files = e.target.files;
-  if (files && files.length > 0) processBannerFile(files[0]);
+  const file = e.target.files?.[0];
+  e.target.value = "";
+  if (file) validateAndSetBanner(file);
 };
 
-const processBannerFile = (file) => {
+const handleBannerDrop = (e) => {
+  isDraggingBanner.value = false;
+  if (bannerUploading.value) return;
+  const file = e.dataTransfer.files?.[0];
+  if (file) validateAndSetBanner(file);
+};
+
+const validateAndSetBanner = (file) => {
   bannerError.value = "";
-  if (file.size > 5 * 1024 * 1024) {
-    bannerError.value = "File is too large. Max size is 5MB.";
+  const allowed = ["image/jpeg", "image/png", "image/webp"];
+  if (!allowed.includes(file.type)) {
+    bannerError.value = "Only JPG, PNG, or WEBP images are allowed.";
     return;
   }
-  const reader = new FileReader();
-  reader.onload = (e) => {
-    bannerPreview.value = e.target.result;
-  };
-  reader.readAsDataURL(file);
+  if (file.size > MAX_BANNER_SIZE) {
+    bannerError.value = "File is too large. Maximum size is 5 MB.";
+    return;
+  }
+  if (objectUrlToRevoke) {
+    URL.revokeObjectURL(objectUrlToRevoke);
+    objectUrlToRevoke = null;
+  }
   bannerFile.value = file;
+  const url = URL.createObjectURL(file);
+  objectUrlToRevoke = url;
+  bannerPreview.value = url;
+  uploadToCloudinary(file);
+};
+
+const uploadToCloudinary = (file) => {
+  if (currentXhr) currentXhr.abort();
+  const token = ++uploadToken;
+
+  bannerUploading.value = true;
+  bannerFailed.value = false;
+  bannerUploadProgress.value = 0;
+  bannerError.value = "";
+  formData.value.banner_url = "";
+
+  const fd = new FormData();
+  fd.append("file", file);
+  fd.append("upload_preset", CLOUDINARY_UPLOAD_PRESET);
+  fd.append("folder", "event_banners");
+
+  const xhr = new XMLHttpRequest();
+  currentXhr = xhr;
+  xhr.open(
+    "POST",
+    `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`
+  );
+
+  const finish = (url, message) => {
+    if (token !== uploadToken) return;
+    currentXhr = null;
+    bannerUploading.value = false;
+    if (url) {
+      formData.value.banner_url = url;
+    } else {
+      bannerFailed.value = true;
+      bannerError.value = message;
+    }
+  };
+
+  xhr.upload.onprogress = (e) => {
+    if (token === uploadToken && e.lengthComputable) {
+      bannerUploadProgress.value = Math.round((e.loaded / e.total) * 100);
+    }
+  };
+  xhr.onload = () => {
+    if (xhr.status === 200) {
+      try {
+        finish(JSON.parse(xhr.responseText).secure_url);
+      } catch {
+        finish(null, "Banner upload failed. Retry or remove the banner.");
+      }
+    } else {
+      finish(null, "Banner upload failed. Retry or remove the banner.");
+    }
+  };
+  xhr.onerror = () =>
+    finish(null, "Network error while uploading. Check your connection and retry.");
+
+  xhr.send(fd);
+};
+
+const retryBannerUpload = () => {
+  if (bannerFile.value) uploadToCloudinary(bannerFile.value);
 };
 
 const removeBanner = () => {
-  bannerPreview.value = "";
+  uploadToken++;
+  if (currentXhr) {
+    currentXhr.abort();
+    currentXhr = null;
+  }
+  if (objectUrlToRevoke) {
+    URL.revokeObjectURL(objectUrlToRevoke);
+    objectUrlToRevoke = null;
+  }
   bannerFile.value = null;
+  bannerPreview.value = null;
+  bannerUploading.value = false;
+  bannerFailed.value = false;
+  bannerError.value = "";
   formData.value.banner_url = "";
   if (bannerInput.value) bannerInput.value.value = "";
 };
 
-// --- Rich Text Editor Logic ---
-const execCmd = (cmd) => {
-  document.execCommand(cmd, false, null);
-  syncDescription();
-  descriptionEditor.value?.focus();
+// ──────────────────────────────────────────────
+// RICH TEXT DESCRIPTION
+// ──────────────────────────────────────────────
+
+const ALLOWED_TAGS = new Set([
+  "P", "BR", "DIV", "STRONG", "B", "EM", "I", "U",
+  "UL", "OL", "LI", "H2", "H3", "BLOCKQUOTE", "A",
+]);
+const DROP_TAGS = new Set([
+  "SCRIPT", "STYLE", "IFRAME", "OBJECT", "EMBED", "NOSCRIPT", "TEMPLATE", "META", "LINK",
+]);
+
+const isSafeUrl = (url) => {
+  try {
+    const u = new URL(url, "https://placeholder.invalid");
+    return ["http:", "https:", "mailto:"].includes(u.protocol);
+  } catch {
+    return false;
+  }
 };
 
-// --- Paste Sanitization Logic ---
-const handlePaste = (e) => {
-  // Prevent the default browser paste behavior
-  e.preventDefault();
+const sanitizeHtml = (html) => {
+  if (!html) return "";
+  const doc = new DOMParser().parseFromString(html, "text/html");
+  const clean = (node) => {
+    [...node.childNodes].forEach((child) => {
+      if (child.nodeType === 3) return;
+      if (child.nodeType !== 1) {
+        child.remove();
+        return;
+      }
+      const tag = child.tagName;
+      if (DROP_TAGS.has(tag)) {
+        child.remove();
+        return;
+      }
+      clean(child);
+      if (!ALLOWED_TAGS.has(tag)) {
+        child.replaceWith(...child.childNodes);
+        return;
+      }
+      const href = tag === "A" ? child.getAttribute("href") : null;
+      [...child.attributes].forEach((a) => child.removeAttribute(a.name));
+      if (tag === "A") {
+        if (href && isSafeUrl(href)) {
+          child.setAttribute("href", href);
+          child.setAttribute("rel", "noopener noreferrer");
+          child.setAttribute("target", "_blank");
+        } else {
+          child.replaceWith(...child.childNodes);
+        }
+      }
+    });
+  };
+  clean(doc.body);
+  return doc.body.innerHTML;
+};
 
-  // Get both HTML and Plain Text flavors from the clipboard
+const escapeHtml = (s) =>
+  s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+const saveSelection = () => {
+  const sel = window.getSelection();
+  const el = descriptionEditor.value;
+  if (sel && sel.rangeCount && el && el.contains(sel.anchorNode)) {
+    savedRange = sel.getRangeAt(0).cloneRange();
+  }
+};
+
+const restoreSelection = () => {
+  descriptionEditor.value?.focus();
+  if (savedRange) {
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(savedRange);
+  }
+};
+
+const updateToolbarState = () => {
+  const el = descriptionEditor.value;
+  const sel = window.getSelection();
+  if (!el || !sel || !sel.anchorNode || !el.contains(sel.anchorNode)) return;
+  activeFormats.bold = document.queryCommandState("bold");
+  activeFormats.italic = document.queryCommandState("italic");
+  activeFormats.underline = document.queryCommandState("underline");
+  activeFormats.ul = document.queryCommandState("insertUnorderedList");
+  activeFormats.ol = document.queryCommandState("insertOrderedList");
+  const v = (document.queryCommandValue("formatBlock") || "")
+    .toLowerCase()
+    .replace(/[<>]/g, "");
+  currentBlock.value = ["h2", "h3", "blockquote"].includes(v) ? v : "p";
+};
+
+const execCmd = (cmd, value = null) => {
+  descriptionEditor.value?.focus();
+  document.execCommand(cmd, false, value);
+  syncDescription();
+  updateToolbarState();
+};
+
+const execFormatBlock = (e) => {
+  const val = e.target.value || "p";
+  restoreSelection();
+  execCmd("formatBlock", `<${val}>`);
+};
+
+const openLinkPopover = () => {
+  saveSelection();
+  linkUrl.value = "https://";
+  linkError.value = "";
+  linkOpen.value = true;
+  nextTick(() => linkInput.value?.focus());
+};
+
+const closeLinkPopover = () => {
+  linkOpen.value = false;
+  linkError.value = "";
+  restoreSelection();
+};
+
+const applyLink = () => {
+  const url = linkUrl.value.trim();
+  if (!savedRange || savedRange.collapsed) {
+    linkError.value = "Select the text you want to turn into a link first.";
+    return;
+  }
+  if (!url || !isSafeUrl(url) || !/^(https?:|mailto:)/i.test(url)) {
+    linkError.value = "Enter a valid web address starting with https://";
+    return;
+  }
+  restoreSelection();
+  execCmd("createLink", url);
+  linkOpen.value = false;
+  linkError.value = "";
+};
+
+const handlePaste = (e) => {
+  e.preventDefault();
   const html = e.clipboardData.getData("text/html");
   const text = e.clipboardData.getData("text/plain");
-
-  if (html) {
-    // Parse the clipboard HTML so we can manipulate its DOM structure safely
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(html, "text/html");
-
-    // Find every single element within the pasted block
-    const allElements = doc.body.querySelectorAll("*");
-
-    allElements.forEach((el) => {
-      // Strip explicit inline styles (kills bad colors, alignments, fonts, backgrounds)
-      el.removeAttribute("style");
-      // Strip source framework classes (kills external layout rules)
-      el.removeAttribute("class");
-    });
-
-    // Cleanly insert the sanitized HTML layout at the current cursor position
-    document.execCommand("insertHTML", false, doc.body.innerHTML);
-  } else {
-    // Fallback for cases where only plain text is available
-    document.execCommand("insertText", false, text);
-  }
-
-  // Sync back to your reactive formData structure
+  const safe = html
+    ? sanitizeHtml(html)
+    : escapeHtml(text).replace(/\r?\n/g, "<br>");
+  document.execCommand("insertHTML", false, safe);
   syncDescription();
 };
-const execFormatBlock = (e) => {
-  const val = e.target.value;
-  document.execCommand("formatBlock", false, val || "P");
-  syncDescription();
-  e.target.value = "";
-  descriptionEditor.value?.focus();
-};
-const insertLink = () => {
-  const url = prompt("Enter the link URL:");
-  if (url) document.execCommand("createLink", false, url);
-  syncDescription();
-};
+
 const syncDescription = () => {
-  if (descriptionEditor.value) {
-    formData.value.description = descriptionEditor.value.innerHTML;
+  formData.value.description = descriptionEditor.value?.innerHTML || "";
+};
+
+// ──────────────────────────────────────────────
+// PRICING
+// ──────────────────────────────────────────────
+
+const setFree = (free) => {
+  formData.value.is_free = free;
+  if (free) {
+    formData.value.admission_fee = 0;
+    formData.value.pricing_mode = "flat";
+  } else if (!formData.value.admission_fee) {
+    formData.value.admission_fee = null;
   }
 };
 
-// --- Pricing Logic ---
-const handleFreeEventToggle = () => {
-  if (formData.value.is_free) {
-    formData.value.admission_fee = 0.0;
-  }
-};
 const initTieredPricing = () => {
   formData.value.pricing_mode = "tiered";
-  if (formData.value.pricing_tiers.length === 0) {
-    addTier();
-  }
+  if (formData.value.pricing_tiers.length === 0) addTier();
 };
+
 const addTier = () => {
   formData.value.pricing_tiers.push({
     name: "",
-    price: 0,
+    price: null,
     description: "",
     perks: [""],
   });
 };
-const removeTier = (index) => {
-  formData.value.pricing_tiers.splice(index, 1);
-};
-const addPerk = (tierIndex) => {
-  formData.value.pricing_tiers[tierIndex].perks.push("");
-};
-const removePerk = (tierIndex, perkIndex) => {
-  formData.value.pricing_tiers[tierIndex].perks.splice(perkIndex, 1);
+
+const removeTier = (i) => {
+  if (formData.value.pricing_tiers.length > 1) {
+    formData.value.pricing_tiers.splice(i, 1);
+  }
 };
 
-// --- Form Builder Logic ---
-const fieldTypeLabel = (type) => {
-  const map = {
-    text: "Short Text",
-    textarea: "Long Text",
-    email: "Email",
-    tel: "Phone",
-    number: "Number",
-    select: "Dropdown",
-    radio: "Multiple Choice",
-    checkbox: "Checkbox",
-    date: "Date",
-    file: "File Upload",
-  };
-  return map[type] || type;
+const addPerk = (ti) => {
+  formData.value.pricing_tiers[ti].perks.push("");
 };
+
+const removePerk = (ti, pi) => {
+  formData.value.pricing_tiers[ti].perks.splice(pi, 1);
+};
+
+// ──────────────────────────────────────────────
+// FORM FIELDS
+// ──────────────────────────────────────────────
+
+const FIELD_LABELS = {
+  text: "Short Text",
+  textarea: "Long Text",
+  email: "Email",
+  tel: "Phone",
+  number: "Number",
+  select: "Dropdown",
+  radio: "Multiple Choice",
+  checkbox: "Checkbox",
+  date: "Date",
+  file: "File Upload",
+};
+
+const supportsPlaceholder = (type) =>
+  ["text", "textarea", "email", "tel", "number"].includes(type);
+
 const addFormField = () => {
+  const id = makeFieldId();
   formData.value.form_fields.push({
-    _id: crypto.randomUUID(),
+    _id: id,
     label: "",
     type: newFieldType.value,
     required: false,
-    _expanded: true,
     placeholder: "",
     optionsRaw: "",
     accept: "",
+    _expanded: ["select", "radio", "file"].includes(newFieldType.value),
   });
+  nextTick(() => document.getElementById(`${id}-label`)?.focus());
 };
+
+const onFieldTypeChange = (field) => {
+  if (["select", "radio", "file"].includes(field.type)) field._expanded = true;
+};
+
 const removeFormField = (index) => {
-  formData.value.form_fields.splice(index, 1);
+  const [field] = formData.value.form_fields.splice(index, 1);
+  lastRemoved.value = { field, index };
+  clearTimeout(undoTimer);
+  undoTimer = setTimeout(() => (lastRemoved.value = null), 8000);
 };
+
+const undoRemove = () => {
+  if (!lastRemoved.value) return;
+  const { field, index } = lastRemoved.value;
+  const fields = formData.value.form_fields;
+  fields.splice(Math.min(index, fields.length), 0, field);
+  lastRemoved.value = null;
+  clearTimeout(undoTimer);
+};
+
+const moveField = (index, dir) => {
+  const fields = formData.value.form_fields;
+  const target = index + dir;
+  if (target < 0 || target >= fields.length) return;
+  const [moved] = fields.splice(index, 1);
+  fields.splice(target, 0, moved);
+};
+
 const onDragStart = (e, index) => {
   draggingIndex.value = index;
   e.dataTransfer.effectAllowed = "move";
+  e.dataTransfer.setData("text/plain", String(index));
 };
-const onDropOnField = (e, index) => {
-  if (draggingIndex.value !== null && draggingIndex.value !== index) {
-    const fields = formData.value.form_fields;
-    const movedItem = fields.splice(draggingIndex.value, 1)[0];
-    fields.splice(index, 0, movedItem);
+
+const onDragEnd = () => {
+  draggingIndex.value = null;
+  dragOverIndex.value = null;
+  dragArmed.value = null;
+};
+
+const onDropOnField = (e, targetIndex) => {
+  if (draggingIndex.value === null || draggingIndex.value === targetIndex) {
+    onDragEnd();
+    return;
   }
-  draggingIndex.value = null;
-  dragOverIndex.value = null;
+  const fields = formData.value.form_fields;
+  const moved = fields.splice(draggingIndex.value, 1)[0];
+  fields.splice(targetIndex, 0, moved);
+  onDragEnd();
 };
-const onDropField = (e) => {
-  draggingIndex.value = null;
-  dragOverIndex.value = null;
-};
+
+const onDropField = () => onDragEnd();
+
+// ──────────────────────────────────────────────
+// SERIALIZATION
+// ──────────────────────────────────────────────
+
+const serializeFields = () =>
+  formData.value.form_fields.map(({ _id, _expanded, optionsRaw, ...rest }) => ({
+    ...rest,
+    label: rest.label.trim(),
+    options:
+      rest.type === "select" || rest.type === "radio"
+        ? optionsRaw
+            .split("\n")
+            .map((s) => s.trim())
+            .filter(Boolean)
+        : undefined,
+  }));
 
 const buildDatePayload = () => {
-  if (formData.value.event_type === 'single') {
+  const d = formData.value;
+  if (d.event_type === "single") {
     return {
-      event_date: formData.value.event_start_time
-        ? `${formData.value.event_date}T${formData.value.event_start_time}`
-        : formData.value.event_date,
-      event_end_date: formData.value.event_end_time
-        ? `${formData.value.event_date}T${formData.value.event_end_time}`
+      event_date: toISO(d.event_date, d.event_start_time),
+      event_end_date: d.event_end_time
+        ? toISO(d.event_date, d.event_end_time)
         : null,
-    }
+    };
   }
   return {
-    event_date: formData.value.event_date,
-    event_end_date: formData.value.event_end_date || null,
-  }
-}
+    event_date: toISO(d.event_date, d.event_start_time || "00:00"),
+    event_end_date: d.event_end_date
+      ? toISO(d.event_end_date, d.event_end_time || "23:59")
+      : null,
+  };
+};
 
-// --- Submission Logic ---
+const cleanDescription = () => {
+  const el = descriptionEditor.value;
+  if (!el || !el.textContent.trim()) return "";
+  return sanitizeHtml(el.innerHTML);
+};
+
+// ──────────────────────────────────────────────
+// SUBMIT
+// ──────────────────────────────────────────────
+
 const handleUpdateEvent = async () => {
-  isUpdating.value = true;
+  attempted.value = true;
 
-  try {
-    let finalBannerUrl = formData.value.banner_url;
-
-    // Upload new banner if selected
-    if (bannerFile.value) {
-      bannerUploading.value = true;
-      const fileExt = bannerFile.value.name.split(".").pop();
-      const fileName = `${Date.now()}-${Math.random()
-        .toString(36)
-        .substring(7)}.${fileExt}`;
-      const filePath = `event-banners/${fileName}`;
-
-      const { data: uploadData, error: uploadError } = await supabase.storage
-        .from("events") // Ensure this bucket matches your setup
-        .upload(filePath, bannerFile.value);
-
-      if (uploadError) throw uploadError;
-
-      const {
-        data: { publicUrl },
-      } = supabase.storage.from("events").getPublicUrl(filePath);
-
-      finalBannerUrl = publicUrl;
-      bannerUploading.value = false;
-    } else if (!bannerPreview.value) {
-      finalBannerUrl = "";
-    }
-
-    // Prepare fields by stripping private UI properties (_expanded, _id)
-    const cleanFormFields = formData.value.form_fields.map((f) => {
-      const { _expanded, _id, ...rest } = f;
-      return rest;
+  if (bannerUploading.value) {
+    toast.add({
+      title: "Please wait",
+      description: "Banner is still uploading.",
+      color: "yellow",
     });
+    return;
+  }
 
+  if (!validate()) return;
+
+  const tiers = cleanTiers(formData.value.pricing_tiers);
+  const admissionFee = deriveAdmissionFee(formData.value);
+
+  isUpdating.value = true;
+  try {
     const updateData = {
-      title: formData.value.title,
+      title: formData.value.title.trim(),
       ...buildDatePayload(),
-      description: formData.value.description,
-      venue: formData.value.venue,
-      form_fields: cleanFormFields,
-      banner_url: finalBannerUrl,
-      pricing_mode: formData.value.is_free
-        ? "flat"
-        : formData.value.pricing_mode,
-      pricing_tiers:
-        formData.value.pricing_mode === "tiered"
-          ? formData.value.pricing_tiers
-          : [],
-      admission_fee: formData.value.is_free
-        ? 0.0
-        : parseFloat(formData.value.admission_fee || 0),
-      currency: formData.value.currency,
+      venue: formData.value.venue.trim(),
+      description: cleanDescription(),
       is_free: formData.value.is_free,
+      currency: formData.value.is_free ? "₦" : formData.value.currency,
+      admission_fee: admissionFee,
+      pricing_mode: formData.value.is_free ? null : formData.value.pricing_mode,
+      pricing_tiers:
+        formData.value.pricing_mode === "tiered" && !formData.value.is_free
+          ? tiers
+          : null,
+      form_fields: serializeFields(),
+      banner_url: formData.value.banner_url || null,
       updated_at: new Date().toISOString(),
     };
 
@@ -1522,28 +2350,145 @@ const handleUpdateEvent = async () => {
       .from("events")
       .update(updateData)
       .eq("id", eventId);
-
     if (dbError) throw dbError;
 
+    justSaved.value = true;
     showSuccessModal.value = true;
   } catch (err) {
     toast.add({
-      title: "Error updating event",
-      description: err.message,
+      title: "Update failed",
+      description: err.message || "An error occurred. Please try again.",
       color: "red",
+      timeout: 7000,
     });
   } finally {
     isUpdating.value = false;
-    bannerUploading.value = false;
   }
 };
+
+// ──────────────────────────────────────────────
+// NAVIGATION + SUCCESS MODAL
+// ──────────────────────────────────────────────
+
+const goBack = () => router.push("/admin/events");
+
+const goToEventsList = () => {
+  showSuccessModal.value = false;
+  router.push("/admin/events");
+};
+
+const stayOnPage = () => {
+  showSuccessModal.value = false;
+  // Reset snapshot so the page is no longer "dirty" after a successful save
+  initialSnapshot.value = snapshot();
+  justSaved.value = false;
+  attempted.value = false;
+  errors.value = { tiers: [], fields: {} };
+};
+
+watch(showSuccessModal, (open) => {
+  if (open) nextTick(() => successDialog.value?.querySelector("button")?.focus());
+});
+
+const onDialogKeydown = (e) => {
+  if (e.key === "Escape") {
+    e.preventDefault();
+    stayOnPage();
+    return;
+  }
+  if (e.key !== "Tab" || !successDialog.value) return;
+  const focusable = [...successDialog.value.querySelectorAll("button")];
+  if (!focusable.length) return;
+  const first = focusable[0];
+  const last = focusable[focusable.length - 1];
+  if (e.shiftKey && document.activeElement === first) {
+    e.preventDefault();
+    last.focus();
+  } else if (!e.shiftKey && document.activeElement === last) {
+    e.preventDefault();
+    first.focus();
+  }
+};
+
+// ── Leave protection ──
+onBeforeRouteLeave(() => {
+  if (!isDirty.value || justSaved.value) return true;
+  return window.confirm("You have unsaved changes. Leave this page?");
+});
+
+const onBeforeUnload = (e) => {
+  if (isDirty.value && !justSaved.value) {
+    e.preventDefault();
+    e.returnValue = "";
+  }
+};
+
+onMounted(() => {
+  document.execCommand("defaultParagraphSeparator", false, "p");
+  document.addEventListener("selectionchange", updateToolbarState);
+  window.addEventListener("beforeunload", onBeforeUnload);
+});
+
+onBeforeUnmount(() => {
+  document.removeEventListener("selectionchange", updateToolbarState);
+  window.removeEventListener("beforeunload", onBeforeUnload);
+  clearTimeout(undoTimer);
+  if (currentXhr) currentXhr.abort();
+  if (objectUrlToRevoke) URL.revokeObjectURL(objectUrlToRevoke);
+});
+
+// ──────────────────────────────────────────────
+// PAGE META
+// ──────────────────────────────────────────────
+
+useHead({
+  title: "Edit Event - Admin Dashboard",
+  meta: [{ name: "description", content: "Edit an existing educational event" }],
+});
 </script>
 
 <style scoped>
-.rich-editor[contenteditable="true"]:empty:before {
+.rich-editor:empty::before {
   content: attr(data-placeholder);
-  color: #9ca3af;
+  color: #6b7280;
   pointer-events: none;
-  display: block; /* For Firefox */
+}
+
+.rich-editor :deep(h2) {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+}
+.rich-editor :deep(h3) {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0.4rem 0;
+}
+.rich-editor :deep(blockquote) {
+  border-left: 3px solid #acbea3;
+  padding-left: 1rem;
+  color: #6b7280;
+  font-style: italic;
+  margin: 0.5rem 0;
+}
+.rich-editor :deep(ul) {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin: 0.4rem 0;
+}
+.rich-editor :deep(ol) {
+  list-style: decimal;
+  padding-left: 1.5rem;
+  margin: 0.4rem 0;
+}
+.rich-editor :deep(a) {
+  color: #4e6646;
+  text-decoration: underline;
+}
+.rich-editor :deep(strong) {
+  font-weight: 700;
+}
+.rich-editor :deep(em) {
+  font-style: italic;
 }
 </style>
